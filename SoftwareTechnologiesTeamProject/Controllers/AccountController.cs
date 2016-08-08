@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using SoftwareTechnologiesTeamProject.Extensions;
-using SoftwareTechnologiesTeamProject.Models;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-
-namespace SoftwareTechnologiesTeamProject.Controllers
+﻿namespace SoftwareTechnologiesTeamProject.Controllers
 {
+    using Extensions;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin.Security;
+    using Models;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
+
     [Authorize]
     public class AccountController : Controller
     {

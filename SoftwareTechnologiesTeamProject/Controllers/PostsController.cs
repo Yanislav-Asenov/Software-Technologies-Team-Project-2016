@@ -1,16 +1,14 @@
-﻿
-
-using SoftwareTechnologiesTeamProject.Extensions;
-using System;
-
-namespace SoftwareTechnologiesTeamProject.Controllers
+﻿namespace SoftwareTechnologiesTeamProject.Controllers
 {
+    using Extensions;
+    using System;
     using Microsoft.AspNet.Identity;
     using Models;
     using System.Data.Entity;
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
+
     public class PostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

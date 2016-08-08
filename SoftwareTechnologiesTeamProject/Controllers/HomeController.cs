@@ -1,7 +1,6 @@
-﻿using System.Web.Mvc;
-
-namespace SoftwareTechnologiesTeamProject.Controllers
+﻿namespace SoftwareTechnologiesTeamProject.Controllers
 {
+    using System.Web.Mvc;
     public class HomeController : Controller
     {
         public ActionResult Index()

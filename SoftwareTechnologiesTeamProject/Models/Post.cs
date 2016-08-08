@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Web.Mvc;
-
-namespace SoftwareTechnologiesTeamProject.Models
+﻿namespace SoftwareTechnologiesTeamProject.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web.Mvc;
     public class Post
     {
         public Post()
