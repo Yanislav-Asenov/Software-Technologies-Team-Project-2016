@@ -29,10 +29,11 @@
         public DateTime? Date { get; set; }
 
         public string AuthorId { get; set; }
+
+
+
+        [Display(Name = "Author full name")]
         [ForeignKey("AuthorId")]
-
-
-        [Display(Name = "Author Name")]
         public ApplicationUser Author { get; set; }
 
     }

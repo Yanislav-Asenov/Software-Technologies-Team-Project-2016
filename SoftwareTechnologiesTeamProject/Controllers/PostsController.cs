@@ -1,9 +1,9 @@
 ﻿namespace SoftwareTechnologiesTeamProject.Controllers
 {
     using Extensions;
-    using System;
     using Microsoft.AspNet.Identity;
     using Models;
+    using System;
     using System.Data.Entity;
     using System.Linq;
     using System.Net;
@@ -98,15 +98,28 @@
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Body,Date,AuthorId")] Post post)
+        public ActionResult Edit(Post post)
         {
             if (ModelState.IsValid)
             {
+                var authorId = db.Users.FirstOrDefault(x => x.UserName == post.Author.UserName)?.Id;
+
+                //If author name does not exists send error message
+                if (authorId == null)
+                {
+                    this.AddNotification("Username does not exist.", NotificationType.ERROR);
+                    return RedirectToAction("Edit", post.Id);
+                }
+
+                post.AuthorId = authorId;
+                post.Author = db.Users.FirstOrDefault(user => user.Id == post.AuthorId);
                 db.Entry(post).State = EntityState.Modified;
+
                 if (post.Date == null)
                 {
                     post.Date = DateTime.Now;
                 }
+
                 db.SaveChanges();
 
                 this.AddNotification("Post edited successfully.", NotificationType.SUCCESS);
