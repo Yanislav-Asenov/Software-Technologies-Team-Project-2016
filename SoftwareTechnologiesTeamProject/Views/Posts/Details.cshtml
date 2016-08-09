@@ -1,4 +1,5 @@
-﻿@model SoftwareTechnologiesTeamProject.Models.Post
+﻿@using Microsoft.AspNet.Identity
+@model SoftwareTechnologiesTeamProject.Models.Post
 
 @{
     ViewBag.Title = "Details";
@@ -39,7 +40,50 @@
 <p>
     @if (User.IsInRole("Administrators") || (Model.Author != null && User.Identity.Name == Model.Author.UserName))
     {
-        @Html.ActionLink("Edit", "Edit", new {id = Model.Id}) <br/>
+        @Html.ActionLink("Edit", "Edit", new {id = Model.Id})
+        <br/>
     }
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<div class="add-comment-wrapper">
+    @using (Html.BeginForm("AddComment", "Posts", FormMethod.Post))
+    {
+          
+        @Html.AntiForgeryToken()
+
+        @Html.Hidden("PostId", Model.Id)
+        @Html.Hidden("AuthorId", User.Identity.GetUserId())
+
+        @Html.TextArea("Content", new { rows = 4, cols = 2, @class="add-comment-text-area" });
+
+        <input type="submit" value="Add comment" class="bottom-right" />
+    }
+</div>
+
+
+
+<div class="comments-wrapper">
+    <h1>Comments</h1>
+
+    <div class="comments">
+        @foreach (var comment in Model.Comments.ToList())
+        {
+            <div class="single-comment">
+                <div class="single-info">
+                    <p>
+                        <strong>@comment.Author.FullName</strong> - <i>@comment.PostedOn</i>
+                    </p>
+                </div>
+                <div class="single-comment-content">
+                    @comment.Content
+                </div>
+            </div>
+            }
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

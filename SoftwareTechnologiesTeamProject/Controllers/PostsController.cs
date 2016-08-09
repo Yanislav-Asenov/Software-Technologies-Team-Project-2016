@@ -26,14 +26,46 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+
+            Post post = db.Posts.Include(p => p.Comments).First(x => x.Id == id);
+
             if (post == null)
             {
                 return HttpNotFound();
             }
-            post.Author = db.Users.FirstOrDefault(u => u.Id == post.AuthorId);
+
+            foreach (var comment in post.Comments)
+            {
+                comment.Author = db.Users.Find(comment.AuthorId);
+
+            }
 
             return View(post);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddComment(Comment comment)
+        {
+            var post = db.Posts.Find(comment.PostId);
+
+            try
+            {
+                comment.Author = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+
+                db.Comments.Add(comment);
+
+                db.SaveChanges();
+
+                return RedirectToAction("Details", new { id = post.Id });
+            }
+            catch
+            {
+                this.AddNotification("Comment field must containt atleast 1 character.", NotificationType.ERROR);
+                return RedirectToAction("Details", new { id = post.Id });
+            }
+
         }
 
         // GET: Posts/Create
@@ -56,6 +88,7 @@
                 post.Author = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
                 db.Posts.Add(post);
                 db.SaveChanges();
+
                 this.AddNotification("Post created successfully.", NotificationType.SUCCESS);
                 return RedirectToAction("Index");
             }
@@ -72,7 +105,7 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            Post post = db.Posts.Include(p => p.Author).FirstOrDefault(x => x.Id == id);
             if (post == null)
             {
                 this.AddNotification("Sorry this post does not exist.", NotificationType.ERROR);
@@ -84,9 +117,6 @@
                 this.AddNotification("You are not admin nor the post owner.", NotificationType.INFO);
                 return RedirectToAction("Index");
             }
-
-            ViewBag.Authors = db.Users.ToList();
-
 
             return View(post);
         }
@@ -113,19 +143,19 @@
 
                 post.AuthorId = authorId;
                 post.Author = db.Users.FirstOrDefault(user => user.Id == post.AuthorId);
-                db.Entry(post).State = EntityState.Modified;
 
                 if (post.Date == null)
                 {
                     post.Date = DateTime.Now;
                 }
 
+                db.Entry(post).State = EntityState.Modified;
+
                 db.SaveChanges();
 
                 this.AddNotification("Post edited successfully.", NotificationType.SUCCESS);
                 return RedirectToAction("Index");
             }
-
 
             this.AddNotification("Could not edit the post. The input data is not valid.", NotificationType.ERROR);
             return View(post);

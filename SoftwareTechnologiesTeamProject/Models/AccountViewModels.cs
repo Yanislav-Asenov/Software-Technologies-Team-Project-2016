@@ -63,11 +63,6 @@
 
     public class RegisterViewModel
     {
-        //[Required]
-        //[Display(Name = "Username")]
-        //[StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
-        //public string UserName { get; set; }
-
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

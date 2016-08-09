@@ -1,6 +1,7 @@
 ﻿namespace SoftwareTechnologiesTeamProject.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Web.Mvc;
@@ -22,7 +23,7 @@
         [Required]
         [AllowHtml]
         public string Body { get; set; }
-
+        
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "datetime2")]
@@ -31,10 +32,10 @@
         public string AuthorId { get; set; }
 
 
-
         [Display(Name = "Author full name")]
         [ForeignKey("AuthorId")]
         public ApplicationUser Author { get; set; }
 
+        public List<Comment> Comments { get; set; }
     }
 }

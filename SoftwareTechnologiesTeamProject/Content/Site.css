@@ -29,3 +29,38 @@ textarea {
     resize: none;
 }
 
+.add-comment-wrapper {
+    height: 100px;
+}
+
+.add-comment-wrapper > form > textarea {
+    width: 100%;
+    
+}
+
+.bottom-right {
+    float: right;
+}
+
+.add-comment-wrapper > form {
+    height: 100%;
+}
+
+.add-comment-text-area {
+    max-width: 90%;
+}
+
+
+.add-comment-wrapper > form > input {
+    height: 85%;
+    width: 10%;
+}
+
+.single-commment {
+    margin:auto;
+    text-align: center;
+}
+
+.single-comment > div {
+    text-align: center;
+}

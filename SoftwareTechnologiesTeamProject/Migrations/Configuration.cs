@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace SoftwareTechnologiesTeamProject.Migrations
 {
     using Microsoft.AspNet.Identity;
@@ -159,6 +161,10 @@ namespace SoftwareTechnologiesTeamProject.Migrations
             post.Body = body;
             post.Date = date;
             post.Author = context.Users.Where(u => u.UserName == authorUsername).FirstOrDefault();
+            post.Comments = new List<Comment>();
+            post.Comments.Add(new Comment { Author = post.Author, Content = "Meow edin komentar nice a ", PostedOn = DateTime.Now });
+            post.Comments.Add(new Comment { Author = post.Author, Content = "Vtori Komentar m e gotin", PostedOn = DateTime.Now });
+            post.Comments.Add(new Comment { Author = post.Author, Content = "Eto go i tretiq nice a ?", PostedOn = DateTime.Now });
             context.Posts.Add(post);
         }
 
