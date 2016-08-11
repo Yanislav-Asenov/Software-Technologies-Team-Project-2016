@@ -32,7 +32,7 @@
         public string AuthorId { get; set; }
 
 
-        [Display(Name = "Author full name")]
+        [Display(Name = "Author")]
         [ForeignKey("AuthorId")]
         public ApplicationUser Author { get; set; }
 
