@@ -13,7 +13,7 @@
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Posts
+        // GET: Posts 
         public ActionResult Index()
         {
             return View(db.Posts.Include(p => p.Author).ToList());
