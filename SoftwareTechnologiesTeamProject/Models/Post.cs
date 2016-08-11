@@ -10,6 +10,7 @@
         public Post()
         {
             this.Date = DateTime.Now;
+            this.Comments = new List<Comment>();
         }
 
         [Key]
@@ -23,7 +24,7 @@
         [Required]
         [AllowHtml]
         public string Body { get; set; }
-        
+
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "datetime2")]

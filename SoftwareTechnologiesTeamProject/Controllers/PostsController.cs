@@ -3,11 +3,11 @@
     using Extensions;
     using Microsoft.AspNet.Identity;
     using Models;
-    using System;
     using System.Data.Entity;
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
+    using ViewModels;
 
     public class PostsController : Controller
     {
@@ -27,45 +27,51 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Post post = db.Posts.Include(p => p.Comments).First(x => x.Id == id);
+            Post post = db.Posts
+                .Include(p => p.Author)
+                .Include(p => p.Comments.Select(c => c.Author))
+                .First(p => p.Id == id);
 
             if (post == null)
             {
-                return HttpNotFound();
+                this.AddNotification("Error occurred while trying to load post deitals.", NotificationType.ERROR);
+                return RedirectToAction("Index", "Posts");
             }
 
-            foreach (var comment in post.Comments)
+            var viewModel = new PostDetailsViewModel
             {
-                comment.Author = db.Users.Find(comment.AuthorId);
+                Post = post,
+                CommentAuthorId = User.Identity.GetUserId(),
+                PostId = post.Id
+            };
 
-            }
-
-            return View(post);
+            return View(viewModel);
         }
 
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddComment(Comment comment)
+        public ActionResult AddComment([Bind(Include = "NewCommentContent,PostId,CommentAuthorId")] PostDetailsViewModel viewModel)
         {
-            var post = db.Posts.Find(comment.PostId);
-
-            try
+            if (ModelState.IsValid)
             {
-                comment.Author = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+                Comment newComment = new Comment
+                {
+                    PostId = viewModel.PostId,
+                    Author = db.Users.Find(viewModel.CommentAuthorId),
+                    Content = viewModel.NewCommentContent,
+                    AuthorId = viewModel.CommentAuthorId
+                };
 
-                db.Comments.Add(comment);
-
+                db.Comments.Add(newComment);
                 db.SaveChanges();
 
-                return RedirectToAction("Details", new { id = post.Id });
-            }
-            catch
-            {
-                this.AddNotification("Comment field must containt atleast 1 character.", NotificationType.ERROR);
-                return RedirectToAction("Details", new { id = post.Id });
+                return RedirectToAction("Details", new { id = viewModel.PostId });
             }
 
+            viewModel.Post = db.Posts.Find(viewModel.PostId);
+            this.AddNotification("Error while creating the post.", NotificationType.ERROR);
+            return View("Details", viewModel);
         }
 
         // GET: Posts/Create
@@ -105,7 +111,7 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Include(p => p.Author).FirstOrDefault(x => x.Id == id);
+            Post post = db.Posts.Include(p => p.Author).FirstOrDefault(p => p.Id == id);
             if (post == null)
             {
                 this.AddNotification("Sorry this post does not exist.", NotificationType.ERROR);
@@ -132,25 +138,16 @@
         {
             if (ModelState.IsValid)
             {
-                var authorId = db.Users.FirstOrDefault(x => x.UserName == post.Author.UserName)?.Id;
+                post.Author = db.Users.FirstOrDefault(x => x.UserName == post.Author.UserName);
 
-                //If author name does not exists send error message
-                if (authorId == null)
+                if (post.Author == null)
                 {
                     this.AddNotification("Username does not exist.", NotificationType.ERROR);
                     return RedirectToAction("Edit", post.Id);
                 }
 
-                post.AuthorId = authorId;
-                post.Author = db.Users.FirstOrDefault(user => user.Id == post.AuthorId);
-
-                if (post.Date == null)
-                {
-                    post.Date = DateTime.Now;
-                }
-
+                post.AuthorId = post.Author.Id;
                 db.Entry(post).State = EntityState.Modified;
-
                 db.SaveChanges();
 
                 this.AddNotification("Post edited successfully.", NotificationType.SUCCESS);
@@ -191,17 +188,16 @@
         {
             Post post = db.Posts.Find(id);
 
-            if (User.Identity.GetUserId() != post.AuthorId && !User.IsInRole("Administrators"))
-            {
-                this.AddNotification("You are not admin nor the post owner.", NotificationType.INFO);
-                return RedirectToAction("Index");
-            }
+            //if (User.Identity.GetUserId() != post.AuthorId && !User.IsInRole("Administrators"))
+            //{
+            //    this.AddNotification("You are not admin nor the post owner.", NotificationType.INFO);
+            //    return RedirectToAction("Index");
+            //}
 
             db.Posts.Remove(post);
             db.SaveChanges();
 
             this.AddNotification("Post deleted successfully.", NotificationType.SUCCESS);
-
             return RedirectToAction("Index");
         }
 
