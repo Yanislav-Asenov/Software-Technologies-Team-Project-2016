@@ -93,6 +93,13 @@
                         <strong>@comment.Author.FullName</strong> - <i>@comment.PostedOn</i>
                     </p>
                 </div>
+                @if (User.IsInRole("Administrators") || User.Identity.Name == comment.Author.UserName)
+                {
+                    <div>
+                        @Html.ActionLink("Delete", "DeleteComment", new {id = comment.Id})
+                        @*@Html.ActionLink("Edit", "EditComment", new { id = comment.Id })*@
+                    </div>
+                }
                 <div class="single-comment-content">
                     @comment.Content
                 </div>
