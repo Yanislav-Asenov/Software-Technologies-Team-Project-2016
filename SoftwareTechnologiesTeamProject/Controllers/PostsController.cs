@@ -74,6 +74,33 @@
             return View("Details", viewModel);
         }
 
+        public ActionResult DeleteComment(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Comment comment = db.Comments.Find(id);
+
+            int postId = comment.PostId;
+            db.Comments.Remove(comment);
+            db.SaveChanges();
+
+            return RedirectToAction("Details", new { id = postId });
+        }
+
+        public ActionResult EditComment(Comment comment)
+        {
+            comment.Author = db.Users.FirstOrDefault(u => u.Id == comment.AuthorId);
+
+            db.Entry(comment).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Details", new { id = comment.PostId });
+        }
+
+
         // GET: Posts/Create
         [Authorize]
         public ActionResult Create()
@@ -187,12 +214,6 @@
         public ActionResult DeleteConfirmed(int id)
         {
             Post post = db.Posts.Find(id);
-
-            //if (User.Identity.GetUserId() != post.AuthorId && !User.IsInRole("Administrators"))
-            //{
-            //    this.AddNotification("You are not admin nor the post owner.", NotificationType.INFO);
-            //    return RedirectToAction("Index");
-            //}
 
             db.Posts.Remove(post);
             db.SaveChanges();
