@@ -63,4 +63,32 @@ textarea {
 
 .single-comment > div {
     text-align: center;
+    width: 100%;
+    height: 60px;
+    padding: 10px 2px;
 }
+
+.single-comment > .edit-comment-div {
+    text-align: center;
+}
+
+.single-comment-content {
+    position: relative;
+    border: solid black;
+}
+
+.edit-comment-div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 0px;
+}
+
+
+.edit-comment-div > form > textarea {
+     width:250px;
+    padding: 0;
+    border: 1px solid #ccc;
+}
+
+

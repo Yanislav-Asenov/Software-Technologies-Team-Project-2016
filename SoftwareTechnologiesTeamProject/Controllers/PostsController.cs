@@ -90,13 +90,15 @@
             return RedirectToAction("Details", new { id = postId });
         }
 
-        //public ActionResult EditComment(int? id)
-        //{
-        //    Comment comment = db.Comments.Find(id);
+        public ActionResult EditComment(Comment comment)
+        {
+            comment.Author = db.Users.FirstOrDefault(u => u.Id == comment.AuthorId);
 
+            db.Entry(comment).State = EntityState.Modified;
+            db.SaveChanges();
 
-        //    return RedirectToAction("Details", new { id = postId });
-        //}
+            return RedirectToAction("Details", new { id = comment.PostId });
+        }
 
 
         // GET: Posts/Create

@@ -97,12 +97,31 @@
                 {
                     <div>
                         @Html.ActionLink("Delete", "DeleteComment", new {id = comment.Id})
-                        @*@Html.ActionLink("Edit", "EditComment", new { id = comment.Id })*@
+                        <a onclick="showEditPostDiv(@comment.Id)" id="editLink">Edit</a>
                     </div>
                 }
                 <div class="single-comment-content">
                     @comment.Content
+                    <div class="edit-comment-div hidden" id=@comment.Id>
+                        @using (Html.BeginForm("EditComment", "Posts", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @Html.HiddenFor(m => comment.Author)
+                            @Html.HiddenFor(m => comment.AuthorId)
+                            @Html.HiddenFor(m => comment.Id)
+                            @Html.HiddenFor(c => comment.PostedOn)
+                            @Html.HiddenFor(c => comment.PostId)
+
+                            @Html.TextAreaFor(m => comment.Content, new { rows = 2, cols = 40});
+                            @Html.ValidationMessageFor(model => model.NewCommentContent, "", new { @class = "text-danger" })
+                            <input type="submit" value="Edit" class="bottom-right"/>
+                            <a onclick="cancelEdit(@comment.Id)">Cancel</a>
+                        }
+                    </div>
                 </div>
+               
             </div>
             }
     </div>
@@ -110,4 +129,16 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function showEditPostDiv(commentId) {
+            $("#" + commentId).removeClass("hidden");
+            $("#editLink").hide();
+        }
+
+        function cancelEdit(id) {
+            $("#" + id).addClass("hidden");
+            $("#editLink").show();
+        }
+    </script>
 }
