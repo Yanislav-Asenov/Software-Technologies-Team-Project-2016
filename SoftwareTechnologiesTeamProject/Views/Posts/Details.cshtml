@@ -64,7 +64,7 @@
 <div class="add-comment-wrapper">
     @using (Html.BeginForm("AddComment", "Posts", FormMethod.Post))
     {
-          
+        @Html.ValidationMessageFor(model => model.NewCommentContent, "", new { @class = "text-danger" })
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -72,11 +72,10 @@
         @Html.HiddenFor(m => m.CommentAuthorId)
         @Html.HiddenFor(m => m.Post.Author)
 
-        @Html.TextAreaFor(m => m.NewCommentContent, new { rows = 4, cols = 2, @class="add-comment-text-area" });
-        @Html.ValidationMessageFor(model => model.NewCommentContent, "", new { @class = "text-danger" })
-
+        @Html.TextAreaFor(m => m.NewCommentContent, new { @class="add-comment-text-area" });
         <input type="submit" value="Add comment" class="bottom-right" />
     }
+ 
 </div>
 
 
@@ -88,39 +87,42 @@
         @foreach (var comment in Model.Post.Comments.ToList())
         {
             <div class="single-comment">
-                <div class="single-info">
+                <div class="info">
                     <p>
                         <strong>@comment.Author.FullName</strong> - <i>@comment.PostedOn</i>
                     </p>
                 </div>
-                @if (User.IsInRole("Administrators") || User.Identity.Name == comment.Author.UserName)
+                <div class="actions">
+                    @if (User.IsInRole("Administrators") || User.Identity.Name == comment.Author.UserName)
+                    {
+                        @Html.ActionLink("Delete", "DeleteComment", new { id = comment.Id }, new { id = "deleteLink-" + comment.Id })
+                        <a onclick="showEditPostDiv(@comment.Id)" id="editLink-@comment.Id">Edit</a>
+                    }
+                </div>
+
+                <div class="single-comment-content" id="@comment.Id-content">
+                   @Html.DisplayFor(m => comment.Content)
+                </div>
+
+                @using (Html.BeginForm("EditComment", "Posts", FormMethod.Post, new { @class = " hidden edit-form", id=comment.Id }))
                 {
-                    <div>
-                        @Html.ActionLink("Delete", "DeleteComment", new {id = comment.Id})
-                        <a onclick="showEditPostDiv(@comment.Id)" id="editLink">Edit</a>
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @Html.HiddenFor(m => comment.Author)
+                    @Html.HiddenFor(m => comment.AuthorId)
+                    @Html.HiddenFor(m => comment.Id)
+                    @Html.HiddenFor(c => comment.PostedOn)
+                    @Html.HiddenFor(c => comment.PostId)
+
+                    @Html.TextAreaFor(m => comment.Content)
+                    @Html.ValidationMessageFor(model => model.NewCommentContent, "", new { @class = "text-danger" })
+
+                    <div class="edit-comment-actions">
+                        <input type="submit" value="Edit" class="edit-comment-button" />
+                        <a onclick="cancelEdit(@comment.Id)" class="edit-comment-cancel-link">Cancel</a>
                     </div>
                 }
-                <div class="single-comment-content">
-                    @comment.Content
-                    <div class="edit-comment-div hidden" id=@comment.Id>
-                        @using (Html.BeginForm("EditComment", "Posts", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                            @Html.HiddenFor(m => comment.Author)
-                            @Html.HiddenFor(m => comment.AuthorId)
-                            @Html.HiddenFor(m => comment.Id)
-                            @Html.HiddenFor(c => comment.PostedOn)
-                            @Html.HiddenFor(c => comment.PostId)
-
-                            @Html.TextAreaFor(m => comment.Content, new { rows = 2, cols = 40});
-                            @Html.ValidationMessageFor(model => model.NewCommentContent, "", new { @class = "text-danger" })
-                            <input type="submit" value="Edit" class="bottom-right"/>
-                            <a onclick="cancelEdit(@comment.Id)">Cancel</a>
-                        }
-                    </div>
-                </div>
                
             </div>
             }
@@ -133,12 +135,16 @@
     <script>
         function showEditPostDiv(commentId) {
             $("#" + commentId).removeClass("hidden");
-            $("#editLink").hide();
+            $('#' + commentId + "-content").hide();
+            $("#editLink-" + commentId).hide();
+            $("#deleteLink-" + commentId).hide();
         }
 
-        function cancelEdit(id) {
-            $("#" + id).addClass("hidden");
-            $("#editLink").show();
+        function cancelEdit(commentId) {
+            $("#" + commentId).addClass("hidden");
+            $('#' + commentId + "-content").show();
+            $("#editLink-" + commentId).show();
+            $("#deleteLink-" + commentId).show();
         }
     </script>
 }

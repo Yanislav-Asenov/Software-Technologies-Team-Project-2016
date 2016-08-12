@@ -69,7 +69,7 @@
                 return RedirectToAction("Details", new { id = viewModel.PostId });
             }
 
-            viewModel.Post = db.Posts.Find(viewModel.PostId);
+            viewModel.Post = db.Posts.Include(p => p.Author).Include(p => p.Comments.Select(c => c.Author)).First(p => p.Id == viewModel.PostId);
             this.AddNotification("Error while creating the post.", NotificationType.ERROR);
             return View("Details", viewModel);
         }
