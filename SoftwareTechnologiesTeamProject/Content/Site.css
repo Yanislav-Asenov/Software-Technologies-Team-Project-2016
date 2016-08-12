@@ -64,3 +64,56 @@ textarea {
 .single-comment > div {
     text-align: center;
 }
+
+.example3 .navbar-brand {
+  height: 80px;
+}
+
+.example3 .nav >li >a {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.example3 .navbar-toggle {
+  padding: 10px;
+  margin: 25px 15px 25px 0;
+}
+.logo5 {
+    left: 50%;
+}
+
+body{
+  margin-top: 50px;
+}
+
+.divide-nav{
+  height: 50px;
+  background-color: #428bca;
+}
+
+.divide-text{
+    color:#fff;
+    line-height: 20px;
+    font-size:20px;
+    padding: 15px 0;
+}
+
+.affix {
+  top: 50px;
+  width:100%;
+}
+
+.filler{
+  min-height: 2000px;
+}
+
+.navbar-form {
+   padding-left: 0;
+}
+
+.navbar-collapse{
+   padding-left:0; 
+}
+
+.body { 
+    padding-top: 65px; 
+}
