@@ -3,6 +3,8 @@
     using Extensions;
     using Microsoft.AspNet.Identity;
     using Models;
+    using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Net;
@@ -19,6 +21,25 @@
             return View(db.Posts.Include(p => p.Author).ToList());
         }
 
+        public ActionResult Tag(int? id)
+        {
+            var tag = db.Tags.Include(t => t.Posts.Select(p => p.Author)).FirstOrDefault(t => t.Id == id);
+
+            if (tag == null)
+            {
+                return HttpNotFound();
+            }
+
+            var posts = new List<Post>();
+            foreach (var post in tag.Posts)
+            {
+                posts.Add(post);
+            }
+            ViewBag.Title = tag.Name;
+
+            return View(posts);
+        }
+
         // GET: Posts/Details/5
         public ActionResult Details(int? id)
         {
@@ -30,6 +51,7 @@
             Post post = db.Posts
                 .Include(p => p.Author)
                 .Include(p => p.Comments.Select(c => c.Author))
+                .Include(p => p.Tags)
                 .First(p => p.Id == id);
 
             if (post == null)
@@ -55,21 +77,26 @@
         {
             if (ModelState.IsValid)
             {
+                var author = db.Users.Find(viewModel.CommentAuthorId);
                 Comment newComment = new Comment
                 {
                     PostId = viewModel.PostId,
-                    Author = db.Users.Find(viewModel.CommentAuthorId),
+                    Author = author,
                     Content = viewModel.NewCommentContent,
                     AuthorId = viewModel.CommentAuthorId
                 };
-
+                author.Comments.Add(newComment);
                 db.Comments.Add(newComment);
                 db.SaveChanges();
 
                 return RedirectToAction("Details", new { id = viewModel.PostId });
             }
 
-            viewModel.Post = db.Posts.Include(p => p.Author).Include(p => p.Comments.Select(c => c.Author)).First(p => p.Id == viewModel.PostId);
+            viewModel.Post = db.Posts
+                .Include(p => p.Author)
+                .Include(p => p.Comments.Select(c => c.Author))
+                .First(p => p.Id == viewModel.PostId);
+
             this.AddNotification("Error while creating the post.", NotificationType.ERROR);
             return View("Details", viewModel);
         }
@@ -100,7 +127,6 @@
             return RedirectToAction("Details", new { id = comment.PostId });
         }
 
-
         // GET: Posts/Create
         [Authorize]
         public ActionResult Create()
@@ -108,17 +134,40 @@
             return View();
         }
 
-        // POST: Posts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Body")] Post post)
+        public ActionResult Create([Bind(Include = "Title,Body,AuthorId,Tags")] CreatePostViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                post.Author = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+                Post post = new Post
+                {
+                    Author = db.Users.FirstOrDefault(u => u.Id == viewModel.AuthorId),
+                    Title = viewModel.Title,
+                    Body = viewModel.Body,
+                    AuthorId = viewModel.AuthorId,
+                };
+
+                var tags = db.Tags.ToList();
+                var inputTags = viewModel.Tags.Split(new char[] { '#' }, StringSplitOptions.RemoveEmptyEntries).Distinct();
+                foreach (var tagName in inputTags)
+                {
+                    if (tags.FirstOrDefault(t => t.Name == tagName) == null)
+                    {
+                        post.Tags.Add(new Tag
+                        {
+                            Name = tagName
+                        });
+                    }
+                    else
+                    {
+                        Tag tag = tags.Find(x => x.Name == tagName);
+                        post.Tags.Add(tag);
+                        tag.Posts.Add(post);
+                    }
+                }
+
                 db.Posts.Add(post);
                 db.SaveChanges();
 
@@ -127,7 +176,7 @@
             }
 
             this.AddNotification("Error while creating the post.", NotificationType.ERROR);
-            return View(post);
+            return View();
         }
 
         // GET: Posts/Edit/5

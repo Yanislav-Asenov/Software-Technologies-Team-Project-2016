@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    margin-top: 50px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -86,11 +87,6 @@ textarea {
     word-wrap: break-word;
 }
 
-/*.single-comment-content > p {
-    width: 100%;
-    height: inherit;
-}*/
-
 .single-comment > .actions {
     
     top: 0;
@@ -139,102 +135,42 @@ textarea {
     width: 100%;
     left: 15%;
 }
-/*.single-comment > div {
-    text-align: center;
-    width: 100%;
-    height: 60px;
-    padding: 10px 2px;
+
+
+
+.tag-container > ul {
+    padding: 0px;
+    color: white;
 }
 
-.single-comment > .edit-comment-div {
-    text-align: center;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    bottom: 100px;
-    border: solid green;
+.tag-container > ul > li {
+    display: inline-table;
+    list-style: none;
 }
 
-<<<<<<< HEAD
-.example3 .navbar-brand {
-  height: 80px;
+.tag.container > ul > li > a {
+    text-decoration: none;
 }
 
-.example3 .nav >li >a {
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-.example3 .navbar-toggle {
-  padding: 10px;
-  margin: 25px 15px 25px 0;
-}
-.logo5 {
-    left: 50%;
+.single-tag-name {
+    background: springgreen;
+    border-radius: 45px 45px 45px 45px;
+    padding: 5px;
+    font-weight: bold;
 }
 
-body{
-  margin-top: 50px;
-}
-
-.divide-nav{
-  height: 50px;
-  background-color: #428bca;
-}
-
-.divide-text{
-    color:#fff;
-    line-height: 20px;
-    font-size:20px;
-    padding: 15px 0;
-}
-
-.affix {
-  top: 50px;
-  width:100%;
-}
-
-.filler{
-  min-height: 2000px;
-}
-
-.navbar-form {
-   padding-left: 0;
-}
-
-.navbar-collapse{
-   padding-left:0; 
-}
-
-.body { 
-    padding-top: 65px; 
-}
-=======
-.single-comment-content {
-    border: red thin;
+.single-tag-name:hover {
+    background: red;
+    border-radius: 45px 45px 45px 45px;
+    padding: 5px;
+    font-weight: bold;
 }
 
 
-.edit-comment-div > form {
-    height: 100%;
-}*/
-
-/*.single-comment-content > form {
-    width: inherit;
-}*/
-
-/*.edit-comment-div {
-    height: 100px;
-}*/
-
-
-/*.edit-comment-div > form > textarea {
-    width: 100%;
+.single-tag-name > a:hover {
+    text-decoration: none;
 }
 
-<<<<<<< HEAD
-.edit-comment-div > form {
-    height: 100%;
-}*/
-=======
->>>>>>> origin/master
->>>>>>> origin/master
+.single-tag-name > a {
+    color: white;
+}

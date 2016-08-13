@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace SoftwareTechnologiesTeamProject.Migrations
 {
     using Microsoft.AspNet.Identity;
@@ -156,15 +154,13 @@ namespace SoftwareTechnologiesTeamProject.Migrations
         private void CreatePost(ApplicationDbContext context,
             string title, string body, DateTime date, string authorUsername)
         {
-            var post = new Post();
-            post.Title = title;
-            post.Body = body;
-            post.Date = date;
-            post.Author = context.Users.Where(u => u.UserName == authorUsername).FirstOrDefault();
-            post.Comments = new List<Comment>();
-            post.Comments.Add(new Comment { Author = post.Author, Content = "Meow edin komentar nice a ", PostedOn = DateTime.Now });
-            post.Comments.Add(new Comment { Author = post.Author, Content = "Vtori Komentar m e gotin", PostedOn = DateTime.Now });
-            post.Comments.Add(new Comment { Author = post.Author, Content = "Eto go i tretiq nice a ?", PostedOn = DateTime.Now });
+            var post = new Post
+            {
+                Title = title,
+                Body = body,
+                Date = date,
+                Author = context.Users.FirstOrDefault(u => u.UserName == authorUsername)
+            };
             context.Posts.Add(post);
         }
 

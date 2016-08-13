@@ -8,7 +8,7 @@
     {
         public Comment()
         {
-            this.PostedOn = DateTime.Now;
+            this.DateCreated = DateTime.Now;
         }
 
         [Key]
@@ -26,7 +26,7 @@
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "datetime2")]
-        public DateTime PostedOn { get; set; }
+        public DateTime DateCreated { get; set; }
 
         public int PostId { get; set; }
 

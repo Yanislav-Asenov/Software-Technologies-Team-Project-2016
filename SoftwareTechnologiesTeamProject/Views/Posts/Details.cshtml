@@ -50,6 +50,20 @@
         <dd>
             @Html.DisplayFor(model => model.Post.Author.Email)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Post.Tags)
+        </dt>
+
+        <dd class="tag-container">
+            <ul>
+                @foreach (var tag in Model.Post.Tags)
+                {
+                    <li class="single-tag-name">@Html.ActionLink(tag.Name, "Tag", new { id = tag.Id })</li>
+                }
+            </ul>
+
+        </dd>
     </dl>
 </div>
 <p>
@@ -72,7 +86,7 @@
         @Html.HiddenFor(m => m.CommentAuthorId)
         @Html.HiddenFor(m => m.Post.Author)
 
-        @Html.TextAreaFor(m => m.NewCommentContent, new { @class="add-comment-text-area" });
+        @Html.TextAreaFor(m => m.NewCommentContent, new { @class="add-comment-text-area" })
         <input type="submit" value="Add comment" class="bottom-right" />
     }
  
@@ -84,12 +98,12 @@
     <h1>Comments</h1>
 
     <div class="comments">
-        @foreach (var comment in Model.Post.Comments.ToList())
+        @foreach (var comment in Model.Post.Comments)
         {
             <div class="single-comment">
                 <div class="info">
                     <p>
-                        <strong>@comment.Author.FullName</strong> - <i>@comment.PostedOn</i>
+                        <strong>@comment.Author.FullName</strong> - <i>@comment.DateCreated</i>
                     </p>
                 </div>
                 <div class="actions">
@@ -109,10 +123,9 @@
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                    @Html.HiddenFor(m => comment.Author)
                     @Html.HiddenFor(m => comment.AuthorId)
                     @Html.HiddenFor(m => comment.Id)
-                    @Html.HiddenFor(c => comment.PostedOn)
+                    @Html.HiddenFor(c => comment.DateCreated)
                     @Html.HiddenFor(c => comment.PostId)
 
                     @Html.TextAreaFor(m => comment.Content)

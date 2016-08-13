@@ -11,6 +11,7 @@
         {
             this.Date = DateTime.Now;
             this.Comments = new List<Comment>();
+            this.Tags = new List<Tag>();
         }
 
         [Key]
@@ -37,6 +38,8 @@
         [ForeignKey("AuthorId")]
         public ApplicationUser Author { get; set; }
 
-        public List<Comment> Comments { get; set; }
+        public virtual List<Comment> Comments { get; set; }
+
+        public virtual List<Tag> Tags { get; set; }
     }
 }
