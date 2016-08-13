@@ -1,6 +1,8 @@
 ﻿namespace SoftwareTechnologiesTeamProject.ViewModels
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using System.Web.Mvc;
 
     public class CreatePostViewModel
@@ -18,5 +20,10 @@
 
         [StringLength(100)]
         public string Tags { get; set; }
+
+        public string[] GetTags()
+        {
+            return Tags.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries).Distinct().ToArray();
+        }
     }
 }

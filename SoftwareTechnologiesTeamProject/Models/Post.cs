@@ -6,11 +6,14 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using System.Web.Mvc;
+    using ViewModels;
+
     public class Post
     {
         public Post()
         {
             this.Date = DateTime.Now;
+            this.Tags = new List<Tag>();
         }
 
         [Key]
@@ -62,5 +65,25 @@
             }
         }
 
+        public string GetTagNames()
+        {
+            string tagNames = "";
+
+            if (Tags.Count != 0)
+            {
+                tagNames = "#" + string.Join("#", Tags.Select(t => t.Name));
+            }
+
+            return tagNames;
+        }
+
+        public void Update(ApplicationUser author, EditPostViewModel viewModel)
+        {
+            this.Author = author;
+            this.AuthorId = author.Id;
+            this.Title = viewModel.Title;
+            this.Date = DateTime.Now;
+            this.Body = viewModel.Body;
+        }
     }
 }

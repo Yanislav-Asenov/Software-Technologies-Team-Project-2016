@@ -2,9 +2,11 @@
 
 namespace SoftwareTechnologiesTeamProject.ViewModels
 {
+    using Models;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
     using System.Web.Mvc;
 
     public class EditPostViewModel
@@ -32,6 +34,28 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
         [EmailAddress]
         public string AuthorUserName { get; set; }
 
+        public EditPostViewModel()
+        {
 
+        }
+
+        public EditPostViewModel(Post post, string tags)
+        {
+            PostId = post.Id;
+            AuthorUserName = post.Author.UserName;
+            Title = post.Title;
+            Body = post.Body;
+            Date = post.Date;
+            Tags = tags;
+        }
+
+        public string[] GetTagNames()
+        {
+            string tags = Tags ?? "";
+            return tags
+                .Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries)
+                .Distinct()
+                .ToArray();
+        }
     }
 }

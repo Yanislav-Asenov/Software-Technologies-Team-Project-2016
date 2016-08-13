@@ -3,8 +3,6 @@
     using Extensions;
     using Microsoft.AspNet.Identity;
     using Models;
-    using System;
-    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Net;
@@ -30,11 +28,7 @@
                 return HttpNotFound();
             }
 
-            var posts = new List<Post>();
-            foreach (var post in tag.Posts)
-            {
-                posts.Add(post);
-            }
+            var posts = tag.Posts;
             ViewBag.Header = tag.Name;
 
             return View(posts);
@@ -85,6 +79,7 @@
                     Content = viewModel.NewCommentContent,
                     AuthorId = viewModel.CommentAuthorId
                 };
+
                 author.Comments.Add(newComment);
                 db.Comments.Add(newComment);
                 db.SaveChanges();
@@ -97,7 +92,7 @@
                 .Include(p => p.Comments.Select(c => c.Author))
                 .First(p => p.Id == viewModel.PostId);
 
-            this.AddNotification("Error while creating the post.", NotificationType.ERROR);
+            this.AddNotification("Error while adding the comment.", NotificationType.ERROR);
             return View("Details", viewModel);
         }
 
@@ -152,14 +147,10 @@
                     AuthorId = viewModel.AuthorId,
                 };
 
-                var tags = db.Tags.ToList();
-                var inputTags = viewModel
-                    .Tags.Split(new char[] { '#' }, StringSplitOptions.RemoveEmptyEntries)
-                    .Distinct()
-                    .ToArray();
+                var existingTags = db.Tags.ToList();
+                var inputTags = viewModel.GetTags();
 
-                post.AddTags(inputTags, tags);
-
+                post.AddTags(inputTags, existingTags);
                 db.Posts.Add(post);
                 db.SaveChanges();
 
@@ -179,6 +170,7 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Post post = db.Posts.Include(p => p.Author).FirstOrDefault(p => p.Id == id);
 
             if (post == null)
@@ -193,21 +185,7 @@
                 return RedirectToAction("Index");
             }
 
-            string tags;
-            if (post.Tags.Count != 0)
-                tags = "#" + string.Join("#", post.Tags.Select(t => t.Name));
-            else
-                tags = "";
-
-            EditPostViewModel viewModel = new EditPostViewModel
-            {
-                PostId = post.Id,
-                AuthorUserName = post.Author.UserName,
-                Title = post.Title,
-                Body = post.Body,
-                Date = post.Date,
-                Tags = tags
-            };
+            EditPostViewModel viewModel = new EditPostViewModel(post, post.GetTagNames());
 
             return View(viewModel);
         }
@@ -233,15 +211,10 @@
                     return RedirectToAction("Edit", post.Id);
                 }
 
-                post.Author = author;
-                post.AuthorId = author.Id;
-                post.Title = viewModel.Title;
-                post.Date = DateTime.Now;
-                post.Body = viewModel.Body;
+                post.Update(author, viewModel);
 
-                string tags = viewModel.Tags ?? "";
-                string[] tagNames = tags.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries);
-                List<Tag> allExistingTags = db.Tags.ToList();
+                string[] tagNames = viewModel.GetTagNames();
+                var allExistingTags = db.Tags.ToList();
                 post.AddTags(tagNames, allExistingTags);
 
                 db.Entry(post).State = EntityState.Modified;
