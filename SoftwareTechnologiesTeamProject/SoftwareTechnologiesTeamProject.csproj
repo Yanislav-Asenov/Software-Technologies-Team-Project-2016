@@ -216,6 +216,7 @@
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\ConfigureTwoFactorViewModel.cs" />
     <Compile Include="ViewModels\CreatePostViewModel.cs" />
+    <Compile Include="ViewModels\EditPostViewModel.cs" />
     <Compile Include="ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewModels\ExternalLoginListViewModel.cs" />
     <Compile Include="ViewModels\FactorViewModel.cs" />

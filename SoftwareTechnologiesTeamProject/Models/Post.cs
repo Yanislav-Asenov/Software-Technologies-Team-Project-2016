@@ -4,14 +4,13 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
     using System.Web.Mvc;
     public class Post
     {
         public Post()
         {
             this.Date = DateTime.Now;
-            this.Comments = new List<Comment>();
-            this.Tags = new List<Tag>();
         }
 
         [Key]
@@ -41,5 +40,27 @@
         public virtual List<Comment> Comments { get; set; }
 
         public virtual List<Tag> Tags { get; set; }
+
+        public void AddTags(string[] tagNames, List<Tag> existingTags)
+        {
+            foreach (var tagName in tagNames)
+            {
+                if (existingTags.FirstOrDefault(t => t.Name == tagName) == null)
+                {
+                    Tags.Add(new Tag
+                    {
+                        Name = tagName,
+                        Posts = new List<Post>() { this }
+                    });
+                }
+                else
+                {
+                    Tag tag = existingTags.First(t => t.Name == tagName);
+                    this.Tags.Add(tag);
+                    tag.Posts.Add(this);
+                }
+            }
+        }
+
     }
 }

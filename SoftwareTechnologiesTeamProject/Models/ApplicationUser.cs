@@ -9,6 +9,11 @@ namespace SoftwareTechnologiesTeamProject.Models
     using System.Threading.Tasks;
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {
+            Comments = new List<Comment>();
+        }
+
         [Display(Name = "Full name")]
         public string FullName { get; set; }
 

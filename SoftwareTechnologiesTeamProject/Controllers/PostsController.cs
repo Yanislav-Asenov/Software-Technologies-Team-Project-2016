@@ -35,7 +35,7 @@
             {
                 posts.Add(post);
             }
-            ViewBag.Title = tag.Name;
+            ViewBag.Header = tag.Name;
 
             return View(posts);
         }
@@ -117,6 +117,9 @@
             return RedirectToAction("Details", new { id = postId });
         }
 
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditComment(Comment comment)
         {
             comment.Author = db.Users.FirstOrDefault(u => u.Id == comment.AuthorId);
@@ -150,23 +153,12 @@
                 };
 
                 var tags = db.Tags.ToList();
-                var inputTags = viewModel.Tags.Split(new char[] { '#' }, StringSplitOptions.RemoveEmptyEntries).Distinct();
-                foreach (var tagName in inputTags)
-                {
-                    if (tags.FirstOrDefault(t => t.Name == tagName) == null)
-                    {
-                        post.Tags.Add(new Tag
-                        {
-                            Name = tagName
-                        });
-                    }
-                    else
-                    {
-                        Tag tag = tags.Find(x => x.Name == tagName);
-                        post.Tags.Add(tag);
-                        tag.Posts.Add(post);
-                    }
-                }
+                var inputTags = viewModel
+                    .Tags.Split(new char[] { '#' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Distinct()
+                    .ToArray();
+
+                post.AddTags(inputTags, tags);
 
                 db.Posts.Add(post);
                 db.SaveChanges();
@@ -179,7 +171,7 @@
             return View();
         }
 
-        // GET: Posts/Edit/5
+        // GET: Edit
         [Authorize]
         public ActionResult Edit(int? id)
         {
@@ -188,6 +180,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Post post = db.Posts.Include(p => p.Author).FirstOrDefault(p => p.Id == id);
+
             if (post == null)
             {
                 this.AddNotification("Sorry this post does not exist.", NotificationType.ERROR);
@@ -200,38 +193,66 @@
                 return RedirectToAction("Index");
             }
 
-            return View(post);
+            string tags;
+            if (post.Tags.Count != 0)
+                tags = "#" + string.Join("#", post.Tags.Select(t => t.Name));
+            else
+                tags = "";
+
+            EditPostViewModel viewModel = new EditPostViewModel
+            {
+                PostId = post.Id,
+                AuthorUserName = post.Author.UserName,
+                Title = post.Title,
+                Body = post.Body,
+                Date = post.Date,
+                Tags = tags
+            };
+
+            return View(viewModel);
         }
 
-        // POST: Posts/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-
+        //POST Edit
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Post post)
+        public ActionResult Edit(EditPostViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                post.Author = db.Users.FirstOrDefault(x => x.UserName == post.Author.UserName);
+                Post post = db.Posts.Include(p => p.Author).First(p => p.Id == viewModel.PostId);
+                post.Tags.Clear();
 
                 if (post.Author == null)
+                    return HttpNotFound();
+
+                var author = db.Users.FirstOrDefault(u => u.UserName == viewModel.AuthorUserName);
+                if (author == null)
                 {
                     this.AddNotification("Username does not exist.", NotificationType.ERROR);
                     return RedirectToAction("Edit", post.Id);
                 }
 
-                post.AuthorId = post.Author.Id;
+                post.Author = author;
+                post.AuthorId = author.Id;
+                post.Title = viewModel.Title;
+                post.Date = DateTime.Now;
+                post.Body = viewModel.Body;
+
+                string tags = viewModel.Tags ?? "";
+                string[] tagNames = tags.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries);
+                List<Tag> allExistingTags = db.Tags.ToList();
+                post.AddTags(tagNames, allExistingTags);
+
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
 
                 this.AddNotification("Post edited successfully.", NotificationType.SUCCESS);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { post.Id });
             }
 
             this.AddNotification("Could not edit the post. The input data is not valid.", NotificationType.ERROR);
-            return View(post);
+            return View(viewModel);
         }
 
         // GET: Posts/Delete/5
@@ -263,7 +284,6 @@
         public ActionResult DeleteConfirmed(int id)
         {
             Post post = db.Posts.Find(id);
-
             db.Posts.Remove(post);
             db.SaveChanges();
 

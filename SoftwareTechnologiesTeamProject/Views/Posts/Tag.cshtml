@@ -1,12 +1,14 @@
 ﻿@model IEnumerable<SoftwareTechnologiesTeamProject.Models.Post>
-
-<h2>Posts for #@ViewBag.Title</h2>
+@{
+    ViewBag.Title = "Tag:" + ViewBag.Header;
+}
+<h2>Tag: @ViewBag.Header</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>d
+    <tr>
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>

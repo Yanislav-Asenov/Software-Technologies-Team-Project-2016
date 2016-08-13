@@ -35,9 +35,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Tags, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Tags, new { @class = "form-control", placeholder = "#example1#example2" })
+                @Html.TextBoxFor(model => model.Tags, new { @class = "form-control", placeholder = "#example1#example2#example3" })
                 @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
             </div>
         </div>
