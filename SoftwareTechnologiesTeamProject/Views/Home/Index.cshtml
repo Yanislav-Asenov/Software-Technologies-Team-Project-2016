@@ -1,5 +1,16 @@
-﻿@{
+﻿
+
+@{
     ViewBag.Title = "Home Page";
 }
+<div class="page-header"><h2>Home page header</h2></div>
 
-<h2>Home page content</h2>
+<div class="recent-posts-container">
+    <div>
+        <h3>Recent posts</h3>
+    </div>
+    @foreach (var post in ViewBag.RecentPosts)
+    {
+        <a href="/Posts/Details/@post.Id" class="recent-post-link">@post.Title</a>
+    }
+</div>

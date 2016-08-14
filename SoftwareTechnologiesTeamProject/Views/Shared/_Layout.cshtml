@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,45 +8,39 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-    <meta name="description" content="Project Drop Table" />
+    <meta name="description" content="The description of my page" />
 </head>
 <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a clas="logo" href="@Url.Action("Index", "Home")">
-                        <img class="logo" src="@Url.Content("~/Content/Images/droptableV6.png")" width="100" />
-                    </a>
-                </div>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Drop Table", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div id="navbar3" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Posts", "Index", "Posts")</li>
-                        <li>@Html.Partial("_LoginPartial")</li>
-                    </ul>
-                </div>
+            <div class="navbar-collapse collapse" autofocus>
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Posts", "Index", "Posts")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-<div class="container body-content">
-    @RenderBody()
+    <div class="container body-content">
+        @RenderBody()
+        @*<hr />*@
+        @*<footer>
+            <p>&copy; @DateTime.Now.Year - Team Drop Table</p>
+        </footer>*@
+        <div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
+    </div>
 
-    <hr/>
-    <footer>
-        <p>&copy; @DateTime.Now.Year - Team Drop Table</p>
-    </footer>
-</div>
-
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

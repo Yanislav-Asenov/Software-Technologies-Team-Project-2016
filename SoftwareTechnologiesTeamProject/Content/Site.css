@@ -1,7 +1,31 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-    margin-top: 50px;
+﻿html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  position: relative;
+  padding-top: 50px;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -9,7 +33,6 @@
     padding-left: 15px;
     padding-right: 15px;
 }
-
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -21,13 +44,15 @@
 
 textarea {
     width: 60%;
+    resize: none;
 }
 
-input,
-select,
-textarea {
-    max-width: 100%;
-    resize: none;
+.text-box {
+    width: 60%;
+}
+
+.form-group {
+    height: auto;
 }
 
 .add-comment-wrapper {
@@ -139,7 +164,7 @@ textarea {
 
 
 .tag-container > ul {
-    padding: 0px;
+    padding: 0;
     color: white;
 }
 
@@ -174,3 +199,49 @@ textarea {
 .single-tag-name > a {
     color: white;
 }
+
+.alert {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+
+/* Home page styles */
+
+.recent-posts-container {
+    background: white;
+    width: 30%;
+    height: auto;
+    float: right;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.recent-post-link {
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+    height: 60px;
+}
+
+.recent-post-link:hover {
+    text-decoration: none;
+     color: white;
+    background: rgb(44, 44, 44);
+     font-weight: bold;
+}
+
+.recent-post-link:focus {
+    text-decoration: none;
+     color: white;
+    background: rgb(44, 44, 44);
+     font-weight: bold;
+}
+
+/* End of home page styles*/
