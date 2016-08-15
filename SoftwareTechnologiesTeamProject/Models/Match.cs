@@ -10,11 +10,14 @@ namespace SoftwareTechnologiesTeamProject.Models
             AwayTeamVotes = 0;
             DrawVotes = 0;
             VotedUsers = new List<ApplicationUser>();
+            Result = string.Empty;
         }
 
         public int Id { get; set; }
 
         public string Time { get; set; }
+
+        public string Result { get; set; }
 
         public string HomeTeamName { get; set; }
 

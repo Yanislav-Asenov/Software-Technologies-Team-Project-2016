@@ -123,9 +123,9 @@
                 <div class="actions">
                     @if (User.IsInRole("Administrators") || User.Identity.Name == comment.Author.UserName)
                     {
-                        @*@Html.ActionLink("Delete", "DeleteComment", new { id = comment.Id }, new { id = "deleteLink-" + comment.Id })*@
-                        <a id="deleteLink-@comment.Id" onclick="showConfirmDelete(@comment.Id)">Delete</a>
-                        <a onclick="showEditPostDiv(@comment.Id)" id="editLink-@comment.Id">Edit</a>
+                        <br />
+                        <a id="deleteLink-@comment.Id" class="confirmDeleteLink" onclick="showConfirmDelete(@comment.Id)">Delete</a>
+                        <a onclick="showEditPostDiv(@comment.Id)" id="editLink-@comment.Id" class="cancelConfirmDelete">Edit</a>
                     }
                 </div>
 
@@ -146,7 +146,7 @@
                     @Html.ValidationMessageFor(model => model.NewCommentContent, "", new { @class = "text-danger" })
 
                     <div class="edit-comment-actions">
-                        <input type="submit" value="Edit" class="edit-comment-button" />
+                        <input type="submit" value="Edit" class="edit-comment-button btn btn-primary" />
                         <a onclick="cancelEdit(@comment.Id)" class="edit-comment-cancel-link">Cancel</a>
                     </div>
                 }
@@ -178,7 +178,7 @@
             $("#single-comment-" + commentId).children().hide();
             let confirmDeleteElements =
                 "<div id='confirmDelete-"+ commentId + "' class='confirmDelete'>" +
-                    "<p>Confirm delete</p><br>" +
+                    "<p>Confirm delete</p>" +
                     "<a href='/Posts/DeleteComment/" + commentId + "' class='confirmDeleteLink'>Delete</a>" +
                     "<a id='cancelDelete-"+ commentId + "' onclick='cancelConfirmDelete(" + commentId + ")' class='cancelConfirmDelete' >Cancel</a>" +
                     "</div>";
