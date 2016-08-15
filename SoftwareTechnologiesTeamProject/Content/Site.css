@@ -175,6 +175,7 @@ textarea {
     font-weight: bolder;
     padding: 5px;
     font-size: 15px;
+     cursor:pointer;
 }
 
 .edit-comment-cancel-link {
@@ -191,7 +192,7 @@ textarea {
     bottom: 0px;
     border-radius: 45px 45px 45px 45px;
     font-weight: bold;
-    cursor: default;
+    cursor:pointer;
 }
 
 .edit-comment-cancel-link:hover {
@@ -209,6 +210,7 @@ textarea {
      bottom: 0px;
      border-radius: 45px 45px 45px 45px;
     font-weight: bold;
+    cursor:pointer;
 }
 .edit-comment-cancel-link:focus {
     position: absolute;
@@ -225,6 +227,7 @@ textarea {
     bottom: 0px;
      border-radius: 45px 45px 45px 45px;
      font-weight: bold;
+      cursor:pointer;
 }
 
 .actions {
@@ -244,12 +247,15 @@ textarea {
 .confirmDelete {
     padding-bottom: 20px;
     margin-bottom: 0;
+      cursor:pointer;
 }
 
 .confirmDelete > p{
-    margin-left: 30%;
+    margin-left: 29%;
     font-size: 20px;
     font-weight: bolder;
+      cursor:pointer;
+    margin-bottom: 20px;
 }
 
 
@@ -266,6 +272,7 @@ textarea {
     border-radius: 45px 45px 45px 45px;
     border: solid red;
     border-radius: 45px 45px 45px 45px;
+     cursor:pointer;
 }
 
 
@@ -277,6 +284,7 @@ textarea {
     font-weight: bolder;
     font-size: 15px;
     border-radius: 45px 45px 45px 45px;
+      cursor:pointer;
 }
 
 .confirmDeleteLink:focus {
@@ -287,6 +295,7 @@ textarea {
     font-weight: bolder;
     font-size: 15px;
     border-radius: 45px 45px 45px 45px;
+      cursor:pointer;
 }
 
 .cancelConfirmDelete {
@@ -297,6 +306,7 @@ textarea {
     font-size: 15px;
     border: solid rgb(51, 50, 50);
     border-radius: 45px 45px 45px 45px;
+     cursor:pointer;
 }
 
 .cancelConfirmDelete:hover {
@@ -304,8 +314,8 @@ textarea {
     background: rgb(51, 50, 50);
     border-radius: 45px 45px 45px 45px;
     color: white;
-    cursor: default;
     font-size: 15px;
+    cursor:pointer;
 }
 
 .cancelConfirmDelete:focus {
@@ -314,7 +324,7 @@ textarea {
     border-radius: 45px 45px 45px 45px;
     color: white;
     font-size: 15px;
-    cursor: default;
+     cursor:pointer;
 }
 
 
@@ -329,6 +339,7 @@ textarea {
     text-decoration: none;
     background: orange;
     border-radius: 45px 45px 45px 45px;
+      cursor:pointer;
 }
 
 .tag-container > a:hover {
@@ -338,6 +349,7 @@ textarea {
     text-decoration: none;
     background: rgb(54, 51, 51);
     border-radius: 45px 45px 45px 45px;
+     cursor:pointer;
 }
 
 .alert {
