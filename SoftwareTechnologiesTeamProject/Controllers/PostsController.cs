@@ -264,6 +264,28 @@
             return RedirectToAction("Index");
         }
 
+        [Authorize]
+        public ActionResult AddLike(int? id)
+        {
+            if (id == null)
+            {
+                this.AddNotification("Something went wrong please try again and check if the post exist.", NotificationType.ERROR);
+                return View("Index");
+            }
+
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.Find(userId);
+
+            var post = db.Posts.Find(id);
+
+            post.VotedUsers.Add(user);
+
+            db.Entry(post).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Details", new { id = post.Id });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -272,5 +294,6 @@
             }
             base.Dispose(disposing);
         }
+
     }
 }

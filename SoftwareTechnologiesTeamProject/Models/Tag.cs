@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-
-namespace SoftwareTechnologiesTeamProject.Models
+﻿namespace SoftwareTechnologiesTeamProject.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class Tag
     {
         public Tag()
         {
-
+            this.Posts = new List<Post>();
         }
 
         [Required]

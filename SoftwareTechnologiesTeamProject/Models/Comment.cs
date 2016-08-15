@@ -30,5 +30,14 @@
 
         public int PostId { get; set; }
 
+        public string GetDate()
+        {
+            return $"{DateCreated:dd/MMMM/yyyy}";
+        }
+
+        public string GetTime()
+        {
+            return $"{DateCreated:H:mm}";
+        }
     }
 }

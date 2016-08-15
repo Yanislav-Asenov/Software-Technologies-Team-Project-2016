@@ -58,7 +58,7 @@ textarea {
 .add-comment-wrapper {
     width: 60%;
     height: 60px;
-    margin: 0;
+    margin: 10px;
 }
 
 .add-comment-wrapper > form > textarea {
@@ -161,43 +161,103 @@ textarea {
     left: 15%;
 }
 
-
-
-.tag-container > ul {
-    padding: 0;
-    color: white;
+.confirmDelete {
+    padding-bottom: 20px;
+    margin-bottom: 0;
 }
 
-.tag-container > ul > li {
-    display: inline-table;
-    list-style: none;
+.confirmDelete > p{
+    margin-left: 30%;
+    font-size: 20px;
+    font-weight: bolder;
 }
 
-.tag.container > ul > li > a {
+
+.confirmDeleteLink {
+    background: white;
+    color: red;
+    text-align: center;
+    margin-left: 28%;
+    margin-right: 30px;
     text-decoration: none;
-}
-
-.single-tag-name {
-    background: springgreen;
+    padding: 10px;
+    font-weight: bolder;
+    font-size: 15px;
     border-radius: 45px 45px 45px 45px;
-    padding: 5px;
-    font-weight: bold;
+    border: solid red;
+    border-radius: 45px 45px 45px 45px;
 }
 
-.single-tag-name:hover {
+
+.confirmDeleteLink:hover {
     background: red;
-    border-radius: 45px 45px 45px 45px;
-    padding: 5px;
-    font-weight: bold;
-}
-
-
-.single-tag-name > a:hover {
-    text-decoration: none;
-}
-
-.single-tag-name > a {
     color: white;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bolder;
+    font-size: 15px;
+    border-radius: 45px 45px 45px 45px;
+}
+
+.confirmDeleteLink:focus {
+    background: red;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bolder;
+    font-size: 15px;
+    border-radius: 45px 45px 45px 45px;
+}
+
+.cancelConfirmDelete {
+    text-decoration: none;
+    color: black;
+    cursor: default;
+    padding: 10px;
+    font-size: 15px;
+    border: solid rgb(51, 50, 50);
+    border-radius: 45px 45px 45px 45px;
+}
+
+.cancelConfirmDelete:hover {
+    text-decoration: none;
+    background: rgb(51, 50, 50);
+    border-radius: 45px 45px 45px 45px;
+    color: white;
+    cursor: default;
+    font-size: 15px;
+}
+
+.cancelConfirmDelete:focus {
+    text-decoration: none;
+    background: rgb(51, 50, 50);
+    border-radius: 45px 45px 45px 45px;
+    color: white;
+    font-size: 15px;
+    cursor: default;
+}
+
+
+.tag-container {
+    margin: 5px;
+}
+
+.tag-container > a {
+    margin-right: 5px;
+    padding: 5px 5px 5px 5px;
+    color: black;
+    text-decoration: none;
+    background: orange;
+    border-radius: 45px 45px 45px 45px;
+}
+
+.tag-container > a:hover {
+    margin-right: 5px;
+    padding: 5px 5px 5px 5px;
+    color: white;
+    text-decoration: none;
+    background: rgb(54, 51, 51);
+    border-radius: 45px 45px 45px 45px;
 }
 
 .alert {
@@ -245,3 +305,40 @@ textarea {
 }
 
 /* End of home page styles*/
+
+/* Like button styles */
+
+.glyphicon {
+    color: black;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.glyphicon:hover {
+    color: red;
+    text-decoration: none;
+}
+
+.glyphicon:focus {
+    color: red;
+    text-decoration: none;
+}
+
+.liked {
+    color: red;
+    text-decoration: none;
+}
+
+/* End of like button styles */
+
+/* Details page styles */
+
+.post-info-wrapper {
+    margin: 10px 0 10px 0;
+}
+
+.post-info-wrapper > dd {
+    height: 30px;
+}
+
+/* End of details page styles*/

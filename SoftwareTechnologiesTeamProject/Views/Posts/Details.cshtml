@@ -7,7 +7,7 @@
 
 <h2>Details</h2>
 
-<div>
+<div class="post-info-wrapper">
     <h4>Post</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -56,25 +56,39 @@
         </dt>
 
         <dd class="tag-container">
-            <ul>
-                @foreach (var tag in Model.Post.Tags)
-                {
-                    <li class="single-tag-name">@Html.ActionLink(tag.Name, "Tag", new { id = tag.Id })</li>
-                }
-            </ul>
 
+            @foreach (var tag in Model.Post.Tags)
+            {
+                @Html.ActionLink(tag.Name, "Tag", new { id = tag.Id })
+            }
+        </dd>
+
+        <dt>
+            @if (Model.Post.HasVoted(User.Identity.GetUserId()))
+            {
+                <span class="glyphicon glyphicon-heart liked"></span>
+            }
+            else
+            {
+
+                @Html.ActionLink(" ", "AddLike", new { id = Model.Post.Id }, new { @class = "glyphicon glyphicon-heart" })
+            }
+        </dt>
+
+        <dd>
+            @Model.Post.VotedUsers.Count
         </dd>
     </dl>
-</div>
-<p>
-    @if (User.IsInRole("Administrators") || (Model.Post.Author != null && User.Identity.Name == Model.Post.Author.UserName))
-    {
-        @Html.ActionLink("Edit", "Edit", new {id = Model.PostId})
-        <br/>
-    }
-    @Html.ActionLink("Back to List", "Index")
-</p>
 
+    <p>
+        @if (User.IsInRole("Administrators") || (Model.Post.Author != null && User.Identity.Name == Model.Post.Author.UserName))
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.PostId })
+            <br />
+        }
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
 <div class="add-comment-wrapper">
     @using (Html.BeginForm("AddComment", "Posts", FormMethod.Post))
     {
@@ -86,21 +100,21 @@
         @Html.HiddenFor(m => m.CommentAuthorId)
         @Html.HiddenFor(m => m.Post.Author)
 
-        @Html.TextAreaFor(m => m.NewCommentContent, new { @class="add-comment-text-area" })
+        @Html.TextAreaFor(m => m.NewCommentContent, new { @class = "add-comment-text-area" })
         <input type="submit" value="Add comment" class="bottom-right" />
     }
- 
+
 </div>
 
 
 
 <div class="comments-wrapper">
-    <h1>Comments</h1>
+    <h1>Comments(@Model.Post.Comments.Count)</h1>
 
     <div class="comments">
         @foreach (var comment in Model.Post.Comments)
         {
-            <div class="single-comment">
+            <div class="single-comment" id="single-comment-@comment.Id">
                 <div class="info">
                     <p>
                         <strong>@comment.Author.FullName</strong> - <i>@comment.DateCreated</i>
@@ -109,16 +123,16 @@
                 <div class="actions">
                     @if (User.IsInRole("Administrators") || User.Identity.Name == comment.Author.UserName)
                     {
-                        @Html.ActionLink("Delete", "DeleteComment", new { id = comment.Id }, new { id = "deleteLink-" + comment.Id })
+                        @*@Html.ActionLink("Delete", "DeleteComment", new { id = comment.Id }, new { id = "deleteLink-" + comment.Id })*@
+                        <a id="deleteLink-@comment.Id" onclick="showConfirmDelete(@comment.Id)">Delete</a>
                         <a onclick="showEditPostDiv(@comment.Id)" id="editLink-@comment.Id">Edit</a>
                     }
                 </div>
 
                 <div class="single-comment-content" id="@comment.Id-content">
-                   @Html.DisplayFor(m => comment.Content)
+                    @Html.DisplayFor(m => comment.Content)
                 </div>
-
-                @using (Html.BeginForm("EditComment", "Posts", FormMethod.Post, new { @class = " hidden edit-form", id=comment.Id }))
+                @using (Html.BeginForm("EditComment", "Posts", FormMethod.Post, new { @class = " hidden edit-form", id = comment.Id }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -136,9 +150,9 @@
                         <a onclick="cancelEdit(@comment.Id)" class="edit-comment-cancel-link">Cancel</a>
                     </div>
                 }
-               
+
             </div>
-            }
+        }
     </div>
 </div>
 
@@ -158,6 +172,23 @@
             $('#' + commentId + "-content").show();
             $("#editLink-" + commentId).show();
             $("#deleteLink-" + commentId).show();
+        }
+
+        function showConfirmDelete(commentId) {
+            $("#single-comment-" + commentId).children().hide();
+            let confirmDeleteElements =
+                "<div id='confirmDelete-"+ commentId + "' class='confirmDelete'>" +
+                    "<p>Confirm delete</p><br>" +
+                    "<a href='/Posts/DeleteComment/" + commentId + "' class='confirmDeleteLink'>Delete</a>" +
+                    "<a id='cancelDelete-"+ commentId + "' onclick='cancelConfirmDelete(" + commentId + ")' class='cancelConfirmDelete' >Cancel</a>" +
+                    "</div>";
+            $("#single-comment-" + commentId)
+                .append(confirmDeleteElements);
+        }
+
+        function cancelConfirmDelete(commentId) {
+            $("#confirmDelete-" + commentId).remove();
+            $("#single-comment-" + commentId).children().show();
         }
     </script>
 }

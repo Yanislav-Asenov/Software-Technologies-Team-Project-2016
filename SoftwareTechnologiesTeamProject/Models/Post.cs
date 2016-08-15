@@ -14,6 +14,8 @@
         {
             this.Date = DateTime.Now;
             this.Tags = new List<Tag>();
+            this.VotedUsers = new List<ApplicationUser>();
+            this.LastDateActive = DateTime.Now;
         }
 
         [Key]
@@ -31,7 +33,13 @@
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "datetime2")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyy}",
+               ApplyFormatInEditMode = true)]
         public DateTime? Date { get; set; }
+
+        public DateTime? LastDateActive { get; set; }
+
+        public virtual List<ApplicationUser> VotedUsers { get; set; }
 
         public string AuthorId { get; set; }
 
@@ -84,6 +92,22 @@
             this.Title = viewModel.Title;
             this.Date = DateTime.Now;
             this.Body = viewModel.Body;
+        }
+
+        public bool HasVoted(string userId)
+        {
+            return this.VotedUsers.Select(u => u.Id).ToList().Contains(userId);
+        }
+
+        public string GetDate()
+        {
+
+            return $"{Date:dd/MMMM/yyyy}";
+        }
+
+        public string GetTime()
+        {
+            return $"{Date:H:mm}";
         }
     }
 }

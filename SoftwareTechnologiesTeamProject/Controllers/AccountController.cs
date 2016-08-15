@@ -88,7 +88,7 @@
             {
                 case SignInStatus.Success:
                     this.AddNotification("You are now logged in.", NotificationType.SUCCESS);
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "Posts");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
