@@ -25,6 +25,7 @@
             return new ApplicationDbContext();
         }
 
+        public DbSet<Season> Seasons { get; set; }
 
         public DbSet<Post> Posts { get; set; }
 
@@ -33,5 +34,11 @@
         public DbSet<Tag> Tags { get; set; }
 
         public DbSet<Match> Matches { get; set; }
+
+        public DbSet<League> Leagues { get; set; }
+
+        public DbSet<Team> Teams { get; set; }
+
+        public DbSet<Vote> Votes { get; set; }
     }
 }

@@ -13,8 +13,6 @@
         public Post()
         {
             this.Date = DateTime.Now;
-            this.Tags = new List<Tag>();
-            this.VotedUsers = new List<ApplicationUser>();
             this.LastDateActive = DateTime.Now;
         }
 
@@ -39,7 +37,7 @@
 
         public DateTime? LastDateActive { get; set; }
 
-        public virtual List<ApplicationUser> VotedUsers { get; set; }
+        public virtual List<ApplicationUser> VotedUsers { get; set; } = new List<ApplicationUser>();
 
         public string AuthorId { get; set; }
 
@@ -50,7 +48,7 @@
 
         public virtual List<Comment> Comments { get; set; }
 
-        public virtual List<Tag> Tags { get; set; }
+        public virtual List<Tag> Tags { get; set; } = new List<Tag>();
 
         public void AddTags(string[] tagNames, List<Tag> existingTags)
         {

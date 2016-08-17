@@ -9,15 +9,14 @@ namespace SoftwareTechnologiesTeamProject.Models
     using System.Threading.Tasks;
     public class ApplicationUser : IdentityUser
     {
-        public ApplicationUser()
-        {
-            Comments = new List<Comment>();
-        }
-
         [Display(Name = "Full name")]
-        public string FullName { get; set; } 
+        public string FullName { get; set; }
 
-        public List<Comment> Comments { get; set; }
+        public virtual List<Comment> Comments { get; set; } = new List<Comment>();
+
+        public virtual List<Match> MatchHistory { get; set; } = new List<Match>();
+
+        public virtual List<Vote> Votes { get; set; } = new List<Vote>();
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -28,3 +27,4 @@ namespace SoftwareTechnologiesTeamProject.Models
         }
     }
 }
+ 

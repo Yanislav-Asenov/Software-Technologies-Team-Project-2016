@@ -1,152 +1,116 @@
-﻿using SoftwareTechnologiesTeamProject.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using SoftwareTechnologiesTeamProject.Models;
 
 namespace SoftwareTechnologiesTeamProject.Controllers
 {
-    using Microsoft.AspNet.Identity;
-    using ViewModels;
-
-    public class MatchesController : Controller
+    public class LeaguesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Matches
+        // GET: Leagues
         public ActionResult Index()
         {
-            var viewModel = new MatchesIndexViewModel();
-            viewModel.Matches = db.Matches.ToList();
-            viewModel.User = db.Users.Find(User.Identity.GetUserId());
-
-            return View(viewModel);
+            return View(db.Leagues.ToList());
         }
 
-
-        [Authorize]
-        public ActionResult AddVote(int? id, string voteType)
-        {
-            Match match = db.Matches.Find(id);
-            if (match == null)
-            {
-                return HttpNotFound();
-            }
-
-            var user = db.Users.Find(User.Identity.GetUserId());
-
-            if (voteType == "away")
-            {
-                match.AwayTeamVotes++;
-            }
-            else if (voteType == "home")
-            {
-                match.HomeTeamVotes++;
-            }
-            else if (voteType == "draw")
-            {
-                match.DrawVotes++;
-            }
-
-            match.VotedUsers.Add(user);
-
-            db.Entry(match).State = EntityState.Modified;
-            db.SaveChanges();
-
-            return RedirectToAction("Index");
-        }
-
-        // GET: Matches/Details/5
+        // GET: Leagues/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Match match = db.Matches.Find(id);
-            if (match == null)
+            League league = db.Leagues.Find(id);
+            if (league == null)
             {
                 return HttpNotFound();
             }
-            return View(match);
+            return View(league);
         }
 
-        // GET: Matches/Create
+        // GET: Leagues/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Matches/Create
+        // POST: Leagues/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,HomeTeamName,AwayTeamName,Time")] Match match)
+        public ActionResult Create([Bind(Include = "Id,Name,Date")] League league)
         {
             if (ModelState.IsValid)
             {
-                db.Matches.Add(match);
+                db.Leagues.Add(league);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(match);
+            return View(league);
         }
 
-        // GET: Matches/Edit/5
+        // GET: Leagues/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Match match = db.Matches.Find(id);
-            if (match == null)
+            League league = db.Leagues.Find(id);
+            if (league == null)
             {
                 return HttpNotFound();
             }
-            return View(match);
+            return View(league);
         }
 
-        // POST: Matches/Edit/5
+        // POST: Leagues/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,HomeTeamName,AwayTeamName,HomeTeamScore,AwayTeamScore,HomeTeamVotes,DrawVotes,AwayTeamVotes")] Match match)
+        public ActionResult Edit([Bind(Include = "Id,Name,Date")] League league)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(match).State = EntityState.Modified;
+                db.Entry(league).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(match);
+            return View(league);
         }
 
-        // GET: Matches/Delete/5
+        // GET: Leagues/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Match match = db.Matches.Find(id);
-            if (match == null)
+            League league = db.Leagues.Find(id);
+            if (league == null)
             {
                 return HttpNotFound();
             }
-            return View(match);
+            return View(league);
         }
 
-        // POST: Matches/Delete/5
+        // POST: Leagues/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Match match = db.Matches.Find(id);
-            db.Matches.Remove(match);
+            League league = db.Leagues.Find(id);
+            db.Leagues.Remove(league);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
