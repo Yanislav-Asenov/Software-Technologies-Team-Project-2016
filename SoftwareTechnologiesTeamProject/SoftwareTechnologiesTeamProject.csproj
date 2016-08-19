@@ -331,9 +331,11 @@
     <Content Include="Views\Leagues\Edit.cshtml" />
     <Content Include="Views\Leagues\Index.cshtml" />
     <Content Include="Views\Leagues\Standings.cshtml" />
+    <Content Include="Views\Leagues\EditTeam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Teams\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

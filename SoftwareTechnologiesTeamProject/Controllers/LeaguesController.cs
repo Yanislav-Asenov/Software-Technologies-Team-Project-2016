@@ -85,6 +85,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
         public ActionResult AddTeam([Bind(Include = "LeagueId,NewTeam")]StandingsViewModel teamInfo)
@@ -110,10 +111,12 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             db.Teams.Add(newTeam);
             db.SaveChanges();
 
-            return RedirectToAction("Standings", new { id = league.Id, leagueName = league.Name });
+            return RedirectToAction("Standings", new { id = league.Id });
         }
 
         [Authorize]
+        [Authorize(Roles = "Administrator")]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteTeam(int? id)
         {
             if (!User.IsInRole("Administrator"))
@@ -137,6 +140,37 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         }
 
 
+        public ActionResult EditTeam(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            var team = db.Teams.Find(id);
+
+
+            return View(team);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult EditTeam(Team team)
+        {
+            var leagueId = team.LeagueId;
+
+            var newTeamInfo = db.Teams.Find(team.Id);
+            newTeamInfo.Update(team);
+            newTeamInfo.League = db.Leagues.Find(leagueId);
+
+            db.Entry(newTeamInfo).State = EntityState.Modified;
+            db.SaveChanges();
+
+
+            return RedirectToAction("Standings", new { id = leagueId });
+        }
 
         // GET: Leagues/Edit/5
         [Authorize(Roles = "Administrator")]

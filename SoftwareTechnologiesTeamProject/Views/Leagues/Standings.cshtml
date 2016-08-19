@@ -18,6 +18,7 @@
         <th>Goal difference</th>
         <th>Points</th>
         <th></th>
+        <th></th>
     </tr>
 
 
@@ -26,22 +27,35 @@
         var team = Model.Teams[i];
         var position = i + 1;
 
-        <tr class="singleTeamInfo">
-            <td><div class="teamTableInfoCells">@position</div></td>
-            <td><div class="teamTableInfoCells clubName">@team.Name</div></td>
-            <td><div class="teamTableInfoCells">@team.GamesPlayed</div></td>
-            <td><div class="teamTableInfoCells">@team.Victories</div></td>
-            <td><div class="teamTableInfoCells">@team.Draws</div></td>
-            <td><div class="teamTableInfoCells">@team.Losses</div></td>
-            <td><div class="teamTableInfoCells">@team.GoalsFor</div></td>
-            <td><div class="teamTableInfoCells">@team.GoalsAgainst</div></td>
-            <td><div class="teamTableInfoCells">@team.GoalDifference</div></td>
-            <td><div class="teamTableInfoCells">@team.Points</div></td>
+        <tr class="singleTeamInfo" id="singleTeamInfo-@team.Id">
+            <td>
+                <div class="teamTableInfoCells">@position</div></td>
+            <td>
+                <div class="teamTableInfoCells clubName">@team.Name</div></td>
+            <td>
+                <div class="teamTableInfoCells">@team.GamesPlayed</div></td>
+            <td>
+                <div class="teamTableInfoCells">@team.Victories</div></td>
+            <td>
+                <div class="teamTableInfoCells">@team.Draws</div></td>
+            <td>
+                <div class="teamTableInfoCells">@team.Losses</div></td>
+            <td>
+                <div class="teamTableInfoCells">@team.GoalsFor</div></td>
+            <td>
+                <div class="teamTableInfoCells">@team.GoalsAgainst</div></td>
+            <td>
+                <div class="teamTableInfoCells">@team.GoalDifference</div></td>
+            <td>
+                <div class="teamTableInfoCells">@team.Points</div></td>
             @if (User.IsInRole("Administrator"))
             {
                 <td><div class="teamTableInfoCells">@Html.ActionLink("Delete", "DeleteTeam", new {id = team.Id})</div></td>
+                <td><div class="teamTableInfoCells">@Html.ActionLink("Edit", "EditTeam", new { id = team.Id })</div></td>
             }
         </tr>
+
+        
     }
 
     @if (User.IsInRole("Administrator"))
@@ -55,8 +69,10 @@
                     <div style="font-weight: bolder">New team</div>
                 </td>
                 <td>
-                    
-                    <div class="newTeamInputClubName">@Html.TextBoxFor(m => m.NewTeam.Name)</div>
+
+                    <div class="newTeamInputClubName">
+                        @Html.TextBoxFor(m => m.NewTeam.Name)
+                    </div>
                 </td>
                 <td>
 
@@ -107,7 +123,11 @@
                     </div>
                 </td>
                 @Html.HiddenFor(m => m.LeagueId)
-                <td><input type="submit" value="Add team" class="btn btn-group-sm" /></td>
+                <td>
+                    <div class="newTeamInput">
+                        <input type="submit" value="Add team" style="width: 100%"/>
+                    </div>
+                </td>
             </tr>
         }
     }

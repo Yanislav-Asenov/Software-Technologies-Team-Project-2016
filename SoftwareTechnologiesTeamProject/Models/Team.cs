@@ -34,5 +34,19 @@
         public League League { get; set; }
 
         public virtual List<Match> Matches { get; set; }
+
+        public void Update(Team team)
+        {
+            this.Name = team.Name;
+            this.GamesPlayed = team.GamesPlayed;
+            this.GoalsFor = team.GoalsFor;
+            this.Victories = team.Victories;
+            this.Draws = team.Draws;
+            this.Losses = team.Losses;
+            this.GoalsFor = team.GoalsFor;
+            this.GoalsAgainst = team.GoalsAgainst;
+            this.GoalDifference = team.GoalDifference;
+            this.Points = team.Points;
+        }
     }
 }
