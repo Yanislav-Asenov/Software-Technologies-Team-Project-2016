@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Team
     {
@@ -25,6 +26,12 @@
         public int GoalDifference { get; set; }
 
         public int Points { get; set; }
+
+        [Required]
+        public int? LeagueId { get; set; }
+
+        [ForeignKey("LeagueId")]
+        public League League { get; set; }
 
         public virtual List<Match> Matches { get; set; }
     }

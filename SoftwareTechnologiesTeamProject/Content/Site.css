@@ -233,6 +233,7 @@ textarea {
 .actions {
     margin-right: 55px;
     left: 0px;
+    display: none;
 }
 
 .actions > a {
@@ -240,6 +241,10 @@ textarea {
     border-width: 2px;
     padding: 5px;
     margin: 5px;
+}
+
+.single-comment:hover .actions {
+    display: block;
 }
 
 /* End of single comment edit / delete actions styles */
@@ -361,6 +366,14 @@ textarea {
 }
 
 
+.actions {
+
+}
+
+.single-comment:hover {
+    
+}
+
 
 /* Home page styles */
 
@@ -435,3 +448,30 @@ textarea {
 }
 
 /* End of details page styles*/
+
+
+/* Standings styles*/
+
+
+.newTeamInput > input {
+    width: 50px;
+    text-align: right;
+    padding: 2px;
+    margin-left: 15%;
+}
+
+.newTeamInputClubName > input {
+    width: 100%;
+}
+
+.teamTableInfoCells {
+    text-align: center;
+}
+
+.tableInfoCells > th {
+    text-align: center;
+}
+
+.clubName {
+    text-align: left;
+}

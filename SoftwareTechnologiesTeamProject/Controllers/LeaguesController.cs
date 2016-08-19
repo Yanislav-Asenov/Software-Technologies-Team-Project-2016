@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using SoftwareTechnologiesTeamProject.Models;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using SoftwareTechnologiesTeamProject.Models;
 
 namespace SoftwareTechnologiesTeamProject.Controllers
 {
+    using Extensions;
+    using System.Linq;
+    using ViewModels;
+
     public class LeaguesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -18,6 +17,32 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         public ActionResult Index()
         {
             return View(db.Leagues.ToList());
+        }
+
+        public ActionResult Standings(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            var league = db.Leagues.Find(id);
+
+            var teams = db.Teams
+                .Include(t => t.Matches)
+                .Where(t => t.LeagueId == id)
+                .OrderByDescending(t => t.Points)
+                .ThenByDescending(t => t.GoalDifference)
+                .ToList();
+
+            var viewModel = new StandingsViewModel
+            {
+                LeagueName = league.Name,
+                LeagueId = id,
+                Teams = teams
+            };
+
+            return View(viewModel);
         }
 
         // GET: Leagues/Details/5
@@ -38,6 +63,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         // GET: Leagues/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
@@ -58,7 +84,62 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             return View(league);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult AddTeam([Bind(Include = "LeagueId,NewTeam")]StandingsViewModel teamInfo)
+        {
+            if (teamInfo.NewTeam.Name == null)
+            {
+                return HttpNotFound();
+            }
+
+            var league = db.Leagues.Find(teamInfo.LeagueId);
+
+            if (league.Teams.FirstOrDefault(t => t.Name == teamInfo.NewTeam.Name) != null)
+            {
+                this.AddNotification("Team already exists.", NotificationType.ERROR);
+                return RedirectToAction("Standings", new { id = league.Id, leagueName = league.Name });
+            }
+
+            var newTeam = teamInfo.NewTeam;
+            newTeam.League = league;
+            newTeam.LeagueId = teamInfo.LeagueId;
+
+            league.Teams.Add(newTeam);
+            db.Teams.Add(newTeam);
+            db.SaveChanges();
+
+            return RedirectToAction("Standings", new { id = league.Id, leagueName = league.Name });
+        }
+
+        [Authorize]
+        public ActionResult DeleteTeam(int? id)
+        {
+            if (!User.IsInRole("Administrator"))
+            {
+                this.AddNotification("You are not admin.", NotificationType.ERROR);
+                return RedirectToAction("Index");
+            }
+
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            var team = db.Teams.Find(id);
+            var leagueId = team.LeagueId;
+
+            db.Teams.Remove(team);
+            db.SaveChanges();
+
+            return RedirectToAction("Standings", new { id = leagueId });
+        }
+
+
+
         // GET: Leagues/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)

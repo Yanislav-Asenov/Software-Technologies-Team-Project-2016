@@ -25,8 +25,6 @@
             return new ApplicationDbContext();
         }
 
-        public DbSet<Season> Seasons { get; set; }
-
         public DbSet<Post> Posts { get; set; }
 
         public DbSet<Comment> Comments { get; set; }

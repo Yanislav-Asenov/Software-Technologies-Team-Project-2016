@@ -83,8 +83,8 @@
     <p>
         @if (User.IsInRole("Administrators") || (Model.Post.Author != null && User.Identity.Name == Model.Post.Author.UserName))
         {
-            @Html.ActionLink("Edit", "Edit", new { id = Model.PostId })
-            <br />
+            @Html.ActionLink("Edit", "Edit", new {id = Model.PostId})
+            <br/>
         }
         @Html.ActionLink("Back to List", "Index")
     </p>
@@ -120,6 +120,7 @@
                         <strong>@comment.Author.FullName</strong> - <i>@comment.DateCreated</i>
                     </p>
                 </div>
+
                 <div class="actions">
                     @if (User.IsInRole("Administrators") || User.Identity.Name == comment.Author.UserName)
                     {
@@ -181,7 +182,7 @@
                 "<div id='confirmDelete-"+ commentId + "' class='confirmDelete'>" +
                     "<p>Confirm delete</p>" +
                     "<a href='/Posts/DeleteComment/" + commentId + "' class='confirmDeleteLink'>Delete</a>" +
-                    "<a id='cancelDelete-"+ commentId + "' onclick='cancelConfirmDelete(" + commentId + ")' class='cancelConfirmDelete' >Cancel</a>" +
+                    "<a id='cancelDelete-"+ commentId + "' onclick='cancelConfirmDelete(" + commentId + ")' class='cancelConfirmDelete'>Cancel</a>" +
                     "</div>";
             $("#single-comment-" + commentId)
                 .append(confirmDeleteElements);
@@ -191,5 +192,6 @@
             $("#confirmDelete-" + commentId).remove();
             $("#single-comment-" + commentId).children().show();
         }
+
     </script>
 }

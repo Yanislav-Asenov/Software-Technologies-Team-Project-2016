@@ -4,6 +4,7 @@ namespace SoftwareTechnologiesTeamProject.Migrations
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -26,8 +27,8 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 CreateUser(context, "merry@gmail.com", "123", "Maria Petrova");
                 CreateUser(context, "geshu@gmail.com", "123", "George Petrov");
 
-                CreateRole(context, "Administrators");
-                AddUserToRole(context, "admin@gmail.com", "Administrators");
+                CreateRole(context, "Administrator");
+                AddUserToRole(context, "admin@gmail.com", "Administrator");
 
                 CreatePost(context,
                     title: "Work Begins on HTML5.1",
@@ -96,6 +97,8 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                     authorUsername: "merry@gmail.com"
                 );
 
+                //CreateSeason(context);
+
                 context.SaveChanges();
             }
         }
@@ -162,6 +165,336 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Author = context.Users.FirstOrDefault(u => u.UserName == authorUsername)
             };
             context.Posts.Add(post);
+        }
+
+        public void CreateSeason(ApplicationDbContext context)
+        {
+            League league = new League { Name = "Premiership", Teams = new List<Team>() };
+            //United
+            Team manchesterUnited = new Team
+            {
+                Name = "Manchester United",
+                GamesPlayed = 1,
+                Victories = 1,
+                Draws = 0,
+                Losses = 0,
+                GoalsFor = 3,
+                GoalsAgainst = 1,
+                GoalDifference = 2,
+                Points = 3,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(manchesterUnited);
+
+            Team liverPool = new Team
+            {
+                Name = "Liverpool",
+                GamesPlayed = 1,
+                Victories = 1,
+                Draws = 0,
+                Losses = 0,
+                GoalsFor = 4,
+                GoalsAgainst = 3,
+                GoalDifference = 1,
+                Points = 3,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(liverPool);
+
+            Team chelsea = new Team
+            {
+                Name = "Chelsea",
+                GamesPlayed = 1,
+                Victories = 1,
+                Draws = 0,
+                Losses = 0,
+                GoalsFor = 2,
+                GoalsAgainst = 1,
+                GoalDifference = 1,
+                Points = 3,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(chelsea);
+
+            Team hullCity = new Team
+            {
+                Name = "Hull City",
+                GamesPlayed = 1,
+                Victories = 1,
+                Draws = 0,
+                Losses = 0,
+                GoalsFor = 2,
+                GoalsAgainst = 1,
+                GoalDifference = 1,
+                Points = 3,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(hullCity);
+
+            Team manchesterCity = new Team
+            {
+                Name = "Manchester City",
+                GamesPlayed = 1,
+                Victories = 1,
+                Draws = 0,
+                Losses = 0,
+                GoalsFor = 2,
+                GoalsAgainst = 1,
+                GoalDifference = 1,
+                Points = 3,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(manchesterCity);
+
+            Team swanseaCity = new Team
+            {
+                Name = "Swansea City",
+                GamesPlayed = 1,
+                Victories = 1,
+                Draws = 0,
+                Losses = 0,
+                GoalsFor = 1,
+                GoalsAgainst = 0,
+                GoalDifference = 1,
+                Points = 3,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(swanseaCity);
+
+            Team westBromwichAlbion = new Team
+            {
+                Name = "West Bromwich Albion",
+                GamesPlayed = 1,
+                Victories = 1,
+                Draws = 0,
+                Losses = 0,
+                GoalsFor = 1,
+                GoalsAgainst = 0,
+                GoalDifference = 1,
+                Points = 3,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(westBromwichAlbion);
+
+
+            Team everton = new Team
+            {
+                Name = "Everton",
+                GamesPlayed = 1,
+                Victories = 0,
+                Draws = 1,
+                Losses = 0,
+                GoalsFor = 1,
+                GoalsAgainst = 1,
+                GoalDifference = 0,
+                Points = 1,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(everton);
+
+            Team middlesbrough = new Team
+            {
+                Name = "Middlesbrough",
+                GamesPlayed = 1,
+                Victories = 0,
+                Draws = 1,
+                Losses = 0,
+                GoalsFor = 1,
+                GoalsAgainst = 1,
+                GoalDifference = 0,
+                Points = 1,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(middlesbrough);
+
+            Team southampton = new Team
+            {
+                Name = "Southampton",
+                GamesPlayed = 1,
+                Victories = 0,
+                Draws = 1,
+                Losses = 0,
+                GoalsFor = 1,
+                GoalsAgainst = 1,
+                GoalDifference = 0,
+                Points = 1,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(southampton);
+
+            Team stokeCity = new Team
+            {
+                Name = "Stoke City",
+                GamesPlayed = 1,
+                Victories = 0,
+                Draws = 1,
+                Losses = 0,
+                GoalsFor = 1,
+                GoalsAgainst = 1,
+                GoalDifference = 0,
+                Points = 1,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(stokeCity);
+
+
+            Team tottenhamHotspur = new Team
+            {
+                Name = "Tottenham Hotspur",
+                GamesPlayed = 1,
+                Victories = 0,
+                Draws = 1,
+                Losses = 0,
+                GoalsFor = 1,
+                GoalsAgainst = 1,
+                GoalDifference = 0,
+                Points = 1,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(tottenhamHotspur);
+
+            Team watford = new Team
+            {
+                Name = "Watford",
+                GamesPlayed = 1,
+                Victories = 0,
+                Draws = 1,
+                Losses = 0,
+                GoalsFor = 1,
+                GoalsAgainst = 1,
+                GoalDifference = 0,
+                Points = 1,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(watford);
+
+
+            Team arsenal = new Team
+            {
+                Name = "Arsenal",
+                GamesPlayed = 1,
+                Victories = 0,
+                Draws = 0,
+                Losses = 1,
+                GoalsFor = 3,
+                GoalsAgainst = 4,
+                GoalDifference = -1,
+                Points = 0,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(arsenal);
+
+            Team leicesterCity = new Team
+            {
+                Name = "Leicester City",
+                GamesPlayed = 1,
+                Victories = 0,
+                Draws = 0,
+                Losses = 1,
+                GoalsFor = 1,
+                GoalsAgainst = 2,
+                GoalDifference = -1,
+                Points = 0,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(leicesterCity);
+
+            Team sunderland = new Team
+            {
+                Name = "Sunderland",
+                GamesPlayed = 1,
+                Victories = 0,
+                Draws = 0,
+                Losses = 1,
+                GoalsFor = 1,
+                GoalsAgainst = 2,
+                GoalDifference = -1,
+                Points = 0,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(sunderland);
+
+            Team westHamUnited = new Team
+            {
+                Name = "West Ham United",
+                GamesPlayed = 1,
+                Victories = 0,
+                Draws = 0,
+                Losses = 1,
+                GoalsFor = 1,
+                GoalsAgainst = 2,
+                GoalDifference = -1,
+                Points = 0,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(westHamUnited);
+
+            Team burnley = new Team
+            {
+                Name = "Burnley",
+                GamesPlayed = 1,
+                Victories = 0,
+                Draws = 0,
+                Losses = 1,
+                GoalsFor = 0,
+                GoalsAgainst = 1,
+                GoalDifference = -1,
+                Points = 0,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(burnley);
+
+            Team crystalPalace = new Team
+            {
+                Name = "Crystal Palace",
+                GamesPlayed = 1,
+                Victories = 0,
+                Draws = 0,
+                Losses = 1,
+                GoalsFor = 0,
+                GoalsAgainst = 1,
+                GoalDifference = -1,
+                Points = 0,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(crystalPalace);
+
+            Team bournemouth = new Team
+            {
+                Name = "Bournemouth",
+                GamesPlayed = 1,
+                Victories = 0,
+                Draws = 0,
+                Losses = 1,
+                GoalsFor = 1,
+                GoalsAgainst = 3,
+                GoalDifference = -2,
+                Points = 0,
+                Matches = new List<Match>()
+            };
+
+            league.Teams.Add(bournemouth);
+
+            context.Leagues.Add(league);
         }
 
     }

@@ -14,7 +14,7 @@ namespace SoftwareTechnologiesTeamProject.Models
         [Required]
         public string Name { get; set; }
 
-        public List<Team> Teams { get; set; } = new List<Team>();
+        public virtual List<Team> Teams { get; set; } = new List<Team>();
 
         public virtual List<Match> Matches { get; set; } = new List<Match>();
 

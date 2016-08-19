@@ -1,39 +1,33 @@
 ﻿@model IEnumerable<SoftwareTechnologiesTeamProject.Models.League>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Leagues";
 }
 
-<h2>Index</h2>
+<h2>Leagues</h2>
+@if (User.IsInRole("Administrator"))
+{
+    @Html.ActionLink("Add new league", "Create")
+}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
+            Leagues
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var league in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(league.Name, "Standings", new { id = league.Id })
+            </td>
+            <td>
 
+            </td>
+        </tr>
+    }
 </table>

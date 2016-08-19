@@ -1,14 +1,13 @@
 ﻿@model IEnumerable<SoftwareTechnologiesTeamProject.Models.Post>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Posts";
 }
 
-<h2>Index</h2>
+<h2>Posts</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@Html.ActionLink("Create new", "Create");
+
 <table class="table">
     <tr>
         <th>
@@ -49,7 +48,7 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @if (User.IsInRole("Administrators") || (item.Author != null && User.Identity.Name == item.Author.UserName))
+                @if (User.IsInRole("Administrator") || (item.Author != null && User.Identity.Name == item.Author.UserName))
                 {
                     @Html.ActionLink("Edit", "Edit", new {id = item.Id})
                     <br/>

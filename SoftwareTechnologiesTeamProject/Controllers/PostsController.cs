@@ -179,7 +179,7 @@
                 return HttpNotFound();
             }
 
-            if (User.Identity.GetUserId() != post.AuthorId && !User.IsInRole("Administrators"))
+            if (User.Identity.GetUserId() != post.AuthorId && !User.IsInRole("Administrator"))
             {
                 this.AddNotification("You are not admin nor the post owner.", NotificationType.INFO);
                 return RedirectToAction("Index");
@@ -242,7 +242,7 @@
                 return HttpNotFound();
             }
 
-            if (User.Identity.GetUserId() != post.AuthorId && !User.IsInRole("Administrators"))
+            if (User.Identity.GetUserId() != post.AuthorId && !User.IsInRole("Administrator"))
             {
                 return RedirectToAction("Index");
             }
