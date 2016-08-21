@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - SoftUni Team Project</title>
     @Html.Partial("_Notifications")
     @Styles.Render("~/Content/css")
+    @RenderSection("styles", required: false)
     @Scripts.Render("~/bundles/modernizr")
 
     <meta name="description" content="The description of my page" />
@@ -34,10 +35,6 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        @*<hr />*@
-        @*<footer>
-            <p>&copy; @DateTime.Now.Year - Team Drop Table</p>
-        </footer>*@
         <div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
     </div>
 

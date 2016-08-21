@@ -20,6 +20,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             var matches = db.Matches
                 .Include(m => m.AwayTeam)
                 .Include(m => m.HomeTeam)
+                .OrderByDescending(m => m.DateTime)
                 .ToList();
 
             return View(matches.ToList());
@@ -49,7 +50,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             viewModel.HomeTeamHistory = db.Matches
                 .Include(m => m.HomeTeam)
                 .Include(m => m.AwayTeam)
-                .Where(m => m.HomeTeam.Name == match.HomeTeam.Name || m.AwayTeam.Name == match.HomeTeam.Name)
+                .Where(m => (m.HomeTeam.Name == match.HomeTeam.Name || m.AwayTeam.Name == match.HomeTeam.Name) && m.IsResultUpdated == true)
                 .OrderByDescending(m => m.DateTime)
                 .Take(10)
                 .ToList();
@@ -57,7 +58,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             viewModel.AwayTeamHistory = db.Matches
                 .Include(m => m.HomeTeam)
                 .Include(m => m.AwayTeam)
-                .Where(m => m.HomeTeam.Name == match.AwayTeam.Name || m.AwayTeam.Name == match.AwayTeam.Name)
+                .Where(m => (m.HomeTeam.Name == match.AwayTeam.Name || m.AwayTeam.Name == match.AwayTeam.Name) && m.IsResultUpdated == true)
                 .OrderByDescending(m => m.DateTime)
                 .Take(10)
                 .ToList();
@@ -66,6 +67,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 .Where(t => t.LeagueId == match.LeagueId)
                 .OrderByDescending(t => t.Points)
                 .ThenByDescending(t => t.GoalsFor - t.GoalsAgainst)
+                .ThenBy(t => t.GoalsFor)
                 .ToList();
 
             viewModel.LeagueName = db.Leagues.Find(match.LeagueId).Name;

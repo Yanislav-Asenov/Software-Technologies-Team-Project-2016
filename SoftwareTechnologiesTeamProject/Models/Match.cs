@@ -37,7 +37,6 @@
         public Team AwayTeam { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
         public DateTime? DateTime { get; set; }
 
         public string Result => HomeTeamGoals + " - " + AwayTeamGoals;
@@ -58,11 +57,11 @@
 
         public int AwayVotesCount { get; set; }
 
-        public double HomeCoefficient { get; set; }
+        public string HomeCoefficient { get; set; }
 
-        public double DrawCoefficient { get; set; }
+        public string DrawCoefficient { get; set; }
 
-        public double AwayCoefficient { get; set; }
+        public string AwayCoefficient { get; set; }
 
         public string GetWinningSide()
         {
@@ -133,7 +132,7 @@
 
         public string GetDate()
         {
-            return $"{DateTime:dd-MMM-yyyy}";
+            return $"{DateTime:dd-MM-yyyy}";
         }
 
         public string GetTime()

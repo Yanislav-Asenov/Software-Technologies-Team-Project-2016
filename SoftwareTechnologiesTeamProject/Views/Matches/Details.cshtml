@@ -8,7 +8,7 @@
 @* Home team logo/name - Away team logo/name *@
 <div class="container-fluid">
     <p class="gameTitle">@Model.Match.HomeTeam.Name vs @Model.Match.AwayTeam.Name</p>
-    <p class="gameTime">@Model.Match.DateTime<br /> @DateTime.Now.ToString("HH:mm")</p>
+    <p class="gameTime">@Model.Match.GetDate()<br /> @Model.Match.GetTime()</p>
     <div class="homeTeamLogo">
         <img src="@Model.Match.HomeTeam.LogoLink" width="130" height="130"/>
         <p>@Model.Match.HomeTeam.Name</p>
@@ -25,7 +25,7 @@
     @* Votes and total votes *@
     <div class="votesContainer">
         <div class="voteWrapper">
-            @if (Model.Match.HasUserVoted(User.Identity.GetUserId()))
+            @if (Model.Match.HasUserVoted(User.Identity.GetUserId()) || Model.Match.IsResultUpdated)
             {
                 <span class="votedButton">1</span>
             }
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="voteWrapper">
-            @if (Model.Match.HasUserVoted(User.Identity.GetUserId()))
+            @if (Model.Match.HasUserVoted(User.Identity.GetUserId()) || Model.Match.IsResultUpdated)
             {
                 <span class="votedButton">X</span>
             }
@@ -63,7 +63,7 @@
             </div>
         </div>
         <div class="voteWrapper">
-            @if (Model.Match.HasUserVoted(User.Identity.GetUserId()))
+            @if (Model.Match.HasUserVoted(User.Identity.GetUserId()) || Model.Match.IsResultUpdated)
             {
                 <span class="votedButton">2</span>
             }
@@ -100,7 +100,6 @@
     @* Home team match history *@
     <span class="matchHistoryHeading">@Model.Match.HomeTeam.Name - last matches</span>
     <table class="table matchHistoryTable">
-        <thead>
         <tr>
             <th class="matchHistoryDate">Date</th>
             <th class="matchHistoryHomeTeam">Home team</th>
@@ -110,9 +109,7 @@
             <th class="matchHistoryCoefficient">X</th>
             <th class="matchHistoryCoefficient">2</th>
         </tr>
-        </thead>
 
-        <tbody>
         @foreach (var match in Model.HomeTeamHistory)
         {
             <tr>
@@ -126,7 +123,7 @@
                 {
                     <td class="historyMatchResult" style="background: lightgreen">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
                 }
-                else if (match.GetWinnerName() == Model.Match.AwayTeam.Name)
+                else
                 {
                     <td class="historyMatchResult" style="background: rgb(255, 57, 57)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
                 }
@@ -136,14 +133,12 @@
                 <td class="matchHistoryCoefficient">@match.AwayCoefficient</td>
             </tr>
         }
-        </tbody>
     </table>
 
 
     @* Away team match history *@
     <span class="matchHistoryHeading">@Model.Match.AwayTeam.Name - last matches</span>
     <table class="table matchHistoryTable">
-        <thead>
             <tr>
                 <th class="matchHistoryDate">Date</th>
                 <th class="matchHistoryHomeTeam">Home team</th>
@@ -153,9 +148,7 @@
                 <th class="matchHistoryCoefficient">X</th>
                 <th class="matchHistoryCoefficient">2</th>
             </tr>
-        </thead>
 
-        <tbody>
             @foreach (var match in Model.AwayTeamHistory)
             {
                 <tr>
@@ -169,7 +162,7 @@
                     {
                         <td class="historyMatchResult" style="background: lightgreen">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
                     }
-                    else if (match.GetWinnerName() == Model.Match.HomeTeam.Name)
+                    else
                     {
                         <td class="historyMatchResult" style="background: rgb(255, 57, 57)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
                     }
@@ -179,7 +172,6 @@
                     <td class="matchHistoryCoefficient">@match.AwayCoefficient</td>
                 </tr>
             }
-        </tbody>
     </table>
 
     @* Standings *@

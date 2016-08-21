@@ -29,29 +29,43 @@
 
         <tr class="singleTeamInfo" id="singleTeamInfo-@team.Id">
             <td>
-                <div class="teamTableInfoCells">@position</div></td>
+                <div class="teamTableInfoCells">@position</div>
+            </td>
             <td>
-                <div class="teamTableInfoCells clubName">@team.Name</div></td>
+                <div class="teamTableInfoCells clubName"><img src="@team.LogoLink" width="20" />@team.Name</div>
+            </td>
             <td>
-                <div class="teamTableInfoCells">@team.GamesPlayed</div></td>
+                <div class="teamTableInfoCells">@team.GamesPlayed</div>
+            </td>
             <td>
-                <div class="teamTableInfoCells">@team.Victories</div></td>
+                <div class="teamTableInfoCells">@team.Victories</div>
+            </td>
             <td>
-                <div class="teamTableInfoCells">@team.Draws</div></td>
+                <div class="teamTableInfoCells">@team.Draws</div>
+            </td>
             <td>
-                <div class="teamTableInfoCells">@team.Losses</div></td>
+                <div class="teamTableInfoCells">@team.Losses</div>
+            </td>
             <td>
-                <div class="teamTableInfoCells">@team.GoalsFor</div></td>
+                <div class="teamTableInfoCells">@team.GoalsFor</div>
+            </td>
             <td>
-                <div class="teamTableInfoCells">@team.GoalsAgainst</div></td>
+                <div class="teamTableInfoCells">@team.GoalsAgainst</div>
+            </td>
             <td>
-                <div class="teamTableInfoCells">@team.GetGoalDifference()</div></td>
+                <div class="teamTableInfoCells">@team.GetGoalDifference()</div>
+            </td>
             <td>
-                <div class="teamTableInfoCells">@team.Points</div></td>
+                <div class="teamTableInfoCells">@team.Points</div>
+            </td>
             @if (User.IsInRole("Administrator"))
             {
-                <td><div class="teamTableInfoCells">@Html.ActionLink("Delete", "DeleteTeam", new {id = team.Id})</div></td>
-                <td><div class="teamTableInfoCells">@Html.ActionLink("Edit", "EditTeam", new { id = team.Id })</div></td>
+                <td>
+                    <div class="teamTableInfoCells">@Html.ActionLink("Delete", "DeleteTeam", new { id = team.Id })</div>
+                </td>
+                <td>
+                    <div class="teamTableInfoCells">@Html.ActionLink("Edit", "EditTeam", new { id = team.Id })</div>
+                </td>
             }
         </tr>
 
