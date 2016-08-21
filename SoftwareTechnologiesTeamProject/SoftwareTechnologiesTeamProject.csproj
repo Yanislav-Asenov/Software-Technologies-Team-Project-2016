@@ -247,13 +247,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-<<<<<<< HEAD
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-=======
     <Content Include="Content\Images\droptableV3.png" />
     <Content Include="Content\Images\navbarbckg.png" />
     <Content Include="Content\Images\search.png" />
->>>>>>> origin/master
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
