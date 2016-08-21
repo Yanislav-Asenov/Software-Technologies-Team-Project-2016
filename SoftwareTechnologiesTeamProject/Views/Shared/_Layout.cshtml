@@ -14,7 +14,6 @@
 </head>
 <body>
 <div class="container">
-    @*<img class="dropTableLogo" src="../../Content/Images/droptableV3.png" height="150" />*@
     <header class="page-header">
         <a href="@Url.Action("Index", "Home")" title="List View" class="links">
             <img class="dropTableLogo" alt="Droptable" src="@Url.Content("../Content/Images/droptableV3.png")">
@@ -45,48 +44,33 @@
             </div>
             <!--/.nav-collapse -->
         </div>
-<<<<<<< HEAD
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
-    </div>
-=======
     </nav>
 
-    <main class="container">
-        <h1>Hello</h1>
-    </main>
 
-<div class="container body-content">
-    @RenderBody()
-    @*<hr />*@
-    @*<footer>
-            <p>&copy; @DateTime.Now.Year - Team Drop Table</p>
-        </footer>*@
-    @*<div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.
-    </div>*@
-</div>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+     <div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
+</body>
+</html>
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)
+
 <script type="text/javascript">
     var affixElement = '#navbar-main';
->>>>>>> origin/master
 
     $(affixElement).affix({
         offset: {
             // Distance of between element and top page
             top: function () {
-                return (this.top = $(affixElement).offset().top)
+                return (this.top = $(affixElement).offset().top);
             },
-            // when start #footer 
+            // when start #footer
             bottom: function () {
-                return (this.bottom = $('#footer').outerHeight(true))
+                return (this.bottom = $('#footer').outerHeight(true));
             }
         }
     });
 </script>
-</body>
-</html>

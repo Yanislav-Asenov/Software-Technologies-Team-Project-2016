@@ -3,74 +3,44 @@
     ViewBag.Title = "Standings";
 }
 
-<h2>@Model.League.Name (@Model.League.GetSeason()) - Standings</h2>
-
-<table class="table">
-    <tr class="tableInfoCells">
-        <th>№</th>
-        <th>Team</th>
-        <th>Games played</th>
-        <th>Wins</th>
-        <th>Draws</th>
-        <th>Losses</th>
-        <th>Goals for</th>
-        <th>Goals against</th>
-        <th>Goal difference</th>
-        <th>Points</th>
-        <th></th>
-        <th></th>
-    </tr>
-
-
-    @for (int i = 0; i < Model.Teams.Count; i++)
-    {
-        var team = Model.Teams[i];
-        var position = i + 1;
-
-        <tr class="singleTeamInfo" id="singleTeamInfo-@team.Id">
-            <td>
-                <div class="teamTableInfoCells">@position</div>
-            </td>
-            <td>
-                <div class="teamTableInfoCells clubName"><img src="@team.LogoLink" width="20" />@team.Name</div>
-            </td>
-            <td>
-                <div class="teamTableInfoCells">@team.GamesPlayed</div>
-            </td>
-            <td>
-                <div class="teamTableInfoCells">@team.Victories</div>
-            </td>
-            <td>
-                <div class="teamTableInfoCells">@team.Draws</div>
-            </td>
-            <td>
-                <div class="teamTableInfoCells">@team.Losses</div>
-            </td>
-            <td>
-                <div class="teamTableInfoCells">@team.GoalsFor</div>
-            </td>
-            <td>
-                <div class="teamTableInfoCells">@team.GoalsAgainst</div>
-            </td>
-            <td>
-                <div class="teamTableInfoCells">@team.GetGoalDifference()</div>
-            </td>
-            <td>
-                <div class="teamTableInfoCells">@team.Points</div>
-            </td>
-            @if (User.IsInRole("Administrator"))
-            {
-                <td>
-                    <div class="teamTableInfoCells">@Html.ActionLink("Delete", "DeleteTeam", new { id = team.Id })</div>
-                </td>
-                <td>
-                    <div class="teamTableInfoCells">@Html.ActionLink("Edit", "EditTeam", new { id = team.Id })</div>
-                </td>
-            }
+<span class="standingsHeading">@Model.League.Name (@Model.League.GetSeason()) - Standings</span>
+<table class="table standingsTable">
+    <thead>
+        <tr>
+            <th class="standingsInfo">№</th>
+            <th class="standingsTeamName">Team</th>
+            <th class="standingsInfo" title="Games played">GP</th>
+            <th class="standingsInfo">Wins</th>
+            <th class="standingsInfo">Draws</th>
+            <th class="standingsInfo">Losses</th>
+            <th class="standingsInfo" title="Goals for">GF</th>
+            <th class="standingsInfo" title="Goals against">GA</th>
+            <th class="standingsInfo" title="Goals difference">GD</th>
+            <th class="standingsInfo">Points</th>
         </tr>
+    </thead>
 
-        
-    }
+    <tbody>
+        @for (int i = 0; i < Model.Teams.Count; i++)
+        {
+                int position = i + 1;
+                var team = Model.Teams[i];
+                <tr>
+                    <td class="standingsInfo">@position</td>
+                    <td class="standingsTeamName"><img src="@team.LogoLink" width="20" />@team.Name</td>
+                    <td class="standingsInfo">@team.GamesPlayed</td>
+                    <td class="standingsInfo">@team.Victories</td>
+                    <td class="standingsInfo">@team.Draws</td>
+                    <td class="standingsInfo">@team.Losses</td>
+                    <td class="standingsInfo">@team.GoalsFor</td>
+                    <td class="standingsInfo">@team.GoalsAgainst</td>
+                    <td class="standingsInfo">@team.GetGoalDifference()</td>
+                    <td class="standingsInfo">@team.Points</td>
+                </tr>
+        }
+    </tbody>
+
+    @* Add new team form *@
 
     @if (User.IsInRole("Administrator"))
     {
@@ -129,7 +99,7 @@
                 <td>
 
                     <div class="newTeamInput">
-                        <input type="text" value="" disabled="disabled"/>
+                        <input type="text" value="" disabled="disabled" />
                     </div>
                 </td>
                 <td>
@@ -140,10 +110,11 @@
                 @Html.HiddenFor(m => m.League.Id)
                 <td>
                     <div class="newTeamInput">
-                        <input type="submit" value="Add team" style="width: 100%"/>
+                        <input type="submit" value="Add team" style="width: 100%" />
                     </div>
                 </td>
             </tr>
         }
     }
 </table>
+

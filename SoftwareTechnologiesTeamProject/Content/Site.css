@@ -26,6 +26,7 @@ body {
   padding: 1rem;
   background-color: #efefef;
   text-align: center;
+    height: 2%;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -467,6 +468,27 @@ textarea {
     width: 200px;
 }
 
+.standingsHeading {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 30px 0 30px 10px;
+    position: relative;
+    float: left;
+}
+
+.standingsInfo {
+    text-align: center;
+    width: 5%;
+}
+
+.standingsTeamName {
+    width: 15%;
+    text-align: left;
+}
+
+th{
+    text-align: center;
+}
 
 /* Matches styles */
 
@@ -697,6 +719,11 @@ p {
 
 .matchHistoryDate {
     width: 100px;
+    text-align: left;
+}
+
+.boldTeamName {
+    font-weight: bolder;
 }
 
 
@@ -706,13 +733,12 @@ p {
 }
 
 thead {
-    color: black;
-    font-weight: bold;
+    color: white;
     font-size: 15px;
+    background: green;
 }
 
 .matchHistoryTable {
-    font-weight: bold;
     color: black;
     margin-top: 50px;
 }
@@ -728,7 +754,6 @@ thead {
     margin-top: 50px;
 }
 
-<<<<<<< HEAD
 .searchPost {
     width: 130px;
     box-sizing: border-box;
@@ -766,23 +791,10 @@ thead {
 
 
 /* Not important */
-.footer {
-  background: #eee;
-  height: 2%;
-}
 
 .dropTableLogo {
     height: 150px;
     
         
 }
-=======
-.standingsHeading {
-    font-weight: bold;
-    font-size: 20px;
-    margin-left: 35%;
-    margin-top: 50px;
-    position: relative;
-    float: left;
-}
->>>>>>> origin/master
+

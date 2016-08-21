@@ -50,7 +50,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             viewModel.HomeTeamHistory = db.Matches
                 .Include(m => m.HomeTeam)
                 .Include(m => m.AwayTeam)
-                .Where(m => (m.HomeTeam.Name == match.HomeTeam.Name || m.AwayTeam.Name == match.HomeTeam.Name) && m.IsResultUpdated == true)
+                .Where(m => (m.HomeTeam.Name == match.HomeTeam.Name || m.AwayTeam.Name == match.HomeTeam.Name) && m.IsResultUpdated && m.DateTime < match.DateTime)
                 .OrderByDescending(m => m.DateTime)
                 .Take(10)
                 .ToList();
@@ -58,7 +58,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             viewModel.AwayTeamHistory = db.Matches
                 .Include(m => m.HomeTeam)
                 .Include(m => m.AwayTeam)
-                .Where(m => (m.HomeTeam.Name == match.AwayTeam.Name || m.AwayTeam.Name == match.AwayTeam.Name) && m.IsResultUpdated == true)
+                .Where(m => (m.HomeTeam.Name == match.AwayTeam.Name || m.AwayTeam.Name == match.AwayTeam.Name) && m.IsResultUpdated && m.DateTime < match.DateTime)
                 .OrderByDescending(m => m.DateTime)
                 .Take(10)
                 .ToList();
@@ -67,7 +67,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 .Where(t => t.LeagueId == match.LeagueId)
                 .OrderByDescending(t => t.Points)
                 .ThenByDescending(t => t.GoalsFor - t.GoalsAgainst)
-                .ThenBy(t => t.GoalsFor)
+                .ThenByDescending(t => t.GoalsFor)
                 .ToList();
 
             viewModel.LeagueName = db.Leagues.Find(match.LeagueId).Name;
@@ -126,30 +126,35 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         [HttpPost]
         public ActionResult UpdateResult([Bind(Include = "Id,HomeTeamGoals,AwayTeamGoals,HomeTeamId,AwayTeamId")]Match match)
         {
-            var curr = db.Matches
+            var currentMatch = db.Matches
                 .Include(m => m.HomeTeam)
                 .Include(m => m.AwayTeam)
                 .Include(m => m.Votes.Select(v => v.Voter))
                 .FirstOrDefault(m => m.Id == match.Id);
 
-            curr.HomeTeamGoals = match.HomeTeamGoals;
-            curr.AwayTeamGoals = match.AwayTeamGoals;
-            string winner = curr.GetWinningSide();
+            if (currentMatch == null)
+            {
+                return HttpNotFound();
+            }
 
-            curr.UpdateTeams(winner);
-            curr.IsResultUpdated = true;
+            currentMatch.HomeTeamGoals = match.HomeTeamGoals;
+            currentMatch.AwayTeamGoals = match.AwayTeamGoals;
+            string winner = currentMatch.GetWinningSide();
 
-            db.Entry(curr.HomeTeam).State = EntityState.Modified;
-            db.Entry(curr.AwayTeam).State = EntityState.Modified;
+            currentMatch.UpdateTeams(winner);
+            currentMatch.IsResultUpdated = true;
 
-            foreach (var vote in curr.Votes.Where(v => v.VoteType == winner))
+            db.Entry(currentMatch.HomeTeam).State = EntityState.Modified;
+            db.Entry(currentMatch.AwayTeam).State = EntityState.Modified;
+
+            foreach (var vote in currentMatch.Votes.Where(v => v.VoteType == winner))
             {
                 var user = vote.Voter;
                 user.Balance += 50;
                 db.Entry(user).State = EntityState.Modified;
             }
 
-            db.Entry(curr).State = EntityState.Modified;
+            db.Entry(currentMatch).State = EntityState.Modified;
             db.SaveChanges();
 
             return RedirectToAction("Details", "Matches", new { id = match.Id });
@@ -178,6 +183,15 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 match.League = db.Leagues.Find(match.LeagueId);
                 match.LeagueName = db.Leagues.Find(match.LeagueId).Name;
                 db.Matches.Add(match);
+
+                //Add this match to home/away teams match history
+                var homeTeam = db.Teams.Find(match.HomeTeamId);
+                homeTeam.Matches.Add(match);
+                var awayTeam = db.Teams.Find(match.AwayTeamId);
+                homeTeam.Matches.Add(match);
+
+                db.Entry(homeTeam).State = EntityState.Modified;
+                db.Entry(awayTeam).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

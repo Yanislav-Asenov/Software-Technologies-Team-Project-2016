@@ -32,7 +32,7 @@
                         {
                             @match.Result
                         }
-                        else
+                        else if(User.IsInRole("Aadministrator"))
                         {
                             @Html.ActionLink("Update result", "UpdateResult", new { id = match.Id })
                         }

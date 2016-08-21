@@ -114,7 +114,15 @@
         {
             <tr>
                 <td class="matchHistoryDate">@match.GetDate()</td>
-                <td class="matchHistoryHomeTeam">@match.HomeTeam.Name</td>
+                @if (match.HomeTeam.Name == Model.Match.HomeTeam.Name)
+                {
+                    <td class="matchHistoryHomeTeam boldTeamName">@match.HomeTeam.Name</td>
+                }
+                else
+                {
+                    <td class="matchHistoryHomeTeam">@match.HomeTeam.Name</td>
+                }
+
                 @if (match.GetWinnerName() == "draw")
                 {
                     <td class="historyMatchResult" style="background: rgb(255, 202, 104)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
@@ -127,7 +135,15 @@
                 {
                     <td class="historyMatchResult" style="background: rgb(255, 57, 57)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
                 }
-                <td class="matchHistoryAwayTeam">@match.AwayTeam.Name</td>
+
+                @if (match.AwayTeam.Name == Model.Match.HomeTeam.Name)
+                {
+                    <td class="matchHistoryAwayTeam boldTeamName">@match.AwayTeam.Name</td>
+                }
+                else
+                {
+                    <td class="matchHistoryAwayTeam">@match.AwayTeam.Name</td>
+                }
                 <td class="matchHistoryCoefficient">@match.HomeCoefficient</td>
                 <td class="matchHistoryCoefficient">@match.DrawCoefficient</td>
                 <td class="matchHistoryCoefficient">@match.AwayCoefficient</td>
@@ -153,7 +169,15 @@
             {
                 <tr>
                     <td class="matchHistoryDate">@match.GetDate()</td>
-                    <td class="matchHistoryHomeTeam">@match.HomeTeam.Name</td>
+                    @if (@match.HomeTeam.Name == Model.Match.AwayTeam.Name)
+                    {
+                        <td class="matchHistoryHomeTeam boldTeamName">@match.HomeTeam.Name</td>
+                    }
+                    else
+                    {
+                        <td class="matchHistoryHomeTeam">@match.HomeTeam.Name</td>
+                    }
+
                     @if (match.GetWinnerName() == "draw")
                     {
                         <td class="historyMatchResult" style="background: rgb(255, 202, 104)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
@@ -166,7 +190,14 @@
                     {
                         <td class="historyMatchResult" style="background: rgb(255, 57, 57)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
                     }
-                    <td class="matchHistoryAwayTeam">@match.AwayTeam.Name</td>
+                    @if (@match.AwayTeam.Name == Model.Match.AwayTeam.Name)
+                    {
+                        <td class="matchHistoryAwayTeam boldTeamName">@match.AwayTeam.Name</td>
+                    }
+                    else
+                    {
+                        <td class="matchHistoryAwayTeam">@match.AwayTeam.Name</td>
+                    }
                     <td class="matchHistoryCoefficient">@match.HomeCoefficient</td>
                     <td class="matchHistoryCoefficient">@match.DrawCoefficient</td>
                     <td class="matchHistoryCoefficient">@match.AwayCoefficient</td>
@@ -179,16 +210,16 @@
     <table class="table matchHistoryTable">
         <thead>
             <tr>
-                <th>№</th>
-                <th>Team</th>
-                <th>Games played</th>
-                <th>Wins</th>
-                <th>Draws</th>
-                <th>Losses</th>
-                <th title="Goals for">GF</th>
-                <th title="Goals against">GA</th>
-                <th title="Goals difference">GD</th>
-                <th title="Points">Points</th>
+                <th class="standingsInfo">№</th>
+                <th class="standingsTeamName">Team</th>
+                <th class="standingsInfo" title="Games played">GP</th>
+                <th class="standingsInfo">Wins</th>
+                <th class="standingsInfo">Draws</th>
+                <th class="standingsInfo">Losses</th>
+                <th class="standingsInfo" title="Goals for">GF</th>
+                <th class="standingsInfo" title="Goals against">GA</th>
+                <th class="standingsInfo" title="Goals difference">GD</th>
+                <th class="standingsInfo" title="Points">Points</th>
             </tr>
         </thead>
 
@@ -200,31 +231,31 @@
                 if (team.Name == Model.Match.HomeTeam.Name || team.Name == Model.Match.AwayTeam.Name)
                 {
                     <tr style="background:lightgreen">
-                        <td>@position</td>
-                        <td>@team.Name</td>
-                        <td>@team.GamesPlayed</td>
-                        <td>@team.Victories</td>
-                        <td>@team.Draws</td>
-                        <td>@team.Losses</td>
-                        <td>@team.GoalsFor</td>
-                        <td>@team.GoalsAgainst</td>
-                        <td>@team.GetGoalDifference()</td>
-                        <td>@team.Points</td>
+                        <td class="standingsInfo">@position</td>
+                        <td class="standingsTeamName">@team.Name</td>
+                        <td class="standingsInfo">@team.GamesPlayed</td>
+                        <td class="standingsInfo">@team.Victories</td>
+                        <td class="standingsInfo">@team.Draws</td>
+                        <td class="standingsInfo">@team.Losses</td>
+                        <td class="standingsInfo">@team.GoalsFor</td>
+                        <td class="standingsInfo">@team.GoalsAgainst</td>
+                        <td class="standingsInfo">@team.GetGoalDifference()</td>
+                        <td class="standingsInfo">@team.Points</td>
                     </tr>
                 }
                 else
                 {
                     <tr>
-                        <td>@position</td>
+                        <td class="standingsInfo">@position</td>
                         <td>@team.Name</td>
-                        <td>@team.GamesPlayed</td>
-                        <td>@team.Victories</td>
-                        <td>@team.Draws</td>
-                        <td>@team.Losses</td>
-                        <td>@team.GoalsFor</td>
-                        <td>@team.GoalsAgainst</td>
-                        <td>@team.GetGoalDifference()</td>
-                        <td>@team.Points</td>
+                        <td class="standingsInfo">@team.GamesPlayed</td>
+                        <td class="standingsInfo">@team.Victories</td>
+                        <td class="standingsInfo">@team.Draws</td>
+                        <td class="standingsInfo">@team.Losses</td>
+                        <td class="standingsInfo">@team.GoalsFor</td>
+                        <td class="standingsInfo">@team.GoalsAgainst</td>
+                        <td class="standingsInfo">@team.GetGoalDifference()</td>
+                        <td class="standingsInfo">@team.Points</td>
                     </tr>
                 }
 

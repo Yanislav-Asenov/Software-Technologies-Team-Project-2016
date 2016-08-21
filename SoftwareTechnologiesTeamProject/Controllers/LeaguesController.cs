@@ -31,7 +31,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 .Where(t => t.LeagueId == id)
                 .OrderByDescending(t => t.Points)
                 .ThenByDescending(t => t.GoalsFor - t.GoalsAgainst)
-                .ThenBy(t => t.GoalsFor)
+                .ThenByDescending(t => t.GoalsFor)
                 .ToList();
 
             var viewModel = new StandingsViewModel

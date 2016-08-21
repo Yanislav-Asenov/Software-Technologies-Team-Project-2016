@@ -16,15 +16,23 @@
         // GET: Posts 
         public ActionResult Index(string searchString)
         {
-            var searchedPosts = from m in db.Posts
-                         select m;
+            //var searchedPosts = from m in db.Posts
+            //                    select m;
+
+            var posts = db.Posts
+                .Include(p => p.Author)
+                .OrderByDescending(p => p.Date)
+                .ToList();
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                searchedPosts = searchedPosts.Where(s => s.Title.Contains(searchString));
+                //searchedPosts = searchedPosts.Where(s => s.Title.Contains(searchString));
+                posts = posts
+                    .Where(p => p.Title.Contains(searchString) || p.Author.FullName.Contains(searchString) || p.Body.Contains(searchString))
+                    .ToList();
             }
 
-            return View(searchedPosts);
+            return View(posts);
         }
 
         public ActionResult Tag(int? id)
