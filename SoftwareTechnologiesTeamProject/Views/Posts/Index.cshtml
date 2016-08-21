@@ -5,8 +5,20 @@
 }
 
 <h2>Posts</h2>
+@using (Html.BeginForm())
+{
+    <form>
+        <input class="searchPost" type="text" name="searchString" placeholder="Search..">
+    </form>
 
-@Html.ActionLink("Create new", "Create");
+
+}
+
+
+<br />
+
+
+@Html.ActionLink("Create new", "Create")
 
 <table class="table">
     <tr>
