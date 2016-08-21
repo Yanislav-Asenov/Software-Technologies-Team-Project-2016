@@ -139,6 +139,11 @@
             return $"{DateTime:dd-MMM-yyyy}";
         }
 
+        public string GetTime()
+        {
+            return $"{DateTime:HH:mm}";
+        }
+
         public void UpdateTeams(string winner)
         {
             this.HomeTeam.GoalsFor += this.HomeTeamGoals;

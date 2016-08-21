@@ -50,6 +50,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 .Include(m => m.HomeTeam)
                 .Include(m => m.AwayTeam)
                 .Where(t => t.HomeTeam.Id == match.HomeTeamId || t.AwayTeam.Id == match.HomeTeamId)
+                .OrderBy(m => m.DateTime)
                 .Take(5)
                 .ToList();
 
@@ -57,8 +58,18 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 .Include(m => m.HomeTeam)
                 .Include(m => m.AwayTeam)
                 .Where(m => m.HomeTeamId == match.AwayTeamId || m.AwayTeamId == match.AwayTeamId)
+                .OrderBy(m => m.DateTime)
                 .Take(5)
                 .ToList();
+
+            viewModel.LeagueTeams = db.Teams
+                .Where(t => t.LeagueId == match.LeagueId)
+                .OrderByDescending(t => t.Points)
+                .ThenByDescending(t => t.GoalDifference)
+                .ToList();
+
+            viewModel.LeagueName = db.Leagues.Find(match.LeagueId).Name;
+
             return View(viewModel);
         }
 

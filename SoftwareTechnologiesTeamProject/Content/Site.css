@@ -471,13 +471,14 @@ textarea {
 /* Matches styles */
 
 .games {
-    width: 100%;
+    width: 70%;
     margin: 0px 0px 30px 0px;
     border-collapse: collapse;
     display: table;
     border-collapse: separate;
     border-spacing: 2px;
     border-color: grey;
+    text-align: left;
 }
 
 .games > td {
@@ -670,7 +671,7 @@ p {
 
 .matchResult {
     position: absolute;
-    top: 30%;
+    top: 25%;
     left: 48%;
     color: black;
     font-weight: bolder;

@@ -11,7 +11,7 @@
     <table class="games">
         <thead class="tableHead">
         <tr>
-            <th>[image]</th>
+            <th>Time</th>
             <th class="left">Premier League</th>
             <th>Result</th>
             <th>1</th>
@@ -23,7 +23,7 @@
             @foreach (var match in Model)
             {
                 <tr class="tr0">
-                    <td class="time">@match.DateTime</td>
+                    <td class="time">@match.GetTime()</td>
                     <td class="teams">
                         @Html.ActionLink(match.HomeTeam.Name + " - " + match.AwayTeam.Name, "Details", new { id = match.Id })
                     </td>

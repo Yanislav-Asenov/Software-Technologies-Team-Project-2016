@@ -11,5 +11,9 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
         public List<Match> HomeTeamHistory { get; set; }
 
         public List<Match> AwayTeamHistory { get; set; }
+
+        public string LeagueName { get; set; }
+
+        public List<Team> LeagueTeams { get; set; }
     }
 }
