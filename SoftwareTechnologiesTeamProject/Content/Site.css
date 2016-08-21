@@ -669,21 +669,20 @@ p {
 }
 
 .matchResult {
-    position: absolute;
-    top: 25%;
-    left: 48%;
+    position: relative;
     color: black;
     font-weight: bolder;
     font-size: 20px;
     padding: 10px;
     color: red;
+    margin-left: 47%;
 }
 
 
 .matchHistoryHomeTeam {
     text-align: right;
     width: 200px;
-}
+} 
 
 .matchHistoryAwayTeam {
     text-align: left;
@@ -691,7 +690,7 @@ p {
 }
 
 .historyMatchResult {
-    width: 40px;
+    width: 50px;
     text-align: center;
 }
 
@@ -728,6 +727,7 @@ thead {
     margin-top: 50px;
 }
 
+<<<<<<< HEAD
 .searchPost {
     width: 130px;
     box-sizing: border-box;
@@ -775,3 +775,13 @@ thead {
     
         
 }
+=======
+.standingsHeading {
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 35%;
+    margin-top: 50px;
+    position: relative;
+    float: left;
+}
+>>>>>>> origin/master

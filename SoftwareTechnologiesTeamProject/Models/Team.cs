@@ -23,8 +23,6 @@
 
         public int GoalsAgainst { get; set; }
 
-        public int GoalDifference { get; set; }
-
         public int Points { get; set; }
 
         public string LogoLink { get; set; }
@@ -59,6 +57,13 @@
             this.GoalsFor = team.GoalsFor;
             this.GoalsAgainst = team.GoalsAgainst;
             this.Points = team.Points;
+        }
+
+        public string GetGoalDifference()
+        {
+            int goalDiff = this.GoalsFor - this.GoalsAgainst;
+
+            return goalDiff >= 0 ? "+" + goalDiff : "" + goalDiff;
         }
     }
 }
