@@ -14,9 +14,17 @@
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Posts 
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.Posts.Include(p => p.Author).ToList());
+            var searchedPosts = from m in db.Posts
+                         select m;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                searchedPosts = searchedPosts.Where(s => s.Title.Contains(searchString));
+            }
+
+            return View(searchedPosts);
         }
 
         public ActionResult Tag(int? id)

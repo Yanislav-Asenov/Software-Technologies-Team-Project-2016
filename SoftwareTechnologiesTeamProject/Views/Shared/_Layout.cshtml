@@ -8,38 +8,85 @@
     @Styles.Render("~/Content/css")
     @RenderSection("styles", required: false)
     @Scripts.Render("~/bundles/modernizr")
-
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <meta name="description" content="The description of my page" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+<div class="container">
+    @*<img class="dropTableLogo" src="../../Content/Images/droptableV3.png" height="150" />*@
+    <header class="page-header">
+        <a href="@Url.Action("Index", "Home")" title="List View" class="links">
+            <img class="dropTableLogo" alt="Droptable" src="@Url.Content("../Content/Images/droptableV3.png")">
+        </a>
+    </header>
+</div>
+
+    <nav id="navbar-main" class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Drop Table", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand" href="#">Project name</a>
             </div>
-            <div class="navbar-collapse collapse" autofocus>
+            <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Posts", "Index", "Posts")</li>
-                    <li>@Html.ActionLink("Leagues", "Index", "Leagues")</li>
-                    <li>@Html.ActionLink("Matches", "Index", "Matches")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Posts", "Index", "Posts")</li>
+                        <li>@Html.ActionLink("Leagues", "Index", "Leagues")</li>
+                        <li>@Html.ActionLink("Matches", "Index", "Matches")</li>
+                 </ul>
+                    @Html.Partial("_LoginPartial")
+                
             </div>
+            <!--/.nav-collapse -->
         </div>
+<<<<<<< HEAD
     </div>
     <div class="container body-content">
         @RenderBody()
         <div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
     </div>
+=======
+    </nav>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <main class="container">
+        <h1>Hello</h1>
+    </main>
+
+<div class="container body-content">
+    @RenderBody()
+    @*<hr />*@
+    @*<footer>
+            <p>&copy; @DateTime.Now.Year - Team Drop Table</p>
+        </footer>*@
+    @*<div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.
+    </div>*@
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+<script type="text/javascript">
+    var affixElement = '#navbar-main';
+>>>>>>> origin/master
+
+    $(affixElement).affix({
+        offset: {
+            // Distance of between element and top page
+            top: function () {
+                return (this.top = $(affixElement).offset().top)
+            },
+            // when start #footer 
+            bottom: function () {
+                return (this.bottom = $('#footer').outerHeight(true))
+            }
+        }
+    });
+</script>
 </body>
 </html>

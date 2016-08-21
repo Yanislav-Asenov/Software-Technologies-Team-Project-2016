@@ -11,7 +11,6 @@
 
 body {
   position: relative;
-  padding-top: 50px;
   margin: 0;
   padding-bottom: 6rem;
   min-height: 100%;
@@ -729,6 +728,55 @@ thead {
     margin-top: 50px;
 }
 
+<<<<<<< HEAD
+.searchPost {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('../Content/Images/search.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.searchPost:focus {
+    width: 100%;
+}
+
+ 
+.affixed-top {
+    background-image: url(../Content/Images/navbarbckg.png);
+  }
+  /* Added `.affix` class css when the element is >= 170px (Look: line 8 html) */
+.affix {
+    background-image: url(../Content/Images/navbarbckg.png);
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  /* Added `.affix-bottom` class css when the element is footer */
+.affix-bottom {
+    background-image: url(../Content/Images/navbarbckg.png);
+  }
+
+
+/* Not important */
+.footer {
+  background: #eee;
+  height: 2%;
+}
+
+.dropTableLogo {
+    height: 150px;
+    
+        
+}
+=======
 .standingsHeading {
     font-weight: bold;
     font-size: 20px;
@@ -737,3 +785,4 @@ thead {
     position: relative;
     float: left;
 }
+>>>>>>> origin/master
