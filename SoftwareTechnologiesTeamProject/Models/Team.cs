@@ -27,6 +27,8 @@
 
         public int Points { get; set; }
 
+        public string LogoLink { get; set; }
+
         [Required]
         public int? LeagueId { get; set; }
 
@@ -34,6 +36,17 @@
         public League League { get; set; }
 
         public virtual List<Match> Matches { get; set; }
+
+        public Team()
+        {
+            GamesPlayed = 0;
+            GoalsFor = 0;
+            GoalsAgainst = 0;
+            Losses = 0;
+            Victories = 0;
+            Draws = 0;
+            Points = 0;
+        }
 
         public void Update(Team team)
         {
@@ -45,7 +58,6 @@
             this.Losses = team.Losses;
             this.GoalsFor = team.GoalsFor;
             this.GoalsAgainst = team.GoalsAgainst;
-            this.GoalDifference = team.GoalDifference;
             this.Points = team.Points;
         }
     }

@@ -65,8 +65,10 @@
             @Html.AntiForgeryToken()
             <tr>
                 <td>
-                    
-                    <div style="font-weight: bolder">New team</div>
+
+                    <div>
+                        @Html.TextBoxFor(m => m.NewTeam.LogoLink, new { placeholder = "Paste link of the team logo" })
+                    </div>
                 </td>
                 <td>
 

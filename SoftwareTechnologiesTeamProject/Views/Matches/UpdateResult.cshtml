@@ -1,0 +1,27 @@
+﻿@model SoftwareTechnologiesTeamProject.Models.Match
+@{
+    ViewBag.Title = "UpdateResult";
+}
+
+<h2>@Model.HomeTeam.Name - @Model.AwayTeam.Name</h2>
+
+@using (Html.BeginForm("UpdateResult", "Matches", FormMethod.Post))
+{
+    <table>
+        <tr class="updateMatchInfoCells">
+            <th>Home team goals</th>
+            <th></th>
+            <th>Away team goals</th>
+            <th></th>
+        </tr>
+        <tr class="updateResultInputFields">
+            <td>@Html.EditorFor(m => m.HomeTeamGoals, new { @class="editor" })</td>
+            <td></td>
+            <td>@Html.EditorFor(m => m.AwayTeamGoals, new {@class = "editor"})</td>
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor((m => m.HomeTeamId))
+            @Html.HiddenFor(m => m.AwayTeamId)
+            <td><input type="submit" value="Update result" /></td>
+        </tr>
+    </table>
+}

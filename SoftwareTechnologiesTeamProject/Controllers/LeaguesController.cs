@@ -116,7 +116,6 @@ namespace SoftwareTechnologiesTeamProject.Controllers
 
         [Authorize]
         [Authorize(Roles = "Administrator")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteTeam(int? id)
         {
             if (!User.IsInRole("Administrator"))

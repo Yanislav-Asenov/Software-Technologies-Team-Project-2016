@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SoftwareTechnologiesTeamProject.Models.Match>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@Html.ActionLink("Create new", "Create")
+<div class="contentContainer">
+    <h1 id="dateHeader">Мачове за @DateTime.Now.ToString("dddd, dd MMMM, yyyy")</h1>
+    <table class="games">
+        <thead class="tableHead">
+        <tr>
+            <th>[image]</th>
+            <th class="left">Premier League</th>
+            <th>Result</th>
+            <th>1</th>
+            <th>X</th>
+            <th>2</th>
+        </tr>
+        </thead>
+        <tbody class="tableBody">
+            @foreach (var match in Model)
+            {
+                <tr class="tr0">
+                    <td class="time">@match.DateTime</td>
+                    <td class="teams">
+                        @Html.ActionLink(match.HomeTeam.Name + " - " + match.AwayTeam.Name, "Details", new { id = match.Id })
+                    </td>
+                    <td>
+                        @if (match.IsResultUpdated)
+                        {
+                            @match.Result
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Update result", "UpdateResult", new { id = match.Id })
+                        }
+                    </td>
+                    <td>@match.HomeCoefficient</td>
+                    <td>@match.DrawCoefficient</td>
+                    <td>@match.AwayCoefficient</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

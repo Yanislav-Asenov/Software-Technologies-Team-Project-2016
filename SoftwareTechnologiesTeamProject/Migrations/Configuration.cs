@@ -180,7 +180,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 0,
                 GoalsFor = 3,
                 GoalsAgainst = 1,
-                GoalDifference = 2,
                 Points = 3,
                 Matches = new List<Match>()
             };
@@ -196,7 +195,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 0,
                 GoalsFor = 4,
                 GoalsAgainst = 3,
-                GoalDifference = 1,
                 Points = 3,
                 Matches = new List<Match>()
             };
@@ -212,7 +210,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 0,
                 GoalsFor = 2,
                 GoalsAgainst = 1,
-                GoalDifference = 1,
                 Points = 3,
                 Matches = new List<Match>()
             };
@@ -228,7 +225,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 0,
                 GoalsFor = 2,
                 GoalsAgainst = 1,
-                GoalDifference = 1,
                 Points = 3,
                 Matches = new List<Match>()
             };
@@ -244,7 +240,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 0,
                 GoalsFor = 2,
                 GoalsAgainst = 1,
-                GoalDifference = 1,
                 Points = 3,
                 Matches = new List<Match>()
             };
@@ -260,7 +255,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 0,
                 GoalsFor = 1,
                 GoalsAgainst = 0,
-                GoalDifference = 1,
                 Points = 3,
                 Matches = new List<Match>()
             };
@@ -276,7 +270,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 0,
                 GoalsFor = 1,
                 GoalsAgainst = 0,
-                GoalDifference = 1,
                 Points = 3,
                 Matches = new List<Match>()
             };
@@ -293,7 +286,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 0,
                 GoalsFor = 1,
                 GoalsAgainst = 1,
-                GoalDifference = 0,
                 Points = 1,
                 Matches = new List<Match>()
             };
@@ -309,7 +301,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 0,
                 GoalsFor = 1,
                 GoalsAgainst = 1,
-                GoalDifference = 0,
                 Points = 1,
                 Matches = new List<Match>()
             };
@@ -325,7 +316,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 0,
                 GoalsFor = 1,
                 GoalsAgainst = 1,
-                GoalDifference = 0,
                 Points = 1,
                 Matches = new List<Match>()
             };
@@ -341,7 +331,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 0,
                 GoalsFor = 1,
                 GoalsAgainst = 1,
-                GoalDifference = 0,
                 Points = 1,
                 Matches = new List<Match>()
             };
@@ -358,7 +347,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 0,
                 GoalsFor = 1,
                 GoalsAgainst = 1,
-                GoalDifference = 0,
                 Points = 1,
                 Matches = new List<Match>()
             };
@@ -374,7 +362,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 0,
                 GoalsFor = 1,
                 GoalsAgainst = 1,
-                GoalDifference = 0,
                 Points = 1,
                 Matches = new List<Match>()
             };
@@ -391,7 +378,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 1,
                 GoalsFor = 3,
                 GoalsAgainst = 4,
-                GoalDifference = -1,
                 Points = 0,
                 Matches = new List<Match>()
             };
@@ -407,7 +393,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 1,
                 GoalsFor = 1,
                 GoalsAgainst = 2,
-                GoalDifference = -1,
                 Points = 0,
                 Matches = new List<Match>()
             };
@@ -423,7 +408,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 1,
                 GoalsFor = 1,
                 GoalsAgainst = 2,
-                GoalDifference = -1,
                 Points = 0,
                 Matches = new List<Match>()
             };
@@ -439,7 +423,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 1,
                 GoalsFor = 1,
                 GoalsAgainst = 2,
-                GoalDifference = -1,
                 Points = 0,
                 Matches = new List<Match>()
             };
@@ -455,7 +438,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 1,
                 GoalsFor = 0,
                 GoalsAgainst = 1,
-                GoalDifference = -1,
                 Points = 0,
                 Matches = new List<Match>()
             };
@@ -471,7 +453,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 1,
                 GoalsFor = 0,
                 GoalsAgainst = 1,
-                GoalDifference = -1,
                 Points = 0,
                 Matches = new List<Match>()
             };
@@ -487,7 +468,6 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Losses = 1,
                 GoalsFor = 1,
                 GoalsAgainst = 3,
-                GoalDifference = -2,
                 Points = 0,
                 Matches = new List<Match>()
             };

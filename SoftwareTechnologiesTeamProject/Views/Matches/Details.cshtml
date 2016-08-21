@@ -1,0 +1,184 @@
+﻿@using Microsoft.AspNet.Identity
+@model SoftwareTechnologiesTeamProject.ViewModels.MatchDetailsViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container-fluid">
+    <p class="gameTitle">@Model.Match.HomeTeam.Name vs @Model.Match.AwayTeam.Name</p>
+    <p class="gameTime">@Model.Match.DateTime<br /> @DateTime.Now.ToString("HH:mm")</p>
+    <div class="homeTeamLogo">
+        <img src="@Model.Match.HomeTeam.LogoLink" width="130" height="130"/>
+        <p>@Model.Match.HomeTeam.Name</p>
+    </div>
+    <div class="awayTeamLogo">
+        <img src="@Model.Match.AwayTeam.LogoLink" width="130" height="130" />
+        <p>@Model.Match.AwayTeam.Name</p>
+    </div>
+    @if (Model.Match.IsResultUpdated)
+    {
+        <div class="matchResult"><span>@Model.Match.Result</span></div>
+    }
+
+    @* Votes and total votes *@
+    <div class="votesContainer">
+        <div class="voteWrapper">
+            @if (Model.Match.HasUserVoted(User.Identity.GetUserId()))
+            {
+                <span class="votedButton">1</span>
+            }
+            else
+            {
+                @Html.ActionLink("1", "AddVote", new {id = Model.Match.Id, voteType = "home"}, new {@class = "voteButton"})
+            }
+            <div class="homeTeamVotes">
+                @for (int i = 0; i < Model.Match.GetVotesInPercents(@Model.Match.HomeVotesCount); i++)
+                {
+                    <div class="onePercent"></div>
+                }
+                <span class="votePecents">
+                    <strong>@Model.Match.GetVotesInPercents(@Model.Match.HomeVotesCount)%</strong> for @Model.Match.HomeTeam.Name
+                </span>
+            </div>
+        </div>
+        <div class="voteWrapper">
+            @if (Model.Match.HasUserVoted(User.Identity.GetUserId()))
+            {
+                <span class="votedButton">X</span>
+            }
+            else
+            {
+                @Html.ActionLink("X", "AddVote", new {id = Model.Match.Id, voteType = "draw"}, new {@class = "voteButton"})
+            }
+            <div class="drawVotes">
+                @for (int i = 0; i < Model.Match.GetVotesInPercents(@Model.Match.DrawVotesCount); i++)
+                {
+                    <div class="onePercent"></div>
+                }
+                <span class="votePecents">
+                    <strong>@Model.Match.GetVotesInPercents(@Model.Match.DrawVotesCount)%</strong> for Draw
+                </span>
+            </div>
+        </div>
+        <div class="voteWrapper">
+            @if (Model.Match.HasUserVoted(User.Identity.GetUserId()))
+            {
+                <span class="votedButton">2</span>
+            }
+            else
+            {
+                @Html.ActionLink("2", "AddVote", new {id = Model.Match.Id, voteType = "away"}, new {@class = "voteButton"})
+            }
+            <div class="awayTeamVotes">
+                @for (int i = 0; i < Model.Match.GetVotesInPercents(@Model.Match.AwayVotesCount); i++)
+                {
+                    <div class="onePercent"></div>
+                }
+                <span class="votePecents">
+                    <strong>@Model.Match.GetVotesInPercents(@Model.Match.AwayVotesCount)%</strong> for @Model.Match.AwayTeam.Name
+                </span>
+            </div>
+        </div>
+
+        <div class="totalVotesWrapper">
+            <span>Total votes: @Model.Match.TotalVotesCount</span>
+        </div>
+        <div class="voteInfo">
+            @if (Model.Match.HasUserVoted(User.Identity.GetUserId()))
+            {
+                <span>You've already voted for this game !</span>
+            }
+            else
+            {
+                <span>To vote, click on the mark</span>
+            }
+        </div>
+    </div>
+
+    @* Home team match history *@
+    <span class="matchHistoryHeading">@Model.Match.HomeTeam.Name - last matches</span>
+    <table class="table matchHistoryTable">
+        <thead>
+        <tr>
+            <th class="matchHistoryDate">Date</th>
+            <th class="matchHistoryHomeTeam">Home team</th>
+            <th class="historyMatchResult">Result</th>
+            <th class="matchHistoryAwayTeam">Away team</th>
+            <th class="matchHistoryCoefficient">1</th>
+            <th class="matchHistoryCoefficient">X</th>
+            <th class="matchHistoryCoefficient">2</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var match in Model.HomeTeamHistory)
+        {
+            <tr>
+                <td class="matchHistoryDate">@match.GetDate()</td>
+                <td class="matchHistoryHomeTeam">@match.HomeTeam.Name</td>
+                @if (match.GetWinnerName() == "draw")
+                {
+                    <td class="historyMatchResult" style="background: rgb(255, 202, 104)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
+                }
+                else if (match.GetWinnerName() == match.HomeTeam.Name)
+                {
+                    <td class="historyMatchResult" style="background: lightgreen">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
+                }
+                else if (match.GetWinnerName() == match.AwayTeam.Name)
+                {
+                    <td class="historyMatchResult" style="background: rgb(255, 57, 57)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
+                }
+                <td class="matchHistoryAwayTeam">@match.AwayTeam.Name</td>
+                <td class="matchHistoryCoefficient">@match.HomeCoefficient</td>
+                <td class="matchHistoryCoefficient">@match.DrawCoefficient</td>
+                <td class="matchHistoryCoefficient">@match.AwayCoefficient</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+
+    @* Away team match history *@
+    <span class="matchHistoryHeading">@Model.Match.AwayTeam.Name - last matches</span>
+    <table class="table matchHistoryTable">
+        <thead>
+            <tr>
+                <th class="matchHistoryDate">Date</th>
+                <th class="matchHistoryHomeTeam">Home team</th>
+                <th class="historyMatchResult">Result</th>
+                <th class="matchHistoryAwayTeam">Away team</th>
+                <th class="matchHistoryCoefficient">1</th>
+                <th class="matchHistoryCoefficient">X</th>
+                <th class="matchHistoryCoefficient">2</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var match in Model.AwayTeamHistory)
+            {
+                <tr>
+                    <td class="matchHistoryDate">@match.GetDate()</td>
+                    <td class="matchHistoryHomeTeam">@match.HomeTeam.Name</td>
+                    @if (match.GetWinnerName() == "draw")
+                    {
+                        <td class="historyMatchResult" style="background: rgb(255, 202, 104)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
+                    }
+                    else if (match.GetWinnerName() == match.AwayTeam.Name)
+                    {
+                        <td class="historyMatchResult" style="background: lightgreen">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
+                    }
+                    else if (match.GetWinnerName() == match.HomeTeam.Name)
+                    {
+                        <td class="historyMatchResult" style="background: rgb(255, 57, 57)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
+                    }
+                    <td class="matchHistoryAwayTeam">@match.AwayTeam.Name</td>
+                    <td class="matchHistoryCoefficient">@match.HomeCoefficient</td>
+                    <td class="matchHistoryCoefficient">@match.DrawCoefficient</td>
+                    <td class="matchHistoryCoefficient">@match.AwayCoefficient</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

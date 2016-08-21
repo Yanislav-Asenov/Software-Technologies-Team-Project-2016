@@ -18,6 +18,8 @@ namespace SoftwareTechnologiesTeamProject.Models
 
         public virtual List<Vote> Votes { get; set; } = new List<Vote>();
 
+        public double Balance { get; set; } = 0;
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -27,4 +29,3 @@ namespace SoftwareTechnologiesTeamProject.Models
         }
     }
 }
- 

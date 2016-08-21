@@ -21,5 +21,6 @@
 
         [ForeignKey("MatchId")]
         public Match Match { get; set; }
+
     }
 }

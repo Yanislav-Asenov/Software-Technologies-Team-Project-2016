@@ -15,7 +15,8 @@ body {
   margin: 0;
   padding-bottom: 6rem;
   min-height: 100%;
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-family: Verdana, sans-serif, serif;
+  font-size: 13px;
 }
 
 .footer {
@@ -365,16 +366,6 @@ textarea {
     font-weight: bold;
 }
 
-
-.actions {
-
-}
-
-.single-comment:hover {
-    
-}
-
-
 /* Home page styles */
 
 .recent-posts-container {
@@ -474,4 +465,265 @@ textarea {
 
 .clubName {
     text-align: left;
+}
+
+
+/* Matches styles */
+
+.games {
+    width: 100%;
+    margin: 0px 0px 30px 0px;
+    border-collapse: collapse;
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+.games > td {
+    color: darkgreen;
+    padding: 5px 4px;
+}
+
+.games > th {
+     padding: 5px 4px;
+}
+
+td ,th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+
+
+/*
+    Match details styles
+*/
+
+.container-fluid {
+    margin-top: 50px;
+    min-height: 900px;
+}
+
+.gameTitle {
+    margin: 0px 0px 10px 0px;
+    padding: 0px;
+    text-align: center;
+    color: darkgreen;
+    font-weight: normal;
+    font-size: 250%;
+}
+
+p {
+    display: block;
+}
+
+.gameTime {
+    margin: 0px 0px 0px 0px;
+    padding: 0px;
+    text-align: center;
+    font-size: 180%;
+    font-weight: bolder;
+    color: darkgreen;
+}
+
+
+
+.homeTeamLogo, .awayTeamLogo {
+    margin: 0px 0px 10px 0px;
+    padding: 0px;
+    width: 50%;
+    text-align: center;
+    font-size: 190%;
+    font-weight: bold;
+}
+
+.homeTeamLogo {
+    float: left;
+    padding-left: 50px;
+}
+
+.awayTeamLogo {
+    float: right;
+    padding-right: 50px;
+}
+
+.votesContainer {
+    float: right;
+    width: 100%;
+    margin: 0px;
+    position: relative;
+    height: 12%;
+}
+
+.votedButton {
+    display: block;
+    background: red;
+    color: white;
+    font-weight: bold;
+    font-size: 150%;
+    width: 3%;
+    text-align: center;
+    margin: 5px 2px 2px 5px;
+    text-decoration: none;
+}
+
+.voteButton {
+    display: block;
+    background: red;
+    color: white;
+    font-weight: bold;
+    font-size: 150%;
+    width: 3%;
+    text-align: center;
+    margin: 5px 2px 2px 5px;
+    text-decoration: none;
+}
+
+.voteButton:hover {
+    display: block;
+    background: green;
+    color: white;
+    font-weight: bold;
+    font-size: 150%;
+    width: 3%;
+    text-align: center;
+    margin: 5px 2px 2px 5px;
+    text-decoration: none;
+}
+
+.voteButton:focus {
+    display: block;
+    background: green;
+    color: white;
+    font-weight: bold;
+    font-size: 150%;
+    width: 3%;
+    text-align: center;
+    margin: 5px 2px 2px 5px;
+    text-decoration: none;
+}
+
+.voteWrapper {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+.totalVotesWrapper {
+    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+    font-size: 150%;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+
+.homeTeamVotes, .awayTeamVotes, .drawVotes {
+    position: absolute;
+    top: 0;
+    left: 38px;
+}
+
+
+.onePercent {
+    width: 3px;
+    background: green;
+    height: 27px;
+    float: left;
+    margin: 0px;
+}
+
+.votePecents {
+    font-size: 130%;
+    margin-left: 5px;
+}
+
+.voteInfo {
+    float: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 5px;
+    font-size: 110%;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.updateResultContainer > form {
+    width: 50%;
+    margin-left: 33%;
+}
+
+.updateResultContainer > * {
+
+    left: 20%;
+    bottom: 0;
+}
+
+.matchResult {
+    position: absolute;
+    top: 30%;
+    left: 48%;
+    color: black;
+    font-weight: bolder;
+    font-size: 20px;
+    padding: 10px;
+    color: red;
+}
+
+
+.matchHistoryHomeTeam {
+    text-align: right;
+    width: 200px;
+}
+
+.matchHistoryAwayTeam {
+    text-align: left;
+    width: 200px;
+}
+
+.historyMatchResult {
+    width: 40px;
+    text-align: center;
+}
+
+.matchHistoryDate {
+    width: 100px;
+}
+
+
+.matchHistoryCoefficient {
+    width: 50px;
+    text-align: center;
+}
+
+thead {
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.matchHistoryTable {
+    font-weight: bold;
+    color: black;
+    margin-top: 50px;
+}
+
+.matchHistoryHeading {
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+    float: left;
+    margin-right: 40%;
+    margin-top: 50px;
 }
