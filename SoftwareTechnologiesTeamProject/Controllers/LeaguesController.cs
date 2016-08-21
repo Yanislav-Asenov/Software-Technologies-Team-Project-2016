@@ -26,19 +26,16 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 return HttpNotFound();
             }
 
-            var league = db.Leagues.Find(id);
-
             var teams = db.Teams
                 .Include(t => t.Matches)
                 .Where(t => t.LeagueId == id)
                 .OrderByDescending(t => t.Points)
-                .ThenByDescending(t => t.GoalDifference)
+                .ThenByDescending(t => t.GoalsFor - t.GoalsAgainst)
                 .ToList();
 
             var viewModel = new StandingsViewModel
             {
-                LeagueName = league.Name,
-                LeagueId = id,
+                League = db.Leagues.Find(id),
                 Teams = teams
             };
 
@@ -95,7 +92,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 return HttpNotFound();
             }
 
-            var league = db.Leagues.Find(teamInfo.LeagueId);
+            var league = db.Leagues.Find(teamInfo.League.Id);
 
             if (league.Teams.FirstOrDefault(t => t.Name == teamInfo.NewTeam.Name) != null)
             {
@@ -105,7 +102,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
 
             var newTeam = teamInfo.NewTeam;
             newTeam.League = league;
-            newTeam.LeagueId = teamInfo.LeagueId;
+            newTeam.LeagueId = teamInfo.League.Id;
 
             league.Teams.Add(newTeam);
             db.Teams.Add(newTeam);

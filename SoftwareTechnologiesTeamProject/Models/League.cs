@@ -21,5 +21,15 @@ namespace SoftwareTechnologiesTeamProject.Models
         [DataType(DataType.Date)]
         [Column(TypeName = "datetime2")]
         public DateTime StartDate { get; set; }
+
+        [DataType(DataType.Date)]
+        [Column(TypeName = "datetime2")]
+        public DateTime EndDate { get; set; }
+
+        public string GetSeason()
+        {
+            return $"{StartDate:yyyy} - {EndDate:yyyy}";
+        }
+
     }
 }

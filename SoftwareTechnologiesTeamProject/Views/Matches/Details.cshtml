@@ -2,9 +2,10 @@
 @model SoftwareTechnologiesTeamProject.ViewModels.MatchDetailsViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Match details";
 }
 
+@* Home team logo/name - Away team logo/name *@
 <div class="container-fluid">
     <p class="gameTitle">@Model.Match.HomeTeam.Name vs @Model.Match.AwayTeam.Name</p>
     <p class="gameTime">@Model.Match.DateTime<br /> @DateTime.Now.ToString("HH:mm")</p>
@@ -121,11 +122,11 @@
                 {
                     <td class="historyMatchResult" style="background: rgb(255, 202, 104)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
                 }
-                else if (match.GetWinnerName() == match.HomeTeam.Name)
+                else if (match.GetWinnerName() == Model.Match.HomeTeam.Name)
                 {
                     <td class="historyMatchResult" style="background: lightgreen">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
                 }
-                else if (match.GetWinnerName() == match.AwayTeam.Name)
+                else if (match.GetWinnerName() == Model.Match.AwayTeam.Name)
                 {
                     <td class="historyMatchResult" style="background: rgb(255, 57, 57)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
                 }
@@ -164,11 +165,11 @@
                     {
                         <td class="historyMatchResult" style="background: rgb(255, 202, 104)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
                     }
-                    else if (match.GetWinnerName() == match.AwayTeam.Name)
+                    else if (match.GetWinnerName() == Model.Match.AwayTeam.Name)
                     {
                         <td class="historyMatchResult" style="background: lightgreen">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
                     }
-                    else if (match.GetWinnerName() == match.HomeTeam.Name)
+                    else if (match.GetWinnerName() == Model.Match.HomeTeam.Name)
                     {
                         <td class="historyMatchResult" style="background: rgb(255, 57, 57)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
                     }
@@ -215,7 +216,7 @@
                         <td>@team.Losses</td>
                         <td>@team.GoalsFor</td>
                         <td>@team.GoalsAgainst</td>
-                        <td>@team.GoalDifference</td>
+                        <td>@team.GetGoalDifference()</td>
                         <td>@team.Points</td>
                     </tr>
                 }
@@ -230,7 +231,7 @@
                         <td>@team.Losses</td>
                         <td>@team.GoalsFor</td>
                         <td>@team.GoalsAgainst</td>
-                        <td>@team.GoalDifference</td>
+                        <td>@team.GetGoalDifference()</td>
                         <td>@team.Points</td>
                     </tr>
                 }

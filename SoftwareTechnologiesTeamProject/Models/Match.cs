@@ -10,8 +10,6 @@
     {
         public Match()
         {
-            HomeTeamGoals = 0;
-            AwayTeamGoals = 0;
             HomeVotesCount = 0;
             AwayVotesCount = 0;
             DrawVotesCount = 0;
@@ -39,9 +37,7 @@
         public Team AwayTeam { get; set; }
 
         [Required]
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyy}",
-               ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime? DateTime { get; set; }
 
         public string Result => HomeTeamGoals + " - " + AwayTeamGoals;
@@ -118,6 +114,7 @@
             return true;
         }
 
+
         public string GetWinnerName()
         {
             if (HomeTeamGoals > AwayTeamGoals)
@@ -148,12 +145,10 @@
         {
             this.HomeTeam.GoalsFor += this.HomeTeamGoals;
             this.HomeTeam.GoalsAgainst += this.AwayTeamGoals;
-            this.HomeTeam.GoalDifference = this.HomeTeamGoals - this.AwayTeamGoals;
             this.HomeTeam.GamesPlayed++;
 
             this.AwayTeam.GoalsFor += this.AwayTeamGoals;
             this.AwayTeam.GoalsAgainst += this.HomeTeamGoals;
-            this.AwayTeam.GoalDifference = this.AwayTeamGoals - this.HomeTeamGoals;
             this.AwayTeam.GamesPlayed++;
 
             if (winner == "home")

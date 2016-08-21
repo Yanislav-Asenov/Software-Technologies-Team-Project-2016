@@ -35,7 +35,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             Match match = db.Matches
                 .Include(m => m.HomeTeam)
                 .Include(m => m.AwayTeam)
-                .Include(M => M.Votes)
+                .Include(m => m.Votes)
                 .FirstOrDefault(m => m.Id == id);
 
             if (match == null)
@@ -49,23 +49,23 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             viewModel.HomeTeamHistory = db.Matches
                 .Include(m => m.HomeTeam)
                 .Include(m => m.AwayTeam)
-                .Where(t => t.HomeTeam.Id == match.HomeTeamId || t.AwayTeam.Id == match.HomeTeamId)
-                .OrderBy(m => m.DateTime)
-                .Take(5)
+                .Where(m => m.HomeTeam.Name == match.HomeTeam.Name || m.AwayTeam.Name == match.HomeTeam.Name)
+                .OrderByDescending(m => m.DateTime)
+                .Take(10)
                 .ToList();
 
             viewModel.AwayTeamHistory = db.Matches
                 .Include(m => m.HomeTeam)
                 .Include(m => m.AwayTeam)
-                .Where(m => m.HomeTeamId == match.AwayTeamId || m.AwayTeamId == match.AwayTeamId)
-                .OrderBy(m => m.DateTime)
-                .Take(5)
+                .Where(m => m.HomeTeam.Name == match.AwayTeam.Name || m.AwayTeam.Name == match.AwayTeam.Name)
+                .OrderByDescending(m => m.DateTime)
+                .Take(10)
                 .ToList();
 
             viewModel.LeagueTeams = db.Teams
                 .Where(t => t.LeagueId == match.LeagueId)
                 .OrderByDescending(t => t.Points)
-                .ThenByDescending(t => t.GoalDifference)
+                .ThenByDescending(t => t.GoalsFor - t.GoalsAgainst)
                 .ToList();
 
             viewModel.LeagueName = db.Leagues.Find(match.LeagueId).Name;

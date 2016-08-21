@@ -14,6 +14,6 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
 
         public string LeagueName { get; set; }
 
-        public List<Team> LeagueTeams { get; set; }
+        public List<Team> LeagueTeams { get; set; } 
     }
 }

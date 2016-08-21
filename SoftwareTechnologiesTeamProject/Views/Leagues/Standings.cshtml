@@ -3,7 +3,7 @@
     ViewBag.Title = "Standings";
 }
 
-<h2>@Model.LeagueName - Standings</h2>
+<h2>@Model.League.Name (@Model.League.GetSeason()) - Standings</h2>
 
 <table class="table">
     <tr class="tableInfoCells">
@@ -45,7 +45,7 @@
             <td>
                 <div class="teamTableInfoCells">@team.GoalsAgainst</div></td>
             <td>
-                <div class="teamTableInfoCells">@team.GoalDifference</div></td>
+                <div class="teamTableInfoCells">@team.GetGoalDifference()</div></td>
             <td>
                 <div class="teamTableInfoCells">@team.Points</div></td>
             @if (User.IsInRole("Administrator"))
@@ -115,16 +115,15 @@
                 <td>
 
                     <div class="newTeamInput">
-                        @Html.TextBoxFor(m => m.NewTeam.GoalDifference, new { Value = 0 })
+                        <input type="text" value="" disabled="disabled"/>
                     </div>
                 </td>
                 <td>
-
                     <div class="newTeamInput">
                         @Html.TextBoxFor(m => m.NewTeam.Points, new { Value = 0 })
                     </div>
                 </td>
-                @Html.HiddenFor(m => m.LeagueId)
+                @Html.HiddenFor(m => m.League.Id)
                 <td>
                     <div class="newTeamInput">
                         <input type="submit" value="Add team" style="width: 100%"/>
