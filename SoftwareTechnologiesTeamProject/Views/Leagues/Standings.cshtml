@@ -17,6 +17,11 @@
             <th class="standingsInfo" title="Goals against">GA</th>
             <th class="standingsInfo" title="Goals difference">GD</th>
             <th class="standingsInfo">Points</th>
+            <th class="standingsInfo"></th>
+            @if (User.IsInRole("Administrator"))
+            {
+                <th class="standingsInfo"></th>
+            }
         </tr>
     </thead>
 
@@ -36,6 +41,19 @@
                     <td class="standingsInfo">@team.GoalsAgainst</td>
                     <td class="standingsInfo">@team.GetGoalDifference()</td>
                     <td class="standingsInfo">@team.Points</td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <td class="standingsInfo">
+                            @Html.ActionLink("Edit", "EditTeam", new {id = team.Id})
+                        </td>
+                        <td class="standingsInfo">
+                            @Html.ActionLink("Delete", "DeleteTeam", new { id = team.Id })
+                        </td>
+                    }
+                    else
+                    {
+                        <td>Team match history</td>
+                    }
                 </tr>
         }
     </tbody>
@@ -47,6 +65,7 @@
         using (Html.BeginForm("AddTeam", "Leagues", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <tr>
                 <td>
 
@@ -57,7 +76,8 @@
                 <td>
 
                     <div class="newTeamInputClubName">
-                        @Html.TextBoxFor(m => m.NewTeam.Name)
+                        @Html.TextBoxFor(m => m.NewTeam.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.NewTeam.Name, "", new { @class = "text-danger" })
                     </div>
                 </td>
                 <td>
@@ -107,10 +127,10 @@
                         @Html.TextBoxFor(m => m.NewTeam.Points, new { Value = 0 })
                     </div>
                 </td>
-                @Html.HiddenFor(m => m.League.Id)
+                @Html.HiddenFor(m => m.LeagueId)
                 <td>
-                    <div class="newTeamInput">
-                        <input type="submit" value="Add team" style="width: 100%" />
+                    <div>
+                        <input type="submit" value="Add team" />
                     </div>
                 </td>
             </tr>

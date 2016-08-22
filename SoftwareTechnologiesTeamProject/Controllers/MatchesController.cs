@@ -214,8 +214,11 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 return HttpNotFound();
             }
+
+
             ViewBag.AwayTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
             ViewBag.HomeTeamId = new SelectList(db.Teams, "Id", "Name", match.HomeTeamId);
+            ViewBag.LeagueId = new SelectList(db.Leagues, "Id", "Name", match.LeagueId);
             return View(match);
         }
 
@@ -224,7 +227,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,HomeTeamId,AwayTeamId,DateTime,Result,HomeTeamGoals,AwayTeamGoals,TotalVotesCount,HomeVotesCount,DrawVotesCount,AwayVotesCount,HomeCoefficient,DrawCoefficient,AwayCoefficient")] Match match)
+        public ActionResult Edit([Bind(Include = "Id,LeagueId,HomeTeamId,AwayTeamId,DateTime,Result,HomeTeamGoals,AwayTeamGoals,TotalVotesCount,HomeVotesCount,DrawVotesCount,AwayVotesCount,HomeCoefficient,DrawCoefficient,AwayCoefficient")] Match match)
         {
             if (ModelState.IsValid)
             {
@@ -234,6 +237,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             }
             ViewBag.AwayTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
             ViewBag.HomeTeamId = new SelectList(db.Teams, "Id", "Name", match.HomeTeamId);
+            ViewBag.LeagueId = new SelectList(db.Leagues, "Id", "Name", match.LeagueId);
             return View(match);
         }
 

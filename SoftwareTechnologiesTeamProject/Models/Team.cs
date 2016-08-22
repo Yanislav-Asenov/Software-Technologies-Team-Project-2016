@@ -9,20 +9,28 @@
         [Key]
         public int Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
+        [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
         public int GamesPlayed { get; set; }
 
+        [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
         public int Victories { get; set; }
 
+        [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
         public int Draws { get; set; }
 
+        [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
         public int Losses { get; set; }
 
+        [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
         public int GoalsFor { get; set; }
 
+        [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
         public int GoalsAgainst { get; set; }
 
+        [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
         public int Points { get; set; }
 
         public string LogoLink { get; set; }

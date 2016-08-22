@@ -36,6 +36,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
 
             var viewModel = new StandingsViewModel
             {
+                LeagueId = id,
                 League = db.Leagues.Find(id),
                 Teams = teams
             };
@@ -93,7 +94,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 return HttpNotFound();
             }
 
-            var league = db.Leagues.Find(teamInfo.League.Id);
+            var league = db.Leagues.Find(teamInfo.LeagueId);
 
             if (league.Teams.FirstOrDefault(t => t.Name == teamInfo.NewTeam.Name) != null)
             {
@@ -103,7 +104,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
 
             var newTeam = teamInfo.NewTeam;
             newTeam.League = league;
-            newTeam.LeagueId = teamInfo.League.Id;
+            newTeam.LeagueId = league.Id;
 
             league.Teams.Add(newTeam);
             db.Teams.Add(newTeam);
@@ -112,19 +113,33 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             return RedirectToAction("Standings", new { id = league.Id });
         }
 
+
+        public ActionResult DeleteTeam(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Team team = db.Teams.Find(id);
+            if (team == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(team);
+        }
+
         [Authorize]
         [Authorize(Roles = "Administrator")]
-        public ActionResult DeleteTeam(int? id)
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult DeleteTeam(int id)
         {
             if (!User.IsInRole("Administrator"))
             {
                 this.AddNotification("You are not admin.", NotificationType.ERROR);
                 return RedirectToAction("Index");
-            }
-
-            if (id == null)
-            {
-                return HttpNotFound();
             }
 
             var team = db.Teams.Find(id);
