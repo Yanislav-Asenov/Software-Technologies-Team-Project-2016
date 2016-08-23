@@ -253,6 +253,10 @@
     <Content Include="Content\Images\droptableV3.png" />
     <Content Include="Content\Images\navbarbckg.png" />
     <Content Include="Content\Images\search.png" />
+    <Content Include="Content\Images\Slideshow\sl1.jpeg" />
+    <Content Include="Content\Images\Slideshow\sl3.jpeg" />
+    <Content Include="Content\Images\Slideshow\sl2.jpg" />
+    <Content Include="Content\Images\Slideshow\sl4.jpeg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

@@ -838,33 +838,15 @@ thead {
     width: 100%;
 }
 
- 
-.affixed-top {
-    background-image: url(../Content/Images/navbarbckg.png);
-  }
-  /* Added `.affix` class css when the element is >= 170px (Look: line 8 html) */
-.affix {
-    background-image: url(../Content/Images/navbarbckg.png);
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-  /* Added `.affix-bottom` class css when the element is footer */
-.affix-bottom {
-    background-image: url(../Content/Images/navbarbckg.png);
-  }
-
-
 /* Not important */
 
 .dropTableLogo {
-<<<<<<< HEAD
     height: 150px;
     width: 280px;
     }
-=======
-    height: 90px;
-    width: 150px;        
-}
->>>>>>> origin/master
 
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 100%;
+      margin: auto;
+  }
