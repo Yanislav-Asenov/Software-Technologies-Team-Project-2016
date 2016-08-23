@@ -38,5 +38,7 @@
         public DbSet<Team> Teams { get; set; }
 
         public DbSet<Vote> Votes { get; set; }
+
+        public DbSet<Profile> Profiles { get; set; }
     }
 }
