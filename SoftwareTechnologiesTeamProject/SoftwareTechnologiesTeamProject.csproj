@@ -424,8 +424,6 @@
     <Content Include="Views\Posts\Tag.cshtml" />
     <Content Include="Views\Leagues\Create.cshtml" />
     <Content Include="Views\Leagues\Delete.cshtml" />
-    <Content Include="Views\Leagues\Details.cshtml" />
-    <Content Include="Views\Leagues\Edit.cshtml" />
     <Content Include="Views\Leagues\Index.cshtml" />
     <Content Include="Views\Leagues\Standings.cshtml" />
     <Content Include="Views\Leagues\EditTeam.cshtml" />
