@@ -6,6 +6,11 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
 
     public class StandingsViewModel
     {
+        public StandingsViewModel()
+        {
+            Teams = new List<Team>();
+        }
+
         public int? LeagueId { get; set; }
 
         public League League { get; set; }

@@ -79,9 +79,23 @@
             }
         }
 
-        public int GetVotesInPercents(int votes)
+        public int GetVotesInPercents(string votesType)
         {
-            double percents = ((double)votes / this.TotalVotesCount) * 100;
+            double percents = -1;
+
+            if (votesType == "draw")
+            {
+                percents = ((double)this.DrawVotesCount / this.TotalVotesCount) * 100;
+            }
+            else if (votesType == "home")
+            {
+                percents = ((double)this.HomeVotesCount / this.TotalVotesCount) * 100;
+            }
+            else if (votesType == "away")
+            {
+                percents = ((double)this.AwayVotesCount / this.TotalVotesCount) * 100;
+            }
+
             int result = (int)Math.Round(percents);
 
             return result > 0 ? result : 0;
@@ -138,6 +152,18 @@
         public string GetTime()
         {
             return $"{DateTime:HH:mm}";
+        }
+
+        public Team GetOpponentName(string teamName)
+        {
+            if (teamName == this.HomeTeam.Name)
+            {
+                return this.AwayTeam;
+            }
+            else
+            {
+                return this.HomeTeam;
+            }
         }
 
         public void UpdateTeams(string winner)

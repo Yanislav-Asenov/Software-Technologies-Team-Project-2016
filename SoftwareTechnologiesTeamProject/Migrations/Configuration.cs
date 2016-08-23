@@ -118,15 +118,7 @@ namespace SoftwareTechnologiesTeamProject.Migrations
             {
                 UserName = email,
                 Email = email,
-                FullName = fullName,
-                Profile = new Profile
-                {
-                    Age = 18,
-                    City = "Sofia",
-                    Interests = "Nqmam",
-                    MoreInfo = "Imam",
-                    ProfilePic = "http://tipster.bg/images/teams/chehia/viktoria-pilzen.gif"
-                }
+                FullName = fullName
             };
 
             var userCreateResult = userManager.Create(user, password);
