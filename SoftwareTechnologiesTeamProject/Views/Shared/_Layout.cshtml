@@ -4,34 +4,66 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - SoftUni Team Project</title>
-    @Html.Partial("_Notifications")
-    @Styles.Render("~/Content/css")
-    @RenderSection("styles", required: false)
-    @Scripts.Render("~/bundles/modernizr")
+   
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
     <meta name="description" content="The description of my page" />
 </head>
 <body>
-<div class="container">
-    <header class="page-header">
-        <a href="@Url.Action("Index", "Home")" title="List View" class="links">
-            <img class="dropTableLogo" alt="Droptable" src="@Url.Content("../Content/Images/droptableV3.png")">
-        </a>
-    </header>
-</div>
 
-    <nav id="navbar-main" class="navbar navbar-inverse">
+    <header>
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Project name</a>
+            <div class="row">
+                <div class="header_top">
+                    <div class="col-md-3 col-sm-3">
+                        <div class="follow_us">
+                            <ul>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="logo">
+                            <a href="@Url.Action("Index", "Home")" title="List View" class="links">
+                                <img class="dropTableLogo" alt="Droptable" src="@Url.Content("../Content/Images/droptableV3.png")">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="header_search">
+                            @using (Html.BeginForm())
+                            {
+                                <form>
+                                    <input class="searchPost" type="text" name="searchString" placeholder="Search..">
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <nav class="navbar navbar-default primary-bg">
+                        <div class="navbar-header">
+                            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="navbar-collapse collapse" id="navbar" aria-expanded="false" style="height: 0px;">
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Posts", "Index", "Posts")</li>
+                                <li>@Html.ActionLink("Leagues", "Index", "Leagues")</li>
+                                <li>@Html.ActionLink("Matches", "Index", "Matches")</li>
+                            </ul>
+                            @Html.Partial("_LoginPartial")
+                            
+                        </div>
+                    </nav>
+                </div>
             </div>
+<<<<<<< HEAD
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
@@ -44,9 +76,16 @@
                 
             </div>
             <!--/.nav-collapse -->
+=======
+>>>>>>> origin/master
         </div>
-    </nav>
+    </header>
 
+    
+    @Html.Partial("_Notifications")
+    @Styles.Render("~/Content/css")
+    @RenderSection("styles", required: false)
+    @Scripts.Render("~/bundles/modernizr")
 
     <div class="container body-content">
         @RenderBody()
@@ -60,18 +99,5 @@
 @RenderSection("scripts", required: false)
 
 <script type="text/javascript">
-    var affixElement = '#navbar-main';
 
-    $(affixElement).affix({
-        offset: {
-            // Distance of between element and top page
-            top: function () {
-                return (this.top = $(affixElement).offset().top);
-            },
-            // when start #footer
-            bottom: function () {
-                return (this.bottom = $('#footer').outerHeight(true));
-            }
-        }
-    });
 </script>

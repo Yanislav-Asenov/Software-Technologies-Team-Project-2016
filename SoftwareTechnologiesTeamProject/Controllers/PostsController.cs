@@ -27,7 +27,7 @@
                     .Where(p => p.Title.Contains(searchString) || p.Author.FullName.Contains(searchString) || p.Body.Contains(searchString))
                     .ToList();
             }
-
+             
             return View(posts);
         }
 

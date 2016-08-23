@@ -492,7 +492,12 @@ th{
 }
 
 .standingsTable {
-    font-size: 15px;
+     font-size: 1.4rem;
+    vertical-align: central;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
 }
 
 .standingsMatchHistory {
@@ -814,6 +819,7 @@ thead {
 }
 
 .searchPost {
+    margin-top: 5%;
     width: 130px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -852,8 +858,13 @@ thead {
 /* Not important */
 
 .dropTableLogo {
+<<<<<<< HEAD
     height: 150px;
-    
-        
+    width: 280px;
+    }
+=======
+    height: 90px;
+    width: 150px;        
 }
+>>>>>>> origin/master
 
