@@ -17,10 +17,10 @@
             <th class="standingsInfo" title="Goals against">GA</th>
             <th class="standingsInfo" title="Goals difference">GD</th>
             <th class="standingsInfo">Points</th>
-            <th class="standingsInfo"></th>
+            <th class="standingsMatchHistory">Form</th>
             @if (User.IsInRole("Administrator"))
             {
-                <th class="standingsInfo"></th>
+                <th class="standingsInfo">Actions</th>
             }
         </tr>
     </thead>
@@ -41,6 +41,32 @@
                     <td class="standingsInfo">@team.GoalsAgainst</td>
                     <td class="standingsInfo">@team.GetGoalDifference()</td>
                     <td class="standingsInfo">@team.Points</td>
+                    <td class="standingsMatchHistory">
+                        <ul>
+                            @foreach (var match in team.Matches)
+                            {
+                                if (match.GetWinnerName() == team.Name)
+                                {
+                                    <li class="standingsMatchHistoryLetter" style="background: #13cf00">
+                                        <a href="/Matches/Details/@match.Id"> W </a>
+                                    </li>
+                                }
+                                else if (match.GetWinnerName() == "draw")
+                                {
+                                    <li class="standingsMatchHistoryLetter" style="background: rgb(249, 214, 7)">
+                                        <a href="/Matches/Details/@match.Id"> D </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="standingsMatchHistoryLetter" style="background: #d81920">
+                                        <a href="/Matches/Details/@match.Id"> L </a>
+                                    </li>
+
+                                }
+                            }
+                        </ul>
+                    </td>
                     @if (User.IsInRole("Administrator"))
                     {
                         <td class="standingsInfo">
@@ -49,10 +75,6 @@
                         <td class="standingsInfo">
                             @Html.ActionLink("Delete", "DeleteTeam", new { id = team.Id })
                         </td>
-                    }
-                    else
-                    {
-                        <td>Team match history</td>
                     }
                 </tr>
         }

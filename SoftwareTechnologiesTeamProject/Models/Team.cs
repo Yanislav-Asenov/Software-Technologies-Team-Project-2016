@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
 
     public class Team
     {
@@ -72,6 +73,16 @@
             int goalDiff = this.GoalsFor - this.GoalsAgainst;
 
             return goalDiff >= 0 ? "+" + goalDiff : "" + goalDiff;
+        }
+
+        public List<Match> GetMatchHistory(List<Match> matches)
+        {
+            var matchHistory = matches.Where(m => m.Id == this.Id)
+                .OrderByDescending(m => m.DateTime)
+                .Take(6)
+                .ToList();
+
+            return matchHistory;
         }
     }
 }

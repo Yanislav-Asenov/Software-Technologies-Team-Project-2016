@@ -27,7 +27,6 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             }
 
             var teams = db.Teams
-                .Include(t => t.Matches)
                 .Where(t => t.LeagueId == id)
                 .OrderByDescending(t => t.Points)
                 .ThenByDescending(t => t.GoalsFor - t.GoalsAgainst)
@@ -40,6 +39,13 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 League = db.Leagues.Find(id),
                 Teams = teams
             };
+
+            //Setting match history for each team
+            var matches = db.Matches.Where(m => m.IsResultUpdated).ToList();
+            foreach (var team in viewModel.Teams)
+            {
+                team.Matches = matches.Where(m => m.HomeTeam.Name == team.Name || m.AwayTeam.Name == team.Name).ToList();
+            }
 
             return View(viewModel);
         }

@@ -178,20 +178,20 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                match.AwayTeam = db.Teams.Find(match.AwayTeamId);
+
+
                 match.HomeTeam = db.Teams.Find(match.HomeTeamId);
+                match.AwayTeam = db.Teams.Find(match.AwayTeamId);
                 match.League = db.Leagues.Find(match.LeagueId);
                 match.LeagueName = db.Leagues.Find(match.LeagueId).Name;
-                db.Matches.Add(match);
 
                 //Add this match to home/away teams match history
-                var homeTeam = db.Teams.Find(match.HomeTeamId);
-                homeTeam.Matches.Add(match);
-                var awayTeam = db.Teams.Find(match.AwayTeamId);
-                homeTeam.Matches.Add(match);
+                //var homeTeam = db.Teams.Find(match.HomeTeamId);
+                //homeTeam.Matches.Add(match);
+                //var awayTeam = db.Teams.Find(match.AwayTeamId);
+                //awayTeam.Matches.Add(match);
 
-                db.Entry(homeTeam).State = EntityState.Modified;
-                db.Entry(awayTeam).State = EntityState.Modified;
+                db.Matches.Add(match);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
