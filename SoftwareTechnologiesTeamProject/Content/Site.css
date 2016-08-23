@@ -814,6 +814,7 @@ thead {
 }
 
 .searchPost {
+    margin-top: 5%;
     width: 130px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -853,7 +854,6 @@ thead {
 
 .dropTableLogo {
     height: 150px;
-    
-        
-}
+    width: 280px;
+    }
 
