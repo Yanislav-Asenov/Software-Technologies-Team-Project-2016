@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -18,7 +19,11 @@
                     <div class="col-md-8">
                         <div class="logo">
                             <a href="@Url.Action("Index", "Home")" title="List View" class="links">
+<<<<<<< HEAD
                                 <img class="dropTableLogo" alt="Droptable" src="@Url.Content("../..")">
+=======
+                                <img class="dropTableLogo" alt="Droptable" src="~/Content/Images/droptableV3.png">
+>>>>>>> 5bbc24890d0f516b50741db1f0ab63ba75dc3595
                             </a>
                         </div>
                     </div>
@@ -49,6 +54,7 @@
                                 <li>@Html.ActionLink("Posts", "Index", "Posts")</li>
                                 <li>@Html.ActionLink("Leagues", "Index", "Leagues")</li>
                                 <li>@Html.ActionLink("Matches", "Index", "Matches")</li>
+                                <li>@Html.ActionLink("Profile", "Index", "Profiles")</li>
                             </ul>
                             @Html.Partial("_LoginPartial")
                             

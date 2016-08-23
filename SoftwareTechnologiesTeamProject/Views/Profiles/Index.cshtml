@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SoftwareTechnologiesTeamProject.Models.Profile>
+﻿@model SoftwareTechnologiesTeamProject.Models.Profile
 
 @{
     ViewBag.Title = "Index";
@@ -6,9 +6,6 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -32,32 +29,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.User.FullName)
+            @Html.DisplayFor(modelItem => Model.User.FullName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Age)
+            @Html.DisplayFor(modelItem => Model.Age)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.City)
+            @Html.DisplayFor(modelItem => Model.City)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Interests)
+            @Html.DisplayFor(modelItem => Model.Interests)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MoreInfo)
+            @Html.DisplayFor(modelItem => Model.MoreInfo)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ProfilePic)
+            @Html.DisplayFor(modelItem => Model.ProfilePic)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @*@Html.ActionLink("Edit", "Edit", new { id= Model.UserId }) |*@
         </td>
     </tr>
-}
+
 
 </table>
