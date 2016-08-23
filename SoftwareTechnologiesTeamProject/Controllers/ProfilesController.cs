@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using SoftwareTechnologiesTeamProject.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using SoftwareTechnologiesTeamProject.Models;
 
 namespace SoftwareTechnologiesTeamProject.Controllers
 {
+    using Microsoft.AspNet.Identity;
+
     public class ProfilesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -17,8 +15,9 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         // GET: Profiles
         public ActionResult Index()
         {
-            var profiles = db.Profiles.Include(p => p.User);
-            return View(profiles.ToList());
+            var userId = User.Identity.GetUserId();
+            var profile = db.Profiles.Include(p => p.User).FirstOrDefault(p => p.UserId == userId);
+            return View(profile);
         }
 
         // GET: Profiles/Details/5
@@ -36,7 +35,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             return View(profile);
         }
 
-  
+
         // GET: Profiles/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -49,7 +48,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 return HttpNotFound();
             }
-        
+
             return View(profile);
         }
 
@@ -66,7 +65,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-          
+
             return View(profile);
         }
 
