@@ -178,8 +178,6 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         {
             if (ModelState.IsValid)
             {
-
-
                 match.HomeTeam = db.Teams.Find(match.HomeTeamId);
                 match.AwayTeam = db.Teams.Find(match.AwayTeamId);
                 match.League = db.Leagues.Find(match.LeagueId);

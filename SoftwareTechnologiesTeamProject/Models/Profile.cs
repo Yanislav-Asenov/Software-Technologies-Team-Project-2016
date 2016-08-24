@@ -10,11 +10,6 @@ namespace SoftwareTechnologiesTeamProject.Models
     public class Profile
     {
 
-        public Profile()
-        {
-
-        }
-
         [Required]
         [Key]
         public string UserId { get; set; }

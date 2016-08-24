@@ -18,6 +18,7 @@
             <th class="standingsInfo" title="Goals difference">GD</th>
             <th class="standingsInfo">Points</th>
             <th class="standingsMatchHistory">Form</th>
+            <th class="standingsInfo">Next</th>
             @if (User.IsInRole("Administrator"))
             {
                 <th class="standingsInfo">Actions</th>
@@ -32,7 +33,7 @@
                 var team = Model.Teams[i];
                 <tr>
                     <td class="standingsInfo">@position</td>
-                    <td class="standingsTeamName"><img src="@team.LogoLink" width="20" />@team.Name</td>
+                    <td class="standingsTeamName"><img src="@team.LogoLink" width="30" />@team.Name</td>
                     <td class="standingsInfo">@team.GamesPlayed</td>
                     <td class="standingsInfo">@team.Victories</td>
                     <td class="standingsInfo">@team.Draws</td>
@@ -67,6 +68,15 @@
                             }
                         </ul>
                     </td>
+                    <td class="standingsInfo">
+                        @if (team.NextMatch != null)
+                        {
+                            <a href="/Matches/Details/@team.NextMatch.Id">
+                                <img src="@team.NextMatch.GetOpponentName(team.Name).LogoLink" width="30" />
+                            </a>
+                            
+                        }
+                    </td>
                     @if (User.IsInRole("Administrator"))
                     {
                         <td class="standingsInfo">
@@ -92,7 +102,7 @@
                 <td>
 
                     <div>
-                        @Html.TextBoxFor(m => m.NewTeam.LogoLink, new { placeholder = "Paste link of the team logo" })
+                        @Html.TextBoxFor(m => m.NewTeam.LogoLink, new { placeholder = "Paste link to the team logo" })
                     </div>
                 </td>
                 <td>

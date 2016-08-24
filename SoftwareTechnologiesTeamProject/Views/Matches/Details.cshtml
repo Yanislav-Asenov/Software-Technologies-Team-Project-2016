@@ -10,7 +10,7 @@
     <p class="gameTitle">@Model.Match.HomeTeam.Name vs @Model.Match.AwayTeam.Name</p>
     <p class="gameTime">@Model.Match.GetDate()<br /> @Model.Match.GetTime()</p>
     <div class="homeTeamLogo">
-        <img src="@Model.Match.HomeTeam.LogoLink" width="130" height="130"/>
+        <img src="@Model.Match.HomeTeam.LogoLink" width="130" height="130" alt="Home team logo"/>
         <p>@Model.Match.HomeTeam.Name</p>
     </div>
     <div class="awayTeamLogo">
@@ -34,12 +34,12 @@
                 @Html.ActionLink("1", "AddVote", new {id = Model.Match.Id, voteType = "home"}, new {@class = "voteButton"})
             }
             <div class="homeTeamVotes">
-                @for (int i = 0; i < Model.Match.GetVotesInPercents(@Model.Match.HomeVotesCount); i++)
+                @for (int i = 0; i < Model.Match.GetVotesInPercents("home"); i++)
                 {
                     <div class="onePercent"></div>
                 }
                 <span class="votePecents">
-                    <strong>@Model.Match.GetVotesInPercents(@Model.Match.HomeVotesCount)%</strong> for @Model.Match.HomeTeam.Name
+                    <strong>@Model.Match.GetVotesInPercents("home")%</strong> for @Model.Match.HomeTeam.Name
                 </span>
             </div>
         </div>
@@ -53,12 +53,12 @@
                 @Html.ActionLink("X", "AddVote", new {id = Model.Match.Id, voteType = "draw"}, new {@class = "voteButton"})
             }
             <div class="drawVotes">
-                @for (int i = 0; i < Model.Match.GetVotesInPercents(@Model.Match.DrawVotesCount); i++)
+                @for (int i = 0; i < Model.Match.GetVotesInPercents("draw"); i++)
                 {
                     <div class="onePercent"></div>
                 }
                 <span class="votePecents">
-                    <strong>@Model.Match.GetVotesInPercents(@Model.Match.DrawVotesCount)%</strong> for Draw
+                    <strong>@Model.Match.GetVotesInPercents("draw")%</strong> for Draw
                 </span>
             </div>
         </div>
@@ -72,12 +72,12 @@
                 @Html.ActionLink("2", "AddVote", new {id = Model.Match.Id, voteType = "away"}, new {@class = "voteButton"})
             }
             <div class="awayTeamVotes">
-                @for (int i = 0; i < Model.Match.GetVotesInPercents(@Model.Match.AwayVotesCount); i++)
+                @for (int i = 0; i < Model.Match.GetVotesInPercents("away"); i++)
                 {
                     <div class="onePercent"></div>
                 }
                 <span class="votePecents">
-                    <strong>@Model.Match.GetVotesInPercents(@Model.Match.AwayVotesCount)%</strong> for @Model.Match.AwayTeam.Name
+                    <strong>@Model.Match.GetVotesInPercents("away")%</strong> for @Model.Match.AwayTeam.Name
                 </span>
             </div>
         </div>

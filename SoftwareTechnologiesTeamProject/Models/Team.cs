@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
 
     public class Team
     {
@@ -44,6 +43,9 @@
 
         public virtual List<Match> Matches { get; set; }
 
+        [NotMapped]
+        public Match NextMatch { get; set; }
+
         public Team()
         {
             GamesPlayed = 0;
@@ -73,16 +75,6 @@
             int goalDiff = this.GoalsFor - this.GoalsAgainst;
 
             return goalDiff >= 0 ? "+" + goalDiff : "" + goalDiff;
-        }
-
-        public List<Match> GetMatchHistory(List<Match> matches)
-        {
-            var matchHistory = matches.Where(m => m.Id == this.Id)
-                .OrderByDescending(m => m.DateTime)
-                .Take(6)
-                .ToList();
-
-            return matchHistory;
         }
     }
 }
