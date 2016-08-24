@@ -1,13 +1,15 @@
-﻿using SoftwareTechnologiesTeamProject.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using SoftwareTechnologiesTeamProject.Models;
 
 namespace SoftwareTechnologiesTeamProject.Controllers
 {
-    using Microsoft.AspNet.Identity;
-
     public class ProfilesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -15,9 +17,8 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         // GET: Profiles
         public ActionResult Index()
         {
-            var userId = User.Identity.GetUserId();
-            var profile = db.Profiles.Include(p => p.User).FirstOrDefault(p => p.UserId == userId);
-            return View(profile);
+            var profile = db.Profile.Include(p => p.User);
+            return View(profile.ToList());
         }
 
         // GET: Profiles/Details/5
@@ -27,14 +28,13 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Profile profile = db.Profiles.Find(id);
+            Profile profile = db.Profile.Find(id);
             if (profile == null)
             {
                 return HttpNotFound();
             }
             return View(profile);
         }
-
 
         // GET: Profiles/Edit/5
         public ActionResult Edit(int? id)
@@ -43,12 +43,12 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Profile profile = db.Profiles.Find(id);
+            Profile profile = db.Profile.Find(id);
             if (profile == null)
             {
                 return HttpNotFound();
             }
-
+            //ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "FullName", profile.UserId);
             return View(profile);
         }
 
@@ -65,7 +65,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            //ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "FullName", profile.UserId);
             return View(profile);
         }
 
@@ -76,7 +76,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Profile profile = db.Profiles.Find(id);
+            Profile profile = db.Profile.Find(id);
             if (profile == null)
             {
                 return HttpNotFound();
@@ -89,8 +89,8 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Profile profile = db.Profiles.Find(id);
-            db.Profiles.Remove(profile);
+            Profile profile = db.Profile.Find(id);
+            db.Profile.Remove(profile);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
