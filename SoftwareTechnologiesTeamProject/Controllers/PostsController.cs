@@ -23,9 +23,11 @@
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                posts = posts
+                var searchedPosts = posts
                     .Where(p => p.Title.Contains(searchString) || p.Author.FullName.Contains(searchString) || p.Body.Contains(searchString))
                     .ToList();
+
+                return View(searchedPosts);
             }
              
             return View(posts);

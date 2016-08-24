@@ -18,7 +18,11 @@
                 <div class="header_top">
                     <div class="col-md-8">
                         <div class="logo">
-                            <a href="@Url.Action("Index", "Home")" title="List View" class="links"></a>
+                            <a href="@Url.Action("Index", "Home")" title="List View" class="links">
+
+                                <img class="dropTableLogo" alt="Droptable" src="~/Content/Images/droptableV3.png">
+
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4">
@@ -26,7 +30,7 @@
                             @using (Html.BeginForm())
                             {
                                 <form>
-                                    <input class="searchPost" type="text" name="searchString" placeholder="Search..">  
+                                    <input class="searchPost" type="text" name="searchString" placeholder="Search..">
                                 </form>
                             }
                         </div>
