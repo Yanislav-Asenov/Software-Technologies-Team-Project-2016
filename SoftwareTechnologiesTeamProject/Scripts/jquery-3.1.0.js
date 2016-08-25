@@ -6188,7 +6188,7 @@ function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {
 
 			// At this point, extra isn't border nor margin, so remove border
 			if ( extra !== "margin" ) {
-				val -= jQuery.css( elem, "border" + cssExpand[ i ] + "Width", true, styles );
+				val -= jQuery.css( elem, "border" + cssExpand[ i ] + "StadiumWidth", true, styles );
 			}
 		} else {
 
@@ -6197,7 +6197,7 @@ function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {
 
 			// At this point, extra isn't content nor padding, so add border
 			if ( extra !== "padding" ) {
-				val += jQuery.css( elem, "border" + cssExpand[ i ] + "Width", true, styles );
+				val += jQuery.css( elem, "border" + cssExpand[ i ] + "StadiumWidth", true, styles );
 			}
 		}
 	}
@@ -6463,7 +6463,7 @@ jQuery.cssHooks.marginLeft = addGetHookIf( support.reliableMarginLeft,
 jQuery.each( {
 	margin: "",
 	padding: "",
-	border: "Width"
+	border: "StadiumWidth"
 }, function( prefix, suffix ) {
 	jQuery.cssHooks[ prefix + suffix ] = {
 		expand: function( value ) {
@@ -9961,7 +9961,7 @@ jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
 
 				if ( jQuery.isWindow( elem ) ) {
 
-					// $( window ).outerWidth/Height return w/h including scrollbars (gh-1729)
+					// $( window ).outerWidth/StadiumHeight return w/h including scrollbars (gh-1729)
 					return funcName.indexOf( "outer" ) === 0 ?
 						elem[ "inner" + name ] :
 						elem.document.documentElement[ "client" + name ];
@@ -9971,7 +9971,7 @@ jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
 				if ( elem.nodeType === 9 ) {
 					doc = elem.documentElement;
 
-					// Either scroll[Width/Height] or offset[Width/Height] or client[Width/Height],
+					// Either scroll[StadiumWidth/StadiumHeight] or offset[StadiumWidth/StadiumHeight] or client[StadiumWidth/StadiumHeight],
 					// whichever is greatest
 					return Math.max(
 						elem.body[ "scroll" + name ], doc[ "scroll" + name ],

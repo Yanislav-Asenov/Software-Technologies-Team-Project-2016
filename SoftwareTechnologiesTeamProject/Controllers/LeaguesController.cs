@@ -63,20 +63,6 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             return View(viewModel);
         }
 
-        // GET: Leagues/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            League league = db.Leagues.Find(id);
-            if (league == null)
-            {
-                return HttpNotFound();
-            }
-            return View(league);
-        }
 
         // GET: Leagues/Create
         public ActionResult Create()
@@ -201,38 +187,6 @@ namespace SoftwareTechnologiesTeamProject.Controllers
 
 
             return RedirectToAction("Standings", new { id = leagueId });
-        }
-
-        // GET: Leagues/Edit/5
-        [Authorize(Roles = "Administrator")]
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            League league = db.Leagues.Find(id);
-            if (league == null)
-            {
-                return HttpNotFound();
-            }
-            return View(league);
-        }
-
-        // POST: Leagues/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Date")] League league)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(league).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(league);
         }
 
         // GET: Leagues/Delete/5

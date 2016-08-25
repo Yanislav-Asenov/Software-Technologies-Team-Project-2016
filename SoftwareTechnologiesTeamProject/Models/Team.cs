@@ -1,6 +1,7 @@
 ﻿namespace SoftwareTechnologiesTeamProject.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -33,6 +34,32 @@
         [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
         public int Points { get; set; }
 
+        [Required]
+        [StringLength(100)]
+        public string City { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string Coach { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string Stadium { get; set; }
+
+        [Required]
+        [DisplayName("Stadium capacity")]
+        public int StadiumCapacity { get; set; }
+
+        [Required]
+        [DisplayName("Stadium width")]
+        public int StadiumWidth { get; set; }
+
+        [Required]
+        [DisplayName("Stadium height")]
+        public int StadiumHeight { get; set; }
+
+        [Required]
+        [StringLength(300)]
         public string LogoLink { get; set; }
 
         [Required]
@@ -68,6 +95,12 @@
             this.GoalsFor = team.GoalsFor;
             this.GoalsAgainst = team.GoalsAgainst;
             this.Points = team.Points;
+            this.City = team.City;
+            this.Coach = team.Coach;
+            this.Stadium = team.Stadium;
+            this.StadiumCapacity = team.StadiumCapacity;
+            this.StadiumWidth = team.StadiumWidth;
+            this.StadiumHeight = team.StadiumHeight;
         }
 
         public string GetGoalDifference()
@@ -75,6 +108,11 @@
             int goalDiff = this.GoalsFor - this.GoalsAgainst;
 
             return goalDiff >= 0 ? "+" + goalDiff : "" + goalDiff;
+        }
+
+        public string GetStadiumSize()
+        {
+            return $"{this.StadiumWidth} x {this.StadiumHeight} m";
         }
     }
 }

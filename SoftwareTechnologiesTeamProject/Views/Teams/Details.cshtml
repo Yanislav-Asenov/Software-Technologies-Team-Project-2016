@@ -1,0 +1,102 @@
+﻿@model SoftwareTechnologiesTeamProject.ViewModels.TeamDetailsViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+@if (User.IsInRole("Administrator"))
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Team.Id }) |
+        <a href="/Leagues/Standings/@Model.Team.LeagueId">Back to standings</a>
+    </p>
+}
+
+<div class="teamDetailsContainer">
+    <div class="leagueNameWrapper">
+        <img src="@Model.Team.LogoLink" alt="clubLogo" width="130"/>
+        <h1>@Model.Team.Name</h1>
+        <h2>@Model.LeagueName</h2>
+
+
+        <table class="table-condensed teamInfoTable">
+            <tr>
+                <th>Team info</th>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.Team.City)</td>
+                <td>@Model.Team.City</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.Team.Coach)</td>
+                <td>@Model.Team.Coach</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.Team.Stadium)</td>
+                <td>@Model.Team.Stadium</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.Team.StadiumCapacity)</td>
+                <td>@Model.Team.StadiumCapacity</td>
+            </tr>
+            <tr>
+                <td>Stadium size</td>
+                <td>@Model.Team.GetStadiumSize()</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="playedGamesWrapper">
+        <table class="table matchHistoryTable">
+            <tr>
+                <th class="matchHistoryDate">Date</th>
+                <th class="matchHistoryHomeTeam">Home team</th>
+                <th class="historyMatchResult">Result</th>
+                <th class="matchHistoryAwayTeam">Away team</th>
+                <th class="matchHistoryCoefficient">1</th>
+                <th class="matchHistoryCoefficient">X</th>
+                <th class="matchHistoryCoefficient">2</th>
+            </tr>
+
+            @foreach (var match in Model.GetPlayedMatches())
+            {
+                <tr>
+                    <td class="matchHistoryDate">@match.GetDate()</td>
+                    @if (match.HomeTeam.Name == Model.Team.Name)
+                {
+                        <td class="matchHistoryHomeTeam boldTeamName">@match.HomeTeam.Name</td>
+                    }
+                    else
+                    {
+                        <td class="matchHistoryHomeTeam">@match.HomeTeam.Name</td>
+                    }
+
+                    @if (match.GetWinnerName() == "draw")
+                    {
+                        <td class="historyMatchResult" style="background: rgb(255, 202, 104)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
+                    }
+                    else if (match.GetWinnerName() == Model.Team.Name)
+                    {
+                        <td class="historyMatchResult" style="background: lightgreen">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
+                    }
+                    else
+                    {
+                        <td class="historyMatchResult" style="background: rgb(255, 57, 57)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
+                    }
+
+                    @if (match.AwayTeam.Name == Model.Team.Name)
+                {
+                        <td class="matchHistoryAwayTeam boldTeamName">@match.AwayTeam.Name</td>
+                    }
+                    else
+                    {
+                        <td class="matchHistoryAwayTeam">@match.AwayTeam.Name</td>
+                    }
+                    <td class="matchHistoryCoefficient">@match.HomeCoefficient</td>
+                    <td class="matchHistoryCoefficient">@match.DrawCoefficient</td>
+                    <td class="matchHistoryCoefficient">@match.AwayCoefficient</td>
+                </tr>
+            }
+        </table>
+        <p>Total of @Model.GetTotalWinsCount() wins in last @Model.GetPlayedMatches().Count games</p>
+    </div>
+</div>

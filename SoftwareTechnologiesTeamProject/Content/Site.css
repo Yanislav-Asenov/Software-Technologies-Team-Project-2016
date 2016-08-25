@@ -850,3 +850,32 @@ thead {
       width: 100%;
       margin: auto;
   }
+
+
+
+/*  Team deitals view styles */
+
+.leagueNameWrapper {
+    position: relative;
+}
+
+.leagueNameWrapper > img {
+    float: left;
+}
+
+.leagueNameWrapper > h1, h2 {
+    margin-left: 50px;
+    width: 35%;
+    margin-left: 30%;
+}
+
+.teamInfoTable {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.playedGamesWrapper {
+    margin-top: 15%;
+}
+

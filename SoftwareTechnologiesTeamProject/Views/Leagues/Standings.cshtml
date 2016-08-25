@@ -6,167 +6,97 @@
 <span class="standingsHeading">@Model.League.Name (@Model.League.GetSeason()) - Standings</span>
 <table class="table standingsTable">
     <thead>
-        <tr>
-            <th class="standingsInfo">№</th>
-            <th class="standingsTeamName">Team</th>
-            <th class="standingsInfo" title="Games played">GP</th>
-            <th class="standingsInfo">Wins</th>
-            <th class="standingsInfo">Draws</th>
-            <th class="standingsInfo">Losses</th>
-            <th class="standingsInfo" title="Goals for">GF</th>
-            <th class="standingsInfo" title="Goals against">GA</th>
-            <th class="standingsInfo" title="Goals difference">GD</th>
-            <th class="standingsInfo">Points</th>
-            <th class="standingsMatchHistory">Form</th>
-            <th class="standingsInfo">Next</th>
-            @if (User.IsInRole("Administrator"))
-            {
-                <th class="standingsInfo">Actions</th>
-            }
-        </tr>
+    <tr>
+        <th class="standingsInfo">№</th>
+        <th class="standingsTeamName">Team</th>
+        <th class="standingsInfo" title="Games played">GP</th>
+        <th class="standingsInfo">Wins</th>
+        <th class="standingsInfo">Draws</th>
+        <th class="standingsInfo">Losses</th>
+        <th class="standingsInfo" title="Goals for">GF</th>
+        <th class="standingsInfo" title="Goals against">GA</th>
+        <th class="standingsInfo" title="Goals difference">GD</th>
+        <th class="standingsInfo">Points</th>
+        <th class="standingsMatchHistory">Form</th>
+        <th class="standingsInfo">Next</th>
+        @if (User.IsInRole("Administrator"))
+        {
+            <th class="standingsInfo">Actions</th>
+            <th class="standingsInfo"></th>
+        }
+    </tr>
     </thead>
 
     <tbody>
-        @for (int i = 0; i < Model.Teams.Count; i++)
-        {
-                int position = i + 1;
-                var team = Model.Teams[i];
-                <tr>
-                    <td class="standingsInfo">@position</td>
-                    <td class="standingsTeamName"><img src="@team.LogoLink" width="30" />@team.Name</td>
-                    <td class="standingsInfo">@team.GamesPlayed</td>
-                    <td class="standingsInfo">@team.Victories</td>
-                    <td class="standingsInfo">@team.Draws</td>
-                    <td class="standingsInfo">@team.Losses</td>
-                    <td class="standingsInfo">@team.GoalsFor</td>
-                    <td class="standingsInfo">@team.GoalsAgainst</td>
-                    <td class="standingsInfo">@team.GetGoalDifference()</td>
-                    <td class="standingsInfo">@team.Points</td>
-                    <td class="standingsMatchHistory">
-                        <ul>
-                            @foreach (var match in team.Matches)
-                            {
-                                if (match.GetWinnerName() == team.Name)
-                                {
-                                    <li class="standingsMatchHistoryLetter" style="background: #13cf00">
-                                        <a href="/Matches/Details/@match.Id"> W </a>
-                                    </li>
-                                }
-                                else if (match.GetWinnerName() == "draw")
-                                {
-                                    <li class="standingsMatchHistoryLetter" style="background: rgb(249, 214, 7)">
-                                        <a href="/Matches/Details/@match.Id"> D </a>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li class="standingsMatchHistoryLetter" style="background: #d81920">
-                                        <a href="/Matches/Details/@match.Id"> L </a>
-                                    </li>
-
-                                }
-                            }
-                        </ul>
-                    </td>
-                    <td class="standingsInfo">
-                        @if (team.NextMatch != null)
-                        {
-                            <a href="/Matches/Details/@team.NextMatch.Id">
-                                <img src="@team.NextMatch.GetOpponentName(team.Name).LogoLink" width="30" />
-                            </a>
-                            
-                        }
-                    </td>
-                    @if (User.IsInRole("Administrator"))
-                    {
-                        <td class="standingsInfo">
-                            @Html.ActionLink("Edit", "EditTeam", new {id = team.Id})
-                        </td>
-                        <td class="standingsInfo">
-                            @Html.ActionLink("Delete", "DeleteTeam", new { id = team.Id })
-                        </td>
-                    }
-                </tr>
-        }
-    </tbody>
-
-    @* Add new team form *@
-
-    @if (User.IsInRole("Administrator"))
+    @for (int i = 0; i < Model.Teams.Count; i++)
     {
-        using (Html.BeginForm("AddTeam", "Leagues", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <tr>
-                <td>
+        int position = i + 1;
+        var team = Model.Teams[i];
+        <tr>
+            <td class="standingsInfo">@position</td>
+            <td class="standingsTeamName">
+                <img src="@team.LogoLink" width="30" />
+                <a href="/Teams/Details/@team.Id">@team.Name</a>
+            </td>
+            <td class="standingsInfo">@team.GamesPlayed</td>
+            <td class="standingsInfo">@team.Victories</td>
+            <td class="standingsInfo">@team.Draws</td>
+            <td class="standingsInfo">@team.Losses</td>
+            <td class="standingsInfo">@team.GoalsFor</td>
+            <td class="standingsInfo">@team.GoalsAgainst</td>
+            <td class="standingsInfo">@team.GetGoalDifference()</td>
+            <td class="standingsInfo">@team.Points</td>
+            <td class="standingsMatchHistory">
+                <ul>
+                    @foreach (var match in team.Matches)
+                    {
+                        if (match.GetWinnerName() == team.Name)
+                        {
+                            <li class="standingsMatchHistoryLetter" style="background: #13cf00">
+                                <a href="/Matches/Details/@match.Id"> W </a>
+                            </li>
+                        }
+                        else if (match.GetWinnerName() == "draw")
+                        {
+                            <li class="standingsMatchHistoryLetter" style="background: rgb(249, 214, 7)">
+                                <a href="/Matches/Details/@match.Id"> D </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="standingsMatchHistoryLetter" style="background: #d81920">
+                                <a href="/Matches/Details/@match.Id"> L </a>
+                            </li>
 
-                    <div>
-                        @Html.TextBoxFor(m => m.NewTeam.LogoLink, new { placeholder = "Paste link to the team logo" })
-                    </div>
-                </td>
-                <td>
+                        }
+                    }
+                </ul>
+            </td>
+            <td class="standingsInfo">
+                @if (team.NextMatch != null)
+                {
+                    <a href="/Matches/Details/@team.NextMatch.Id">
+                        <img src="@team.NextMatch.GetOpponentName(team.Name).LogoLink" width="30"/>
+                    </a>
 
-                    <div class="newTeamInputClubName">
-                        @Html.TextBoxFor(m => m.NewTeam.Name, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(m => m.NewTeam.Name, "", new { @class = "text-danger" })
-                    </div>
+                }
+            </td>
+            @if (User.IsInRole("Administrator"))
+            {
+                <td class="standingsInfo">
+                    <a href="/Teams/Edit/@team.Id">Edit</a>
                 </td>
-                <td>
-
-                    <div class="newTeamInput">
-                        @Html.TextBoxFor(m => m.NewTeam.GamesPlayed, new { Value = 0 })
-                    </div>
+                <td class="standingsInfo">
+                    <a href="/Teams/Delete/@team.Id">Delete</a>
                 </td>
-                <td>
-
-                    <div class="newTeamInput">
-                        @Html.TextBoxFor(m => m.NewTeam.Victories, new { Value = 0 })
-                    </div>
-                </td>
-                <td>
-
-                    <div class="newTeamInput">
-                        @Html.TextBoxFor(m => m.NewTeam.Draws, new { Value = 0 })
-                    </div>
-                </td>
-                <td>
-
-                    <div class="newTeamInput">
-                        @Html.TextBoxFor(m => m.NewTeam.Losses, new { Value = 0 })
-                    </div>
-                </td>
-                <td>
-
-                    <div class="newTeamInput">
-                        @Html.TextBoxFor(m => m.NewTeam.GoalsFor, new { Value = 0 })
-                    </div>
-                </td>
-                <td>
-
-                    <div class="newTeamInput">
-                        @Html.TextBoxFor(m => m.NewTeam.GoalsAgainst, new { Value = 0 })
-                    </div>
-                </td>
-                <td>
-
-                    <div class="newTeamInput">
-                        <input type="text" value="" disabled="disabled" />
-                    </div>
-                </td>
-                <td>
-                    <div class="newTeamInput">
-                        @Html.TextBoxFor(m => m.NewTeam.Points, new { Value = 0 })
-                    </div>
-                </td>
-                @Html.HiddenFor(m => m.LeagueId)
-                <td>
-                    <div>
-                        <input type="submit" value="Add team" />
-                    </div>
-                </td>
-            </tr>
-        }
+            }
+        </tr>
     }
+    </tbody>
 </table>
+
+@if (User.IsInRole("Administrator"))
+{
+    @Html.ActionLink("Add new team", "Create", "Teams")
+}
 
