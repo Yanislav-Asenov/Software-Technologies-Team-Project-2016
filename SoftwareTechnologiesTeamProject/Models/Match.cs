@@ -170,11 +170,9 @@
         {
             this.HomeTeam.GoalsFor += this.HomeTeamGoals;
             this.HomeTeam.GoalsAgainst += this.AwayTeamGoals;
-            this.HomeTeam.GamesPlayed++;
 
             this.AwayTeam.GoalsFor += this.AwayTeamGoals;
             this.AwayTeam.GoalsAgainst += this.HomeTeamGoals;
-            this.AwayTeam.GamesPlayed++;
 
             if (winner == "home")
             {

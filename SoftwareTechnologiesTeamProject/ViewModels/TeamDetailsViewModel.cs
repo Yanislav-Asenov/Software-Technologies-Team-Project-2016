@@ -48,21 +48,192 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
             return this.GetAwayPlayedMatches().Count(m => m.GetWinnerName() != this.Team.Name);
         }
 
-        public Dictionary<string, int> MostCommonResults()
+        public List<TeamResultStatsViewModel> GetTeamStats()
         {
-            Dictionary<string, int> mostCommonResult = new Dictionary<string, int>();
+            var teamResultStats = new List<TeamResultStatsViewModel>();
 
-            foreach (var match in this.Matches)
+            foreach (var match in this.GetPlayedMatches())
             {
-                if (!mostCommonResult.ContainsKey(match.Result))
+                var stat = teamResultStats.FirstOrDefault(r => r.Result == match.Result);
+                if (stat != null)
                 {
-                    mostCommonResult.Add(match.Result, 1);
+                    stat.MatchesPlayed++;
                 }
-
-                mostCommonResult[match.Result]++;
+                else
+                {
+                    teamResultStats.Add(new TeamResultStatsViewModel
+                    {
+                        Result = match.Result,
+                        MatchesPlayed = 1
+                    });
+                }
             }
 
-            return mostCommonResult;
+            return teamResultStats.OrderByDescending(s => s.MatchesPlayed).ThenByDescending(s => s.Result).ToList();
+        }
+
+        public string GetWinsInPercents()
+        {
+            double totalWins = this.Team.Victories;
+            double percents = (totalWins / this.Team.TotalGamesPlayed) * 100;
+
+            return percents + "%";
+        }
+
+        public string GetDrawsInPercents()
+        {
+            double totalDraws = this.Team.Draws;
+            double percents = (totalDraws / this.Team.TotalGamesPlayed) * 100;
+
+            return percents + "%";
+        }
+
+        public string GetLossesInPercents()
+        {
+            double totalLosses = this.Team.Losses;
+            double percents = (totalLosses / this.Team.TotalGamesPlayed) * 100;
+
+            return percents + "%";
+        }
+
+        public string GetMatchesGoalsInfo(string overOrUnder, string numberOfGoals)
+        {
+            var matches = this.GetPlayedMatches();
+
+            if (overOrUnder == "over")
+            {
+                if (numberOfGoals == "1.5")
+                {
+                    int matchesCounter = 0;
+                    foreach (var match in matches)
+                    {
+                        int matchGoals = match.HomeTeamGoals + match.AwayTeamGoals;
+                        if (matchGoals > 1)
+                        {
+                            matchesCounter++;
+                        }
+                    }
+
+                    if (matchesCounter == 0)
+                    {
+                        return "0%";
+                    }
+
+                    double percents = (matchesCounter / (double)matches.Count) * 100;
+                    return percents + "%";
+                }
+                else if (numberOfGoals == "2.5")
+                {
+                    int matchesCounter = 0;
+                    foreach (var match in matches)
+                    {
+                        int matchGoals = match.HomeTeamGoals + match.AwayTeamGoals;
+                        if (matchGoals > 2)
+                        {
+                            matchesCounter++;
+                        }
+                    }
+
+
+                    if (matchesCounter == 0)
+                    {
+                        return "0%";
+                    }
+
+                    double percents = (matchesCounter / (double)matches.Count) * 100;
+                    return percents + "%";
+                }
+                else if (numberOfGoals == "3.5")
+                {
+                    int matchesCounter = 0;
+                    foreach (var match in matches)
+                    {
+                        int matchGoals = match.HomeTeamGoals + match.AwayTeamGoals;
+                        if (matchGoals > 3)
+                        {
+                            matchesCounter++;
+                        }
+                    }
+
+
+                    if (matchesCounter == 0)
+                    {
+                        return "0%";
+                    }
+
+
+                    double percents = (matchesCounter / (double)matches.Count) * 100;
+                    return percents + "%";
+                }
+            }
+            else if (overOrUnder == "under")
+            {
+                if (numberOfGoals == "1.5")
+                {
+                    int matchesCounter = 0;
+                    foreach (var match in matches)
+                    {
+                        int matchGoals = match.HomeTeamGoals + match.AwayTeamGoals;
+                        if (matchGoals < 2)
+                        {
+                            matchesCounter++;
+                        }
+                    }
+
+
+                    if (matchesCounter == 0)
+                    {
+                        return "0%";
+                    }
+
+                    double percents = (matchesCounter / (double)matches.Count) * 100;
+                    return percents + "%";
+                }
+                else if (numberOfGoals == "2.5")
+                {
+                    int matchesCounter = 0;
+                    foreach (var match in matches)
+                    {
+                        int matchGoals = match.HomeTeamGoals + match.AwayTeamGoals;
+                        if (matchGoals < 3)
+                        {
+                            matchesCounter++;
+                        }
+                    }
+
+
+                    if (matchesCounter == 0)
+                    {
+                        return "0%";
+                    }
+
+                    double percents = (matchesCounter / (double)matches.Count) * 100;
+                    return percents + "%";
+                }
+                else if (numberOfGoals == "3.5")
+                {
+                    int matchesCounter = 0;
+                    foreach (var match in matches)
+                    {
+                        int matchGoals = match.HomeTeamGoals + match.AwayTeamGoals;
+                        if (matchGoals < 4)
+                        {
+                            matchesCounter++;
+                        }
+                    }
+
+                    if (matchesCounter == 0)
+                    {
+                        return "0%";
+                    }
+
+
+                    double percents = (matchesCounter / (double)matches.Count) * 100;
+                    return percents + "%";
+                }
+            }
+
+            return null;
         }
     }
 }

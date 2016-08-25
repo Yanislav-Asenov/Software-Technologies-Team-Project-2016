@@ -14,7 +14,8 @@
         public string Name { get; set; }
 
         [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
-        public int GamesPlayed { get; set; }
+        [NotMapped]
+        public int TotalGamesPlayed => this.Victories + this.Draws + this.Losses;
 
         [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
         public int Victories { get; set; }
@@ -33,6 +34,9 @@
 
         [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
         public int Points { get; set; }
+
+        [NotMapped]
+        public int TotalGoals => this.GoalsFor + this.GoalsAgainst;
 
         [Required]
         [StringLength(100)]
@@ -75,7 +79,6 @@
 
         public Team()
         {
-            GamesPlayed = 0;
             GoalsFor = 0;
             GoalsAgainst = 0;
             Losses = 0;
@@ -87,7 +90,6 @@
         public void Update(Team team)
         {
             this.Name = team.Name;
-            this.GamesPlayed = team.GamesPlayed;
             this.GoalsFor = team.GoalsFor;
             this.Victories = team.Victories;
             this.Draws = team.Draws;
@@ -113,6 +115,27 @@
         public string GetStadiumSize()
         {
             return $"{this.StadiumWidth} x {this.StadiumHeight} m";
+        }
+
+        public string GetAverageGoalsPerGame()
+        {
+            double averageGoals = this.TotalGoals / (double)this.TotalGamesPlayed;
+
+            return $"{averageGoals:F2}";
+        }
+
+        public string GetAverageGoalsFor()
+        {
+            double averageGoalsFor = this.GoalsFor / (double)this.TotalGamesPlayed;
+
+            return $"{averageGoalsFor:F2}";
+        }
+
+        public string GetAverageGoalsAgainst()
+        {
+            double averageGoalsAgainst = this.GoalsAgainst / (double)this.TotalGamesPlayed;
+
+            return $"{averageGoalsAgainst:F2}";
         }
     }
 }
