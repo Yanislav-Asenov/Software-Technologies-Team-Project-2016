@@ -50,6 +50,18 @@
 
         public virtual List<Tag> Tags { get; set; } = new List<Tag>();
 
+        public string ShortText()
+        {
+            if (this.Body.Length>200)
+            {
+                return this.Body.Substring(0, 200);
+            }
+            else
+            {
+                return this.Body;
+            }
+        }
+
         public void AddTags(string[] tagNames, List<Tag> existingTags)
         {
             foreach (var tagName in tagNames)

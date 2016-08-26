@@ -8,7 +8,7 @@
    
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     
-    <meta name="description" content="The description of my page" />
+    
 </head>
 <body>
 
@@ -20,23 +20,14 @@
                         <div class="logo">
                             <a href="@Url.Action("Index", "Home")" title="List View" class="links">
 
-                                <img class="dropTableLogo" alt="Droptable" src="~/Content/Images/droptableV3.png">
+                                <img class="dropTableLogo" alt="Droptable" src="~/Content/Images/droptableLogo.png">
 
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-4">
-                        <div class="header_search">
-                            @using (Html.BeginForm())
-                            {
-                                <form>
-                                    <input class="searchPost" type="text" name="searchString" placeholder="Search..">
-                                </form>
-                            }
-                        </div>
-                    </div>
                 </div>
-                <div class="col-md-12">
+        <div class="col-md-12">
+                    
                     <nav class="navbar navbar-default primary-bg">
                         <div class="navbar-header">
                             <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
@@ -46,7 +37,7 @@
                                 <span class="icon-bar"></span>
                             </button>
                         </div>
-                        <div class="navbar-collapse collapse" id="navbar" aria-expanded="false" style="height: 0px;">
+                        <div class="navbar-collapse collapse" id="navbar" style="height: 0px;">
                             <ul class="nav navbar-nav">
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                                 <li>@Html.ActionLink("Posts", "Index", "Posts")</li>
@@ -55,11 +46,10 @@
                                 <li>@Html.ActionLink("Profile", "Index", "Profiles")</li>
                             </ul>
                             @Html.Partial("_LoginPartial")
-                            
                         </div>
                     </nav>
                 </div>
-            </div>
+           </div>
         </div>
     </header>
 

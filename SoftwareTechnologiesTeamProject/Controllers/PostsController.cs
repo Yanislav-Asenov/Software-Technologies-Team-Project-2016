@@ -20,7 +20,7 @@
                 .Include(p => p.Author)
                 .OrderByDescending(p => p.Date)
                 .ToList();
-
+            
             if (!string.IsNullOrEmpty(searchString))
             {
                 var searchedPosts = posts

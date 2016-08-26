@@ -359,96 +359,31 @@
 
     <div class="sidebar-add">
         <h2>Recent Posts</h2>
-        @foreach (var post in ViewBag.RecentPosts)
-        {
-            <a href="/Posts/Details/@post.Id" class="recent-post-link">@post.Title</a>
-        }
+       
     </div>
 
-    <div class="sidedar_details">
+    <div class="sidebar">
 
-        <div class="sidedar_deatails_header">
+        <div class="sidebar">
 
             <ul class="nav nav-tabs">
 
-                <li role="presentation" class="active"><a href="#article" aria-controls="home" role="tab" data-toggle="tab">Popular Articles</a></li>
+                <li role="presentation" class="active"><a href="#article" aria-controls="home" role="tab" data-toggle="tab">Recent Posts</a></li>
 
                 <li role="presentation"><a href="#comments-m" aria-controls="home" role="tab" data-toggle="tab">Recent Comments</a></li>
 
             </ul>
-
             <div class="tab-content">
-
                 <div role="tabpanel" class="tab-pane active" id="article">
-
-
-
-                    <div class="sidebar_articles">
-
-                        <div class="side_articles_img"></div>
-
-                        <div class="side_articles_detail">
-
-                            <h6><a href="http://demo.yaythemes.com/blogcafe/category/uncategorized/" rel="category tag">Uncategorized</a></h6>
-
-                            <p><a href="http://demo.yaythemes.com/blogcafe/2016/05/20/hello-world/">Hello world!</a>
-                            </p>
-                            <p>
-
-                                <a href="#" class="comments"><i class="fa fa-comments" aria-hidden="true"></i>1 Comment</a>
-
-                            </p>
+                    <div>
+                        <div>
+                            @foreach(var post in ViewBag.RecentPosts)
+                            {
+                                <a href="/Posts/Details/@post.Id" class="recent-post-link">@post.Title</a>
+                            }
                         </div>
-
                     </div>
-
-
-                    <div class="sidebar_articles">
-
-                        <div class="side_articles_img"><img width="150" height="150" src="http://demo.yaythemes.com/blogcafe/wp-content/uploads/2016/05/img_5-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="img_5">
-                        </div>
-
-                        <div class="side_articles_detail">
-
-                            <h6><a href="http://demo.yaythemes.com/blogcafe/category/photography/" rel="category tag">Photography</a></h6>
-
-                            <p><a href="http://demo.yaythemes.com/blogcafe/2016/05/11/what-is-blog-post/">What Is Blog Post?</a>
-                            </p>
-                            <p>
-
-                                <a href="#" class="comments"><i class="fa fa-comments" aria-hidden="true"></i>0 Comment</a>
-
-                            </p>
-                        </div>
-
-                    </div>
-
-
-                    <div class="sidebar_articles">
-
-                        <div class="side_articles_img"><img width="150" height="150" src="http://demo.yaythemes.com/blogcafe/wp-content/uploads/2016/05/banner_img-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="banner_img">
-                        </div>
-
-                        <div class="side_articles_detail">
-
-                            <h6><a href="http://demo.yaythemes.com/blogcafe/category/business/" rel="category tag">Business</a></h6>
-
-                            <p><a href="http://demo.yaythemes.com/blogcafe/2016/05/10/what-is-lorem-ipsum/">What is Lorem Ipsum?</a>
-                            </p>
-                            <p>
-
-                                <a href="#" class="comments"><i class="fa fa-comments" aria-hidden="true"></i>0 Comment</a>
-
-                            </p>
-                        </div>
-
-                    </div>
-
-
-
-
                 </div>
-
                 <div role="tabpanel" class="tab-pane" id="comments-m">
 
 

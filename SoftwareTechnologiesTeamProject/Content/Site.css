@@ -388,22 +388,24 @@ textarea {
 }
 
 .recent-post-link:hover {
-    text-decoration: none;
+    /*text-decoration: none;
      color: white;
     background: rgb(44, 44, 44);
-     font-weight: bold;
+     font-weight: bold;*/
+    line-height: 10px;
 }
 
 .recent-post-link:focus {
-    text-decoration: none;
+    /*text-decoration: none;
      color: white;
     background: rgb(44, 44, 44);
-     font-weight: bold;
+     font-weight: bold;*/
+    line-height: 10px;
 }
 
-/* End of home page styles*/
+ /*End of home page styles
 
-/* Like button styles */
+ Like button styles*/ 
 
 .glyphicon {
     color: black;
