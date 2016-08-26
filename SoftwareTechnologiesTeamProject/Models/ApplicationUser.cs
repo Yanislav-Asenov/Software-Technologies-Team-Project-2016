@@ -20,7 +20,7 @@ namespace SoftwareTechnologiesTeamProject.Models
 
         public double Balance { get; set; } = 0;
 
-        //public Profile Profile { get; set; }
+        //public Profile Profile { get; set; } = new Profile();
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

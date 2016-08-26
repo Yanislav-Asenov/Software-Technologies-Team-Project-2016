@@ -25,6 +25,12 @@ namespace SoftwareTechnologiesTeamProject.Models
         [StringLength(50)]
         public string City { get; set; }
 
+
+
+        [Display(Name = "FullName")]
+        [StringLength(50)]
+        public string FullName { get; set; }
+
         [Display(Name = "Interests")]
         [StringLength(200)]
         public string Interests { get; set; }
