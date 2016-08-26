@@ -48,7 +48,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "FullName", profile.UserId);
+            ViewBag.UserId = new SelectList(db.Profile, "Id", "FullName", profile.UserId);
             return View(profile);
         }
 
@@ -57,15 +57,16 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Age,City,Interests,MoreInfo,ProfilePic")] Profile profile)
+        public ActionResult Edit([Bind(Include = "Id,UserId,Age,City,Interests,MoreInfo,FullName,ProfilePic")] Profile profile)
         {
             if (ModelState.IsValid)
             {
+                
                 db.Entry(profile).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            //ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "FullName", profile.UserId);
+            ViewBag.UserId = new SelectList(db.Profile, "Id", "FullName", profile.UserId);
             return View(profile);
         }
 

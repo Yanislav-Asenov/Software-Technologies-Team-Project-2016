@@ -11,7 +11,8 @@ namespace SoftwareTechnologiesTeamProject.Models
     {
         [Key]
         public int Id { get; set; }
-
+        
+        
         public string UserId { get; set; }
 
         [ForeignKey("UserId")]
@@ -41,5 +42,15 @@ namespace SoftwareTechnologiesTeamProject.Models
 
         [StringLength(200)]
         public string ProfilePic { get; set; }
+
+
+        //public void Update(ApplicationUser Profile, EditProfileViewModel viewModel)
+        //{
+        //    this.User = Profile.Id;
+            
+        //    this.FullName = viewModel.FullName;
+            
+        //   //TODO
+        //}
     }
 }
