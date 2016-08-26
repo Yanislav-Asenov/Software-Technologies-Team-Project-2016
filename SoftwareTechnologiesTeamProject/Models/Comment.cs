@@ -39,5 +39,15 @@
         {
             return $"{DateCreated:H:mm}";
         }
+
+        public string GetShortContent()
+        {
+            if (this.Content.Length > 100)
+            {
+                return this.Content.Substring(0, 100) + "...";
+            }
+
+            return this.Content;
+        }
     }
 }

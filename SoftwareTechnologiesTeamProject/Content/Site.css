@@ -368,41 +368,47 @@ textarea {
 
 /* Home page styles */
 
-.recent-posts-container {
-    background: white;
-    width: 30%;
-    height: auto;
-    float: right;
-    margin-top: 30px;
-    text-align: center;
-    border: solid black;
+.recent-post-wrapper {
+    margin: 5px;
 }
 
-.recent-post-link {
-    text-decoration: none;
-    color: inherit;
-    font-weight: bold;
+.recent-post-wrapper > a {
     display: block;
-    padding: 10px;
-    height: 60px;
+    font-size: 15px;
 }
 
-.recent-post-link:hover {
-    /*text-decoration: none;
-     color: white;
-    background: rgb(44, 44, 44);
-     font-weight: bold;*/
-    line-height: 10px;
+.recent-post-wrapper > span {
+    display: block;
+    font-size: 12px;
 }
 
-.recent-post-link:focus {
-    /*text-decoration: none;
-     color: white;
-    background: rgb(44, 44, 44);
-     font-weight: bold;*/
-    line-height: 10px;
+.postTitle {
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
 }
 
+.authorName {
+    font-size: 14px;
+    color: black;
+    margin-bottom: 5px;
+}
+
+.date {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.sideBar-recent {
+    float: right;
+    width: 30%;
+    margin-top: -23%;
+}
+
+.singlePost {
+    background: #e7e7e7;
+}
  /*End of home page styles
 
  Like button styles*/ 
@@ -822,7 +828,6 @@ thead {
 }
 
 .searchPost {
-    margin-top: 5%;
     width: 130px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -838,7 +843,7 @@ thead {
 }
 
 .searchPost:focus {
-    width: 100%;
+    width: 110%;
 }
 
 /* Not important */
@@ -928,7 +933,7 @@ td, th {
     width: 200px;
 }
 
-.col-md-2 {
+.col-md-2.leftCol, .col-md-2.rightCol {
     width: 45%;
     height: 200px;
     padding: 0;
@@ -1006,20 +1011,17 @@ td, th {
     text-decoration: none;
     width: 100%;
     cursor: pointer;
-    color: black;
 }
 
-.singleUpcomingMatch:hover {
+.singleUpcomingMatch:hover{
     background: green;
     text-decoration: none;
-    color: white;
     cursor: pointer;
 }
 
 .singleUpcomingMatch:focus {
     background: green;
     text-decoration: none;
-    color: white;
     cursor: pointer;
 }
 

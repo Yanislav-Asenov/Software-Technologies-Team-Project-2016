@@ -63,7 +63,7 @@
 
         public string AwayCoefficient { get; set; }
 
-        public string GetWinningSide()
+        public string GetWinnerSide()
         {
             if (HomeTeamGoals > AwayTeamGoals)
             {

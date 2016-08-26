@@ -26,8 +26,8 @@
                         </div>
                     </div>
                 </div>
-        <div class="col-md-12">
-                    
+                <div class="col-md-12">
+
                     <nav class="navbar navbar-default primary-bg">
                         <div class="navbar-header">
                             <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
@@ -49,11 +49,11 @@
                         </div>
                     </nav>
                 </div>
-           </div>
+            </div>
         </div>
     </header>
 
-    
+
     @Html.Partial("_Notifications")
     @Styles.Render("~/Content/css")
     @RenderSection("styles", required: false)
@@ -61,8 +61,8 @@
 
     <div class="container body-content">
         @RenderBody()
+        <div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
     </div>
-     <div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
 </body>
 </html>
 

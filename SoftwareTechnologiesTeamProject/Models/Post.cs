@@ -33,7 +33,7 @@
         [Column(TypeName = "datetime2")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyy}",
                ApplyFormatInEditMode = true)]
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
 
         public DateTime? LastDateActive { get; set; }
 
@@ -52,9 +52,9 @@
 
         public string ShortText()
         {
-            if (this.Body.Length>200)
+            if (this.Body.Length > 200)
             {
-                return this.Body.Substring(0, 200);
+                return this.Body.Substring(0, 200) + "...";
             }
             else
             {
@@ -118,6 +118,21 @@
         public string GetTime()
         {
             return $"{Date:H:mm}";
+        }
+
+        public string GetShortTitle()
+        {
+            if (this.Title.Length > 40)
+            {
+                return this.Title.Substring(0, 40) + "...";
+            }
+
+            return this.Title;
+        }
+
+        public Comment GetRecentComment()
+        {
+            return this.Comments.OrderByDescending(c => c.DateCreated).First();
         }
     }
 }

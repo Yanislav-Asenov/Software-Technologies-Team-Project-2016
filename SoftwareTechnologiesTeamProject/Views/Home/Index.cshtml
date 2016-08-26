@@ -1,531 +1,167 @@
-﻿
+﻿@using System.Globalization
+@model SoftwareTechnologiesTeamProject.ViewModels.HomePageViewModel
 
 @{
     ViewBag.Title = "Home Page";
 }
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
 
-
-@*<div class="recent-posts-container">
-    <div>
-        <h3>Recent posts</h3>
-        <hr />
-    </div>
-    @foreach (var post in ViewBag.RecentPosts)
-    {
-        <a href="/Posts/Details/@post.Id" class="recent-post-link">@post.Title</a>
-    }
-</div>*@
-
-    
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#myCarousel" data-slide-to="1"></li>
-                            <li data-target="#myCarousel" data-slide-to="2"></li>
-                            <li data-target="#myCarousel" data-slide-to="3"></li>
-                        </ol>
-
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner" role="listbox">
-                            <div class="item active">
-                                <img src="../../Content/Images/Slideshow/beckham.png" alt="Chania" width="460" height="345">
-                            </div>
-
-                            <div class="item">
-                                <img src="../../Content/Images/Slideshow/dqdo.png" alt="Chania" width="460" height="345">
-                            </div>
-
-                            <div class="item">
-                                <img src="../../Content/Images/Slideshow/stadion.png" alt="Flower" width="460" height="345">
-                            </div>
-
-                            <div class="item">
-                                <img src="../../Content/Images/Slideshow/stadion2.png" alt="Flower" width="460" height="345">
-                            </div>
-                        </div>
-
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-           
-
-<div id="post-9" class="post-9 post type-post status-publish format-standard has-post-thumbnail hentry category-fashion tag-5 tag-6 tag-popular">
-    <div class="container">
-    <div class="row">
-    <div class="col-md-8">
-    <div class="featured_articles_heading">
-        <h3> Featured Articles </h3>
-    </div>
-    <div class="featured_articles_detail">
-        <div class="featured_articles_img">
-            <a href="http://demo.yaythemes.com/blogcafe/2016/05/09/there-are-many-variations-of-passages/"> <img width="358" height="243" src="http://demo.yaythemes.com/blogcafe/wp-content/uploads/2016/05/img_4-358x243.png" class="attachment-thumb-small size-thumb-small wp-post-image" alt="img_4"></a>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="../../Content/Images/Slideshow/beckham.png" alt="Chania" width="460" height="345">
         </div>
-        <div class="featured_articles_text">
-            <div class="post_categories">
-                <a href="http://demo.yaythemes.com/blogcafe/category/photography/" rel="category tag">Photography</a>
-            </div>
-            <h2><a href="http://demo.yaythemes.com/blogcafe/2016/05/09/there-are-many-variations-of-passages/">There are many variations of pas...</a>
-            </h2>
+
+        <div class="item">
+            <img src="../../Content/Images/Slideshow/dqdo.png" alt="Chania" width="460" height="345">
         </div>
-    </div>
-    <div class="featured_articles_detail">
-        <div class="featured_articles_img">
-            <a href="http://demo.yaythemes.com/blogcafe/2016/05/09/lorem-ipsum-is-simply-dummy/"> <img width="358" height="243" src="http://demo.yaythemes.com/blogcafe/wp-content/uploads/2016/05/banner_img-358x243.png" class="attachment-thumb-small size-thumb-small wp-post-image" alt="banner_img"></a>
+
+        <div class="item">
+            <img src="../../Content/Images/Slideshow/stadion.png" alt="Flower" width="460" height="345">
         </div>
-        <div class="featured_articles_text">
-            <div class="post_categories">
-                <a href="http://demo.yaythemes.com/blogcafe/category/fashion/" rel="category tag">Fashion</a>
-            </div>
-            <h2><a href="http://demo.yaythemes.com/blogcafe/2016/05/09/lorem-ipsum-is-simply-dummy/">Lorem Ipsum is simply dummy</a>
-            </h2>
+
+        <div class="item">
+            <img src="../../Content/Images/Slideshow/stadion2.png" alt="Flower" width="460" height="345">
         </div>
     </div>
 
-    <div class="recent_articles_detail">
-        <h3> Recent Articles </h3>
-    </div>
-    <div class="recent_articles_detail">
-
-        <div class="post_no_img"></div>
-        <div class="recent_articles_text">
-
-            <div class="post_categories">
-
-                <a href="http://demo.yaythemes.com/blogcafe/category/uncategorized/" rel="category tag">Uncategorized</a>
-            </div>
-
-            <h3><a href="http://demo.yaythemes.com/blogcafe/2016/05/20/hello-world/"> Hello world!</a>
-            </h3>
-
-            <p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>
-
-            <p><a href="http://demo.yaythemes.com/blogcafe/2016/05/20/hello-world/"> Continue Read »</a>
-            </p>
-
-            <div class="recent_articles_text_footer">
-
-                <div class="posted_on">
-
-                    <h6>Posted on : <span>May 20, 2016</span></h6>
-
-                </div>
-
-                <div class="posted_by">
-
-                    <h6>by : <span>Yum Yum!</span></h6>
-
-                </div>
-
-                <div class="posted_with">
-
-                    <h6>with : <span>1 Comment</span></h6>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-    <div class="recent_articles_detail">
-        <div class="blog-quotes">
-            <a href="http://demo.yaythemes.com/blogcafe/2016/05/11/what-is-blog-post/">
-                <div class="quotes-icon">
-                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                </div>
-                <div class="quotes-content">
-                    <h2>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</h2>
-                </div>
-                <div class="quotes-writer-name">
-                    <p>By Yum Yum! </p>
-                </div>
-            </a>
-
-        </div>
-
-    </div>
-    <div class="recent_articles_detail">
-
-        <div class="recent_articles_img">
-            <a href="http://demo.yaythemes.com/blogcafe/2016/05/10/what-is-lorem-ipsum/">
-                <img width="750" height="481" src="http://demo.yaythemes.com/blogcafe/wp-content/uploads/2016/05/banner_img-750x481.png" class="attachment-large-small size-large-small wp-post-image" alt="banner_img">
-            </a>
-        </div>
-        <div class="recent_articles_text">
-
-            <div class="post_categories">
-
-                <a href="http://demo.yaythemes.com/blogcafe/category/business/" rel="category tag">Business</a>
-            </div>
-
-            <h3><a href="http://demo.yaythemes.com/blogcafe/2016/05/10/what-is-lorem-ipsum/"> What is Lorem Ipsum?</a>
-            </h3>
-
-            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.There ...</p>
-
-            <p><a href="http://demo.yaythemes.com/blogcafe/2016/05/10/what-is-lorem-ipsum/"> Continue Read »</a>
-            </p>
-
-            <div class="recent_articles_text_footer">
-
-                <div class="posted_on">
-
-                    <h6>Posted on : <span>May 10, 2016</span></h6>
-
-                </div>
-
-                <div class="posted_by">
-
-                    <h6>by : <span>Yum Yum!</span></h6>
-
-                </div>
-
-                <div class="posted_with">
-
-                    <h6>with : <span>0 Comment</span></h6>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-    <div class="recent_articles_detail">
-        <div class="blog-link">
-            <h2><a href="http://google.co.in/">http://google.co.in/</a>
-            </h2>
-        </div>
-    </div>
-    <div class="recent_articles_detail">
-
-        <div class="post_no_img"></div>
-        <div class="recent_articles_text">
-
-            <div class="post_categories">
-
-                <a href="http://demo.yaythemes.com/blogcafe/category/business/" rel="category tag">Business</a>
-            </div>
-
-            <h3><a href="http://demo.yaythemes.com/blogcafe/2016/05/10/cicero-are-also-reproduced-long/"> Cicero are also reproduced long</a>
-            </h3>
-
-            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.There ...</p>
-
-            <p><a href="http://demo.yaythemes.com/blogcafe/2016/05/10/cicero-are-also-reproduced-long/"> Continue Read »</a>
-            </p>
-
-            <div class="recent_articles_text_footer">
-
-                <div class="posted_on">
-
-                    <h6>Posted on : <span>May 10, 2016</span></h6>
-
-                </div>
-
-                <div class="posted_by">
-
-                    <h6>by : <span>Yum Yum!</span></h6>
-
-                </div>
-
-                <div class="posted_with">
-
-                    <h6>with : <span>2 Comments</span></h6>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-    <div class="recent_articles_detail">
-
-        <div class="recent_articles_img">
-            <a href="http://demo.yaythemes.com/blogcafe/2016/05/10/many-desktop-publishing-packages/">
-                <img width="750" height="500" src="http://demo.yaythemes.com/blogcafe/wp-content/uploads/2016/05/img_5.png" class="attachment-large-small size-large-small wp-post-image" alt="img_5" srcset="http://demo.yaythemes.com/blogcafe/wp-content/uploads/2016/05/img_5.png 750w, http://demo.yaythemes.com/blogcafe/wp-content/uploads/2016/05/img_5-300x200.png 300w" sizes="(max-width: 750px) 100vw, 750px">
-            </a>
-        </div>
-        <div class="recent_articles_text">
-
-            <div class="post_categories">
-
-                <a href="http://demo.yaythemes.com/blogcafe/category/fashion/" rel="category tag">Fashion</a>
-            </div>
-
-            <h3><a href="http://demo.yaythemes.com/blogcafe/2016/05/10/many-desktop-publishing-packages/"> Many desktop publishing packages</a>
-            </h3>
-
-            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.There ...</p>
-
-            <p><a href="http://demo.yaythemes.com/blogcafe/2016/05/10/many-desktop-publishing-packages/"> Continue Read »</a>
-            </p>
-
-            <div class="recent_articles_text_footer">
-
-                <div class="posted_on">
-
-                    <h6>Posted on : <span>May 10, 2016</span></h6>
-
-                </div>
-
-                <div class="posted_by">
-
-                    <h6>by : <span>Yum Yum!</span></h6>
-
-                </div>
-
-                <div class="posted_with">
-
-                    <h6>with : <span>0 Comment</span></h6>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="recent_articles_detail">
-
-        <div class="home-blog-video">
-
-
-            <iframe allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" src="https://player.vimeo.com/video/161535860" width="100%" height="420" style="margin-bottom: -10px;"></iframe>
-
-
-        </div>
-
-        <div class="recent_articles_text">
-
-            <div class="post_categories">
-
-                <a href="http://demo.yaythemes.com/blogcafe/category/photography/" rel="category tag">Photography</a>
-            </div>
-
-            <h3><a href="http://demo.yaythemes.com/blogcafe/2016/05/10/various-versions-have-evolved-over-the-years/"> Various versions have evolved over th...</a>
-            </h3>
-
-            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.There ...</p>
-
-            <p><a href="http://demo.yaythemes.com/blogcafe/2016/05/10/various-versions-have-evolved-over-the-years/"> Continue Read »</a>
-            </p>
-
-            <div class="recent_articles_text_footer">
-
-                <div class="posted_on">
-
-                    <h6>Posted on : <span>May 10, 2016</span></h6>
-
-                </div>
-
-                <div class="posted_by">
-
-                    <h6>by : <span>Yum Yum!</span></h6>
-
-                </div>
-
-                <div class="posted_with">
-
-                    <h6>with : <span>0 Comment</span></h6>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-    <ul class="page-numbers">
-        <li><span class="page-numbers current">1</span></li>
-        <li><a class="page-numbers" href="http://demo.yaythemes.com/blogcafe/page/2/">2</a></li>
-        <li><a class="next page-numbers" href="http://demo.yaythemes.com/blogcafe/page/2/">Next</a></li>
-    </ul>
-
-
-    </div>
-    <div class="col-md-4">
-
-
-    <div class="sidebar-add">
-        <h2>Recent Posts</h2>
-       
-    </div>
-
-    <div class="sidebar">
-
-        <div class="sidebar">
-
-            <ul class="nav nav-tabs">
-
-                <li role="presentation" class="active"><a href="#article" aria-controls="home" role="tab" data-toggle="tab">Recent Posts</a></li>
-
-                <li role="presentation"><a href="#comments-m" aria-controls="home" role="tab" data-toggle="tab">Recent Comments</a></li>
-
-            </ul>
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="article">
-                    <div>
-                        <div>
-                            @foreach(var post in ViewBag.RecentPosts)
-                            {
-                                <a href="/Posts/Details/@post.Id" class="recent-post-link">@post.Title</a>
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="comments-m">
-
-
-
-
-                    <div class="sidebar_articles sidebar_articles_comment">
-
-                        <div class="comment_date_auther">
-
-                            <a href="">Mr WordPress</a>
-
-                            <div class="comment-date">
-
-                                <span>May 10, 2016</span>
-
-                            </div>
-
-                        </div>
-
-                        <a href="http://demo.yaythemes.com/blogcafe/2016/05/10/various-versions-have-evolved-over-the-years/" class="post_comm_title">Various versions have evolved ...</a>
-
-                        <p>
-                            Hi, this is a comment.
-                            To delete a comment, just log in and view the post's comments. There you will h...
-                        </p>
-
-                    </div>
-
-
-                    <div class="sidebar_articles sidebar_articles_comment">
-
-                        <div class="comment_date_auther">
-
-                            <a href="">priyanka</a>
-
-                            <div class="comment-date">
-
-                                <span>May 10, 2016</span>
-
-                            </div>
-
-                        </div>
-
-                        <a href="http://demo.yaythemes.com/blogcafe/2016/05/10/various-versions-have-evolved-over-the-years/" class="post_comm_title">Various versions have evolved ...</a>
-
-                        <p>by injected humour, or randomised words.There are many variations of passages of Lorem Ipsum available, but...</p>
-
-                    </div>
-
-
-                    <div class="sidebar_articles sidebar_articles_comment">
-
-                        <div class="comment_date_auther">
-
-                            <a href="">priyanka</a>
-
-                            <div class="comment-date">
-
-                                <span>May 10, 2016</span>
-
-                            </div>
-
-                        </div>
-
-                        <a href="http://demo.yaythemes.com/blogcafe/2016/05/10/various-versions-have-evolved-over-the-years/" class="post_comm_title">Various versions have evolved ...</a>
-
-                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration i...</p>
-
-                    </div>
-
-
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="sidebar-add-2">
-        <a href="http://demo.yaythemes.com/blogcafe/"><img src="http://demo.yaythemes.com/blogcafe/wp-content/themes/blogcafe/images/add.png"></a>
-    </div>
-
-    <div class="sidebar_wrap sidedar_newsletter">
-
-        <h3>Newsletter</h3>
-
-        <p>Stay updated on latest updates &amp; promotions</p>
-
-        <div class="sidebar_newsleter_form">
-
-            <form method="post" class="side_newsletter_form_filed" action="http://demo.yaythemes.com/blogcafe/?na=s" onsubmit="return newsletter_check(this)">
-
-                <input type="text" class="form-control" placeholder="Name" name="nn">
-
-                <input type="text" value="" class="form-control" name="ne" placeholder="Email Address">
-
-                <span id="n_email_error" class="error"></span>
-
-                <button class="btn btn-default newsletter-submit Subscribe" type="submit">Subscribe</button>
-
-            </form>
-
-        </div>
-
-    </div>
-
-    <div class="sidebar_wrap sidedar_tag">
-
-        <h3> Explore Tags</h3>
-
-        <div class="sidebar_explore_tags">
-
-            <ul>
-
-                <li><a href="http://demo.yaythemes.com/blogcafe/tag/2015/" title="2015 Tag" class="2015">2015</a></li>
-                <li><a href="http://demo.yaythemes.com/blogcafe/tag/2016/" title="2016 Tag" class="2016">2016</a></li>
-                <li><a href="http://demo.yaythemes.com/blogcafe/tag/best/" title="Best Tag" class="best">Best</a></li>
-                <li><a href="http://demo.yaythemes.com/blogcafe/tag/design/" title="Design Tag" class="design">Design</a></li>
-                <li><a href="http://demo.yaythemes.com/blogcafe/tag/food/" title="Food Tag" class="food">Food</a></li>
-                <li><a href="http://demo.yaythemes.com/blogcafe/tag/healthy/" title="Healthy Tag" class="healthy">Healthy</a></li>
-                <li><a href="http://demo.yaythemes.com/blogcafe/tag/people/" title="People Tag" class="people">People</a></li>
-                <li><a href="http://demo.yaythemes.com/blogcafe/tag/popular/" title="Popular Tag" class="popular">Popular</a></li>
-                <li><a href="http://demo.yaythemes.com/blogcafe/tag/travel/" title="Travel Tag" class="travel">Travel</a></li>
-
-            </ul>
-
-        </div>
-
-    </div>
-
-    </div>
-    </div>
-    </div>
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
 </div>
 
-   
+
+<div>
+    <div class="container bodyWrapper">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="featured_articles_heading">
+                    <h3> Featured Posts </h3>
+                </div>
+                @foreach (var post in Model.FeaturedPosts)
+                {
+
+                    <div class="singlePost">
+                        <div class="featured_articles_text">
+                            <h2>
+                                <a href="/Posts/Details/@post.Id">@post.Title</a>
+                            </h2>
+                            <div class="postBody">
+                                @post.Body
+                            </div>
+                            <div class="post_categories">
+                                @foreach (var tag in post.Tags)
+                                {
+                                    <a href="/Posts/Tag/@tag.Id" rel="category tag">#@tag.Name</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+                <hr />
+            </div>
+        </div>
 
 
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <div class="sideBar-recent">
+
+            <br />
+
+            <div class="sidebar">
+
+                <div class="sidebar">
+
+                    <ul class="nav nav-tabs">
+
+                        <li role="presentation" class="active"><a href="#article" aria-controls="home" role="tab" data-toggle="tab">Recent Posts</a></li>
+
+                        <li role="presentation"><a href="#comments-m" aria-controls="home" role="tab" data-toggle="tab">Recent Comments</a></li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="article">
+                            <hr />
+                            <div>
+                                @foreach (var post in Model.RecentPosts)
+                                {
+                                    <div class="recent-post-wrapper">
+                                        <a href="/Posts/Details/@post.Id">
+                                            @post.Title
+                                        </a>
+                                        <span>by @post.Author.FullName on @post.Date.ToString("dd MMMM, yyyy", CultureInfo.InvariantCulture)</span>
+                                    </div>
+                                    <hr />
+                                }
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="comments-m">
 
 
+                            <hr />
+                            @foreach (var post in Model.LastCommentedPosts)
+                            {
+
+                                <div class="sidebar_articles sidebar_articles_comment">
+
+                                    <a href="/Posts/Details/@post.Id" class="postTitle">@post.GetShortTitle()</a>
+
+                                    <div>
+
+                                        <a href="" class="authorName">@post.Author.FullName</a>
+
+                                        <div class="date">
+
+                                            <span>@post.Date.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture)</span>
+
+                                        </div>
+
+                                    </div>
+
+                                    <p style="word-wrap: break-word" class="comment-content">
+                                        @post.GetRecentComment().GetShortContent()
+                                    </p>
+
+                                </div>
+                                <hr />
+                            }
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="sidedar_tag">
+
+                <h3> Explore Tags</h3>
+
+                <div class="sidebar_tags_wrapper">
+
+                    <ul>
+                        @foreach (var tag in Model.PopularTags)
+                        {
+                            <li><a href="/Posts/Tag/@tag.Id" class="tag">#@tag.Name</a></li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

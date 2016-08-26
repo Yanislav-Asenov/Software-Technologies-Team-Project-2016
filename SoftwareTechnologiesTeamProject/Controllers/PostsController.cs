@@ -3,6 +3,7 @@
     using Extensions;
     using Microsoft.AspNet.Identity;
     using Models;
+    using System;
     using System.Data.Entity;
     using System.Linq;
     using System.Net;
@@ -20,7 +21,7 @@
                 .Include(p => p.Author)
                 .OrderByDescending(p => p.Date)
                 .ToList();
-            
+
             if (!string.IsNullOrEmpty(searchString))
             {
                 var searchedPosts = posts
@@ -29,7 +30,7 @@
 
                 return View(searchedPosts);
             }
-             
+
             return View(posts);
         }
 
@@ -132,6 +133,7 @@
         public ActionResult EditComment(Comment comment)
         {
             comment.Author = db.Users.FirstOrDefault(u => u.Id == comment.AuthorId);
+            comment.DateCreated = DateTime.Now;
 
             db.Entry(comment).State = EntityState.Modified;
             db.SaveChanges();
