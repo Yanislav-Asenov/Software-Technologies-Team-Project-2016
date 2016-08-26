@@ -57,7 +57,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserId,Age,City,Interests,MoreInfo,ProfilePic")] Profile profile)
+        public ActionResult Edit([Bind(Include = "Age,City,Interests,MoreInfo,ProfilePic")] Profile profile)
         {
             if (ModelState.IsValid)
             {
