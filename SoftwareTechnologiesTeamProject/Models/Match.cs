@@ -37,7 +37,7 @@
         public Team AwayTeam { get; set; }
 
         [Required]
-        public DateTime? DateTime { get; set; }
+        public DateTime DateTime { get; set; }
 
         public string Result => HomeTeamGoals + " - " + AwayTeamGoals;
 
@@ -154,7 +154,7 @@
             return $"{DateTime:HH:mm}";
         }
 
-        public Team GetOpponentName(string teamName)
+        public Team GetOpponent(string teamName)
         {
             if (teamName == this.HomeTeam.Name)
             {

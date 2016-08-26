@@ -90,7 +90,7 @@
             {
                 <span>You've already voted for this game !</span>
             }
-            else
+            else if(!Model.Match.IsResultUpdated)
             {
                 <span>To vote, click on the mark</span>
             }
@@ -232,7 +232,10 @@
                 {
                     <tr style="background:lightgreen">
                         <td class="standingsInfo">@position</td>
-                        <td class="standingsTeamName">@team.Name</td>
+                        <td class="standingsTeamName">
+                            <img src="@team.LogoLink" width="30" height="30" alt="" />
+                            @team.Name
+                        </td>
                         <td class="standingsInfo">@team.TotalGamesPlayed</td>
                         <td class="standingsInfo">@team.Victories</td>
                         <td class="standingsInfo">@team.Draws</td>
@@ -247,7 +250,10 @@
                 {
                     <tr>
                         <td class="standingsInfo">@position</td>
-                        <td>@team.Name</td>
+                        <td class="standingsTeamName">
+                            <img src="@team.LogoLink" width="30" height="30" alt="" />
+                            @team.Name
+                        </td>
                         <td class="standingsInfo">@team.TotalGamesPlayed</td>
                         <td class="standingsInfo">@team.Victories</td>
                         <td class="standingsInfo">@team.Draws</td>

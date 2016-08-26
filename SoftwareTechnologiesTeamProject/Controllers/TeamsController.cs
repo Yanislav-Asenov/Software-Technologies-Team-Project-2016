@@ -36,14 +36,20 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 .ToList();
 
 
+            var teams = db.Teams
+                .Where(t => t.LeagueId == team.LeagueId)
+                .OrderByDescending(t => t.Points)
+                .ThenByDescending(t => t.GoalsFor - t.GoalsAgainst)
+                .ThenByDescending(t => t.GoalsFor)
+                .ToList();
+
             TeamDetailsViewModel viewModel = new TeamDetailsViewModel
             {
                 Team = team,
                 Matches = matches,
-                LeagueName = db.Leagues.First(l => l.Id == team.LeagueId).Name
+                LeagueName = db.Leagues.First(l => l.Id == team.LeagueId).Name,
+                Standings = teams
             };
-
-            ViewBag.Title = "Details";
 
             return View("Details", viewModel);
         }
@@ -94,13 +100,13 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,City,Coach,Stadium,StadiumCapacity,StadiumWidth,StadiumHeight,LogoLink,LeagueId")] Team team)
+        public ActionResult Edit([Bind(Include = "Id,Name,Victories,Draws,Losses,GoalsFor,GoalsAgainst,Points,City,Coach,Stadium,StadiumCapacity,StadiumWidth,StadiumHeight,LogoLink,LeagueId")] Team team)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(team).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Standings", "Leagues", new { id = team.LeagueId });
             }
             ViewBag.LeagueId = new SelectList(db.Leagues, "Id", "Name", team.LeagueId);
             return View(team);

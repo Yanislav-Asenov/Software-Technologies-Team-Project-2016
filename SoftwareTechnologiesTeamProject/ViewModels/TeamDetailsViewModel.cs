@@ -3,6 +3,7 @@
 namespace SoftwareTechnologiesTeamProject.ViewModels
 {
     using Models;
+    using System.Globalization;
     using System.Linq;
 
     public class TeamDetailsViewModel
@@ -17,6 +18,7 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
 
         public string LeagueName { get; set; }
 
+        public List<Team> Standings { get; set; }
 
         public List<Match> GetPlayedMatches()
         {
@@ -31,6 +33,19 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
         public List<Match> GetAwayPlayedMatches()
         {
             return this.Matches.Where(m => m.AwayTeam.Name == this.Team.Name && m.IsResultUpdated).ToList();
+        }
+
+        public Dictionary<string, Match> GetUpcomingMatches()
+        {
+            var upcomingMatches = new Dictionary<string, Match>();
+
+            foreach (var match in this.Matches.Where(M => M.IsResultUpdated == false))
+            {
+                string date = match.DateTime.ToString("dddd dd MMMM", CultureInfo.InvariantCulture);
+                upcomingMatches.Add(date, match);
+            }
+
+            return upcomingMatches;
         }
 
         public int GetTotalWinsCount()
@@ -70,6 +85,41 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
             }
 
             return teamResultStats.OrderByDescending(s => s.MatchesPlayed).ThenByDescending(s => s.Result).ToList();
+        }
+
+        public Dictionary<int, Team> GetMiniStandings()
+        {
+            var resultTeams = new Dictionary<int, Team>();
+
+            for (int i = 0; i < this.Standings.Count; i++)
+            {
+                var teamName = this.Team.Name;
+                var currentTeam = this.Standings[i];
+
+                if (currentTeam.Name == teamName && i == 0)
+                {
+                    resultTeams.Add(i + 1, this.Standings[i]);
+                    resultTeams.Add(i + 2, this.Standings[i + 1]);
+                    resultTeams.Add(i + 3, this.Standings[i + 2]);
+                    break;
+                }
+                else if (currentTeam.Name == teamName && i == this.Standings.Count - 1)
+                {
+                    resultTeams.Add(i, this.Standings[i - 2]);
+                    resultTeams.Add(i + 1, this.Standings[i - 1]);
+                    resultTeams.Add(i + 2, this.Standings[i]);
+                    break;
+                }
+                else if (currentTeam.Name == teamName)
+                {
+                    resultTeams.Add(i, this.Standings[i - 1]);
+                    resultTeams.Add(i + 1, this.Standings[i]);
+                    resultTeams.Add(i + 2, this.Standings[i + 1]);
+                    break;
+                }
+            }
+
+            return resultTeams;
         }
 
         public string GetWinsInPercents()

@@ -35,7 +35,7 @@
         <tr>
             <td class="standingsInfo">@position</td>
             <td class="standingsTeamName">
-                <img src="@team.LogoLink" width="30" />
+                <img src="@team.LogoLink" width="30" height="30" />
                 <a href="/Teams/Details/@team.Id">@team.Name</a>
             </td>
             <td class="standingsInfo">@team.TotalGamesPlayed</td>
@@ -76,7 +76,7 @@
                 @if (team.NextMatch != null)
                 {
                     <a href="/Matches/Details/@team.NextMatch.Id">
-                        <img src="@team.NextMatch.GetOpponentName(team.Name).LogoLink" width="30"/>
+                        <img src="@team.NextMatch.GetOpponent(team.Name).LogoLink" width="30" height="30"/>
                     </a>
 
                 }
