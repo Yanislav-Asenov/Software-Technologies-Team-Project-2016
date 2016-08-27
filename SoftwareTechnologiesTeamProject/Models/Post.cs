@@ -122,9 +122,6 @@ namespace SoftwareTechnologiesTeamProject.Models
         {
             return $"{Date:H:mm}";
         }
-<<<<<<< HEAD
-       
-=======
 
         public string GetShortTitle()
         {
@@ -140,6 +137,5 @@ namespace SoftwareTechnologiesTeamProject.Models
         {
             return this.Comments.OrderByDescending(c => c.DateCreated).First();
         }
->>>>>>> origin/master
     }
 }
