@@ -49,6 +49,8 @@
 
         public virtual List<Vote> Votes { get; set; } = new List<Vote>();
 
+        public virtual List<Bet> Bets { get; set; } = new List<Bet>();
+
         public int TotalVotesCount => HomeVotesCount + AwayVotesCount + DrawVotesCount;
 
         public int HomeVotesCount { get; set; }

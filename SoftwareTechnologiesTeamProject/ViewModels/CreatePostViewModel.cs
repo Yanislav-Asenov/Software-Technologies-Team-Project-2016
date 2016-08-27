@@ -1,5 +1,6 @@
 ﻿namespace SoftwareTechnologiesTeamProject.ViewModels
 {
+    using Models;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -21,6 +22,7 @@
         [StringLength(100)]
         public string Tags { get; set; }
 
+        public Image Image { get; set; }
         public string[] GetTags()
         {
             return Tags.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries).Distinct().ToArray();

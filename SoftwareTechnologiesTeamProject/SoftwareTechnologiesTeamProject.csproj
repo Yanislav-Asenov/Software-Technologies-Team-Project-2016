@@ -198,6 +198,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\LeaguesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MatchesController.cs" />
@@ -208,10 +209,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608270821520_UploadImage.cs" />
+    <Compile Include="Migrations\201608270821520_UploadImage.Designer.cs">
+      <DependentUpon>201608270821520_UploadImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Bet.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\League.cs" />
     <Compile Include="Models\Match.cs" />
     <Compile Include="Models\Post.cs" />
@@ -441,13 +448,22 @@
     <Content Include="Views\Teams\Details.cshtml" />
     <Content Include="Views\Teams\Edit.cshtml" />
     <Content Include="Views\Teams\Index.cshtml" />
+    <Content Include="Views\Images\Create.cshtml" />
+    <Content Include="Views\Images\Delete.cshtml" />
+    <Content Include="Views\Images\Details.cshtml" />
+    <Content Include="Views\Images\Edit.cshtml" />
+    <Content Include="Views\Images\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201608270821520_UploadImage.resx">
+      <DependentUpon>201608270821520_UploadImage.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
