@@ -9,61 +9,38 @@
 
 <div class="post-info-wrapper">
     <h4>Post</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Title)
-        </dt>
+    <hr/>
 
-        <dd>
-            @Html.DisplayFor(model => model.Post.Title)
-        </dd>
+    <div class="featured_articles_heading">
+        <h2>@Html.DisplayFor(model => model.Post.Title)</h2>
+        <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(model => model.Post.Date)</p>
+       
+        <h3>By <a href="#">@Html.DisplayFor(model => model.Post.Author.FullName)</a></h3>
+</div>
+    <div class="featured_articles_detail">
+        <div class="featured_articles_img">
+            <hr>
+            <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+            <hr>
+        </div>
+        <div class="post-details-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8"> @Html.DisplayFor(model => model.Post.Body)</div>
+                </div>
+            </div>
+            
+            
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Body)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Post.Body)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Post.Date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Author.FullName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Post.Author.FullName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Author.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Post.Author.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Tags)
-        </dt>
-
-        <dd class="tag-container">
+        </div>
+    </div>
+        <div class="tag-container">
 
             @foreach (var tag in Model.Post.Tags)
             {
                 @Html.ActionLink(tag.Name, "Tag", new { id = tag.Id })
             }
-        </dd>
-
-        <dt>
+        </div>
             @if (Model.Post.HasVoted(User.Identity.GetUserId()))
             {
                 <span class="glyphicon glyphicon-heart liked"></span>
@@ -73,12 +50,9 @@
 
                 @Html.ActionLink(" ", "AddLike", new { id = Model.Post.Id }, new { @class = "glyphicon glyphicon-heart" })
             }
-        </dt>
-
-        <dd>
+        
             @Model.Post.VotedUsers.Count
-        </dd>
-    </dl>
+       
 
     <p>
         @if (User.IsInRole("Administrators") || (Model.Post.Author != null && User.Identity.Name == Model.Post.Author.UserName))

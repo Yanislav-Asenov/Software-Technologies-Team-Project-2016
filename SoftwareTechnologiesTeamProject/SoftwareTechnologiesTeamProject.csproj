@@ -259,11 +259,6 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Images\droptableLogo.png" />
     <Content Include="Content\Images\search.png" />
-    <Content Include="Content\Images\Slideshow\beckham.png" />
-    <Content Include="Content\Images\Slideshow\dqdo.png" />
-    <Content Include="Content\Images\Slideshow\stadion.png" />
-    <Content Include="Content\Images\Slideshow\stadion2.png" />
-    <Content Include="Content\Images\Slideshow\topka.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
