@@ -1157,11 +1157,10 @@ td, th {
     display: inline-block
 }
 
-<<<<<<< HEAD
+
 .post-details-content {
-    overflow-wrap: break-word
-=======
+    overflow-wrap: break-word;
+}
 .nav {
     margin-right: 10px;
->>>>>>> origin/master
 }
