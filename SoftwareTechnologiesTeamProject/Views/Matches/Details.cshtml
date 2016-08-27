@@ -230,7 +230,7 @@
                 var team = Model.LeagueTeams[i];
                 if (team.Name == Model.Match.HomeTeam.Name || team.Name == Model.Match.AwayTeam.Name)
                 {
-                    <tr style="background:lightgreen">
+                    <tr class="highlightedTeam">
                         <td class="standingsInfo">@position</td>
                         <td class="standingsTeamName">
                             <img src="@team.LogoLink" width="30" height="30" alt="" />

@@ -64,5 +64,18 @@
             return View(viewModel);
         }
 
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Here you can find how to contact us.";
+
+            return View();
+         }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Here you can find more information about us.";
+
+            return View();
+        }  
     }
 }

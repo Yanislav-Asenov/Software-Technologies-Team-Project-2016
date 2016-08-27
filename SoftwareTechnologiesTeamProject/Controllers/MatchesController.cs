@@ -23,7 +23,11 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 .OrderByDescending(m => m.DateTime)
                 .ToList();
 
-            return View(matches.ToList());
+            var viewModel = new MatchesIndexViewModel();
+
+            viewModel.Matches = matches;
+
+            return View(viewModel);
         }
 
         // GET: Matches/Details/5

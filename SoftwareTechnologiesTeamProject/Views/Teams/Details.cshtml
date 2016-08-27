@@ -12,9 +12,9 @@
     </p>
 }
 
-    <div class="teamDetailsContainer">
+<div class="teamDetailsContainer">
     <div class="leagueNameWrapper">
-        <img src="@Model.Team.LogoLink" alt="clubLogo" width="130" class="teamDetailsLogo"/>
+        <img src="@Model.Team.LogoLink" alt="clubLogo" width="130" class="teamDetailsLogo" />
         <h1>@Model.Team.Name</h1>
         <h2>@Model.LeagueName</h2>
 
@@ -46,7 +46,7 @@
         </table>
     </div>
 
-<div class="playedGamesWrapper">
+    <div class="playedGamesWrapper">
         <table class="table matchHistoryTable">
             <tr>
                 <th class="matchHistoryDate">Date</th>
@@ -210,6 +210,10 @@
             </table>
         </div>
     </div>
+
+    @*
+        Mini Standings
+    *@
     <div class="teamDetailsStandingsFixturesContainer">
         <div class="col-md-2 rightCol">
             <table class="table table-condensed">
@@ -235,7 +239,7 @@
                             <td class="standingsInfo">@position</td>
                             <td class="highlightedTeam standingsTeamName">
                                 <a href="/Teams/Details/@currentTeam.Id" class="teamLink">
-                                    <img src="@currentTeam.LogoLink" alt="Club Logo" width="20" height="20"/> @currentTeam.Name
+                                    <img src="@currentTeam.LogoLink" alt="Club Logo" width="20" height="20" /> @currentTeam.Name
                                 </a>
                             </td>
                             <td class="standingsInfo">@currentTeam.GamesPlayed</td>
@@ -249,7 +253,7 @@
                             <td class="standingsInfo">@position</td>
                             <td class="standingsTeamName">
                                 <a href="/Teams/Details/@currentTeam.Id" class="teamLink">
-                                    <img src="@currentTeam.LogoLink" alt="Club Logo" width="20" height="20"/> @currentTeam.Name
+                                    <img src="@currentTeam.LogoLink" alt="Club Logo" width="20" height="20" /> @currentTeam.Name
                                 </a>
                             </td>
                             <td class="standingsInfo">@currentTeam.GamesPlayed</td>
@@ -263,6 +267,10 @@
                 <a href="/Leagues/Standings/@Model.Team.LeagueId" class="tablesLink">View Full Table</a>
             </div>
         </div>
+
+        @*
+            Team upcoming matches
+        *@
         <div class="col-md-2 leftCol">
             <table class="table table-condensed">
                 <tr>
@@ -302,12 +310,3 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    $(document).ready(function ($) {
-        $(".clickable-row").click(function () {
-            window.document.location = $(this).data("href");
-        });
-    });
-</script>

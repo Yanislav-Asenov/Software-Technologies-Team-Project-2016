@@ -3,24 +3,6 @@
 
 @Styles.Render("~/Content/css")
 
-@{  WebImage photo = null;
-    var newFileName = "";
-    var imagePath = "";
-
-    if (IsPost)
-    {
-        photo = WebImage.GetImageFromRequest();
-        if (photo != null)
-        {
-            newFileName = Guid.NewGuid().ToString() + "_" +
-                Path.GetFileName(photo.FileName);
-            imagePath = @"Images\" + newFileName;
-
-            photo.Save(@"~\" + imagePath);
-        }
-    }
-}
-
 @{
     ViewBag.Title = "Create post";
 }
@@ -74,7 +56,10 @@
         <div class="col-md-8"></div>
     </div>
 }
+<<<<<<< HEAD
+=======
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
+>>>>>>> origin/master
