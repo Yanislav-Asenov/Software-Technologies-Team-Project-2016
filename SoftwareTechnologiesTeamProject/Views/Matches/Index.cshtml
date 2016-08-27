@@ -1,48 +1,99 @@
-﻿@model IEnumerable<SoftwareTechnologiesTeamProject.Models.Match>
+﻿@model SoftwareTechnologiesTeamProject.ViewModels.MatchesIndexViewModel
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-@Html.ActionLink("Create new", "Create")
-<div class="contentContainer">
-    <h1 id="dateHeader">Мачове за @DateTime.Now.ToString("dddd, dd MMMM, yyyy")</h1>
-    <table class="games">
-        <thead class="tableHead">
-        <tr>
-            <th>Time</th>
-            <th class="left">Premier League</th>
-            <th>Result</th>
-            <th>1</th>
-            <th>X</th>
-            <th>2</th>
-        </tr>
-        </thead>
-        <tbody class="tableBody">
-            @foreach (var match in Model)
-            {
-                <tr class="tr0">
-                    <td class="time">@match.GetTime()</td>
-                    <td class="teams">
-                        @Html.ActionLink(match.HomeTeam.Name + " - " + match.AwayTeam.Name, "Details", new { id = match.Id })
-                    </td>
-                    <td>
-                        @if (match.IsResultUpdated)
-                        {
-                            @match.Result
-                        }
+<div class="container">
+    <div class="row">
+        <h2>Index</h2>
+        @Html.ActionLink("Create new", "Create")
 
+        <h1 id="dateHeader">Fixtures</h1>
+
+        @foreach (var kvp in Model.GetUpcomingMatches())
+        {
+            <table class="table upcomingMatchesTable table-condensed">
+                <thead>
+                    <tr class="upcomingMatchesTableHead">
+                        <th colspan="3">@kvp.Key</th>
+                        <th class="upcomingMatchCoef">1</th>
+                        <th class="upcomingMatchCoef">X</th>
+                        <th class="upcomingMatchCoef">2</th>
                         @if (User.IsInRole("Administrator"))
                         {
-                            @Html.ActionLink("Update result", "UpdateResult", new { id = match.Id })
+                            <th class="adminActionsSmall"></th>
+                            <th class="adminActionsSmall"></th>
+                            <th class="adminActionsLarge"></th>
                         }
-                    </td>
-                    <td>@match.HomeCoefficient</td>
-                    <td>@match.DrawCoefficient</td>
-                    <td>@match.AwayCoefficient</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var match in kvp.Value)
+                    {
+                        <tr class="singleUpcomingMatch" id="match-info-@match.Id" onmouseover="changeTimeBackground(@match.Id)" onmouseout="resetTimeBackground(@match.Id)">
+                            <td class="text-right upcomingMatchTeamName">
+                                <a href="/Matches/Details/@match.Id" class="matchLink">
+                                    @match.HomeTeam.Name <img src="@match.HomeTeam.LogoLink" alt="Logo" class="logo" />
+                                </a>
+                            </td>
+                            <td class="upcomingMatchesSmallCell time" id="time-@match.Id">
+                                <a href="/Matches/Details/@match.Id" class="matchLink">
+                                    @if (match.IsResultUpdated)
+                                    {
+                                        @match.Result
+                                    }
+                                    else
+                                    {
+                                        @match.GetTime()
+                                    }
+                                </a>
+                            </td>
+                            <td class="text-left upcomingMatchTeamName">
+                                <a href="/Matches/Details/@match.Id" class="matchLink">
+                                    <img src="@match.AwayTeam.LogoLink" alt="Logo" class="logo" /> @match.AwayTeam.Name
+                                </a>
+                            </td>
+                            <td class="upcomingMatchCoef">
+                                <a href="/Matches/Details/@match.Id" class="matchLink">@match.HomeCoefficient</a>
+                            </td>
+                            <td class="upcomingMatchCoef">
+                                <a href="/Matches/Details/@match.Id" class="matchLink">@match.DrawCoefficient</a>
+                            </td>
+                            <td class="upcomingMatchCoef">
+                                <a href="/Matches/Details/@match.Id" class="matchLink">@match.AwayCoefficient</a>
+                            </td>
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <td class="adminActionsSmall">
+                                    <a href="/Matches/Delete/@match.Id" class="matchLink">Delete</a>
+                                </td>
+                                <td class="adminActionsSmall">
+                                    <a href="/Matches/Edit/@match.Id" class="matchLink">Edit</a>
+                                </td>
+                                <td class="adminActionsLarge">
+                                    @Html.ActionLink("Update result", "UpdateResult", new { id = match.Id })
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    </div>
 </div>
+
+<script>
+    function changeTimeBackground(rowId) {
+        let cell = $('#time-' + rowId);
+
+        cell.addClass('hover').children().css('color', 'darkgreen');
+    }
+
+    function resetTimeBackground(rowId) {
+        let cell = $('#time-' + rowId);
+
+        cell.removeClass('hover').children().css('color', 'black');;
+    }
+</script>

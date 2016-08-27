@@ -19,14 +19,18 @@ body {
 }
 
 .footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  background-color: #efefef;
-  text-align: center;
-  height: 2%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    text-align: center;
+    height: 30px;
+    width: 60%;
+    margin-left: 20%;
+    background: green;
+    color: white;
+    border-radius: 5px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -851,14 +855,14 @@ thead {
 .dropTableLogo {
     height: 100px;
     width: 200px;
-    }
+}
+
 
 .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
       width: 100%;
       margin: auto;
   }
-
 
 
 /*  Team deitals view styles */
@@ -901,6 +905,10 @@ thead {
 
 .text-right {
     padding: 5px;
+}
+
+.text-center {
+    text-align: center;
 }
 
 td, th {
@@ -954,16 +962,16 @@ td, th {
 }
 
 .highlightedTeam {
-    background:rgb(19, 210, 19);
-    color: white;
+    background:#90ee90;
+    color: black;
 }
 
 .highlightedTeam > a {
-    color: white;
+    color: black;
 }
 
 .highlightedTeam > a:hover {
-    color: white;
+    color: black;
 }
 
 
@@ -1039,4 +1047,107 @@ td, th {
 .singleUpcomingMatch > td > a:focus {
     display: block;
     text-decoration: none;
+}
+
+
+.upcomingMatchInfo {
+    display: block;
+    margin: 10px 0 10px 0;
+    border: red solid;
+    height: 50px;
+    padding: 0px;
+}
+
+.upcomingMatchInfo > a {
+    font-size: 15px;
+    padding: 5px;
+}
+
+.upcomingMatchInfo > a:hover {
+     width: 100%;
+    border: green solid;
+    background: darkviolet;
+    color: white;
+}
+
+
+.upcomingMatchInfo > a > * {
+    display: inline-block;
+    font-size: 15px;
+}
+
+.upcomingMatchHomeTeam {
+    width: 20%;
+    text-align: right;
+    margin-left: 10%;
+}
+
+.upcomingMatchAwayTeam {
+    width: 20%;
+    text-align: left;
+}
+
+.upcomingMatchesDate {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.bet {
+    display: inline-block;
+}
+
+.upcomingMatchesTableHead {
+    background: green;
+    color: white;
+}
+
+.upcomingMatchesTable {
+    margin-bottom: 50px;
+}
+
+.upcomingMatchesTable > tbody > tr > td {
+    line-height: 1.5em;
+}
+
+.logo {
+    width: 25px;
+    height: 25px;
+}
+
+.time {
+    background: rgb(226, 224, 224);
+    width: 50px;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.upcomingMatchTeamName {
+    font-weight: bold;
+    width: 250px;
+}
+
+.adminActionsSmall {
+    width: 40px;
+    text-align: right;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.adminActionsLarge {
+    width: 100px;
+    text-align: right;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.upcomingMatchCoef {
+    width: 50px;
+    text-align: center;
+}
+
+
+.hover {
+    background: white;
+    color: darkgreen;
 }
