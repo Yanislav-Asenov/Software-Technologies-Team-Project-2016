@@ -171,7 +171,7 @@
                 db.SaveChanges();
 
                 this.AddNotification("Post created successfully.", NotificationType.SUCCESS);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = post.Id });
             }
 
             this.AddNotification("Error while creating the post.", NotificationType.ERROR);

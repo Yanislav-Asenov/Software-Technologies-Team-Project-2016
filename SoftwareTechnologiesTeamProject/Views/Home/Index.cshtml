@@ -4,6 +4,41 @@
 @{
     ViewBag.Title = "Home Page";
 }
+<div class="row">
+    <div class="col-md-12">
+        @if (Model.HomePageImagePath != null)
+        {
+            <div class="container"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <img class="img-responsive" src="~/Content/Images/HomePage/@Model.HomePageImagePath" alt="Bar"/>
+                </div>
+            </div>
+
+        }
+
+    </div>
+</div>
+@if (User.IsInRole("Administrator"))
+{
+    using (Html.BeginForm("AddHomePageImage", "Images", null, FormMethod.Post,
+                                                          new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <div class="editor-label">
+                @Html.Label("Change image")
+            </div>
+            <div class="editor-field">
+                <input id="ImagePath" title="Upload a product image"
+                       type="file" name="file" />
+            </div>
+            <p><input type="submit" value="Change" /></p>
+        </fieldset>
+    }
+}
+<hr />
 
 <div id="post-9" class="post-9 post type-post status-publish format-standard has-post-thumbnail hentry category-fashion tag-5 tag-6 tag-popular">
     <div class="container">

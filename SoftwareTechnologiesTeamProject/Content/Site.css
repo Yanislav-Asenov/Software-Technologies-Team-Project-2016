@@ -1040,3 +1040,7 @@ td, th {
     display: block;
     text-decoration: none;
 }
+
+.postButtons {
+    display: inline-block
+}

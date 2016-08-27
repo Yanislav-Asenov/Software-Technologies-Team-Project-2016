@@ -8,6 +8,8 @@
     using System.Web.Mvc;
     using ViewModels;
 
+
+
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -51,6 +53,14 @@
 
             viewModel.PopularTags = db.Tags.OrderByDescending(t => t.Posts.Count).Take(10).ToList();
 
+            if (db.Images.Any())
+            {
+                viewModel.HomePageImagePath = db.Images
+                .Where(i => i.ImagePath.Contains("homepage"))
+                .OrderByDescending(i => i.UploadedDate)
+                .First()
+                .ImagePath;
+            }
             return View(viewModel);
         }
 
