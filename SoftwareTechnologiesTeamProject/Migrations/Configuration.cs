@@ -95,9 +95,60 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                     date: new DateTime(2016, 06, 30, 17, 36, 52),
                     authorUsername: "merry@gmail.com"
                 );
-
                 context.SaveChanges();
             }
+
+            if (!context.TeamMembers.Any())
+            {
+                CreateProjectTeamMemberRoles(context);
+                CreateProjectTeamMembers(context);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateProjectTeamMemberRoles(ApplicationDbContext context)
+        {
+            context.TeamMemberRoles.Add(TeamMemberRole.Designer);
+            context.TeamMemberRoles.Add(TeamMemberRole.Developer);
+        }
+
+        private void CreateProjectTeamMembers(ApplicationDbContext context)
+        {
+            var teamMember1 = new TeamMember
+            {
+                Name = "Боби Животното",
+                Role = TeamMemberRole.Developer,
+                Info = "Програмира от 9 години, много е добър.",
+                Image = new Image { ImagePath = "/Content/Images/1148850_648131101864921_2053131244_n.jpg" } 
+            };
+             
+            var teamMember2 = new TeamMember
+            {
+                Name = "Яни Животното",
+                Role = TeamMemberRole.Developer,
+                Info = "Програмира от както ходи, Наков пасти да яде. Като малък е искал да стане зидар, \n\r но след серия неуспешни опити се е насочил към програмирането.",
+                Image = new Image { ImagePath = "/Content/Images/10419971_920034744705734_1313142506640151966_n.jpg" }
+            };
+
+            var teamMember3 = new TeamMember
+            {
+                Name = "Петьо Животното",
+                Role = TeamMemberRole.Designer,
+                Info = "Работил е за гуугъл още преди да съществуват.",
+                Image = new Image { ImagePath = "/Content/Images/11666030_10200580448391070_6748796253436057290_n.jpg" }
+            };
+
+            var teamMember4 = new TeamMember
+            {
+                Name = "Адриан Животното",
+                Role = TeamMemberRole.Designer,
+                Info = "Правил е дизайна на змията за Nokia 3310.",
+                Image = new Image { ImagePath = "/Content/Images/10452379_10203768193393008_793925269277997445_n.jpg" }
+            };
+            context.TeamMembers.Add(teamMember1);
+            context.TeamMembers.Add(teamMember2);
+            context.TeamMembers.Add(teamMember3);
+            context.TeamMembers.Add(teamMember4);
         }
 
         private void CreateUser(ApplicationDbContext context,

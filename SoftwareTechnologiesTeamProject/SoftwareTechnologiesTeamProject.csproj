@@ -196,7 +196,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContractsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\LeaguesController.cs" />
@@ -217,6 +219,8 @@
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\League.cs" />
     <Compile Include="Models\Match.cs" />
+    <Compile Include="Models\TeamMemberRole.cs" />
+    <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Tag.cs" />
@@ -234,6 +238,7 @@
     <Compile Include="ViewModels\FactorViewModel.cs" />
     <Compile Include="ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="ViewModels\ForgotViewModel.cs" />
+    <Compile Include="ViewModels\AboutUsViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\IndexViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -448,8 +453,8 @@
     <Content Include="Views\Images\Details.cshtml" />
     <Content Include="Views\Images\Edit.cshtml" />
     <Content Include="Views\Images\Index.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Contacts\Index.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
