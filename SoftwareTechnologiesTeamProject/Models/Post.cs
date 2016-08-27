@@ -1,4 +1,7 @@
-﻿namespace SoftwareTechnologiesTeamProject.Models
+﻿using System.IO;
+using System.Web.UI.WebControls;
+
+namespace SoftwareTechnologiesTeamProject.Models
 {
     using System;
     using System.Collections.Generic;
@@ -119,5 +122,6 @@
         {
             return $"{Date:H:mm}";
         }
+       
     }
 }

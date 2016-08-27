@@ -203,7 +203,7 @@
     <Compile Include="Controllers\MatchesController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\ProfilesController.cs" />
-    <Compile Include="Controllers\TeamsController.cs" />
+    <Compile Include="Extensions\TeamsController.cs" />
     <Compile Include="Extensions\NotificationExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

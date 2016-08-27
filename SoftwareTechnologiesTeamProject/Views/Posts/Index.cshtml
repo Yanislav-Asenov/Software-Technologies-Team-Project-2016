@@ -1,4 +1,6 @@
 ﻿@using SoftwareTechnologiesTeamProject.Models
+@using System.IO;
+@using System.Collections.Generic;
 @model IEnumerable<SoftwareTechnologiesTeamProject.Models.Post>
 
 @{
@@ -9,7 +11,8 @@
 
 <div class="col-md-8">
     @Html.ActionLink("Create new", "Create")
-     @foreach (var item in Model.OrderByDescending(p => p.Date))
+    
+    @foreach (var item in Model.OrderByDescending(p => p.Date))
      {
 
          <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
