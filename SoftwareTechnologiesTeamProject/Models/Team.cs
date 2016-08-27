@@ -36,7 +36,7 @@
         public int Points { get; set; }
 
         [NotMapped]
-        public int TotalGoals => this.GoalsFor + this.GoalsAgainst;
+        public int GamesPlayed => this.GoalsFor + this.GoalsAgainst;
 
         [Required]
         [StringLength(100)]
@@ -119,7 +119,7 @@
 
         public string GetAverageGoalsPerGame()
         {
-            double averageGoals = this.TotalGoals / (double)this.TotalGamesPlayed;
+            double averageGoals = this.GamesPlayed / (double)this.TotalGamesPlayed;
 
             return $"{averageGoals:F2}";
         }

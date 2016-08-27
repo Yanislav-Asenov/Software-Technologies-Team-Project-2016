@@ -37,7 +37,7 @@
         public Team AwayTeam { get; set; }
 
         [Required]
-        public DateTime? DateTime { get; set; }
+        public DateTime DateTime { get; set; }
 
         public string Result => HomeTeamGoals + " - " + AwayTeamGoals;
 
@@ -48,6 +48,8 @@
         public bool IsResultUpdated { get; set; }
 
         public virtual List<Vote> Votes { get; set; } = new List<Vote>();
+
+        public virtual List<Bet> Bets { get; set; } = new List<Bet>();
 
         public int TotalVotesCount => HomeVotesCount + AwayVotesCount + DrawVotesCount;
 
@@ -63,7 +65,7 @@
 
         public string AwayCoefficient { get; set; }
 
-        public string GetWinningSide()
+        public string GetWinnerSide()
         {
             if (HomeTeamGoals > AwayTeamGoals)
             {
@@ -154,7 +156,7 @@
             return $"{DateTime:HH:mm}";
         }
 
-        public Team GetOpponentName(string teamName)
+        public Team GetOpponent(string teamName)
         {
             if (teamName == this.HomeTeam.Name)
             {

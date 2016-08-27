@@ -1,4 +1,5 @@
-﻿@model SoftwareTechnologiesTeamProject.ViewModels.TeamDetailsViewModel
+﻿@using System.Globalization
+@model SoftwareTechnologiesTeamProject.ViewModels.TeamDetailsViewModel
 @{
     ViewBag.Title = "Details";
 }
@@ -11,16 +12,16 @@
     </p>
 }
 
-<div class="teamDetailsContainer">
+    <div class="teamDetailsContainer">
     <div class="leagueNameWrapper">
-        <img src="@Model.Team.LogoLink" alt="clubLogo" width="130" />
+        <img src="@Model.Team.LogoLink" alt="clubLogo" width="130" class="teamDetailsLogo"/>
         <h1>@Model.Team.Name</h1>
         <h2>@Model.LeagueName</h2>
 
 
         <table class="table-condensed teamInfoTable">
             <tr>
-                <th class="text-center">Team info</th>
+                <th class="text-center" colspan="2">Team info</th>
             </tr>
             <tr>
                 <td class="text-right">@Html.LabelFor(model => model.Team.City):</td>
@@ -36,7 +37,7 @@
             </tr>
             <tr>
                 <td class="text-right">@Html.LabelFor(model => model.Team.StadiumCapacity):</td>
-                <td class="text-left">@Model.Team.StadiumCapacity</td>
+                <td class="text-left">@Model.Team.StadiumCapacity.ToString("#,#", CultureInfo.InvariantCulture)</td>
             </tr>
             <tr>
                 <td class="boldInfo text-right">Stadium size:</td>
@@ -45,7 +46,7 @@
         </table>
     </div>
 
-    <div class="playedGamesWrapper">
+<div class="playedGamesWrapper">
         <table class="table matchHistoryTable">
             <tr>
                 <th class="matchHistoryDate">Date</th>
@@ -143,7 +144,7 @@
             <table class="table-bordered teamStatsTable">
                 <tr>
                     <td class="text-left boldInfo">Goals</td>
-                    <td class="text-right">@Model.Team.TotalGoals</td>
+                    <td class="text-right">@Model.Team.GamesPlayed</td>
                 </tr>
                 <tr>
                     <td class="text-left boldInfo">Average per game</td>
@@ -185,9 +186,7 @@
             @* The most common results *@
             <table class="table-bordered teamStatsTable resultsInfo">
                 <tr>
-                    <th class="tableHeading">The most</th>
-                    <th class="tableHeading">common</th>
-                    <th class="tableHeading">results</th>
+                    <th class="tableHeading" colspan="3">The most common results</th>
                 </tr>
                 <tr>
                     <td>Result</td>
@@ -211,4 +210,104 @@
             </table>
         </div>
     </div>
+    <div class="teamDetailsStandingsFixturesContainer">
+        <div class="col-md-2 rightCol">
+            <table class="table table-condensed">
+                <tr>
+                    <th colspan="5">@Model.LeagueName</th>
+                </tr>
+                <tr>
+                    <th class="standingsInfo">Position</th>
+                    <th class="standingsTeamName">Team</th>
+                    <th class="standingsInfo" title="Played">Pl</th>
+                    <th class="standingsInfo" title="Goal Difference">GD</th>
+                    <th class="standingsInfo" title="Points">Pts</th>
+                </tr>
+
+                @foreach (var keyValuePair in Model.GetMiniStandings())
+                {
+                    int position = keyValuePair.Key;
+                    var currentTeam = keyValuePair.Value;
+
+                    if (keyValuePair.Value.Name == Model.Team.Name)
+                    {
+                        <tr class="highlightedTeam">
+                            <td class="standingsInfo">@position</td>
+                            <td class="highlightedTeam standingsTeamName">
+                                <a href="/Teams/Details/@currentTeam.Id" class="teamLink">
+                                    <img src="@currentTeam.LogoLink" alt="Club Logo" width="20" height="20"/> @currentTeam.Name
+                                </a>
+                            </td>
+                            <td class="standingsInfo">@currentTeam.GamesPlayed</td>
+                            <td class="standingsInfo">@currentTeam.GetGoalDifference()</td>
+                            <td class="standingsInfo">@currentTeam.Points</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td class="standingsInfo">@position</td>
+                            <td class="standingsTeamName">
+                                <a href="/Teams/Details/@currentTeam.Id" class="teamLink">
+                                    <img src="@currentTeam.LogoLink" alt="Club Logo" width="20" height="20"/> @currentTeam.Name
+                                </a>
+                            </td>
+                            <td class="standingsInfo">@currentTeam.GamesPlayed</td>
+                            <td class="standingsInfo">@currentTeam.GetGoalDifference()</td>
+                            <td class="standingsInfo">@currentTeam.Points</td>
+                        </tr>
+                    }
+                }
+            </table>
+            <div class="tablesLinkContainer">
+                <a href="/Leagues/Standings/@Model.Team.LeagueId" class="tablesLink">View Full Table</a>
+            </div>
+        </div>
+        <div class="col-md-2 leftCol">
+            <table class="table table-condensed">
+                <tr>
+                    <th colspan="4">Fixtures</th>
+                </tr>
+                @foreach (var kvp in Model.GetUpcomingMatches())
+                {
+                    var date = kvp.Key;
+                    var match = kvp.Value;
+                    <tr class="singleUpcomingMatch">
+                        <td>
+                            <a href="/Matches/Details/@match.Id" class="matchLink">
+                                @match.GetDate()
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/Matches/Details/@match.Id" class="matchLink text-right">
+                                @match.HomeTeam.Name <img src="@match.HomeTeam.LogoLink" width="20" height="20" alt="Club logo" />
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/Matches/Details/@match.Id" class="matchLink">
+                                @match.GetTime()
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/Matches/Details/@match.Id" class="matchLink text-left">
+                                <img src="@match.AwayTeam.LogoLink" width="20" height="20" alt="Club logo" /> @match.AwayTeam.Name
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="tablesLinkContainer">
+                <a href="/Matches/Index" class="tablesLink">View All Fixtures</a>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<script>
+    $(document).ready(function ($) {
+        $(".clickable-row").click(function () {
+            window.document.location = $(this).data("href");
+        });
+    });
+</script>

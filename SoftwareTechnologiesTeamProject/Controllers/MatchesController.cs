@@ -75,6 +75,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             return View(viewModel);
         }
 
+        [Authorize]
         public ActionResult AddVote(int? id, string voteType)
         {
             if (id == null)
@@ -112,7 +113,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             return RedirectToAction("Details", new { id = match.Id });
         }
 
-
+        [Authorize(Roles = "Administrator")]
         public ActionResult UpdateResult(int? id)
         {
             Match match = db.Matches
@@ -124,6 +125,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public ActionResult UpdateResult([Bind(Include = "Id,HomeTeamGoals,AwayTeamGoals,HomeTeamId,AwayTeamId")]Match match)
         {
             var currentMatch = db.Matches
@@ -139,7 +141,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
 
             currentMatch.HomeTeamGoals = match.HomeTeamGoals;
             currentMatch.AwayTeamGoals = match.AwayTeamGoals;
-            string winner = currentMatch.GetWinningSide();
+            string winner = currentMatch.GetWinnerSide();
 
             currentMatch.UpdateTeams(winner);
             currentMatch.IsResultUpdated = true;
@@ -161,6 +163,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         }
 
         // GET: Matches/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             ViewBag.AwayTeamId = new SelectList(db.Teams, "Id", "Name");
@@ -174,6 +177,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create([Bind(Include = "Id,LeagueId,HomeTeamId,AwayTeamId,DateTime,HomeCoefficient,DrawCoefficient,AwayCoefficient")] Match match)
         {
             if (ModelState.IsValid)
@@ -182,12 +186,6 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 match.AwayTeam = db.Teams.Find(match.AwayTeamId);
                 match.League = db.Leagues.Find(match.LeagueId);
                 match.LeagueName = db.Leagues.Find(match.LeagueId).Name;
-
-                //Add this match to home/away teams match history
-                //var homeTeam = db.Teams.Find(match.HomeTeamId);
-                //homeTeam.Matches.Add(match);
-                //var awayTeam = db.Teams.Find(match.AwayTeamId);
-                //awayTeam.Matches.Add(match);
 
                 db.Matches.Add(match);
                 db.SaveChanges();
@@ -201,6 +199,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         }
 
         // GET: Matches/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -213,7 +212,6 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 return HttpNotFound();
             }
 
-
             ViewBag.AwayTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
             ViewBag.HomeTeamId = new SelectList(db.Teams, "Id", "Name", match.HomeTeamId);
             ViewBag.LeagueId = new SelectList(db.Leagues, "Id", "Name", match.LeagueId);
@@ -225,6 +223,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit([Bind(Include = "Id,LeagueId,HomeTeamId,AwayTeamId,DateTime,Result,HomeTeamGoals,AwayTeamGoals,TotalVotesCount,HomeVotesCount,DrawVotesCount,AwayVotesCount,HomeCoefficient,DrawCoefficient,AwayCoefficient")] Match match)
         {
             if (ModelState.IsValid)
@@ -240,6 +239,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         }
 
         // GET: Matches/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -257,6 +257,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         // POST: Matches/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
             Match match = db.Matches.Find(id);

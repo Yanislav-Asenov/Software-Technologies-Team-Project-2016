@@ -5,7 +5,6 @@ using System.Web.Mvc;
 
 namespace SoftwareTechnologiesTeamProject.Controllers
 {
-    using Extensions;
     using System.Linq;
     using ViewModels;
 
@@ -88,35 +87,6 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             return View(league);
         }
 
-        [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
-        public ActionResult AddTeam([Bind(Include = "LeagueId,NewTeam")]StandingsViewModel teamInfo)
-        {
-            if (teamInfo.NewTeam.Name == null)
-            {
-                return HttpNotFound();
-            }
-
-            var league = db.Leagues.Find(teamInfo.LeagueId);
-
-            if (league.Teams.FirstOrDefault(t => t.Name == teamInfo.NewTeam.Name) != null)
-            {
-                this.AddNotification("Team already exists.", NotificationType.ERROR);
-                return RedirectToAction("Standings", new { id = league.Id, leagueName = league.Name });
-            }
-
-            var newTeam = teamInfo.NewTeam;
-            newTeam.League = league;
-            newTeam.LeagueId = league.Id;
-
-            league.Teams.Add(newTeam);
-            db.Teams.Add(newTeam);
-            db.SaveChanges();
-
-            return RedirectToAction("Standings", new { id = league.Id });
-        }
 
         // GET: Leagues/Delete/5
         public ActionResult Delete(int? id)
