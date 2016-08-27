@@ -43,6 +43,6 @@
 
         public DbSet<Image> Images { get; set; }
 
-        public DbSet<Bet> Bets { get; set; }
+        //public DbSet<Bet> Bets { get; set; }
     }
 }

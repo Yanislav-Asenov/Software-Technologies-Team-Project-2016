@@ -1,4 +1,5 @@
-﻿using SoftwareTechnologiesTeamProject.Models;
+﻿using System;
+using SoftwareTechnologiesTeamProject.Models;
 using System.Web;
 using System.Web.Mvc;
 
@@ -16,23 +17,27 @@ namespace SoftwareTechnologiesTeamProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(HttpPostedFileBase file)
+        public ActionResult AddHomePageImage(HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
                 Image img = new Image();
 
+                string homePageImgName = "homepage"+file.FileName;
+
                 if (file != null)
                 {
-                    file.SaveAs(HttpContext.Server.MapPath("~/Content/Images/")
-                                                          + file.FileName);
-                    img.ImagePath = file.FileName;
+                    file.SaveAs(HttpContext.Server.MapPath("~/Content/Images/HomePage/")
+                                                          + homePageImgName);
+                    img.ImagePath = homePageImgName;
                 }
+                img.UploadedDate = DateTime.Now;
+
                 db.Images.Add(img);
                 db.SaveChanges();
-                return View("Index", img);
+                return RedirectToAction("Index", "Home");
             }
-            return View();
+            return View("Index");
         }
         protected override void Dispose(bool disposing)
         {

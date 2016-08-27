@@ -37,6 +37,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         }
 
         // GET: Profiles/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -56,6 +57,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,UserId,Age,City,Interests,MoreInfo,FullName,ProfilePic")] Profile profile)
         {
@@ -63,6 +65,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 
                 db.Entry(profile).State = EntityState.Modified;
+                db.Entry(profile).Property(ui => ui.UserId).IsModified = false;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -71,6 +74,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         }
 
         // GET: Profiles/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -88,6 +92,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         // POST: Profiles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
             Profile profile = db.Profile.Find(id);

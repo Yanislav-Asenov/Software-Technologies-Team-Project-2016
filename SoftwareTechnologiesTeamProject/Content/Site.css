@@ -1050,6 +1050,7 @@ td, th {
 }
 
 
+
 .upcomingMatchInfo {
     display: block;
     margin: 10px 0 10px 0;
@@ -1150,4 +1151,12 @@ td, th {
 .hover {
     background: white;
     color: darkgreen;
+}
+
+.postButtons {
+    display: inline-block
+}
+
+.nav {
+    margin-right: 10px;
 }

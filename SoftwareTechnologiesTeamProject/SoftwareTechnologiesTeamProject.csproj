@@ -257,6 +257,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Images\10419971_920034744705734_1313142506640151966_n.jpg" />
+    <Content Include="Content\Images\10452379_10203768193393008_793925269277997445_n.jpg" />
+    <Content Include="Content\Images\1148850_648131101864921_2053131244_n.jpg" />
+    <Content Include="Content\Images\11666030_10200580448391070_6748796253436057290_n.jpg" />
     <Content Include="Content\Images\droptableLogo.png" />
     <Content Include="Content\Images\search.png" />
     <Content Include="Content\Images\Slideshow\beckham.png" />
@@ -449,9 +453,12 @@
     <Content Include="Views\Images\Details.cshtml" />
     <Content Include="Views\Images\Edit.cshtml" />
     <Content Include="Views\Images\Index.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\HomePage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
