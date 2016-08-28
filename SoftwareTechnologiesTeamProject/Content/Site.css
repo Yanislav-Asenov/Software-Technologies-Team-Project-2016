@@ -20,17 +20,15 @@ body {
 
 .footer {
     position: absolute;
-    right: 0;
     bottom: 0;
-    left: 0;
+    right: 365px;
     padding: 1rem;
     text-align: center;
     height: 30px;
-    width: 60%;
-    margin-left: 20%;
+    width: 1138px;
     background: green;
     color: white;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -891,12 +889,12 @@ thead {
 }
 
 .playedGamesWrapper {
-    margin-top: 15%;
+    margin-top: 0%;
 }
 
 .teamStatsTable {
     padding: 0;
-    margin: 50px 127px 50px 0;
+    margin: 30px 0 30px 0;
 }
 
 .text-left {
@@ -942,18 +940,16 @@ td, th {
 }
 
 .col-md-2.leftCol, .col-md-2.rightCol {
-    width: 45%;
     height: 200px;
-    padding: 0;
     font-size: 12px;
 }
 
 .col-md-2.rightCol {
-    margin-right: 5%;
+    margin-right: 0%;
 }
 
 .col-md-2.leftCol {
-    margin-left: 5%;
+    margin-left: 3.5%;
 }
 
 .teamLink {
@@ -975,8 +971,7 @@ td, th {
 }
 
 
-.col-md-2 > div > a {
-    position: absolute;
+.col-md-6 > div > a {
     width: 100%;
     height: 40px;
     text-align: center;
@@ -989,7 +984,7 @@ td, th {
     float: right;
 }
 
-.col-md-2 > div > a:hover {
+.col-md-6 > div > a:hover {
     width: 100%;
     height: 40px;
     text-align: center;
@@ -1001,7 +996,7 @@ td, th {
     float: right;
 }
 
-.col-md-2 > div > a:focus {
+.col-md-6 > div > a:focus {
     width: 100%;
     height: 40px;
     text-align: center;
@@ -1180,7 +1175,6 @@ td, th {
     overflow-wrap: break-word;
 }
 .nav {
-<<<<<<< HEAD
     margin-right: 10px;
 }
 
@@ -1213,11 +1207,21 @@ input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
 .uneditable-input:focus {   
-  border-color: green;
-  box-shadow: none;
+    border-color: green;
+    box-shadow: none;
     border: solid 2px;
-  outline: 0 none;
-=======
+    outline: 0 none;
     margin-right: 9px;
->>>>>>> origin/master
+
+}
+
+
+.teamDetailsTeamNameHeading {
+    text-align: center;
+    color: darkgreen;
+    font-weight: bold;
+}
+
+.col-md-3 {
+    margin: 40px 0 40px 0;
 }

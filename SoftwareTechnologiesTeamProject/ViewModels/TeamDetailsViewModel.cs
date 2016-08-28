@@ -16,7 +16,7 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
 
         public List<Match> AwayGames { get; set; }
 
-        public string LeagueName { get; set; }
+        public League League { get; set; }
 
         public List<Team> Standings { get; set; }
 
