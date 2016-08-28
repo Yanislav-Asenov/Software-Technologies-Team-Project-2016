@@ -1175,7 +1175,12 @@ td, th {
     display: inline-block
 }
 
+
+.post-details-content {
+    overflow-wrap: break-word;
+}
 .nav {
+<<<<<<< HEAD
     margin-right: 10px;
 }
 
@@ -1212,4 +1217,7 @@ input[type="color"]:focus,
   box-shadow: none;
     border: solid 2px;
   outline: 0 none;
+=======
+    margin-right: 9px;
+>>>>>>> origin/master
 }

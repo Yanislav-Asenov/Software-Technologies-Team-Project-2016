@@ -55,27 +55,17 @@
 
             if (db.Images.Any())
             {
-                viewModel.HomePageImagePath = db.Images
+                var homePageImage = db.Images
                 .Where(i => i.ImagePath.Contains("homepage"))
                 .OrderByDescending(i => i.UploadedDate)
-                .First()
-                .ImagePath;
+                .FirstOrDefault();
+
+                if (homePageImage != null)
+                {
+                    viewModel.HomePageImagePath = homePageImage.ImagePath;
+                }
             }
             return View(viewModel);
         }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Here you can find how to contact us.";
-
-            return View();
-         }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Here you can find more information about us.";
-
-            return View();
-        }  
     }
 }

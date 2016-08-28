@@ -46,14 +46,14 @@
             <div class="col-md-8">
                 @foreach (var post in Model.FeaturedPosts)
                 {
-                    <div class="featured_articles_heading">
+                    <div class="post-details-conten">
                         <h3> <a href="/Posts/Details/@post.Id">@post.Title</a></h3>
                     </div>
                     <div class="featured_articles_detail">
                         <div class="featured_articles_img">
                             iMAGE
                         </div>
-                        <div class="featured_articles_text">
+                        <div class="post-details-content">
                             @post.Body
                         </div>
                     </div>

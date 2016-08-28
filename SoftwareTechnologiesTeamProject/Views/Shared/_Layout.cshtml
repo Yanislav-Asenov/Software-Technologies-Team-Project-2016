@@ -11,13 +11,12 @@
     
 </head>
 <body>
-
-    <header>
+    <div>
         <div class="container">
             <div class="row">
                 <div class="header_top">
                     <div class="col-md-8">
-                        <div class="logo">
+                        <div class="dropTableLogo">
                             <a href="@Url.Action("Index", "Home")" title="List View" class="links">
 
                                 <img class="dropTableLogo" alt="Droptable" src="~/Content/Images/droptableLogo.png">
@@ -44,8 +43,8 @@
                                 <li>@Html.ActionLink("Leagues", "Index", "Leagues")</li>
                                 <li>@Html.ActionLink("Fixtures", "Index", "Matches")</li>
                                 <li>@Html.ActionLink("Profile", "Index", "Profiles")</li>
-                                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                                <li>@Html.ActionLink("About Us", "About", "Home")</li>
+                                <li>@Html.ActionLink("Contacts", "Index", "Contacts")</li>
+                                <li>@Html.ActionLink("About Us", "Index", "About")</li>
                             </ul>
                             @Html.Partial("_LoginPartial")
                         </div>
@@ -53,7 +52,7 @@
                 </div>
             </div>
         </div>
-    </header>
+    </div>
 
 
     @Html.Partial("_Notifications")
