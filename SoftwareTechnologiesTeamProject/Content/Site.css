@@ -1175,7 +1175,7 @@ td, th {
     overflow-wrap: break-word;
 }
 .nav {
-    margin-right: 10px;
+    margin-right: 0px;
 }
 
 .form-control:focus {
