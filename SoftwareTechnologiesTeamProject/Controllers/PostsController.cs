@@ -1,4 +1,7 @@
-﻿namespace SoftwareTechnologiesTeamProject.Controllers
+﻿using System.Security.Cryptography.X509Certificates;
+using System.Web;
+
+namespace SoftwareTechnologiesTeamProject.Controllers
 {
     using Extensions;
     using Microsoft.AspNet.Identity;
@@ -98,7 +101,7 @@
                 author.Comments.Add(newComment);
                 db.Comments.Add(newComment);
                 db.SaveChanges();
-
+                
                 return RedirectToAction("Details", new { id = viewModel.PostId });
             }
 

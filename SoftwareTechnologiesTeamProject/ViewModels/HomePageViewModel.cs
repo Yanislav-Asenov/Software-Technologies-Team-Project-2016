@@ -15,5 +15,7 @@
 
         public string HomePageImagePath { get; set; }
 
+        
+
     }
 }

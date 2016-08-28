@@ -17,6 +17,7 @@
         [Required]
         public string CommentAuthorId { get; set; }
 
+        public string AddPostImagePaht { get; set; }
 
     }
 }
