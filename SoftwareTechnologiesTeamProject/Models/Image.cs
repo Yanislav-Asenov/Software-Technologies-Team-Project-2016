@@ -18,5 +18,6 @@ namespace SoftwareTechnologiesTeamProject.Models
         public string ImagePath { get; set; }
             
         public DateTime UploadedDate  { get; set; }
+
     }
 }

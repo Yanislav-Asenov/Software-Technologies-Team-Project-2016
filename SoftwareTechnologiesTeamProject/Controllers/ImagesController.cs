@@ -42,7 +42,6 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             return View("Index");
         }
 
-
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]

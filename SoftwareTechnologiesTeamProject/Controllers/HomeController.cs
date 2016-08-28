@@ -53,20 +53,27 @@
 
             viewModel.PopularTags = db.Tags.OrderByDescending(t => t.Posts.Count).Take(5).ToList();
 
-            var  imagesList = db.Images.ToList().ToString();
-            
-            if (db.Images.Any())
-            {
-                var homePageImage = db.Images
+
+
+            var images = db.Images.ToList();
+
+            var homePageImage = images
                 .Where(i => i.ImagePath.Contains("homepage"))
                 .OrderByDescending(i => i.UploadedDate)
                 .FirstOrDefault();
 
-                if (homePageImage != null)
-                {
-                    viewModel.HomePageImagePath = homePageImage.ImagePath;
-                }
+            if (homePageImage != null)
+            {
+                viewModel.HomePageImagePath = homePageImage.ImagePath;
             }
+
+            foreach (var post in viewModel.FeaturedPosts)
+            {
+                post.Image = images.FirstOrDefault(i => i.ImagePath.Contains("PostId_" + post.Id));
+            }
+
+            //Missing Check
+           
             return View(viewModel);
         }
     }

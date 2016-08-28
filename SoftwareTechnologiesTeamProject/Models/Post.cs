@@ -44,10 +44,12 @@ namespace SoftwareTechnologiesTeamProject.Models
 
         public string AuthorId { get; set; }
 
-
         [Display(Name = "Author")]
         [ForeignKey("AuthorId")]
         public ApplicationUser Author { get; set; }
+
+        [NotMapped]
+        public Image Image { get; set; }
 
         public virtual List<Comment> Comments { get; set; }
 

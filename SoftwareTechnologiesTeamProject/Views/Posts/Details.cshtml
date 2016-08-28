@@ -26,31 +26,48 @@
 
             @*@if (User.IsInRole("Administrators"))
             {*@
-            @if(Model.AddPostImagePaht.Contains("postId_"+Model.PostId))
-            { }
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-               @Model.PostId
-                
-                    <img class="img-responsive" src="~/Content/Images/HomePage/@Model.AddPostImagePaht" alt="Bar"/>
-                
-                
-                    @using (Html.BeginForm("AddPostImage/" + Html.DisplayFor(model => model.Post.Id), "Images", null, FormMethod.Post, new {enctype = "multipart/form-data"}))
-                    { 
-                        @Html.AntiForgeryToken()
-                        @Html.ValidationSummary(true)
-                        <fieldset>
-                            <div class="editor-label">
-                                @Html.Label("Change image")
-                            </div>
-                            <div class="editor-field">
-                                <input id="ImagePath" title="Upload a product image"
-                                       type="file" name="file" />
-                            </div>
-                            <p><input type="submit" value="Change" /></p>
-                        </fieldset>
-                    }
-                
+            @if (Model.PostImage != null)
+            {
+                <img class="img-responsive" src="~/Content/Images/PostImages/@Model.PostImage.ImagePath" alt="Bar"/>
+                using (Html.BeginForm("AddPostImage/" + Html.DisplayFor(model => model.Post.Id), "Images", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <div class="editor-label">
+                            @Html.Label("Change image")
+                        </div>
+                        <div class="editor-field">
+                            <input id="ImagePath" title="Upload a product image"
+                                   type="file" name="file" />
+                        </div>
+                        <p>
+                            <input type="submit" value="Change" />
+                        </p>
+                    </fieldset>
                 }
+            }
+            else
+            {
+                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                using (Html.BeginForm("AddPostImage/" + Html.DisplayFor(model => model.Post.Id), "Images", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <div class="editor-label">
+                            @Html.Label("Change image")
+                        </div>
+                        <div class="editor-field">
+                            <input id="ImagePath" title="Upload a product image"
+                                   type="file" name="file" />
+                        </div>
+                        <p>
+                            <input type="submit" value="Add Image" />
+                        </p>
+                    </fieldset>
+                }
+            }
             @*}*@
 
             <hr>

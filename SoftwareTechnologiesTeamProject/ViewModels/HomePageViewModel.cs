@@ -14,8 +14,5 @@
         public List<Tag> PopularTags { get; set; }
 
         public string HomePageImagePath { get; set; }
-
-        
-
     }
 }
