@@ -8,26 +8,33 @@
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
+<br />
+
+
 <h2>Our developers:</h2>
 <br />
 
 @foreach (var member in Model.Developers)
 {
-    <div>
-        <img src="@member.Image.ImagePath" width="170" height="170" />
-        <p>@member.Name</p>
-        <p>@member.Info</p>
+    <div class="dev">
+        <img class="dev-img" src="@member.Image.ImagePath" width="170" height="170" />
+        <p>
+            @member.Name <br />
+            @member.Info
+        </p>
     </div>
-}
+} 
 
 <h2>Our designers:</h2>
 <br />
 
 @foreach (var member in Model.Designers)
 {
-    <div>
-        <img src="@member.Image.ImagePath" width="170" height="170" />
-        <p>@member.Name</p>
-        <p>@member.Info</p>
-    </div>
+    <div class="des">
+        <img class="des-img" src="@member.Image.ImagePath" width="170" height="170" />
+        <p>
+            @member.Name <br />
+            @member.Info
+        </p>
+</div>
 } 
