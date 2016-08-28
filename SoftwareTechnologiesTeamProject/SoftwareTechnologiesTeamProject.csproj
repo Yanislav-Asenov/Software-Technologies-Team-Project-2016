@@ -204,7 +204,7 @@
     <Compile Include="Controllers\MatchesController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\ProfilesController.cs" />
-    <Compile Include="Extensions\TeamsController.cs" />
+    <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Extensions\NotificationExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -455,6 +455,7 @@
     <Content Include="Views\Images\Index.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Matches\ChooseLeague.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

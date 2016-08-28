@@ -844,17 +844,17 @@ thead {
     padding: 12px 20px 12px 40px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
 }
 
-.searchPost:focus {
-    width: 110%;
-}
 
 /* Not important */
 
 .dropTableLogo {
-    height: 100px;
-    width: 200px;
+     height: 70px;
+    width: 150px;
 }
 
 
@@ -1015,7 +1015,7 @@ td, th {
 
 
 .singleUpcomingMatch {
-    background: rgb(232, 232, 232);
+    background: white;
     text-decoration: none;
     width: 100%;
     cursor: pointer;
@@ -1062,6 +1062,7 @@ td, th {
 .upcomingMatchInfo > a {
     font-size: 15px;
     padding: 5px;
+    color: white;
 }
 
 .upcomingMatchInfo > a:hover {
@@ -1098,30 +1099,39 @@ td, th {
 }
 
 .upcomingMatchesTableHead {
-    background: green;
-    color: white;
+    color: black;
+    background: white;
+    border-bottom: solid 0.5px #e7e7e7;
 }
 
 .upcomingMatchesTable {
     margin-bottom: 50px;
+    border: none;
 }
 
-.upcomingMatchesTable > tbody > tr > td {
-    line-height: 1.5em;
+.upcomingMatchesTable > tbody> tr > td {
+    border-left: none;
+    border-right: none;
+    border-bottom: solid 0.5px #e7e7e7;
 }
 
-.logo {
-    width: 25px;
-    height: 25px;
+.team-logo-small {
+    height: 30px;
+    width: 30px;
 }
 
 .time {
-    background: rgb(226, 224, 224);
+    background:darkgreen;
     width: 50px;
     padding: 5px;
     text-align: center;
     font-weight: bold;
 }
+
+.time > .matchLink {
+    color: white;
+}
+
 
 .upcomingMatchTeamName {
     font-weight: bold;
@@ -1142,6 +1152,14 @@ td, th {
     padding-right: 0;
 }
 
+.adminActionsLarge > a:hover {
+    color: white;
+}
+
+.adminActionsSmall > a:hover{
+    color: white;
+}
+
 .upcomingMatchCoef {
     width: 50px;
     text-align: center;
@@ -1159,4 +1177,39 @@ td, th {
 
 .nav {
     margin-right: 10px;
+}
+
+.form-control:focus {
+    border-color: darkgreen;
+    outline: none;
+    -webkit-box-shadow:  0 0px 0px , 0 0 0px darkgreen;
+    box-shadow: 0 0px 0px , 0 0 0px darkgreen;
+    border: solid 3px;
+}
+
+
+/*
+    Test
+*/
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+  border-color: green;
+  box-shadow: none;
+    border: solid 2px;
+  outline: 0 none;
 }

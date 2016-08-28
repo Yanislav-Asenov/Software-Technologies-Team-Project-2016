@@ -9,6 +9,8 @@
     {
         public List<Match> Matches { get; set; }
 
+        public List<League> Leagues { get; set; }
+
         public Dictionary<string, List<Match>> GetUpcomingMatches()
         {
             var upcomingMatches = new Dictionary<string, List<Match>>();

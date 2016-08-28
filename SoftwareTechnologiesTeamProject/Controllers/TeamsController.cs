@@ -1,11 +1,10 @@
-﻿using SoftwareTechnologiesTeamProject.Models;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web.Mvc;
-
-namespace SoftwareTechnologiesTeamProject.Controllers
+﻿namespace SoftwareTechnologiesTeamProject.Controllers
 {
+    using Models;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
     using ViewModels;
 
     public class TeamsController : Controller
@@ -55,9 +54,12 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         }
 
         // GET: Teams/Create
-        public ActionResult Create()
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Create(string id)
         {
-            ViewBag.LeagueId = new SelectList(db.Leagues, "Id", "Name");
+            int leagueId = int.Parse(id);
+
+            ViewBag.LeagueId = new SelectList(db.Leagues.Where(l => l.Id == leagueId).ToList(), "Id", "Name");
             return View();
         }
 
@@ -72,10 +74,10 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 db.Teams.Add(team);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Standings", "Leagues", new { id = team.LeagueId });
             }
 
-            ViewBag.LeagueId = new SelectList(db.Leagues, "Id", "Name", team.LeagueId);
+            ViewBag.LeagueId = new SelectList(db.Leagues.Where(l => l.Id == team.LeagueId).ToList(), "Id", "Name", team.LeagueId);
             return View(team);
         }
 

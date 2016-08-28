@@ -97,6 +97,6 @@
 
 @if (User.IsInRole("Administrator"))
 {
-    @Html.ActionLink("Add new team", "Create", "Teams")
+    <a href="/Teams/Create/@Model.League.Id">Add new team</a>
 }
 

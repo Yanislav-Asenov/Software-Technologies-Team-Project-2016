@@ -25,6 +25,8 @@ namespace SoftwareTechnologiesTeamProject.Controllers
 
             var viewModel = new MatchesIndexViewModel();
 
+
+
             viewModel.Matches = matches;
 
             return View(viewModel);
@@ -166,13 +168,29 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             return RedirectToAction("Details", "Matches", new { id = match.Id });
         }
 
+        [Authorize(Roles = "Administrator")]
+        public ActionResult CreateChooseLeague()
+        {
+            ViewBag.LeagueId = new SelectList(db.Leagues, "Id", "Name");
+
+            return View("ChooseLeague");
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateChooseLeague([Bind(Include = "LeagueId")]Match match)
+        {
+            return RedirectToAction("Create", "Matches", new { id = match.LeagueId });
+        }
+
         // GET: Matches/Create
         [Authorize(Roles = "Administrator")]
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            ViewBag.AwayTeamId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.HomeTeamId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.LeagueId = new SelectList(db.Leagues, "Id", "Name");
+            ViewBag.AwayTeamId = new SelectList(db.Teams.Where(t => t.LeagueId == id), "Id", "Name");
+            ViewBag.HomeTeamId = new SelectList(db.Teams.Where(t => t.LeagueId == id), "Id", "Name");
+            ViewBag.LeagueId = new SelectList(db.Leagues.Where(l => l.Id == id), "Id", "Name");
             return View();
         }
 
