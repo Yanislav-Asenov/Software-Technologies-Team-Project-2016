@@ -257,6 +257,8 @@
     <Compile Include="ViewModels\VerifyPhoneNumberViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-SoftwareTechnologiesTeamProject-20160806091957.mdf" />
+    <Content Include="App_Data\aspnet-SoftwareTechnologiesTeamProject-20160806091957_log.ldf" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -458,10 +460,8 @@
     <Content Include="Views\Matches\ChooseLeague.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\Images\HomePage\" />
     <Folder Include="Content\Images\PostImages\" />
   </ItemGroup>

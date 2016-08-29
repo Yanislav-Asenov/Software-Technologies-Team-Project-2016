@@ -25,7 +25,11 @@
         public Image Image { get; set; }
         public string[] GetTags()
         {
-            return Tags.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries).Distinct().ToArray();
+            if (Tags != null)
+            {
+                return Tags.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries).Distinct().ToArray();
+            }
+            return new string[] { "" };
         }
     }
 }

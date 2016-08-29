@@ -18,6 +18,10 @@ body {
   font-size: 13px; 
 }
 
+p {
+    overflow-wrap: break-word;
+}
+
 .footer {
     position: absolute;
     right: 0;
