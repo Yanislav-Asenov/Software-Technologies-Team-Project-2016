@@ -849,6 +849,9 @@ thead {
 	-moz-box-shadow: none;
 	box-shadow: none;
 }
+.searchPost:focus{
+    width:inherit;
+}
 
 
 /* Not important */
