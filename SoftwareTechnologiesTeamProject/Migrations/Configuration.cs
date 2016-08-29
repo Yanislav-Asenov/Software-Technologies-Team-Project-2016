@@ -172,17 +172,7 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 FullName = fullName
             };
 
-            //var UserProfile = new Profile
-            //{
-            //    UserId = user.Id,
-            //    FullName = fullName,
-            //    Age=0,
-            //    Interests=null,
-            //    MoreInfo=null,
-            //    ProfilePic=null,
-
-            //};
-
+        
             var userCreateResult = userManager.Create(user, password);
             if (!userCreateResult.Succeeded)
             {
@@ -193,14 +183,15 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 CreateProfile(context, user.Id,user.FullName);
             }
         }
-
+        //Profile for seed users
         private void CreateProfile(ApplicationDbContext context,
             string userid, string fullname)
         {
             var userProfile = new Profile
             {
                 UserId = userid,
-                FullName = fullname
+                FullName = fullname,
+                Age = 14
                
             };
             context.Profile.Add(userProfile);
