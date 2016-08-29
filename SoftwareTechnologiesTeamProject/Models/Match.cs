@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Globalization;
     using System.Linq;
 
     public class Match
@@ -146,9 +147,15 @@
             }
         }
 
-        public string GetDate()
+        public string GetShortDate()
         {
             return $"{DateTime:dd-MM-yyyy}";
+        }
+
+        public string GetLongDate()
+        {
+            string date = this.DateTime.ToString("dddd, dd MMMM, yyyy", CultureInfo.InvariantCulture);
+            return date;
         }
 
         public string GetTime()

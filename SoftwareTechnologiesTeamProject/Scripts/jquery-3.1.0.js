@@ -3063,7 +3063,7 @@ jQuery.fn.extend( {
 			return ( this[ 0 ] && this[ 0 ].parentNode ) ? this.first().prevAll().length : -1;
 		}
 
-		// Index in selector
+		// Fixtures in selector
 		if ( typeof elem === "string" ) {
 			return indexOf.call( jQuery( elem ), this[ 0 ] );
 		}
@@ -3223,7 +3223,7 @@ jQuery.Callbacks = function( options ) {
 		// Queue of execution data for repeatable lists
 		queue = [],
 
-		// Index of currently firing callback (modified by add/remove as needed)
+		// Fixtures of currently firing callback (modified by add/remove as needed)
 		firingIndex = -1,
 
 		// Fire callbacks

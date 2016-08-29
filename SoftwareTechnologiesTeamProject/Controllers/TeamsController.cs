@@ -11,13 +11,6 @@
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Teams
-        public ActionResult Index()
-        {
-            var teams = db.Teams.Include(t => t.League);
-            return View(teams.ToList());
-        }
-
         // GET: Teams/Details/5
         public ActionResult Details(int? id)
         {

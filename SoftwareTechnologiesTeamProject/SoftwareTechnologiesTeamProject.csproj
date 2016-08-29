@@ -261,6 +261,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Fixtures.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Images\10419971_920034744705734_1313142506640151966_n.jpg" />
     <Content Include="Content\Images\10452379_10203768193393008_793925269277997445_n.jpg" />
@@ -268,6 +269,9 @@
     <Content Include="Content\Images\11666030_10200580448391070_6748796253436057290_n.jpg" />
     <Content Include="Content\Images\droptableLogo.png" />
     <Content Include="Content\Images\search.png" />
+    <Content Include="Content\MatchDetails.css" />
+    <Content Include="Content\Standings.css" />
+    <Content Include="Content\TeamDetails.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -437,7 +441,7 @@
     <Content Include="Views\Matches\Delete.cshtml" />
     <Content Include="Views\Matches\Details.cshtml" />
     <Content Include="Views\Matches\Edit.cshtml" />
-    <Content Include="Views\Matches\Index.cshtml" />
+    <Content Include="Views\Matches\Fixtures.cshtml" />
     <Content Include="Views\Matches\UpdateResult.cshtml" />
     <Content Include="Views\Profiles\Delete.cshtml" />
     <Content Include="Views\Profiles\Details.cshtml" />
@@ -447,7 +451,6 @@
     <Content Include="Views\Teams\Delete.cshtml" />
     <Content Include="Views\Teams\Details.cshtml" />
     <Content Include="Views\Teams\Edit.cshtml" />
-    <Content Include="Views\Teams\Index.cshtml" />
     <Content Include="Views\Images\Create.cshtml" />
     <Content Include="Views\Images\Delete.cshtml" />
     <Content Include="Views\Images\Details.cshtml" />
@@ -458,7 +461,6 @@
     <Content Include="Views\Matches\ChooseLeague.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

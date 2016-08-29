@@ -1,14 +1,12 @@
-﻿using SoftwareTechnologiesTeamProject.Models;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web.Mvc;
-
-namespace SoftwareTechnologiesTeamProject.Controllers
+﻿namespace SoftwareTechnologiesTeamProject.Controllers
 {
-    using System;
     using Extensions;
     using Microsoft.AspNet.Identity;
+    using Models;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
     using ViewModels;
 
     public class MatchesController : Controller
@@ -16,7 +14,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Matches
-        public ActionResult Index()
+        public ActionResult Fixtures()
         {
             var matches = db.Matches
                 .Include(m => m.AwayTeam)
@@ -218,7 +216,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
 
                 db.Matches.Add(match);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Fixtures");
             }
 
             ViewBag.AwayTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
@@ -259,7 +257,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 db.Entry(match).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Fixtures");
             }
             ViewBag.AwayTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
             ViewBag.HomeTeamId = new SelectList(db.Teams, "Id", "Name", match.HomeTeamId);
@@ -292,7 +290,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             Match match = db.Matches.Find(id);
             db.Matches.Remove(match);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Fixtures");
         }
 
         protected override void Dispose(bool disposing)

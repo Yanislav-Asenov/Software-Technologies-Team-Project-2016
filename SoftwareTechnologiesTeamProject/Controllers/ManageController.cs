@@ -51,7 +51,7 @@
         }
 
         //
-        // GET: /Manage/Index
+        // GET: /Manage/Fixtures
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =

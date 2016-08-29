@@ -5,268 +5,330 @@
     ViewBag.Title = "Match details";
 }
 
-@* Home team logo/name - Away team logo/name *@
-<div class="container-fluid">
-    <p class="gameTitle">@Model.Match.HomeTeam.Name vs @Model.Match.AwayTeam.Name</p>
-    <p class="gameTime">@Model.Match.GetDate()<br /> @Model.Match.GetTime()</p>
-    <div class="homeTeamLogo">
-        <img src="@Model.Match.HomeTeam.LogoLink" width="130" height="130" alt="Home team logo"/>
-        <p>@Model.Match.HomeTeam.Name</p>
+
+    @* Home team logo/name - Away team logo/name *@
+    <div class="row">
+        <div class="col-md-12">
+            <p class="gameTitle">@Model.Match.HomeTeam.Name vs @Model.Match.AwayTeam.Name</p>
+            <p class="gameTime">@Model.Match.GetLongDate()<br /> @Model.Match.GetTime()</p>
+            <div class="homeTeamLogo">
+                <img src="@Model.Match.HomeTeam.LogoLink" class="teamDetailsTeamLogo" alt="Home team logo" />
+                <p>@Model.Match.HomeTeam.Name</p>
+            </div>
+            <div class="awayTeamLogo">
+                <img src="@Model.Match.AwayTeam.LogoLink" class="teamDetailsTeamLogo" alt="Away team logo" />
+                <p>@Model.Match.AwayTeam.Name</p>
+            </div>
+            @if (Model.Match.IsResultUpdated)
+            {
+                <div class="matchResult"><span>@Model.Match.Result</span></div>
+            }
+        </div>
     </div>
-    <div class="awayTeamLogo">
-        <img src="@Model.Match.AwayTeam.LogoLink" width="130" height="130" />
-        <p>@Model.Match.AwayTeam.Name</p>
-    </div>
-    @if (Model.Match.IsResultUpdated)
-    {
-        <div class="matchResult"><span>@Model.Match.Result</span></div>
-    }
 
     @* Votes and total votes *@
-    <div class="votesContainer">
-        <div class="voteWrapper">
-            @if (Model.Match.HasUserVoted(User.Identity.GetUserId()) || Model.Match.IsResultUpdated)
-            {
-                <span class="votedButton">1</span>
-            }
-            else
-            {
-                @Html.ActionLink("1", "AddVote", new {id = Model.Match.Id, voteType = "home"}, new {@class = "voteButton"})
-            }
-            <div class="homeTeamVotes">
-                @for (int i = 0; i < Model.Match.GetVotesInPercents("home"); i++)
+    <div class="row">
+        <div class="col-md-8">
+            <div class="voteWrapper">
+                @if (Model.Match.HasUserVoted(User.Identity.GetUserId()) || Model.Match.IsResultUpdated)
                 {
-                    <div class="onePercent"></div>
+                    <span class="votedButton">1</span>
                 }
-                <span class="votePecents">
-                    <strong>@Model.Match.GetVotesInPercents("home")%</strong> for @Model.Match.HomeTeam.Name
-                </span>
+                else
+                {
+                    @Html.ActionLink("1", "AddVote", new { id = Model.Match.Id, voteType = "home" }, new { @class = "voteButton" })
+                }
+                <div class="homeTeamVotes">
+                    @for (int i = 0; i < Model.Match.GetVotesInPercents("home"); i++)
+                    {
+                        <div class="onePercent"></div>
+                    }
+                    <span class="votePecents">
+                        <strong>@Model.Match.GetVotesInPercents("home")%</strong> for @Model.Match.HomeTeam.Name
+                    </span>
+                </div>
+            </div>
+            <div class="voteWrapper">
+                @if (Model.Match.HasUserVoted(User.Identity.GetUserId()) || Model.Match.IsResultUpdated)
+                {
+                    <span class="votedButton">X</span>
+                }
+                else
+                {
+                    @Html.ActionLink("X", "AddVote", new { id = Model.Match.Id, voteType = "draw" }, new { @class = "voteButton" })
+                }
+                <div class="drawVotes">
+                    @for (int i = 0; i < Model.Match.GetVotesInPercents("draw"); i++)
+                    {
+                        <div class="onePercent"></div>
+                    }
+                    <span class="votePecents">
+                        <strong>@Model.Match.GetVotesInPercents("draw")%</strong> for Draw
+                    </span>
+                </div>
+            </div>
+            <div class="voteWrapper">
+                @if (Model.Match.HasUserVoted(User.Identity.GetUserId()) || Model.Match.IsResultUpdated)
+                {
+                    <span class="votedButton">2</span>
+                }
+                else
+                {
+                    @Html.ActionLink("2", "AddVote", new { id = Model.Match.Id, voteType = "away" }, new { @class = "voteButton" })
+                }
+                <div class="awayTeamVotes">
+                    @for (int i = 0; i < Model.Match.GetVotesInPercents("away"); i++)
+                    {
+                        <div class="onePercent"></div>
+                    }
+                    <span class="votePecents">
+                        <strong>@Model.Match.GetVotesInPercents("away")%</strong> for @Model.Match.AwayTeam.Name
+                    </span>
+                </div>
             </div>
         </div>
-        <div class="voteWrapper">
-            @if (Model.Match.HasUserVoted(User.Identity.GetUserId()) || Model.Match.IsResultUpdated)
-            {
-                <span class="votedButton">X</span>
-            }
-            else
-            {
-                @Html.ActionLink("X", "AddVote", new {id = Model.Match.Id, voteType = "draw"}, new {@class = "voteButton"})
-            }
-            <div class="drawVotes">
-                @for (int i = 0; i < Model.Match.GetVotesInPercents("draw"); i++)
-                {
-                    <div class="onePercent"></div>
-                }
-                <span class="votePecents">
-                    <strong>@Model.Match.GetVotesInPercents("draw")%</strong> for Draw
-                </span>
+        <div class="col-md-4">
+            <div class="votesContainer">
+                <div class="totalVotes">
+                    <span>Total votes: @Model.Match.TotalVotesCount</span>
+                </div>
+                <div class="howToVoteInfo">
+                    @if (Model.Match.HasUserVoted(User.Identity.GetUserId()))
+                    {
+                        <span>You've already voted for this match!</span>
+                    }
+                    else if (!Model.Match.IsResultUpdated)
+                    {
+                        <span>To vote, click on the mark</span>
+                    }
+                </div>
             </div>
-        </div>
-        <div class="voteWrapper">
-            @if (Model.Match.HasUserVoted(User.Identity.GetUserId()) || Model.Match.IsResultUpdated)
-            {
-                <span class="votedButton">2</span>
-            }
-            else
-            {
-                @Html.ActionLink("2", "AddVote", new {id = Model.Match.Id, voteType = "away"}, new {@class = "voteButton"})
-            }
-            <div class="awayTeamVotes">
-                @for (int i = 0; i < Model.Match.GetVotesInPercents("away"); i++)
-                {
-                    <div class="onePercent"></div>
-                }
-                <span class="votePecents">
-                    <strong>@Model.Match.GetVotesInPercents("away")%</strong> for @Model.Match.AwayTeam.Name
-                </span>
-            </div>
-        </div>
-
-        <div class="totalVotesWrapper">
-            <span>Total votes: @Model.Match.TotalVotesCount</span>
-        </div>
-        <div class="voteInfo">
-            @if (Model.Match.HasUserVoted(User.Identity.GetUserId()))
-            {
-                <span>You've already voted for this game !</span>
-            }
-            else if(!Model.Match.IsResultUpdated)
-            {
-                <span>To vote, click on the mark</span>
-            }
         </div>
     </div>
 
     @* Home team match history *@
-    <span class="matchHistoryHeading">@Model.Match.HomeTeam.Name - last matches</span>
-    <table class="table matchHistoryTable">
-        <tr>
-            <th class="matchHistoryDate">Date</th>
-            <th class="matchHistoryHomeTeam">Home team</th>
-            <th class="historyMatchResult">Result</th>
-            <th class="matchHistoryAwayTeam">Away team</th>
-            <th class="matchHistoryCoefficient">1</th>
-            <th class="matchHistoryCoefficient">X</th>
-            <th class="matchHistoryCoefficient">2</th>
-        </tr>
+    <div class="row">
+        <div class="col-md-12">
+            <span class="tableHeading">@Model.Match.HomeTeam.Name - last matches</span>
+            <table class="table">
+                <thead class="tableHead">
+                    <tr>
+                        <th class="matchHistoryDate">Date</th>
+                        <th class="matchHistoryHomeTeam">Home team</th>
+                        <th class="historyMatchResult">Result</th>
+                        <th class="matchHistoryAwayTeam">Away team</th>
+                        <th class="matchHistoryCoefficient">1</th>
+                        <th class="matchHistoryCoefficient">X</th>
+                        <th class="matchHistoryCoefficient">2</th>
+                    </tr>
+                </thead>
 
-        @foreach (var match in Model.HomeTeamHistory)
-        {
-            <tr>
-                <td class="matchHistoryDate">@match.GetDate()</td>
-                @if (match.HomeTeam.Name == Model.Match.HomeTeam.Name)
-                {
-                    <td class="matchHistoryHomeTeam boldTeamName">@match.HomeTeam.Name</td>
-                }
-                else
-                {
-                    <td class="matchHistoryHomeTeam">@match.HomeTeam.Name</td>
-                }
+                <tbody class="tableBody">
+                    @foreach (var match in Model.HomeTeamHistory)
+                    {
+                        <tr>
+                            <td class="matchHistoryDate">@match.GetShortDate()</td>
+                            @if (match.HomeTeam.Name == Model.Match.HomeTeam.Name)
+                            {
+                                <td class="matchHistoryHomeTeam boldTeamName">@match.HomeTeam.Name</td>
+                            }
+                            else
+                            {
+                                <td class="matchHistoryHomeTeam">@match.HomeTeam.Name</td>
+                            }
 
-                @if (match.GetWinnerName() == "draw")
-                {
-                    <td class="historyMatchResult" style="background: rgb(255, 202, 104)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
-                }
-                else if (match.GetWinnerName() == Model.Match.HomeTeam.Name)
-                {
-                    <td class="historyMatchResult" style="background: lightgreen">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
-                }
-                else
-                {
-                    <td class="historyMatchResult" style="background: rgb(255, 57, 57)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
-                }
+                            @* Checking which for match winner and setting necessary class *@
+                            @if (match.GetWinnerName() == "draw")
+                            {
+                                <td class="historyMatchResult draw">
+                                    @match.HomeTeamGoals - @match.AwayTeamGoals
+                                </td>
+                            }
+                            else if (match.GetWinnerName() == Model.Match.HomeTeam.Name)
+                            {
+                                <td class="historyMatchResult loss">
+                                    @match.HomeTeamGoals - @match.AwayTeamGoals
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="historyMatchResult win">
+                                    @match.HomeTeamGoals - @match.AwayTeamGoals
+                                </td>
+                            }
 
-                @if (match.AwayTeam.Name == Model.Match.HomeTeam.Name)
-                {
-                    <td class="matchHistoryAwayTeam boldTeamName">@match.AwayTeam.Name</td>
-                }
-                else
-                {
-                    <td class="matchHistoryAwayTeam">@match.AwayTeam.Name</td>
-                }
-                <td class="matchHistoryCoefficient">@match.HomeCoefficient</td>
-                <td class="matchHistoryCoefficient">@match.DrawCoefficient</td>
-                <td class="matchHistoryCoefficient">@match.AwayCoefficient</td>
-            </tr>
-        }
-    </table>
-
+                            @if (match.AwayTeam.Name == Model.Match.HomeTeam.Name)
+                            {
+                                <td class="matchHistoryAwayTeam boldTeamName">@match.AwayTeam.Name</td>
+                            }
+                            else
+                            {
+                                <td class="matchHistoryAwayTeam">@match.AwayTeam.Name</td>
+                            }
+                            <td class="matchHistoryCoefficient">
+                                @match.HomeCoefficient
+                            </td>
+                            <td class="matchHistoryCoefficient">
+                                @match.DrawCoefficient
+                            </td>
+                            <td class="matchHistoryCoefficient">
+                                @match.AwayCoefficient
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     @* Away team match history *@
-    <span class="matchHistoryHeading">@Model.Match.AwayTeam.Name - last matches</span>
-    <table class="table matchHistoryTable">
-            <tr>
-                <th class="matchHistoryDate">Date</th>
-                <th class="matchHistoryHomeTeam">Home team</th>
-                <th class="historyMatchResult">Result</th>
-                <th class="matchHistoryAwayTeam">Away team</th>
-                <th class="matchHistoryCoefficient">1</th>
-                <th class="matchHistoryCoefficient">X</th>
-                <th class="matchHistoryCoefficient">2</th>
-            </tr>
+    <div class="row">
+        <div class="col-md-12">
+            <span class="tableHeading">@Model.Match.AwayTeam.Name - last matches</span>
+            <table class="table matchHistoryTable">
+                <thead class="tableHead">
+                    <tr>
+                        <th class="matchHistoryDate">Date</th>
+                        <th class="matchHistoryHomeTeam">Home team</th>
+                        <th class="historyMatchResult">Result</th>
+                        <th class="matchHistoryAwayTeam">Away team</th>
+                        <th class="matchHistoryCoefficient">1</th>
+                        <th class="matchHistoryCoefficient">X</th>
+                        <th class="matchHistoryCoefficient">2</th>
+                    </tr>
+                </thead>
 
-            @foreach (var match in Model.AwayTeamHistory)
-            {
-                <tr>
-                    <td class="matchHistoryDate">@match.GetDate()</td>
-                    @if (@match.HomeTeam.Name == Model.Match.AwayTeam.Name)
+                <tbody class="tableBody">
+                    @foreach (var match in Model.AwayTeamHistory)
                     {
-                        <td class="matchHistoryHomeTeam boldTeamName">@match.HomeTeam.Name</td>
-                    }
-                    else
-                    {
-                        <td class="matchHistoryHomeTeam">@match.HomeTeam.Name</td>
-                    }
+                        <tr>
+                            <td class="matchHistoryDate">
+                                @match.GetShortDate()
+                            </td>
+                            @if (@match.HomeTeam.Name == Model.Match.AwayTeam.Name)
+                            {
+                                <td class="matchHistoryHomeTeam boldTeamName">
+                                    @match.HomeTeam.Name
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="matchHistoryHomeTeam">
+                                    @match.HomeTeam.Name
+                                </td>
+                            }
 
-                    @if (match.GetWinnerName() == "draw")
-                    {
-                        <td class="historyMatchResult" style="background: rgb(255, 202, 104)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
+                            @* Checking which for match winner and setting necessary class *@
+                            @if (match.GetWinnerName() == "draw")
+                            {
+                                <td class="historyMatchResult draw">
+                                    @match.HomeTeamGoals - @match.AwayTeamGoals
+                                </td>
+                            }
+                            else if (match.GetWinnerName() == Model.Match.AwayTeam.Name)
+                            {
+                                <td class="historyMatchResult victory">
+                                    @match.HomeTeamGoals - @match.AwayTeamGoals
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="historyMatchResult loss">
+                                    @match.HomeTeamGoals - @match.AwayTeamGoals
+                                </td>
+                            }
+                            @if (@match.AwayTeam.Name == Model.Match.AwayTeam.Name)
+                            {
+                                <td class="matchHistoryAwayTeam boldTeamName">
+                                    @match.AwayTeam.Name
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="matchHistoryAwayTeam">
+                                    @match.AwayTeam.Name
+                                </td>
+                            }
+
+                            <td class="matchHistoryCoefficient">
+                                @match.HomeCoefficient
+                            </td>
+                            <td class="matchHistoryCoefficient">
+                                @match.DrawCoefficient
+                            </td>
+                            <td class="matchHistoryCoefficient">
+                                @match.AwayCoefficient
+                            </td>
+                        </tr>
                     }
-                    else if (match.GetWinnerName() == Model.Match.AwayTeam.Name)
-                    {
-                        <td class="historyMatchResult" style="background: lightgreen">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
-                    }
-                    else
-                    {
-                        <td class="historyMatchResult" style="background: rgb(255, 57, 57)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
-                    }
-                    @if (@match.AwayTeam.Name == Model.Match.AwayTeam.Name)
-                    {
-                        <td class="matchHistoryAwayTeam boldTeamName">@match.AwayTeam.Name</td>
-                    }
-                    else
-                    {
-                        <td class="matchHistoryAwayTeam">@match.AwayTeam.Name</td>
-                    }
-                    <td class="matchHistoryCoefficient">@match.HomeCoefficient</td>
-                    <td class="matchHistoryCoefficient">@match.DrawCoefficient</td>
-                    <td class="matchHistoryCoefficient">@match.AwayCoefficient</td>
-                </tr>
-            }
-    </table>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     @* Standings *@
-    <span class="standingsHeading">@Model.LeagueName - Standings for @DateTime.Now.ToString("dd-MM-yyyy")</span>
-    <table class="table matchHistoryTable">
-        <thead>
-            <tr>
-                <th class="standingsInfo">№</th>
-                <th class="standingsTeamName">Team</th>
-                <th class="standingsInfo" title="Games played">GP</th>
-                <th class="standingsInfo">Wins</th>
-                <th class="standingsInfo">Draws</th>
-                <th class="standingsInfo">Losses</th>
-                <th class="standingsInfo" title="Goals for">GF</th>
-                <th class="standingsInfo" title="Goals against">GA</th>
-                <th class="standingsInfo" title="Goals difference">GD</th>
-                <th class="standingsInfo" title="Points">Points</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @for (int i = 0; i < Model.LeagueTeams.Count; i++)
-            {
-                int position = i + 1;
-                var team = Model.LeagueTeams[i];
-                if (team.Name == Model.Match.HomeTeam.Name || team.Name == Model.Match.AwayTeam.Name)
-                {
-                    <tr class="highlightedTeam">
-                        <td class="standingsInfo">@position</td>
-                        <td class="standingsTeamName">
-                            <img src="@team.LogoLink" width="30" height="30" alt="" />
-                            @team.Name
-                        </td>
-                        <td class="standingsInfo">@team.TotalGamesPlayed</td>
-                        <td class="standingsInfo">@team.Victories</td>
-                        <td class="standingsInfo">@team.Draws</td>
-                        <td class="standingsInfo">@team.Losses</td>
-                        <td class="standingsInfo">@team.GoalsFor</td>
-                        <td class="standingsInfo">@team.GoalsAgainst</td>
-                        <td class="standingsInfo">@team.GetGoalDifference()</td>
-                        <td class="standingsInfo">@team.Points</td>
-                    </tr>
-                }
-                else
-                {
+    <div class="row">
+        <div class="col-md-12">
+            <span class="standingsHeading">@Model.LeagueName - Standings for @DateTime.Now.ToString("dd-MM-yyyy")</span>
+            <table class="table matchHistoryTable">
+                <thead class="tableHead">
                     <tr>
-                        <td class="standingsInfo">@position</td>
-                        <td class="standingsTeamName">
-                            <img src="@team.LogoLink" width="30" height="30" alt="" />
-                            @team.Name
-                        </td>
-                        <td class="standingsInfo">@team.TotalGamesPlayed</td>
-                        <td class="standingsInfo">@team.Victories</td>
-                        <td class="standingsInfo">@team.Draws</td>
-                        <td class="standingsInfo">@team.Losses</td>
-                        <td class="standingsInfo">@team.GoalsFor</td>
-                        <td class="standingsInfo">@team.GoalsAgainst</td>
-                        <td class="standingsInfo">@team.GetGoalDifference()</td>
-                        <td class="standingsInfo">@team.Points</td>
+                        <th class="standingsInfo">№</th>
+                        <th class="standingsTeamName">Team</th>
+                        <th class="standingsInfo" title="Games played">GP</th>
+                        <th class="standingsInfo">Wins</th>
+                        <th class="standingsInfo">Draws</th>
+                        <th class="standingsInfo">Losses</th>
+                        <th class="standingsInfo" title="Goals for">GF</th>
+                        <th class="standingsInfo" title="Goals against">GA</th>
+                        <th class="standingsInfo" title="Goals difference">GD</th>
+                        <th class="standingsInfo" title="Points">Points</th>
                     </tr>
-                }
+                </thead>
 
-            }
-        </tbody>
-    </table>
-
-</div>
+                <tbody class="tableBody">
+                    @for (int i = 0; i < Model.LeagueTeams.Count; i++)
+                    {
+                        int position = i + 1;
+                        var team = Model.LeagueTeams[i];
+                        if (team.Name == Model.Match.HomeTeam.Name || team.Name == Model.Match.AwayTeam.Name)
+                        {
+                            <tr class="highlightedTeam">
+                                <td class="standingsInfo">@position</td>
+                                <td class="standingsTeamName">
+                                    <img src="@team.LogoLink" class="team-logo-small" alt="Team logo" />
+                                    @team.Name
+                                </td>
+                                <td class="standingsInfo">@team.TotalGamesPlayed</td>
+                                <td class="standingsInfo">@team.Victories</td>
+                                <td class="standingsInfo">@team.Draws</td>
+                                <td class="standingsInfo">@team.Losses</td>
+                                <td class="standingsInfo">@team.GoalsFor</td>
+                                <td class="standingsInfo">@team.GoalsAgainst</td>
+                                <td class="standingsInfo">@team.GetGoalDifference()</td>
+                                <td class="standingsInfo">@team.Points</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td class="standingsInfo">@position</td>
+                                <td class="standingsTeamName">
+                                    <img src="@team.LogoLink" width="30" height="30" alt="" />
+                                    @team.Name
+                                </td>
+                                <td class="standingsInfo">@team.TotalGamesPlayed</td>
+                                <td class="standingsInfo">@team.Victories</td>
+                                <td class="standingsInfo">@team.Draws</td>
+                                <td class="standingsInfo">@team.Losses</td>
+                                <td class="standingsInfo">@team.GoalsFor</td>
+                                <td class="standingsInfo">@team.GoalsAgainst</td>
+                                <td class="standingsInfo">@team.GetGoalDifference()</td>
+                                <td class="standingsInfo">@team.Points</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

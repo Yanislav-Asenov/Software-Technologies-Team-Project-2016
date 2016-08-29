@@ -1,0 +1,179 @@
+﻿.totalVotes {
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.howToVoteInfo {
+    text-align: right;
+    margin-top: 55px;
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.tableHeading {
+    color: darkgreen;
+    font-size: 20px;
+}
+
+.victory {
+    background: lightgreen;
+}
+
+.loss {
+    background: tomato;
+    color: darkgreen;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.draw {
+    background: rgb(255, 202, 104);
+}
+
+.teamDetailsTeamLogo {
+    width: 130px;
+    height: 130px;
+}
+
+.gameTitle {
+    margin: 0px 0px 10px 0px;
+    padding: 0px;
+    text-align: center;
+    color: darkgreen;
+    font-weight: normal;
+    font-size: 250%;
+}
+
+.gameTime {
+    margin: 0px 0px 0px 0px;
+    padding: 0px;
+    text-align: center;
+    font-size: 180%;
+    font-weight: bolder;
+    color: darkgreen;
+}
+
+
+.homeTeamVotes, .awayTeamVotes, .drawVotes {
+    position: absolute;
+    top: 0;
+    left: 38px;
+}
+
+
+
+.onePercent {
+    width: 3px;
+    background: green;
+    height: 27px;
+    float: left;
+    margin: 0px;
+}
+
+.votePecents {
+    font-size: 130%;
+    margin-left: 5px;
+}
+
+
+.matchResult {
+    font-weight: bold;
+    font-size: 30px;
+    padding: 10px;
+    color: red;
+    text-align: center;
+}
+
+
+
+.homeTeamLogo, .awayTeamLogo {
+    margin: 0px 0px 10px 0px;
+    padding: 0px;
+    width: 50%;
+    text-align: center;
+    font-size: 190%;
+    font-weight: bold;
+}
+
+.homeTeamLogo {
+    float: left;
+    padding-left: 50px;
+}
+
+
+.awayTeamLogo {
+    float: right;
+    padding-right: 50px;
+}
+
+
+.votedButton {
+    display: block;
+    background: red;
+    color: white;
+    font-weight: bold;
+    font-size: 150%;
+    width: 32.5px;
+    text-align: center;
+    margin: 5px 2px 2px 5px;
+    text-decoration: none;
+}
+
+.voteButton {
+    display: block;
+    background: red;
+    color: white;
+    font-weight: bold;
+    font-size: 150%;
+    width: 4%;
+    text-align: center;
+    margin: 5px 2px 2px 5px;
+    text-decoration: none;
+}
+
+.voteButton:hover {
+    display: block;
+    background: green;
+    color: white;
+    font-weight: bold;
+    font-size: 150%;
+    width: 4%;
+    text-align: center;
+    margin: 5px 2px 2px 5px;
+    text-decoration: none;
+}
+
+.voteButton:focus {
+    display: block;
+    background: green;
+    color: white;
+    font-weight: bold;
+    font-size: 150%;
+    width: 4%;
+    text-align: center;
+    margin: 5px 2px 2px 5px;
+    text-decoration: none;
+}
+
+.voteWrapper {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.statsHeading {
+    margin-left: 20px;
+}
+
+/* Bootstrap overrides */
+
+.row {
+    margin-bottom: 20px;
+}
+
+
+
+
+
