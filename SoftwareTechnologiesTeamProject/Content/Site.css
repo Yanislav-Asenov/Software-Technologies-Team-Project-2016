@@ -632,7 +632,12 @@ input[type="color"]:focus,
     border-radius: 12px;
     background-color: #f2f2f2;
     padding: 16px;
+    margin-right: 5%;
 }
 .dev-img, .des-img {
     border-radius: 50%;
+    padding: 0px;
+}
+.aboutUs {
+    text-align:center;
 }
