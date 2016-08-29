@@ -465,6 +465,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\HomePage\" />
+    <Folder Include="Content\Images\PostImages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

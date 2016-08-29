@@ -17,6 +17,6 @@
         [Required]
         public string CommentAuthorId { get; set; }
 
-
+        public Image PostImage { get; set; }
     }
 }

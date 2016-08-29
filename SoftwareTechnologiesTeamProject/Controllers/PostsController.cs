@@ -1,4 +1,8 @@
-﻿namespace SoftwareTechnologiesTeamProject.Controllers
+﻿using System.Security.Cryptography.X509Certificates;
+using System.Web;
+using Microsoft.Ajax.Utilities;
+
+namespace SoftwareTechnologiesTeamProject.Controllers
 {
     using Extensions;
     using Microsoft.AspNet.Identity;
@@ -68,13 +72,15 @@
                 this.AddNotification("Error occurred while trying to load post deitals.", NotificationType.ERROR);
                 return RedirectToAction("Index", "Posts");
             }
-
+            
             var viewModel = new PostDetailsViewModel
             {
                 Post = post,
                 CommentAuthorId = User.Identity.GetUserId(),
-                PostId = post.Id
-            };
+                PostId = post.Id,
+                PostImage = db.Images.FirstOrDefault(i => i.ImagePath.Contains("PostId_" + post.Id))
+            }; 
+            
 
             return View(viewModel);
         }
@@ -98,7 +104,7 @@
                 author.Comments.Add(newComment);
                 db.Comments.Add(newComment);
                 db.SaveChanges();
-
+                
                 return RedirectToAction("Details", new { id = viewModel.PostId });
             }
 

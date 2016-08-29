@@ -11,8 +11,8 @@
             <div class="container"></div>
             <div class="row">
                 <div class="col-md-12">
-                    <img class="img-responsive" src="~/Content/Images/HomePage/@Model.HomePageImagePath" alt="Bar"/>
-                </div>
+                        <img class="img-responsive" src="~/Content/Images/HomePage/@Model.HomePageImagePath" alt="Bar"/>
+                 </div>
             </div>
 
         }
@@ -51,7 +51,14 @@
                     </div>
                     <div class="featured_articles_detail">
                         <div class="featured_articles_img">
-                            iMAGE
+                            @if (post.Image != null)
+                            {
+                                <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar" />
+                             }
+                            else
+                            {
+                                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                            }
                         </div>
                         <div class="post-details-content">
                             @post.Body
