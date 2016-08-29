@@ -16,95 +16,19 @@ body {
   min-height: 100%;
   font-family: Verdana, sans-serif, serif;
   font-size: 13px;
-    background: #f1f1f1;
 }
 
-.container {
-    background: white;
-}
-
-footer {
+.footer {
+    position: absolute;
+    bottom: 0;
+    right: 365px;
+    padding: 1rem;
+    text-align: center;
+    height: 30px;
+    width: 1138px;
     background: green;
     color: white;
-    padding: 30px 0;
-}
-
-
-/* Bootstrap overrides */
-
-.navbar-collapse.collapse {
-    padding-bottom: 0;
-}
-
-.container {
-    padding-right: 15px;
-    padding-left: 0;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-
-/* ---------LOGO----------*/
-
-
-.dropTableLogo {
-    height: 70px;
-    width: 150px;
-    display: inline-block;
-    float: left;
-}
-.nav {
-    padding-top: 10px;
-}
-
-/* Text  styles */
-
-.text-left {
-    text-align: left;
-    padding: 5px;
-}
-
-.text-right {
-    text-align: right;
-    padding: 5px;
-}
-
-.text-center {
-    text-align: center;
-}
-
-
-.boldInfo {
-    font-weight: bold;
-}
-
-/* 
-    Table head and body styles
-*/
-
-.tableHead {
-    background: darkgreen;
-    color: white;
-}
-
-.tableBody {
-    background: white;
-    color: black;
-}
-
-
-td, th {
-    font-size: 14px;
-}
-
-.table {
-    border: 1px solid #ddd;
-    margin: 0;
-    font-size: 13px;
-}
-
-.table-condensed > thead > tr > th {
-    padding: 5px;
+    border-radius: 2px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -530,13 +454,380 @@ textarea {
 /* Standings styles*/
 
 
+.newTeamInput > input {
+    width: 50px;
+    text-align: right;
+    padding: 2px;
+    margin-left: 15%;
+}
+
+.newTeamInputClubName > input {
+    width: 100%;
+}
+
+.teamTableInfoCells {
+    text-align: center;
+}
+
+.tableInfoCells > th {
+    text-align: center;
+}
+
+.clubName {
+    text-align: left;
+    width: 200px;
+}
+
+.standingsHeading {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 30px 0 30px 10px;
+    position: relative;
+    float: left;
+}
+
+.standingsInfo {
+    text-align: center;
+    width: 2%;
+    max-height: 20px;
+}
+
+.standingsTeamName {
+    width: 17%;
+    text-align: left;
+}
+
+th{
+    text-align: center;
+}
+
+.standingsTable {
+     font-size: 1.4rem;
+    vertical-align: central;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.standingsMatchHistory {
+    color: white;
+    width: 17%;
+}
+
+.standingsMatchHistory > ul {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+.standingsMatchHistoryLetter {
+    display: inline-block;
+    border-radius: 100%;
+    text-align: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: #fff;
+
+}
+
+.standingsMatchHistoryLetter > a {
+    display: inline-block;
+    border-radius: 50%;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    padding: 5px 0 5px 0;
+    color: white;
+}
+
+.standingsMatchHistoryLetter > a:hover {
+    display: inline-block;
+    border-radius: 50%;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    padding: 5px 0 5px 0;
+    text-decoration: none;
+    background: rgb(17, 80, 17)
+}
+
+.standingsMatchHistoryLetter > a:focus {
+    display: inline-block;
+    border-radius: 50%;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    padding: 5px 0 5px 0;
+    text-decoration: none;
+    background: rgb(17, 80, 17)
+}
+
 /* Matches styles */
+
+.games {
+    width: 70%;
+    margin: 0px 0px 30px 0px;
+    border-collapse: collapse;
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
+    text-align: left;
+}
+
+.games > td {
+    color: darkgreen;
+    padding: 5px 4px;
+}
+
+.games > th {
+     padding: 5px 4px;
+}
+
+td ,th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+
 
 /*
     Match details styles
 */
 
+.container-fluid {
+    margin-top: 50px;
+    min-height: 900px;
+}
 
+.gameTitle {
+    margin: 0px 0px 10px 0px;
+    padding: 0px;
+    text-align: center;
+    color: darkgreen;
+    font-weight: normal;
+    font-size: 250%;
+}
+
+p {
+    display: block;
+}
+
+.gameTime {
+    margin: 0px 0px 0px 0px;
+    padding: 0px;
+    text-align: center;
+    font-size: 180%;
+    font-weight: bolder;
+    color: darkgreen;
+}
+
+
+
+.homeTeamLogo, .awayTeamLogo {
+    margin: 0px 0px 10px 0px;
+    padding: 0px;
+    width: 50%;
+    text-align: center;
+    font-size: 190%;
+    font-weight: bold;
+}
+
+.homeTeamLogo {
+    float: left;
+    padding-left: 50px;
+}
+
+.awayTeamLogo {
+    float: right;
+    padding-right: 50px;
+}
+
+.votesContainer {
+    float: right;
+    width: 100%;
+    margin: 0px;
+    position: relative;
+    height: 12%;
+}
+
+.votedButton {
+    display: block;
+    background: red;
+    color: white;
+    font-weight: bold;
+    font-size: 150%;
+    width: 3%;
+    text-align: center;
+    margin: 5px 2px 2px 5px;
+    text-decoration: none;
+}
+
+.voteButton {
+    display: block;
+    background: red;
+    color: white;
+    font-weight: bold;
+    font-size: 150%;
+    width: 3%;
+    text-align: center;
+    margin: 5px 2px 2px 5px;
+    text-decoration: none;
+}
+
+.voteButton:hover {
+    display: block;
+    background: green;
+    color: white;
+    font-weight: bold;
+    font-size: 150%;
+    width: 3%;
+    text-align: center;
+    margin: 5px 2px 2px 5px;
+    text-decoration: none;
+}
+
+.voteButton:focus {
+    display: block;
+    background: green;
+    color: white;
+    font-weight: bold;
+    font-size: 150%;
+    width: 3%;
+    text-align: center;
+    margin: 5px 2px 2px 5px;
+    text-decoration: none;
+}
+
+.voteWrapper {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+.totalVotesWrapper {
+    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+    font-size: 150%;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+
+.homeTeamVotes, .awayTeamVotes, .drawVotes {
+    position: absolute;
+    top: 0;
+    left: 38px;
+}
+
+
+.onePercent {
+    width: 3px;
+    background: green;
+    height: 27px;
+    float: left;
+    margin: 0px;
+}
+
+.votePecents {
+    font-size: 130%;
+    margin-left: 5px;
+}
+
+.voteInfo {
+    float: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 5px;
+    font-size: 110%;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.updateResultContainer > form {
+    width: 50%;
+    margin-left: 33%;
+}
+
+.updateResultContainer > * {
+
+    left: 20%;
+    bottom: 0;
+}
+
+.matchResult {
+    position: relative;
+    color: black;
+    font-weight: bolder;
+    font-size: 20px;
+    padding: 10px;
+    color: red;
+    margin-left: 47%;
+}
+
+
+.matchHistoryHomeTeam {
+    text-align: right;
+    width: 200px;
+} 
+
+.matchHistoryAwayTeam {
+    text-align: left;
+    width: 200px;
+}
+
+.historyMatchResult {
+    width: 50px;
+    text-align: center;
+}
+
+.matchHistoryDate {
+    width: 100px;
+    text-align: left;
+}
+
+.boldTeamName {
+    font-weight: bold;
+    color: darkgreen;
+}
+
+
+.matchHistoryCoefficient {
+    width: 50px;
+    text-align: center;
+}
+
+thead {
+    color: white;
+    font-size: 15px;
+    background: green;
+}
+
+.matchHistoryTable {
+    color: black;
+    margin-top: 50px;
+}
+
+.matchHistoryHeading {
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+    float: left;
+    margin-right: 40%;
+    margin-top: 50px;
+}
 
 .searchPost {
     width: 130px;
@@ -559,6 +850,11 @@ textarea {
 
 /* Not important */
 
+.dropTableLogo {
+     height: 70px;
+    width: 150px;
+}
+
 
 .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
@@ -567,11 +863,308 @@ textarea {
   }
 
 
-
-
 /*  Team deitals view styles */
 
-/* Matches Fixtures View*/
+.leagueNameWrapper {
+    position: relative;
+}
+
+.leagueNameWrapper > img {
+    float: left;
+}
+
+.leagueNameWrapper > h2 {
+    margin-left: 38%;
+}
+
+.leagueNameWrapper > h1 {
+     margin-left: 34%;
+}
+
+
+.teamInfoTable {
+    position: absolute;
+    top: 0;
+    right: -5%;
+}
+
+.playedGamesWrapper {
+    margin-top: 0%;
+}
+
+.teamStatsTable {
+    padding: 0;
+    margin: 30px 0 30px 0;
+}
+
+.text-left {
+    padding: 5px;
+}
+
+.text-right {
+    padding: 5px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+td, th {
+    padding: 5px;
+}
+
+.table {
+    border: 1px solid #ddd;
+    margin: 0;
+}
+
+.table-bordered {
+    display: inline-block;
+}
+
+.boldInfo {
+    font-weight: bold;
+}
+
+.resultsInfo {
+    text-align: center;
+    margin-right: 0;
+}
+
+.table-condensed {
+    margin-right: 5%;
+}
+
+.teamDetailsLogo {
+    width: 200px;
+}
+
+.col-md-2.leftCol, .col-md-2.rightCol {
+    height: 200px;
+    font-size: 12px;
+}
+
+.col-md-2.rightCol {
+    margin-right: 0%;
+}
+
+.col-md-2.leftCol {
+    margin-left: 3.5%;
+}
+
+.teamLink {
+    text-decoration: none;
+    color: black;
+}
+
+.highlightedTeam {
+    background:#90ee90;
+    color: black;
+}
+
+.highlightedTeam > a {
+    color: black;
+}
+
+.highlightedTeam > a:hover {
+    color: black;
+}
+
+
+.col-md-6 > div > a {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    font-size: 15px;
+    padding-top: 10px;
+    text-decoration: none;
+    color: darkgreen;
+    background: rgb(232, 232, 232);
+    font-weight: bold;
+    float: right;
+}
+
+.col-md-6 > div > a:hover {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    font-size: 15px;
+    padding-top: 10px;
+    text-decoration: none;
+    background: darkgreen;
+    color: white;
+    float: right;
+}
+
+.col-md-6 > div > a:focus {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    font-size: 15px;
+    padding-top: 10px;
+    text-decoration: none;
+    background: darkgreen;
+    color: white;
+    float: right;
+}
+
+
+.singleUpcomingMatch {
+    background: white;
+    text-decoration: none;
+    width: 100%;
+    cursor: pointer;
+}
+
+.singleUpcomingMatch:hover{
+    background: green;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.singleUpcomingMatch:focus {
+    background: green;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.singleUpcomingMatch > td > a {
+    display: block;
+    color: black;
+    text-decoration: none;
+}
+
+.singleUpcomingMatch > td > a:hover {
+    display: block;
+    text-decoration: none;
+}
+
+.singleUpcomingMatch > td > a:focus {
+    display: block;
+    text-decoration: none;
+}
+
+
+
+.upcomingMatchInfo {
+    display: block;
+    margin: 10px 0 10px 0;
+    border: red solid;
+    height: 50px;
+    padding: 0px;
+}
+
+.upcomingMatchInfo > a {
+    font-size: 15px;
+    padding: 5px;
+    color: white;
+}
+
+.upcomingMatchInfo > a:hover {
+     width: 100%;
+    border: green solid;
+    background: darkviolet;
+    color: white;
+}
+
+
+.upcomingMatchInfo > a > * {
+    display: inline-block;
+    font-size: 15px;
+}
+
+.upcomingMatchHomeTeam {
+    width: 20%;
+    text-align: right;
+    margin-left: 10%;
+}
+
+.upcomingMatchAwayTeam {
+    width: 20%;
+    text-align: left;
+}
+
+.upcomingMatchesDate {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.bet {
+    display: inline-block;
+}
+
+.upcomingMatchesTableHead {
+    color: black;
+    background: white;
+    border-bottom: solid 0.5px #e7e7e7;
+}
+
+.upcomingMatchesTable {
+    margin-bottom: 50px;
+    border: none;
+}
+
+.upcomingMatchesTable > tbody> tr > td {
+    border-left: none;
+    border-right: none;
+    border-bottom: solid 0.5px #e7e7e7;
+}
+
+.team-logo-small {
+    height: 30px;
+    width: 30px;
+}
+
+.time {
+    background:darkgreen;
+    width: 50px;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.time > .matchLink {
+    color: white;
+}
+
+
+.upcomingMatchTeamName {
+    font-weight: bold;
+    width: 250px;
+}
+
+.adminActionsSmall {
+    width: 40px;
+    text-align: right;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.adminActionsLarge {
+    width: 100px;
+    text-align: right;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.adminActionsLarge > a:hover {
+    color: white;
+}
+
+.adminActionsSmall > a:hover{
+    color: white;
+}
+
+.upcomingMatchCoef {
+    width: 50px;
+    text-align: center;
+}
+
+
+.hover {
+    background: white;
+    color: darkgreen;
+}
 
 .postButtons {
     display: inline-block
@@ -580,6 +1173,9 @@ textarea {
 
 .post-details-content {
     overflow-wrap: break-word;
+}
+.nav {
+    margin-right: 10px;
 }
 
 .form-control:focus {
@@ -617,4 +1213,15 @@ input[type="color"]:focus,
     outline: 0 none;
     margin-right: 9px;
 
+}
+
+
+.teamDetailsTeamNameHeading {
+    text-align: center;
+    color: darkgreen;
+    font-weight: bold;
+}
+
+.col-md-3 {
+    margin: 40px 0 40px 0;
 }

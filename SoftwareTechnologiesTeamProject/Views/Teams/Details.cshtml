@@ -7,9 +7,11 @@
 @if (User.IsInRole("Administrator"))
 {
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Team.Id })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Team.Id }) |
     </p>
 }
+
+<a href="/Leagues/Standings/@Model.Team.LeagueId">Back to standings</a>
 
 <div class="container">
 <div class="leagueNameWrapper">
@@ -23,13 +25,9 @@
         </div>
         <div class="col-md-3">
             <table class="table-condensed teamInfoTable">
-                <thead class="tableHead">
                 <tr>
                     <th class="text-center" colspan="2">Team info</th>
                 </tr>
-                </thead>
-
-                <tbody class="tableBody">
                 <tr>
                     <td class="text-right">@Html.LabelFor(model => model.Team.City):</td>
                     <td class="text-left">@Model.Team.City</td>
@@ -50,7 +48,6 @@
                     <td class="boldInfo text-right">Stadium size:</td>
                     <td class="text-left">@Model.Team.GetStadiumSize()</td>
                 </tr>
-                </tbody>
             </table>
         </div>
     </div>
@@ -61,7 +58,7 @@
         <div class="col-md-12">
             <h3>Games played in the league so far</h3>
             <table class="table matchHistoryTable">
-                <tr class="tableHead">
+                <tr>
                     <th class="matchHistoryDate">Date</th>
                     <th class="matchHistoryHomeTeam">Home team</th>
                     <th class="historyMatchResult">Result</th>
@@ -73,8 +70,8 @@
 
                 @foreach (var match in Model.GetPlayedMatches())
                 {
-                    <tr class="tableBody">
-                        <td class="matchHistoryDate">@match.GetShortDate()</td>
+                    <tr>
+                        <td class="matchHistoryDate">@match.GetDate()</td>
                         @if (match.HomeTeam.Name == Model.Team.Name)
                         {
                             <td class="matchHistoryHomeTeam boldTeamName">@match.HomeTeam.Name</td>
@@ -86,21 +83,15 @@
 
                         @if (match.GetWinnerName() == "draw")
                         {
-                            <td class="historyMatchResult draw">
-                                @match.HomeTeamGoals - @match.AwayTeamGoals
-                            </td>
+                            <td class="historyMatchResult" style="background: rgb(255, 202, 104)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
                         }
                         else if (match.GetWinnerName() == Model.Team.Name)
                         {
-                            <td class="historyMatchResult victory">
-                                @match.HomeTeamGoals - @match.AwayTeamGoals
-                            </td>
+                            <td class="historyMatchResult" style="background: lightgreen">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
                         }
                         else
                         {
-                            <td class="historyMatchResult loss">
-                                @match.HomeTeamGoals - @match.AwayTeamGoals
-                            </td>
+                            <td class="historyMatchResult" style="background: rgb(255, 57, 57)">@match.HomeTeamGoals - @match.AwayTeamGoals</td>
                         }
 
                         @if (match.AwayTeam.Name == Model.Team.Name)
@@ -118,7 +109,7 @@
                 }
             </table>
 
-            @* Paragraph info total wins,draws and losses in all games played through the season *@
+            @* Paragraph info after table total wins,draws and losses in all games played through the season *@
             <p>
                 Total of <strong>@Model.Team.Victories</strong> wins
                 @if (Model.Team.Draws > 0 && Model.Team.Losses > 0)
@@ -145,13 +136,10 @@
             @* Wins/Draws/Losses stats *@
             <div class="col-md-3">
                 <table class="table table-condensed teamStatsTable">
-                    <thead class="tableHead">
                     <tr>
                         <td class="text-left boldInfo">Games played</td>
                         <td class="text-right">@Model.GetPlayedMatches().Count</td>
                     </tr>
-                    </thead>
-                    <tbody class="tableBody">
                     <tr>
                         <td class="text-left boldInfo">Wins</td>
                         <td class="text-right">@Model.GetWinsInPercents()</td>
@@ -164,21 +152,16 @@
                         <td class="text-left boldInfo">Losses</td>
                         <td class="text-right">@Model.GetLossesInPercents()</td>
                     </tr>
-                    </tbody>
                 </table>
             </div>
 
             @* Goals stats *@
             <div class="col-md-3">
                 <table class="table table-condensed teamStatsTable">
-                    <thead class="tableHead">
                     <tr>
                         <td class="text-left boldInfo">Goals</td>
                         <td class="text-right">@Model.Team.GamesPlayed</td>
                     </tr>
-                    </thead>
-
-                    <tbody class="tableBody">
                     <tr>
                         <td class="text-left boldInfo">Average per game</td>
                         <td class="text-right">@Model.Team.GetAverageGoalsPerGame()</td>
@@ -191,56 +174,46 @@
                         <td class="text-left boldInfo">Average goals against</td>
                         <td class="text-right">@Model.Team.GetAverageGoalsAgainst()</td>
                     </tr>
-                    </tbody>
                 </table>
             </div>
 
             @* Goals stats *@
             <div class="col-md-3">
                 <table class="table table-condensed teamStatsTable leftSide">
-                    <thead class="tableHead">
                     <tr>
                         <th class="text-center">Goals</th>
                         <th class="text-center">Under</th>
                         <th class="text-center">Over</th>
                     </tr>
-                    </thead>
-
-                    <tbody class="tableBody">
                     <tr>
-                        <td class="text-center boldInfo">1.5</td>
+                        <td class="text-center">1.5</td>
                         <td class="text-center">@Model.GetMatchesGoalsInfo("under", "1.5")</td>
                         <td class="text-center">@Model.GetMatchesGoalsInfo("over", "1.5")</td>
                     </tr>
                     <tr>
-                        <td class="text-center boldInfo">2.5</td>
+                        <td class="text-center">2.5</td>
                         <td class="text-center">@Model.GetMatchesGoalsInfo("under", "2.5")</td>
                         <td class="text-center">@Model.GetMatchesGoalsInfo("over", "2.5")</td>
                     </tr>
                     <tr>
-                        <td class="text-center boldInfo">3.5</td>
+                        <td class="text-center">3.5</td>
                         <td class="text-center">@Model.GetMatchesGoalsInfo("under", "3.5")</td>
                         <td class="text-center">@Model.GetMatchesGoalsInfo("over", "3.5")</td>
                     </tr>
-                    </tbody>
                 </table>
             </div>
 
             @* The most common results *@
             <div class="col-md-3">
                 <table class="table table-condensed teamStatsTable resultsInfo leftSide">
-                    <thead class="tableHead">
                     <tr>
-                        <th colspan="3">The most common results</th>
+                        <th class="tableHeading" colspan="3">The most common results</th>
                     </tr>
                     <tr>
-                        <td class="boldInfo">Result</td>
-                        <td title="Number of matches with this result" class="boldInfo">Matches</td>
-                        <td class="boldInfo">Percents</td>
+                        <td>Result</td>
+                        <td title="Number of matches with this result">Matches</td>
+                        <td>Percents</td>
                     </tr>
-                    </thead>
-
-                    <tbody class="tableBody">
                     @foreach (var stat in Model.GetTeamStats())
                     {
                         <tr>
@@ -255,7 +228,6 @@
                             </td>
                         </tr>
                     }
-                    </tbody>
                 </table>
             </div>
         </div>
@@ -269,7 +241,6 @@
     <div class="row">
         <div class="col-md-6 rightCol">
             <table class="table table-condensed">
-                <thead class="tableHead">
                 <tr>
                     <th colspan="5">@Model.League.Name</th>
                 </tr>
@@ -280,9 +251,7 @@
                     <th class="standingsInfo" title="Goal Difference">GD</th>
                     <th class="standingsInfo" title="Points">Pts</th>
                 </tr>
-                </thead>
 
-                <tbody class="tableBody">
                 @foreach (var keyValuePair in Model.GetMiniStandings())
                 {
                     int position = keyValuePair.Key;
@@ -294,8 +263,7 @@
                             <td class="standingsInfo">@position</td>
                             <td class="highlightedTeam standingsTeamName">
                                 <a href="/Teams/Details/@currentTeam.Id" class="teamLink">
-                                    <img src="@currentTeam.LogoLink" alt="Club Logo" class="team-logo-small" />
-                                    @currentTeam.Name
+                                    <img src="@currentTeam.LogoLink" alt="Club Logo" width="20" height="20"/> @currentTeam.Name
                                 </a>
                             </td>
                             <td class="standingsInfo">@currentTeam.GamesPlayed</td>
@@ -309,8 +277,7 @@
                             <td class="standingsInfo">@position</td>
                             <td class="standingsTeamName">
                                 <a href="/Teams/Details/@currentTeam.Id" class="teamLink">
-                                    <img src="@currentTeam.LogoLink" class="team-logo-small" alt="Club Logo" />
-                                     @currentTeam.Name
+                                    <img src="@currentTeam.LogoLink" alt="Club Logo" width="20" height="20"/> @currentTeam.Name
                                 </a>
                             </td>
                             <td class="standingsInfo">@currentTeam.GamesPlayed</td>
@@ -319,7 +286,6 @@
                         </tr>
                     }
                 }
-                </tbody>
             </table>
             <div class="tablesLinkContainer">
                 <a href="/Leagues/Standings/@Model.Team.LeagueId" class="tablesLink">View Full Table</a>
@@ -328,16 +294,12 @@
 
         @*
         Team upcoming matches
-         *@
+            *@
         <div class="col-md-6 leftCol">
             <table class="table table-condensed">
-                <thead class="tableHead">
                 <tr>
                     <th colspan="4">Fixtures</th>
                 </tr>
-                </thead>
-
-                <tbody class="tableBody">
                 @foreach (var kvp in Model.GetUpcomingMatches())
                 {
                     var date = kvp.Key;
@@ -345,13 +307,12 @@
                     <tr class="singleUpcomingMatch" onmouseover="changeLinkColor(@match.Id)" id="linkRow-@match.Id" onmouseout="resetLinkColor(@match.Id)">
                         <td>
                             <a href="/Matches/Details/@match.Id" class="matchLink fixtureLink-@match.Id">
-                                @match.GetShortDate()
+                                @match.GetDate()
                             </a>
                         </td>
                         <td>
                             <a href="/Matches/Details/@match.Id" class="matchLink text-right fixtureLink-@match.Id">
-                                @match.HomeTeam.Name
-                                <img src="@match.HomeTeam.LogoLink" class="team-logo-small" alt="Club logo" />
+                                @match.HomeTeam.Name <img src="@match.HomeTeam.LogoLink" width="20" height="20" alt="Club logo"/>
                             </a>
                         </td>
                         <td>
@@ -361,16 +322,14 @@
                         </td>
                         <td>
                             <a href="/Matches/Details/@match.Id" class="matchLink text-left fixtureLink-@match.Id">
-                                <img src="@match.AwayTeam.LogoLink" class="team-logo-small" alt="Club logo" />
-                                @match.AwayTeam.Name
+                                <img src="@match.AwayTeam.LogoLink" width="20" height="20" alt="Club logo"/> @match.AwayTeam.Name
                             </a>
                         </td>
                     </tr>
                 }
-                </tbody>
             </table>
             <div class="tablesLinkContainer">
-                <a href="/Matches/Fixtures" class="tablesLink">View All Fixtures</a>
+                <a href="/Matches/Index" class="tablesLink">View All Fixtures</a>
             </div>
         </div>
     </div>

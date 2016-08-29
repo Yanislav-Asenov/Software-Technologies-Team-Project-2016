@@ -1,12 +1,14 @@
-﻿namespace SoftwareTechnologiesTeamProject.Controllers
+﻿using SoftwareTechnologiesTeamProject.Models;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
+
+namespace SoftwareTechnologiesTeamProject.Controllers
 {
+    using System;
     using Extensions;
     using Microsoft.AspNet.Identity;
-    using Models;
-    using System.Data.Entity;
-    using System.Linq;
-    using System.Net;
-    using System.Web.Mvc;
     using ViewModels;
 
     public class MatchesController : Controller
@@ -14,7 +16,7 @@
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Matches
-        public ActionResult Fixtures()
+        public ActionResult Index()
         {
             var matches = db.Matches
                 .Include(m => m.AwayTeam)
@@ -216,7 +218,7 @@
 
                 db.Matches.Add(match);
                 db.SaveChanges();
-                return RedirectToAction("Fixtures");
+                return RedirectToAction("Index");
             }
 
             ViewBag.AwayTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
@@ -257,7 +259,7 @@
             {
                 db.Entry(match).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Fixtures");
+                return RedirectToAction("Index");
             }
             ViewBag.AwayTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
             ViewBag.HomeTeamId = new SelectList(db.Teams, "Id", "Name", match.HomeTeamId);
@@ -290,7 +292,7 @@
             Match match = db.Matches.Find(id);
             db.Matches.Remove(match);
             db.SaveChanges();
-            return RedirectToAction("Fixtures");
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
