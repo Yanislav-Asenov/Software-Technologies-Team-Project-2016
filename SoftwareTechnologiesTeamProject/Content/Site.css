@@ -10,7 +10,6 @@
 }
 
 body {
-  
   position: relative;
   margin: 0;
   padding-bottom: 6rem;
@@ -1214,16 +1213,17 @@ input[type="url"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
-.uneditable-input:focus {   
-  border-color: green;
-  box-shadow: none;
+.uneditable-input:focus {
+    border-color: green;
+    box-shadow: none;
     border: solid 2px;
-  outline: 0 none;
-
-    width: 300px;
-    height: 300px;
+    outline: 0 none;
+}
+.dev{
+    /*width: 300px;
+    height: 300px;*/
     display: inline-block;
-    border-radius: 12px;
+    /*border-radius: 12px;*/
     background-color: #f2f2f2;
     padding: 16px;
     margin-right: 5%;
@@ -1235,13 +1235,4 @@ input[type="color"]:focus,
 .aboutUs {
     text-align:center;
 
-<<<<<<< HEAD
-.col-md-3 {
-    margin: 40px 0 40px 0;
-}
-
-.softLogo {
-    float: right;
-=======
->>>>>>> origin/master
 }
