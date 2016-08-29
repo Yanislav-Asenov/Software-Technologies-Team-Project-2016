@@ -9,7 +9,6 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     
     
-    <meta name="description" content="'Drop Table' Team Project" />
 </head>
 <body>
     <div>
@@ -54,7 +53,7 @@
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                                 <li>@Html.ActionLink("Posts", "Index", "Posts")</li>
                                 <li>@Html.ActionLink("Leagues", "Index", "Leagues")</li>
-                                <li>@Html.ActionLink("Fixtures", "Index", "Matches")</li>
+                                <li>@Html.ActionLink("Fixtures", "Fixtures", "Matches")</li>
                                 <li>@Html.ActionLink("Profile", "Index", "Profiles")</li>
                                 <li>@Html.ActionLink("Contacts", "Index", "Contacts")</li>
                                 <li>@Html.ActionLink("About Us", "Index", "About")</li>
@@ -75,8 +74,8 @@
 
     <div class="container body-content">
         @RenderBody()
+        <div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
     </div>
-    <div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
 </body>
 </html>
 

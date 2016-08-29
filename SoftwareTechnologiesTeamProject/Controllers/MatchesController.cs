@@ -6,7 +6,6 @@ using System.Web.Mvc;
 
 namespace SoftwareTechnologiesTeamProject.Controllers
 {
-    using System;
     using Extensions;
     using Microsoft.AspNet.Identity;
     using ViewModels;
@@ -26,12 +25,6 @@ namespace SoftwareTechnologiesTeamProject.Controllers
 
             var viewModel = new MatchesIndexViewModel();
 
-            viewModel.Leagues = db.Leagues.ToList();
-
-            foreach (var league in viewModel.Leagues)
-            {
-                league.Matches = matches.Where(m => m.LeagueId == league.Id && !m.IsResultUpdated).ToList();
-            }
 
 
             viewModel.Matches = matches;
