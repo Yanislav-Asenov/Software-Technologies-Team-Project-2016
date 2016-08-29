@@ -10,31 +10,32 @@
 <h3>@ViewBag.Message</h3>
 <br />
 
+<div class="aboutUs">
+    <h2>Our developers:</h2>
+    <br />
 
-<h2>Our developers:</h2>
-<br />
+    @foreach (var member in Model.Developers)
+    {
+        <div class="dev">
+            <img class="dev-img" src="@member.Image.ImagePath" width="170" height="170" />
+            <p>
+                @member.Name <br />
+                @member.Info
+            </p>
+        </div>
+    }
 
-@foreach (var member in Model.Developers)
-{
-    <div class="dev">
-        <img class="dev-img" src="@member.Image.ImagePath" width="170" height="170" />
-        <p>
-            @member.Name <br />
-            @member.Info
-        </p>
-    </div>
-} 
+    <h2>Our designers:</h2>
+    <br />
 
-<h2>Our designers:</h2>
-<br />
-
-@foreach (var member in Model.Designers)
-{
-    <div class="des">
-        <img class="des-img" src="@member.Image.ImagePath" width="170" height="170" />
-        <p>
-            @member.Name <br />
-            @member.Info
-        </p>
+    @foreach (var member in Model.Designers)
+    {
+        <div class="des">
+            <img class="des-img" src="@member.Image.ImagePath" width="170" height="170" />
+            <p>
+                @member.Name <br />
+                @member.Info
+            </p>
+        </div>
+    }
 </div>
-} 
