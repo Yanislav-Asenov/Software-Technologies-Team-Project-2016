@@ -22,55 +22,59 @@
     <div class="featured_articles_detail">
         
         <div class="featured_articles_img">
-            <hr>
-
-            @*@if (User.IsInRole("Administrators"))
-            {*@
+            
+            
             @if (Model.PostImage != null)
             {
                 <img class="img-responsive" src="~/Content/Images/PostImages/@Model.PostImage.ImagePath" alt="Bar"/>
-                using (Html.BeginForm("AddPostImage/" + Html.DisplayFor(model => model.Post.Id), "Images", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true)
-                    <fieldset>
-                        <div class="editor-label">
-                            @Html.Label("Change image")
-                        </div>
-                        <div class="editor-field">
-                            <input id="ImagePath" title="Upload a product image"
-                                   type="file" name="file" />
-                        </div>
-                        <p>
-                            <input type="submit" value="Change" />
-                        </p>
-                    </fieldset>
+                   if (User.IsInRole("Administrator") || (Model.Post.Author != null && User.Identity.Name == Model.Post.Author.UserName))
+                    {
+                        using (Html.BeginForm("AddPostImage/" + Html.DisplayFor(model => model.Post.Id), "Images", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <fieldset>
+                            <div class="editor-label">
+                                @Html.Label("Change image")
+                            </div>
+                            <div class="editor-field">
+                                <input id="ImagePath" title="Upload a product image"
+                                       type="file" name="file"/>
+                            </div>
+                            <p>
+                                <input type="submit" value="Change"/>
+                            </p>
+                        </fieldset>
+                    }
                 }
             }
             else
             {
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-                using (Html.BeginForm("AddPostImage/" + Html.DisplayFor(model => model.Post.Id), "Images", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                if (User.IsInRole("Administrator") || (Model.Post.Author != null && User.Identity.Name == Model.Post.Author.UserName))
                 {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true)
-                    <fieldset>
-                        <div class="editor-label">
-                            @Html.Label("Change image")
-                        </div>
-                        <div class="editor-field">
-                            <input id="ImagePath" title="Upload a product image"
-                                   type="file" name="file" />
-                        </div>
-                        <p>
-                            <input type="submit" value="Add Image" />
-                        </p>
-                    </fieldset>
+
+                    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+
+                    using (Html.BeginForm("AddPostImage/" + Html.DisplayFor(model => model.Post.Id), "Images", null, FormMethod.Post, new {enctype = "multipart/form-data"}))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <fieldset>
+                            <div class="editor-label">
+                                @Html.Label("Change image")
+                            </div>
+                            <div class="editor-field">
+                                <input id="ImagePath" title="Upload a product image"
+                                       type="file" name="file"/>
+                            </div>
+                            <p>
+                                <input type="submit" value="Add Image"/>
+                            </p>
+                        </fieldset>
+                    }
                 }
             }
-            @*}*@
 
-            <hr>
             <hr/>
         </div>
         <div class="post-details-content">
@@ -79,9 +83,7 @@
                     <div class="col-md-8"> @Html.DisplayFor(model => model.Post.Body)</div>
                 </div>
             </div>
-
-
-
+            
         </div>
     </div>
         <div class="tag-container">
@@ -105,8 +107,8 @@
        
 
     <p>
-        @if (User.IsInRole("Administrators") || (Model.Post.Author != null && User.Identity.Name == Model.Post.Author.UserName))
-        {
+        @if (User.IsInRole("Administrator") || (Model.Post.Author != null && User.Identity.Name == Model.Post.Author.UserName))
+       {
             @Html.ActionLink("Edit", "Edit", new {id = Model.PostId})
             <br/>
         }

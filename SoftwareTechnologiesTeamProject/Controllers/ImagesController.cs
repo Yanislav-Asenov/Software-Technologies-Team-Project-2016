@@ -55,7 +55,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 int postid = int.Parse(check);
                 Image img = new Image();
 
-                string postImgName = "PostId_" +check + file.FileName;
+                string postImgName = "PostId_" + check + file.FileName;
 
                 if (file != null)
                 {
