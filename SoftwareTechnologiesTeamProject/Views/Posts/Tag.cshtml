@@ -1,64 +1,94 @@
-﻿@model IEnumerable<SoftwareTechnologiesTeamProject.Models.Post>
+﻿@using SoftwareTechnologiesTeamProject.Models
+@using System.IO;
+@using System.Collections.Generic;
+@model IEnumerable<SoftwareTechnologiesTeamProject.Models.Post>
+
 @{
-    ViewBag.Title = "Tag:" + ViewBag.Header;
+    ViewBag.Title = "Posts";
 }
 <h2>Tag: @ViewBag.Header</h2>
+<br />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Body)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Author)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th></th>
-    </tr>
+<div class="col-md-8">
+    @Html.ActionLink("Create new", "Create")
 
     @foreach (var item in Model.OrderByDescending(p => p.Date))
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Body)
-            </td>
-            <td>
-                @if (item.Author == null)
-                {
-                    @: Anonymous
-            }
-                else
-                {
-                    @Html.DisplayFor(modelItem => item.Author.FullName)
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @if (User.IsInRole("Administrators") || (item.Author != null && User.Identity.Name == item.Author.UserName))
-                {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                    <br />
+
+        <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+        if (item.Author == null)
+        {
+            <p class="lead">
+                by <a>Anonymous</a>
+            </p>
+        }
+
+        else
+        {
+            <p class="lead">
+                by <a href=#>@Html.DisplayFor(modelItem => item.Author.FullName)</a>
+            </p>
+        }
+        <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => item.Date)</p>
+
+        @*<img class="img-responsive" src="http://placehold.it/900x300" alt="">*@
+
+        <p>@item.ShortText()</p>
+
+
+        <h1>@Html.ActionLink("Details", "Details", new { id = item.Id })</h1>
+
+
+        if (User.IsInRole("Administrator") || (item.Author != null && User.Identity.Name == item.Author.UserName))
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+            <br />
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                     <br />
-                }
-
-
-                @Html.ActionLink("Details", "Details", new { id = item.Id })
-            </td>
-        </tr>
+        }
+        <hr>
     }
 
-</table>
+</div>
+<div class="col-md-4">
+
+    <div class="well">
+        <h4>Търсене</h4>
+        <div class="input-group">
+            @using (Html.BeginForm("Index", "Posts", FormMethod.Post))
+            {
+                <input class="searchPost" type="text" name="searchString" placeholder="Search..">
+            }
+        </div>
+
+    </div>
+
+    <div class="well">
+        <h4>Тагове</h4>
+        <div class="row">
+            <div class="col-lg-6">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#">Tags</a>
+                    </li>
+                    <li>
+                        <a href="#">Tags</a>
+                    </li>
+                    <li>
+                        <a href="#">Tags</a>
+                    </li>
+                    <li>
+                        <a href="#">Tags</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Side Widget Well -->
+    <div class="well">
+        <h4>Side Widget Well</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+    </div>
+
+</div>
