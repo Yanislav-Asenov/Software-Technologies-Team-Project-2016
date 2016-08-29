@@ -61,10 +61,19 @@
     @RenderSection("styles", required: false)
     @Scripts.Render("~/bundles/modernizr")
 
-    <div class="container body-content">
+<div class="container body-content">
+    <div class="row">
         @RenderBody()
     </div>
-    <div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
+        </div>
+    </div>
+</div>
+    
 </body>
 </html>
 

@@ -1,6 +1,6 @@
 ﻿html {
-  height: 100%;
-  box-sizing: border-box;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 *,
@@ -10,23 +10,29 @@
 }
 
 body {
-  position: relative;
-  margin: 0;
-  padding-bottom: 6rem;
-  min-height: 100%;
-  font-family: Verdana, sans-serif, serif;
-  font-size: 13px;
-    background: #f1f1f1;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #edebeb;
+}
+
+.body-content {
+    min-height: 752px;
+}
+
+p {
+    overflow-wrap: break-word;
 }
 
 .container {
     background: white;
 }
 
-footer {
+.footer {
     background: green;
     color: white;
-    padding: 30px 0;
+    margin-bottom: -20px;
+    text-align: center;
 }
 
 
@@ -37,7 +43,7 @@ footer {
 }
 
 .container {
-    padding-right: 15px;
+    padding-right: 0;
     padding-left: 0;
     margin-right: auto;
     margin-left: auto;

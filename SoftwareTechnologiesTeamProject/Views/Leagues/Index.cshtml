@@ -4,30 +4,37 @@
     ViewBag.Title = "Leagues";
 }
 
-<h2>Leagues</h2>
-@if (User.IsInRole("Administrator"))
-{
-    @Html.ActionLink("Add new league", "Create")
-}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Leagues</h2>
+            @if (User.IsInRole("Administrator"))
+            {
+                @Html.ActionLink("Add new league", "Create")
+            }
 
 
-<table class="table">
-    <tr>
-        <th>
-            Leagues
-        </th>
-        <th></th>
-    </tr>
+            <table class="table">
+                <tr>
+                    <th>
+                        Leagues
+                    </th>
+                    <th></th>
+                </tr>
 
-    @foreach (var league in Model)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink(league.Name, "Standings", new { id = league.Id })
-            </td>
-            <td>
+                @foreach (var league in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(league.Name, "Standings", new { id = league.Id })
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </table>
 
-            </td>
-        </tr>
-    }
-</table>
+        </div>
+    </div>
+</div>
+
+
