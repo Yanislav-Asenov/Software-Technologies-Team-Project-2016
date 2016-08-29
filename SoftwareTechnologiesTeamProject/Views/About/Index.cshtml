@@ -3,39 +3,31 @@
 @using System.Collections.Generic;
 @model SoftwareTechnologiesTeamProject.ViewModels.AboutUsViewModel
 
+
 @{
     ViewBag.Title = "About Us";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<div class="about-header">
+    <h2>@ViewBag.Title</h2>
+    <h3>@ViewBag.Message</h3>
+</div>
 <br />
 
 <div class="aboutUs">
-    <h2>Our developers:</h2>
+    <h2>Our team:</h2>
     <br />
 
-    @foreach (var member in Model.Developers)
-    {
-        <div class="dev">
-            <img class="dev-img" src="@member.Image.ImagePath" width="170" height="170" />
-            <p>
-                @member.Name <br />
-                @member.Info
-            </p>
-        </div>
-    }
+    <div class="row">
+        @foreach (var member in Model.Developers)
+        {
 
-    <h2>Our designers:</h2>
-    <br />
-
-    @foreach (var member in Model.Designers)
-    {
-        <div class="des">
-            <img class="des-img" src="@member.Image.ImagePath" width="170" height="170" />
-            <p>
-                @member.Name <br />
-                @member.Info
-            </p>
-        </div>
-    }
+            <div class="col-md-3">
+                <img class="dev-img" src="@member.Image.ImagePath" width="170" height="170" />
+                <p>
+                    @member.Name <br />
+                    @member.Info
+                </p>
+            </div>
+        }
+    </div>
 </div>

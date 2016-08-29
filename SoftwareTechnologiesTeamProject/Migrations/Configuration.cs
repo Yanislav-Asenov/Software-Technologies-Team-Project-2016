@@ -133,7 +133,7 @@ namespace SoftwareTechnologiesTeamProject.Migrations
             var teamMember3 = new TeamMember
             {
                 Name = "Петьо Животното",
-                Role = TeamMemberRole.Designer,
+                Role = TeamMemberRole.Developer,
                 Info = "Работил е за гуугъл още преди да съществуват.",
                 Image = new Image { ImagePath = "/Content/Images/11666030_10200580448391070_6748796253436057290_n.jpg" }
             };
@@ -141,7 +141,7 @@ namespace SoftwareTechnologiesTeamProject.Migrations
             var teamMember4 = new TeamMember
             {
                 Name = "Адриан Животното",
-                Role = TeamMemberRole.Designer,
+                Role = TeamMemberRole.Developer,
                 Info = "Правил е дизайна на змията за Nokia 3310.",
                 Image = new Image { ImagePath = "/Content/Images/10452379_10203768193393008_793925269277997445_n.jpg" }
             };

@@ -1226,20 +1226,55 @@ input[type="color"]:focus,
     border: solid 2px;
     outline: 0 none;
 }
-.dev{
-    /*width: 300px;
-    height: 300px;*/
+
+.dev {
+    width: 300px;
+    height: 300px;
     display: inline-block;
-    /*border-radius: 12px;*/
+    border-radius: 12px;
     background-color: #f2f2f2;
-    padding: 16px;
-    margin-right: 5%;
 }
-.dev-img, .des-img {
+.dev-img {
     border-radius: 50%;
-    padding: 0px;
 }
 .aboutUs {
     text-align:center;
-
+}
+.logoff {
+    margin-right: 28px;
+}
+.about-header {
+    text-align: center;
+}
+.contact-header {
+    text-align: center;
+}
+.contact-content {
+    width: 400px;
+    height: 260px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    text-align: center;
+    padding-top: 10px;
+}
+.contact-form {
+    width: 400px;
+    height: 560px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    text-align: center;
+    padding-top: 10px;
+    margin-top: 20px;
+}
+.contact-input-form {
+    width: 200px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.contact-text-form {
+    height: 300px;
+    width: 290px;
+    border-radius: 5px;
 }

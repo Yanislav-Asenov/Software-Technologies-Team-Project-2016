@@ -1,25 +1,43 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Contacts";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<div class="contact-header">
+    <h2>@ViewBag.Title</h2>
+    <h3>@ViewBag.Message</h3>
+</div>
 
-<address>
-    Sofia, Izgrev residential area, 15-17 Tintyava str, fl. 1 <br />
-    Working hours: <br />
-    10:00 - 20:00 (Monday - Friday) <br />
-    Phone number: <br />
-    +359 899 55 55 92 <br />
-    Post code: <br />
-    1113 <br />
-    Email: <br />
-    info@softuni.bg
-</address>
+<div class="contact-content">
+    <address>
+        Sofia, Izgrev residential area, 15-17 Tintyava str, fl. 1 <br />
+        Working hours: <br />
+        10:00 - 20:00 (Monday - Friday) <br />
+        Phone number: <br />
+        +359 899 55 55 92 <br />
+        Post code: <br />
+        1113 <br />
+        Email: <br />
+        info@softuni.bg
+    </address>
 
-<address>
-    <strong>Support:</strong> <a href="https://www.facebook.com/pain.will.fix.it">bobijivotnoto.com</a>,
-    <a href="https://www.facebook.com/pain.will.fix.it">qnijivotnoto.com</a><br />
+    <address>
+        <strong>Support:</strong> <a href="https://www.facebook.com/pain.will.fix.it">bobijivotnoto.com</a>,
+        <a href="https://www.facebook.com/pain.will.fix.it">qnijivotnoto.com</a><br />
 
-    <strong>Marketing:</strong> <a href="https://www.facebook.com/petiovassilev">petiojivotnoto.com</a>,
-    <a href="https://www.facebook.com/adrian.georgiev">adrianjivotnoto.com</a>
-</address>
+        <strong>Marketing:</strong> <a href="https://www.facebook.com/petiovassilev">petiojivotnoto.com</a>,
+        <a href="https://www.facebook.com/adrian.georgiev">adrianjivotnoto.com</a>
+    </address>
+</div>
+
+<div class="contact-form">
+    <form>
+        First name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="contact-input-form" type="text" name="FirstName" value=""><br><br>
+        Last name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="contact-input-form" type="text" name="LastName" value=""><br><br>
+        Email address: <input class="contact-input-form" type="text" name="LastName" value=""><br><br>
+    </form>
+
+    <from>
+        Message: <br /><br />
+        <textarea class="contact-text-form" rows="15" cols="30"></textarea> <br /><br />
+        <input type="submit" value="Submit">
+    </from>
+</div>
