@@ -18,7 +18,8 @@ body {
   font-size: 13px; 
 }
 
-p {
+p, h1, h2, h3, h4, h5, a {
+
     overflow-wrap: break-word;
 }
 
@@ -853,6 +854,9 @@ thead {
 	-moz-box-shadow: none;
 	box-shadow: none;
 }
+.searchPost:focus{
+    width:inherit;
+}
 
 
 /* Not important */
@@ -1185,7 +1189,6 @@ td, th {
     overflow-wrap: break-word;
 }
 .nav {
-<<<<<<< HEAD
     margin-right: 10px;
 }
 
