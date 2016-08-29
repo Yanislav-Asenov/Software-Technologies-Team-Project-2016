@@ -46,7 +46,7 @@
             {
                 Team = team,
                 Matches = matches,
-                LeagueName = db.Leagues.First(l => l.Id == team.LeagueId).Name,
+                League = db.Leagues.First(l => l.Id == team.LeagueId),
                 Standings = teams
             };
 

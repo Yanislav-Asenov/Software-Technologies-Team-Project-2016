@@ -31,7 +31,7 @@ p, h1, h2, h3, h4, h5, a {
     padding: 1rem;
     text-align: center;
     height: 30px;
-    width: 60%;
+    width: 1138px;
     margin-left: 20%;
     background: green;
     color: white;
@@ -900,7 +900,7 @@ thead {
 }
 
 .playedGamesWrapper {
-    margin-top: 15%;
+    margin-top: 30px;
 }
 
 .teamStatsTable {
@@ -951,9 +951,7 @@ td, th {
 }
 
 .col-md-2.leftCol, .col-md-2.rightCol {
-    width: 45%;
     height: 200px;
-    padding: 0;
     font-size: 12px;
 }
 
@@ -962,7 +960,7 @@ td, th {
 }
 
 .col-md-2.leftCol {
-    margin-left: 5%;
+    margin-left: 3.5%;
 }
 
 .teamLink {
@@ -983,22 +981,50 @@ td, th {
     color: black;
 }
 
+.teamDetailsInfoRow {
+    margin-bottom: 30px;
+}
 
-.col-md-2 > div > a {
-    position: absolute;
+.teamDetailsTeamNameHeading {
+    text-align: center;
+    padding-right: 60px;
+}
+
+.teamDetailsLogo {
+    padding-left: 50px;
+}
+
+
+.tablesLink {
     width: 100%;
     height: 40px;
     text-align: center;
     font-size: 15px;
     padding-top: 10px;
     text-decoration: none;
-    color: darkgreen;
-    background: rgb(232, 232, 232);
+    border: solid darkgreen 1px;
+    border-radius: 2px;
+    color: black;
+    float: right;
     font-weight: bold;
+    color: darkgreen;
+
+}
+
+.tablesLink:hover {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    padding-top: 10px;
+    text-decoration: none;
+    background: darkgreen;
+    color: white;
     float: right;
 }
 
-.col-md-2 > div > a:hover {
+.tablesLink:focus {
     width: 100%;
     height: 40px;
     text-align: center;
@@ -1008,18 +1034,7 @@ td, th {
     background: darkgreen;
     color: white;
     float: right;
-}
-
-.col-md-2 > div > a:focus {
-    width: 100%;
-    height: 40px;
-    text-align: center;
-    font-size: 15px;
-    padding-top: 10px;
-    text-decoration: none;
-    background: darkgreen;
-    color: white;
-    float: right;
+    font-weight: bold;
 }
 
 
