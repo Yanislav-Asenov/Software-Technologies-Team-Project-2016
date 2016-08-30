@@ -1,60 +1,69 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - SoftUni Team Project</title>
-   
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    
-    
+
 </head>
 <body>
-<div>
-
-    <nav class="navbar navbar-default primary-bg">
-        <div class="navbar-header">
-            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a rel="home" href="@Url.Action("Index", "Home")" title="Drop Table">
-                <img style="max-width:150px;"
-                     src="~/Content/Images/droptableLogo.png">
-            </a>
-        </div>
-        <div class="navbar-collapse collapse" id="navbar" style="height: 0px;">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Posts", "Index", "Posts")</li>
-                <li>@Html.ActionLink("Leagues", "Index", "Leagues")</li>
-                <li>@Html.ActionLink("Matches", "Matches", "Matches")</li>
-                <li>@Html.ActionLink("Profile", "Index", "Profiles")</li>
-                <li>@Html.ActionLink("Contacts", "Index", "Contacts")</li>
-                <li>@Html.ActionLink("About Us", "Index", "About")</li>
-            </ul>
-            @Html.Partial("_LoginPartial")
-        </div>
-    </nav>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
+    <div class="example3">
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar3">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")" title="Drop Table">
+                       
+                        <img src="~/Content/Images/droptableGreen.png" alt="DROP TABLE">
+                    </a>
+                </div>
+                <div id="navbar3" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="navButtons">@Html.ActionLink("Posts", "Index", "Posts")</li>
+                        <li class="navButtons">@Html.ActionLink("Leagues", "Index", "Leagues")</li>
+                        <li class="navButtons">@Html.ActionLink("Matches", "Matches", "Matches")</li>
+                        <li class="navButtons">@Html.ActionLink("Profile", "Index", "Profiles")</li>
+                        <li class="navButtons">@Html.ActionLink("Contacts", "Index", "Contacts")</li>
+                        <li class="navButtons">@Html.ActionLink("About Us", "Index", "About")</li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account Settings <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.Partial("_LoginPartial")</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+             
             </div>
+           
+        </nav>
+    </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
         </div>
     </div>
 </div>
 
 
-    @Html.Partial("_Notifications")
-    @Styles.Render("~/Content/css")
-    @RenderSection("styles", required: false)
-    @Scripts.Render("~/bundles/modernizr")
 
-    <div class="container body-content">
-        @RenderBody()
-    </div>
-    <div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
+@Html.Partial("_Notifications")
+@Styles.Render("~/Content/css")
+@RenderSection("styles", required: false)
+@Scripts.Render("~/bundles/modernizr")
+
+<div class="container body-content">
+    @RenderBody()
+</div>
+<div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.
+</div>
 </body>
 </html>
 

@@ -7,8 +7,8 @@
 <br />
 
 <div class="col-md-8">
-    @Html.ActionLink("Create new", "Create")
-    
+    <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Create new", "Create") </span></button>
+   
     @foreach (var post in Model.OrderByDescending(p => p.Date))
     {
         <h2> @Html.ActionLink(post.Title, "Details", new {id = post.Id})</h2>
@@ -45,7 +45,7 @@
         <hr/>
     }
 
-        </div>
+</div>
 
 <div class="col-md-4">
 

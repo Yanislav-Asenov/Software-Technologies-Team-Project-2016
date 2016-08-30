@@ -1187,7 +1187,7 @@ th.upcomingMatchCoef, td.upcomingMatchCoef {
 
 .hover {
     background: white;
-    color: darkgreen;
+    
 }
 
 .postButtons {
@@ -1203,13 +1203,13 @@ th.upcomingMatchCoef, td.upcomingMatchCoef {
 }
 
 .form-control:focus {
+    background-color: whitesmoke;
     border-color: darkgreen;
     outline: none;
     -webkit-box-shadow:  0 0px 0px , 0 0 0px darkgreen;
     box-shadow: 0 0px 0px , 0 0 0px darkgreen;
     border: solid 3px;
 }
-
 
 /*
     Test
@@ -1288,19 +1288,18 @@ input[type="color"]:focus,
     width: 290px;
     border-radius: 5px;
 }
-<<<<<<< HEAD
 
 .button {
   display: inline-block;
   border-radius: 4px;
-    background-color: rgb(25, 98, 3);
+    background-color: darkgreen;
   border: none;
   color: black;
   text-align: center;
   font-size: 15px;
   /*padding: 15px;*/
   height: 25px;
-  width: 110px;
+  width: auto;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
@@ -1315,7 +1314,7 @@ input[type="color"]:focus,
 
 .button span:after {
   content: '»';
-    color: white;
+    color: whitesmoke;
   position: absolute;
   opacity: 0;
   top: 0;
@@ -1335,7 +1334,7 @@ input[type="color"]:focus,
 .button span a {
     color: white;
 }
-=======
+
 .read-more-state {
   display: none;
 }
@@ -1385,4 +1384,42 @@ p.about-us {
     border-radius: 10px;
     padding: 4px;
 }
->>>>>>> origin/master
+
+
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+    
+    height: 110%;
+    padding-bottom: 1%;
+    width: auto;
+ 
+}
+
+.navButtons {
+  transition: 0.4s;
+  color: #ffffff;
+  font-size: 13px;
+  text-decoration: none;
+  padding: 0 10px;
+  margin: 0 10px;
+}
+.navButtons:hover {
+  background-color: darkgreen;
+  
+}
+
+
+.example3 .navbar-brand {
+  height: 80px;
+}
+
+.example3 .nav >li >a {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.example3 .navbar-toggle {
+  padding: 10px;
+  margin: 25px 15px 25px 0;
+}
