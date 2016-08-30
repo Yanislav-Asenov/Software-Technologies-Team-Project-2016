@@ -24,18 +24,13 @@ p, h1, h2, h3, h4, h5, a {
 }
 
 .footer {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-    text-align: center;
-    height: 30px;
-    width: 1138px;
-    margin-left: 20%;
-    background: green;
-    color: white;
-    border-radius: 5px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -1145,7 +1140,7 @@ td, th {
 
 .upcomingMatchTeamName {
     font-weight: bold;
-    width: 100px;
+    width: 30%;
     max-width: 100px;
 }
 
@@ -1172,7 +1167,7 @@ td, th {
 }
 
 th.upcomingMatchCoef, td.upcomingMatchCoef {
-    width: 20px;
+    width: 5%;
     text-align: center;
 }
 
@@ -1279,4 +1274,50 @@ input[type="color"]:focus,
     height: 300px;
     width: 290px;
     border-radius: 5px;
+}
+
+.button {
+  display: inline-block;
+  border-radius: 4px;
+    background-color: rgb(25, 98, 3);
+  border: none;
+  color: black;
+  text-align: center;
+  font-size: 15px;
+  /*padding: 15px;*/
+  height: 25px;
+  width: 110px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '»';
+    color: white;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button span a {
+    color: white;
 }

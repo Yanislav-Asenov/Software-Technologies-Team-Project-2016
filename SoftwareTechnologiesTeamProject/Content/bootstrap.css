@@ -4180,6 +4180,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-collapse {
+
+    padding-top: 1.5%;
   padding-right: 15px;
   padding-left: 15px;
   overflow-x: visible;

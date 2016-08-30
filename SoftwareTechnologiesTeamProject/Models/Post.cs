@@ -50,16 +50,16 @@ namespace SoftwareTechnologiesTeamProject.Models
 
         [NotMapped]
         public Image Image { get; set; }
-
+        
         public virtual List<Comment> Comments { get; set; }
 
         public virtual List<Tag> Tags { get; set; } = new List<Tag>();
 
         public string ShortText()
         {
-            if (this.Body.Length > 200)
+            if (this.Body.Length > 400)
             {
-                return this.Body.Substring(0, 200) + "...";
+                return this.Body.Substring(0, 400) + "...";
             }
             else
             {
@@ -138,6 +138,15 @@ namespace SoftwareTechnologiesTeamProject.Models
         public Comment GetRecentComment()
         {
             return this.Comments.OrderByDescending(c => c.DateCreated).First();
+        }
+
+        public void SetImage(List<Image> images)
+        {
+
+            this.Image =
+                images.Where(i => i.ImagePath.Contains("PostId_" + this.Id))
+                    .OrderByDescending(i => i.UploadedDate)
+                    .FirstOrDefault();
         }
     }
 }
