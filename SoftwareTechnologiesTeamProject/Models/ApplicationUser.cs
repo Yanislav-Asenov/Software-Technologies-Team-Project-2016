@@ -5,10 +5,16 @@ namespace SoftwareTechnologiesTeamProject.Models
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Security.Claims;
     using System.Threading.Tasks;
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {
+            Profile = new Profile();
+        }
+
         [Display(Name = "Full name")]
         public string FullName { get; set; }
 
@@ -20,7 +26,11 @@ namespace SoftwareTechnologiesTeamProject.Models
 
         public double Balance { get; set; } = 0;
 
-        //public Profile Profile { get; set; } = new Profile();
+        [NotMapped]
+        public Profile Profile { get; set; } = new Profile();
+
+        [NotMapped]
+        public int ProfileId { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -16,25 +16,47 @@
 <div class="aboutUs">
     <h2>Our team:</h2>
     <br />
-
+   
     <div class="row">
+    @{ int i = 0; }   
         @foreach (var member in Model.Developers)
         {
-
+           
             <div class="col-md-3">
                 <img class="dev-img" src="@member.Image.ImagePath" width="170" height="170" />
                 <hr />
                 <div>
-                    <input type="checkbox" class="read-more-state" id="post-1" />
+                    <input type="checkbox" class="read-more-state" id="post-@i" />
                     <p class="about-us read-more-wrap">
                         @member.Name <br />
                         <span class="read-more-target">
                             @member.Info
                         </span>
                     </p>
-                    <label for="post-1" class="read-more-trigger"></label>
+                    <label for="post-@i" class="read-more-trigger"></label>
                 </div>
             </div>
+            i++;
+        }
+        @foreach (var member in Model.Designers)
+        {
+            
+            <div class="col-md-3">
+                <img class="dev-img" src="@member.Image.ImagePath" width="170" height="170" />
+                <hr />
+                <div>
+                    <input type="checkbox" class="read-more-state" id="post-@i" />
+                    <p class="about-us read-more-wrap">
+                        @member.Name <br />
+                        <span class="read-more-target">
+                            @member.Info
+                        </span>
+                    </p>
+                    <label for="post-@i" class="read-more-trigger"></label>
+                </div>
+            </div>
+            i++;
         }
     </div>
+   
 </div>

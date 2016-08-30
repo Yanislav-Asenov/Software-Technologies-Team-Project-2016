@@ -22,11 +22,19 @@
                 .OrderByDescending(p => p.Date)
                 .ToList();
 
+            var profiles = db.Profile.ToList();
+
+            foreach (var post in posts)
+            {
+                post.Author.Profile = profiles.FirstOrDefault(p => p.UserId == post.AuthorId);
+            }
+
+
             var images = db.Images.ToList();
 
             foreach (var post in posts)
             {
-                post.SetImage(images);   
+                post.SetImage(images);
             }
 
             //foreach (var post in posts)

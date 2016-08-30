@@ -8,10 +8,10 @@
 
 <div class="col-md-8">
     <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Create new", "Create") </span></button>
-   
+
     @foreach (var post in Model.OrderByDescending(p => p.Date))
     {
-        <h2> @Html.ActionLink(post.Title, "Details", new {id = post.Id})</h2>
+        <h2> @Html.ActionLink(post.Title, "Details", new { id = post.Id })</h2>
 
         if (post.Author == null)
         {
@@ -31,7 +31,7 @@
 
             @if (post.Image != null)
             {
-                <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar"/>
+                <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar" />
             }
         </div>
         <p>@post.ShortText()</p>
@@ -39,10 +39,10 @@
 
         if (User.IsInRole("Administrator") || (post.Author != null && User.Identity.Name == post.Author.UserName))
         {
-            <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new {id = post.Id}) </span></button>
-            <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Delete", "Delete", new {id = post.Id}) </span></button>
+            <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new { id = post.Id }) </span></button>
+            <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Delete", "Delete", new { id = post.Id }) </span></button>
         }
-        <hr/>
+        <hr />
     }
 
 </div>
@@ -52,14 +52,14 @@
     <div class="well">
         <h4>Търсене</h4>
         <div class="input-group">
-                @using (Html.BeginForm("Index", "Posts", FormMethod.Post))
-                {
-                    <input class="searchPost" type="text" name="searchString" placeholder="Search..">
-                }
+            @using (Html.BeginForm("Index", "Posts", FormMethod.Post))
+            {
+                <input class="searchPost" type="text" name="searchString" placeholder="Search..">
+            }
         </div>
-    
+
     </div>
-    
+
     <div class="well">
         <h4>Tags</h4>
         <div class="row">

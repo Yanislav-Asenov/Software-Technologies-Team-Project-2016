@@ -59,14 +59,11 @@
         public void SetLeaguesUpcomingMatches(List<League> leagues, List<Match> matches)
         {
             var leaguesUpcomingMatches = new Dictionary<string, List<Match>>();
-
-
-            string date = this.GetShortDate();
+            var date = this.DateForMatches.Date;
 
             foreach (var league in leagues)
             {
-                var currentDateMatches =
-                    league.Matches.Where(m => m.DateTime.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture) == date).ToList();
+                var currentDateMatches = league.Matches.Where(m => m.DateTime.Date == date).ToList();
 
                 if (currentDateMatches.Count != 0)
                 {
