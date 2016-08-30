@@ -8,6 +8,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
 {
     using Extensions;
     using Microsoft.AspNet.Identity;
+    using System;
     using ViewModels;
 
     public class MatchesController : Controller
@@ -15,19 +16,24 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Matches
-        public ActionResult Index()
+        public ActionResult Matches(DateTime? date)
         {
+            var leagues =
+                db.Leagues.Where(l => l.StartDate.Year == DateTime.Now.Year || l.EndDate.Year == DateTime.Now.Year)
+                    .ToList();
+
             var matches = db.Matches
                 .Include(m => m.AwayTeam)
                 .Include(m => m.HomeTeam)
                 .OrderByDescending(m => m.DateTime)
                 .ToList();
 
-            var viewModel = new MatchesIndexViewModel();
+            var viewModel = new MatchesFixturesViewModel
+            {
+                DateForMatches = date ?? DateTime.Now
+            };
 
-
-
-            viewModel.Matches = matches;
+            viewModel.SetLeaguesUpcomingMatches(leagues, matches);
 
             return View(viewModel);
         }
@@ -211,7 +217,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
 
                 db.Matches.Add(match);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Matches");
             }
 
             ViewBag.AwayTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
@@ -252,7 +258,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 db.Entry(match).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Matches");
             }
             ViewBag.AwayTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
             ViewBag.HomeTeamId = new SelectList(db.Teams, "Id", "Name", match.HomeTeamId);
@@ -285,7 +291,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             Match match = db.Matches.Find(id);
             db.Matches.Remove(match);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Matches");
         }
 
         protected override void Dispose(bool disposing)

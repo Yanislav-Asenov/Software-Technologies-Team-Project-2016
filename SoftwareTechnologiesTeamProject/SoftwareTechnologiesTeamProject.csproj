@@ -244,7 +244,8 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\MatchDetailsViewModel.cs" />
-    <Compile Include="ViewModels\MatchesIndexViewModel.cs" />
+    <Compile Include="ViewModels\MatchesFixturesViewModel.cs" />
+    <Compile Include="ViewModels\MatchesReultsViewModel.cs" />
     <Compile Include="ViewModels\PostDetailsViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\ResetPasswordViewModel.cs" />
@@ -439,7 +440,7 @@
     <Content Include="Views\Matches\Delete.cshtml" />
     <Content Include="Views\Matches\Details.cshtml" />
     <Content Include="Views\Matches\Edit.cshtml" />
-    <Content Include="Views\Matches\Index.cshtml" />
+    <Content Include="Views\Matches\Matches.cshtml" />
     <Content Include="Views\Matches\UpdateResult.cshtml" />
     <Content Include="Views\Profiles\Delete.cshtml" />
     <Content Include="Views\Profiles\Details.cshtml" />
