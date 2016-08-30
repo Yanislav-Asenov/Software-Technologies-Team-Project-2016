@@ -79,6 +79,18 @@ textarea {
 
 .bottom-right {
     float: right;
+    background-color:lightskyblue;
+    border-radius: 24px;
+    font-weight: bold;
+    color: black;
+}
+
+.bottom-right:hover {
+    background-color:dodgerblue;
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    transition: all 0.3s ease 0s;
 }
 
 .add-comment-wrapper > form {
@@ -93,7 +105,7 @@ textarea {
 
 .add-comment-wrapper > form > input {
     height: inherit;
-    width: 15%;
+    width: 18%;
 }
 
 .single-comment {
@@ -122,9 +134,10 @@ textarea {
     overflow-x: auto;
     word-wrap: break-word;
     border-style: solid;
+    border-radius: 10px;
     border-width: 1px;
-    border-color: black;
-    background: rgb(232, 232, 232);
+    border-color: grey;
+    background-color: white;
     padding: 5px;
 }
 
@@ -1279,4 +1292,53 @@ input[type="color"]:focus,
     height: 300px;
     width: 290px;
     border-radius: 5px;
+}
+.read-more-state {
+  display: none;
+}
+
+.read-more-target {
+  opacity: 0;
+  max-height: 0;
+  font-size: 0;
+  transition: .25s ease;
+}
+
+.read-more-state:checked ~ .read-more-wrap .read-more-target {
+  opacity: 1;
+  font-size: inherit;
+  max-height: 999em;
+}
+
+.read-more-state ~ .read-more-trigger:before {
+  content: 'Show more';
+}
+
+.read-more-state:checked ~ .read-more-trigger:before {
+  content: 'Show less';
+}
+
+.read-more-trigger {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 .5em;
+  color: #666;
+  font-size: .9em;
+  line-height: 2;
+  border: 1px solid #ddd;
+  border-radius: .25em;
+}
+
+p.about-us {
+  padding: 2%;
+  background-color: #e6ffff;
+  color:dimgrey;
+  border: 1px solid lightblue;
+  border-radius: .25em;
+}
+#NewCommentContent {
+    width: 500px;
+    height: 90px;
+    border-radius: 10px;
+    padding: 4px;
 }
