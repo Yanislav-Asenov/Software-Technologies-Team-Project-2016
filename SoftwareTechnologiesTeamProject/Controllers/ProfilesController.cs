@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using SoftwareTechnologiesTeamProject.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using SoftwareTechnologiesTeamProject.Models;
 
 namespace SoftwareTechnologiesTeamProject.Controllers
 {
+    using Microsoft.AspNet.Identity;
+
     public class ProfilesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -17,8 +15,11 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         // GET: Profiles
         public ActionResult Index()
         {
-            var profile = db.Profile.Include(p => p.User);
-            return View(profile.ToList());
+            var userId = User.Identity.GetUserId();
+
+            var profile = db.Profile.FirstOrDefault(p => p.UserId == userId);
+
+            return View(profile);
         }
 
         // GET: Profiles/Details/5
@@ -28,11 +29,15 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Profile profile = db.Profile.Find(id);
+
             if (profile == null)
             {
                 return HttpNotFound();
             }
+
+
             return View(profile);
         }
 
@@ -63,7 +68,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 db.Entry(profile).State = EntityState.Modified;
                 db.Entry(profile).Property(ui => ui.UserId).IsModified = false;
                 db.SaveChanges();

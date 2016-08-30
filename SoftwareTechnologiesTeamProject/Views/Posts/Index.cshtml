@@ -1,7 +1,4 @@
-﻿@using SoftwareTechnologiesTeamProject.Models
-@using System.IO;
-@using System.Collections.Generic;
-@model IEnumerable<SoftwareTechnologiesTeamProject.Models.Post>
+﻿@model IEnumerable<SoftwareTechnologiesTeamProject.Models.Post>
 
 @{
     ViewBag.Title = "Posts";
@@ -12,8 +9,10 @@
 <div class="col-md-8">
     @Html.ActionLink("Create new", "Create")
     
-    @foreach (var item in Model.OrderByDescending(p => p.Date))
-     {
+    @foreach (var item in Model.Where(p => p.Author.Profile != null).OrderByDescending(p => p.Date))
+    {
+
+        <a href="/Profiles/Details/@item.Author.Profile.Id">@Html.DisplayFor(modelItem => item.Author.FullName)</a>
 
          <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
          if (item.Author == null)
@@ -22,12 +21,11 @@
                 by <a>Anonymous</a>
             </p>
          }
-
          else
          {
-            <p class="lead">
-                by <a href=#>@Html.DisplayFor(modelItem => item.Author.FullName)</a>
-            </p>
+             <p class="lead">
+                 by <a href="/Profiles/Details/@item.Author.Profile.Id">@Html.DisplayFor(modelItem => item.Author.FullName)</a>
+             </p>
          }
         <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => item.Date)</p>
 
