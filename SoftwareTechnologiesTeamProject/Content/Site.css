@@ -606,7 +606,16 @@ th{
      padding: 5px 4px;
 }
 
+.highlightedDate {
+    background: darkgreen;
+    color: white;
+    font-weight: bold; 
+}
 
+.dayLink {
+    padding: 3px;
+    border-radius: 5px;
+}
 /*
     Match details styles
 */
@@ -1067,6 +1076,7 @@ td, th {
     display: block;
     color: black;
     text-decoration: none;
+    max-width: 217px;
 }
 
 .singleUpcomingMatch > td > a:hover {
@@ -1081,18 +1091,16 @@ td, th {
 
 
 .upcomingMatchHomeTeam {
-    width: 100px;
+    width: 217px;
     text-align: right;
-    margin-left: 10%;
 }
 
 .upcomingMatchAwayTeam {
-    width: 20%;
     text-align: left;
 }
 
 .upcomingMatchesDate {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
 }
 
@@ -1101,8 +1109,8 @@ td, th {
 }
 
 .upcomingMatchesTableHead {
-    color: black;
-    background: white;
+    color: white;
+    background: darkgreen;
     border-bottom: solid 0.5px #e7e7e7;
 }
 
@@ -1125,7 +1133,7 @@ td, th {
 
 .time {
     background:darkgreen;
-    width: 30px;
+    width: 20px;
     text-align: center;
     font-weight: bold;
 }
@@ -1138,6 +1146,7 @@ td, th {
 .upcomingMatchTeamName {
     font-weight: bold;
     width: 100px;
+    max-width: 100px;
 }
 
 .adminActionsSmall {

@@ -9,163 +9,176 @@
 
         <h1 id="dateHeader">Matches for @Model.GetLongDate()</h1>
 
-        <div class="col-md-9">
             @if (User.IsInRole("Administrator"))
             {
                 @Html.ActionLink("Create new", "CreateChooseLeague")
             }
 
-            @foreach (var leagueMatchesPair in Model.Matches)
-            {
-                string leagueName = leagueMatchesPair.Key;
-                var leagueMatches = leagueMatchesPair.Value;
-
-
-                <table class="table table-condenced upcomingMatchesTable">
-                    <thead>
-                    <tr class="upcomingMatchesTableHead">
-                        <th colspan="3">@leagueName</th>
-                        <th class="upcomingMatchCoef">1</th>
-                        <th class="upcomingMatchCoef">X</th>
-                        <th class="upcomingMatchCoef">2</th>
-                        @if (User.IsInRole("Administrator"))
-                        {
-                            <th class="adminActionsSmall"></th>
-                            <th class="adminActionsSmall"></th>
-                            <th class="adminActionsLarge"></th>
-                        }
-                    </tr>
-                    </thead>
-                    @foreach (var match in leagueMatches)
-                    {
-                        <tbody>
-
-                        <tr class="singleUpcomingMatch" id="match-info-row-@match.Id" onmouseover="changeTimeBackground(@match.Id)" onmouseout="resetTimeBackground(@match.Id)">
-                            <td class="text-right upcomingMatchTeamName">
-                                <a href="/Matches/Details/@match.Id" class="matchLink match-info-@match.Id">
-                                    @match.HomeTeam.Name <img src="@match.HomeTeam.LogoLink" alt="Logo" class="team-logo-small"/>
-                                </a>
-                            </td>
-                            <td class="upcomingMatchesSmallCell time" id="time-@match.Id">
-                                <a href="/Matches/Details/@match.Id" class="matchLink">
-                                    @if (match.IsResultUpdated)
-                                    {
-                                        @match.Result
-                                    }
-                                    else
-                                    {
-                                        @match.GetTime()
-                                    }
-                                </a>
-                            </td>
-                            <td class="text-left upcomingMatchTeamName">
-                                <a href="/Matches/Details/@match.Id" class="matchLink match-info-@match.Id">
-                                    <img src="@match.AwayTeam.LogoLink" alt="Logo" class="team-logo-small"/> @match.AwayTeam.Name
-                                </a>
-                            </td>
-                            <td class="upcomingMatchCoef match-info-@match.Id">
-                                <a href="/Matches/Details/@match.Id" class="matchLink match-info-@match.Id">@match.HomeCoefficient.PadLeft(4, ' ')</a>
-                            </td>
-                            <td class="upcomingMatchCoef match-info-@match.Id">
-                                <a href="/Matches/Details/@match.Id" class="matchLink match-info-@match.Id">@match.DrawCoefficient.PadLeft(4, ' ')</a>
-                            </td>
-                            <td class="upcomingMatchCoef match-info-@match.Id">
-                                <a href="/Matches/Details/@match.Id" class="matchLink match-info-@match.Id">@match.AwayCoefficient</a>
-                            </td>
-                            @if (User.IsInRole("Administrator"))
-                            {
-                                <td class="adminActionsSmall">
-                                    <a href="/Matches/Delete/@match.Id" class="matchLink">Delete</a>
-                                </td>
-                                <td class="adminActionsSmall">
-                                    <a href="/Matches/Edit/@match.Id" class="matchLink">Edit</a>
-                                </td>
-                                <td class="adminActionsLarge">
-                                    @Html.ActionLink("Update result", "UpdateResult", new {id = match.Id})
-                                </td>
-                            }
-                        </tr>
-                        </tbody>
-                    }
-
-                </table>
-            }
-        </div>
-
-
 
         <div class="col-md-2 calendar">
-            <table id="calendar" class="table calendar">
+            <table class="table table-condensed calendar">
                 <thead>
                     <tr>
                         <th colspan="7">
-                            @Html.ActionLink("◄", "Matches", new {date = Model.DateForMatches.AddMonths(-1)})
-                            <span id="calendarNavBar">@Model.MonthName&nbsp;'@Model.DateForMatches.Day</span>
-                            @Html.ActionLink("►", "Matches", new {date = Model.DateForMatches.AddMonths(1)})
+                            @Html.ActionLink("◄", "Matches", new { date = new DateTime(Model.DateForMatches.Year, Model.DateForMatches.AddMonths(-1).Month, 1) })
+                            <span>@Model.MonthName&nbsp;@Model.DateForMatches.Year</span>
+                            @Html.ActionLink("►", "Matches", new { date = new DateTime(Model.DateForMatches.Year, Model.DateForMatches.AddMonths(1).Month, 1) })
                         </th>
                     </tr>
-                <tr>
-                    <th>Mo</th>
-                    <th>Tu</th>
-                    <th>We</th>
-                    <th>Th</th>
-                    <th>Fr</th>
-                    <th>Sa</th>
-                    <th>Su</th>
-                </tr>
+                    <tr>
+                        <th>Mo</th>
+                        <th>Tu</th>
+                        <th>We</th>
+                        <th>Th</th>
+                        <th>Fr</th>
+                        <th>Sa</th>
+                        <th>Su</th>
+                    </tr>
                 </thead>
                 <tbody>
 
                     @{
                         int day = 1;
                     }
-                @while (day <= Model.LastDayInMonth)
-                {
-                    DateTime date = new DateTime(Model.DateForMatches.Year, Model.DateForMatches.Month, day);
+                    @while (day <= Model.LastDayInMonth)
+                    {
+                        DateTime date = new DateTime(Model.DateForMatches.Year, Model.DateForMatches.Month, day);
 
-                    <tr>
-                        @if (day == 1)
-                        {
-                            string dayOfWeek = date.DayOfWeek.ToString();
-                            int missingDays = Model.GetMissingDays(dayOfWeek);
-
-                            for (int i = 0; i < missingDays; i++)
+                        <tr>
+                            @if (day == 1)
                             {
-                                <td><span>&nbsp;</span></td>
-                            }
+                                string dayOfWeek = date.DayOfWeek.ToString();
+                                int missingDays = Model.GetMissingDays(dayOfWeek);
 
-                            for (int i = 1; i <= 7 - missingDays; i++)
-                            {
-                                <td>
-                                    @Html.ActionLink("" + day++, "Matches", new { date = date })
-                                </td>
-                                date = date.AddDays(1);
-                            }
-
-                        }
-                        else
-                        {
-                            for (int i = 1; i <= 7; i++)
-                            {
-                                if (day > Model.LastDayInMonth)
+                                for (int i = 0; i < missingDays; i++)
                                 {
                                     <td><span>&nbsp;</span></td>
                                 }
-                                else
+
+                                for (int i = 1; i <= 7 - missingDays; i++)
                                 {
                                     <td>
-                                        @Html.ActionLink("" + day++, "Matches", new { date = date })
+                                        @if (date.Day == Model.DateForMatches.Day)
+                                        {
+                                            @Html.ActionLink("" + day++, "Matches", new { date = date }, new { @class = "highlightedDate dayLink" })
+                                        }
+                                        else
+                                        {
+                                            @Html.ActionLink("" + day++, "Matches", new { date = date }, new { @class = "dayLink" })
+                                        }
                                     </td>
                                     date = date.AddDays(1);
                                 }
+
                             }
-                        }
-                    </tr>
-                }
+                            else
+                            {
+                                for (int i = 1; i <= 7; i++)
+                                {
+                                    if (day > Model.LastDayInMonth)
+                                    {
+                                        <td><span>&nbsp;</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @if (date.Day == Model.DateForMatches.Day)
+                                            {
+                                                @Html.ActionLink("" + day++, "Matches", new { date = date }, new { @class = "highlightedDate dayLink" })
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink("" + day++, "Matches", new { date = date }, new { @class = "dayLink" })
+                                            }
+                                        </td>
+                                        date = date.AddDays(1);
+                                    }
+                                }
+                            }
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
 
+
+
+        @foreach (var leagueMatchesPair in Model.Matches)
+            {
+                string leagueName = leagueMatchesPair.Key;
+                var leagueMatches = leagueMatchesPair.Value;
+
+                <div class="col-md-9">
+                    <table class="table table-responsive upcomingMatchesTable">
+                        <thead>
+                            <tr class="upcomingMatchesTableHead">
+                                <th colspan="3">@leagueName</th>
+                                <th class="upcomingMatchCoef">1</th>
+                                <th class="upcomingMatchCoef">X</th>
+                                <th class="upcomingMatchCoef">2</th>
+                                @if (User.IsInRole("Administrator"))
+                                {
+                                    <th class="adminActionsSmall"></th>
+                                    <th class="adminActionsSmall"></th>
+                                    <th class="adminActionsLarge"></th>
+                                }
+                            </tr>
+                        </thead>
+                        @foreach (var match in leagueMatches)
+                        {
+                            <tbody>
+
+                                <tr class="singleUpcomingMatch" id="match-info-row-@match.Id" onmouseover="changeTimeBackground(@match.Id)" onmouseout="resetTimeBackground(@match.Id)">
+                                    <td class="text-right upcomingMatchTeamName">
+                                        <a href="/Matches/Details/@match.Id" class="matchLink match-info-@match.Id">
+                                            @match.HomeTeam.Name <img src="@match.HomeTeam.LogoLink" alt="Logo" class="team-logo-small" />
+                                        </a>
+                                    </td>
+                                    <td class="upcomingMatchesSmallCell time" id="time-@match.Id">
+                                        <a href="/Matches/Details/@match.Id" class="matchLink">
+                                            @if (match.IsResultUpdated)
+                                            {
+                                                @match.Result
+                                            }
+                                            else
+                                            {
+                                                @match.GetTime()
+                                            }
+                                        </a>
+                                    </td>
+                                    <td class="text-left upcomingMatchTeamName">
+                                        <a href="/Matches/Details/@match.Id" class="matchLink match-info-@match.Id">
+                                            <img src="@match.AwayTeam.LogoLink" alt="Logo" class="team-logo-small" /> @match.AwayTeam.Name
+                                        </a>
+                                    </td>
+                                    <td class="upcomingMatchCoef match-info-@match.Id">
+                                        <a href="/Matches/Details/@match.Id" class="matchLink match-info-@match.Id">@match.HomeCoefficient.PadLeft(4, ' ')</a>
+                                    </td>
+                                    <td class="upcomingMatchCoef match-info-@match.Id">
+                                        <a href="/Matches/Details/@match.Id" class="matchLink match-info-@match.Id">@match.DrawCoefficient.PadLeft(4, ' ')</a>
+                                    </td>
+                                    <td class="upcomingMatchCoef match-info-@match.Id">
+                                        <a href="/Matches/Details/@match.Id" class="matchLink match-info-@match.Id">@match.AwayCoefficient</a>
+                                    </td>
+                                    @if (User.IsInRole("Administrator"))
+                                    {
+                                        <td class="adminActionsSmall">
+                                            <a href="/Matches/Delete/@match.Id" class="matchLink">Delete</a>
+                                        </td>
+                                        <td class="adminActionsSmall">
+                                            <a href="/Matches/Edit/@match.Id" class="matchLink">Edit</a>
+                                        </td>
+                                        <td class="adminActionsLarge">
+                                            @Html.ActionLink("Update result", "UpdateResult", new { id = match.Id })
+                                        </td>
+                                    }
+                                </tr>
+                            </tbody>
+                        }
+
+                    </table>
+                </div>
+            }
     </div>
 
 </div>
