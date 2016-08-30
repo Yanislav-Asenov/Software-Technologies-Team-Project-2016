@@ -23,10 +23,17 @@
 
             <div class="col-md-3">
                 <img class="dev-img" src="@member.Image.ImagePath" width="170" height="170" />
-                <p>
-                    @member.Name <br />
-                    @member.Info
-                </p>
+                <hr />
+                <div>
+                    <input type="checkbox" class="read-more-state" id="post-1" />
+                    <p class="about-us read-more-wrap">
+                        @member.Name <br />
+                        <span class="read-more-target">
+                            @member.Info
+                        </span>
+                    </p>
+                    <label for="post-1" class="read-more-trigger"></label>
+                </div>
             </div>
         }
     </div>
