@@ -29,6 +29,22 @@
                 post.Author.Profile = profiles.FirstOrDefault(p => p.UserId == post.AuthorId);
             }
 
+
+            var images = db.Images.ToList();
+
+            foreach (var post in posts)
+            {
+                post.SetImage(images);
+            }
+
+            //foreach (var post in posts)
+            //{
+            //    post.Image =
+            //        images.Where(i => i.ImagePath.Contains("PostId_" + post.Id))
+            //            .OrderByDescending(i => i.UploadedDate)
+            //            .FirstOrDefault();
+            //}
+
             if (!string.IsNullOrEmpty(searchString))
             {
                 var searchedPosts = posts
@@ -51,6 +67,11 @@
             }
 
             var posts = tag.Posts;
+            var images = db.Images.ToList();
+            foreach (var post in posts)
+            {
+                post.SetImage(images);
+            }
             ViewBag.Header = tag.Name;
 
             return View(posts);

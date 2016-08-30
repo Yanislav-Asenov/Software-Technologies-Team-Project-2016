@@ -47,8 +47,8 @@
                     <div class="post-details-conten">
                         <h3> <a href="/Posts/Details/@post.Id">@post.Title</a></h3>
                     </div>
-                    <div class="featured_articles_detail">
-                        <div class="featured_articles_img">
+                    <div>
+                        <div class="postImage">
                             @if (post.Image != null)
                             {
                                 <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar" />
@@ -97,7 +97,7 @@
                                     @foreach (var post in Model.LastCommentedPosts)
                                     {
 
-                                        <div class="sidebar_articles sidebar_articles_comment">
+                                        <div class="sidebarPosts">
 
                                             <a href="/Posts/Details/@post.Id" class="postTitle">@post.GetShortTitle()</a>
 
@@ -131,7 +131,7 @@
 
                     <div class="sidedar_tag">
 
-                        <h3> Explore Tags</h3>
+                        <h3> Popular Tags</h3>
 
                         <div class="sidebar_tags_wrapper">
 

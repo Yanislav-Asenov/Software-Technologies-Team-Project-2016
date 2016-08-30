@@ -108,11 +108,12 @@
 
     <p>
         @if (User.IsInRole("Administrator") || (Model.Post.Author != null && User.Identity.Name == Model.Post.Author.UserName))
-       {
-            @Html.ActionLink("Edit", "Edit", new {id = Model.PostId})
+        {
+            <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new { id = Model.PostId })</span></button>
             <br/>
         }
-        @Html.ActionLink("Back to List", "Index")
+        <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Back to List", "Index")</span></button>
+        
     </p>
 </div>
 <div class="add-comment-wrapper">
@@ -135,6 +136,7 @@
 
 
 <div class="comments-wrapper">
+    <br />
     <h1>Comments(@Model.Post.Comments.Count)</h1>
     <hr />
     <div class="comments">

@@ -9,10 +9,8 @@
 <div class="col-md-8">
     @Html.ActionLink("Create new", "Create")
     
-    @foreach (var item in Model.Where(p => p.Author.Profile != null).OrderByDescending(p => p.Date))
-    {
-
-        <a href="/Profiles/Details/@item.Author.Profile.Id">@Html.DisplayFor(modelItem => item.Author.FullName)</a>
+    @foreach (var item in Model.OrderByDescending(p => p.Date))
+     {
 
          <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
          if (item.Author == null)
@@ -29,7 +27,6 @@
          }
         <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => item.Date)</p>
 
-        @*<img class="img-responsive" src="http://placehold.it/900x300" alt="">*@
 
          <p>@item.ShortText()</p>
        

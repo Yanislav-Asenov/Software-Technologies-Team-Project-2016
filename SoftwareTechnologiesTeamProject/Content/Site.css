@@ -24,18 +24,13 @@ p, h1, h2, h3, h4, h5, a {
 }
 
 .footer {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-    text-align: center;
-    height: 30px;
-    width: 1138px;
-    margin-left: 20%;
-    background: green;
-    color: white;
-    border-radius: 5px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -79,6 +74,18 @@ textarea {
 
 .bottom-right {
     float: right;
+    background-color:lightskyblue;
+    border-radius: 24px;
+    font-weight: bold;
+    color: black;
+}
+
+.bottom-right:hover {
+    background-color:dodgerblue;
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    transition: all 0.3s ease 0s;
 }
 
 .add-comment-wrapper > form {
@@ -93,7 +100,7 @@ textarea {
 
 .add-comment-wrapper > form > input {
     height: inherit;
-    width: 15%;
+    width: 18%;
 }
 
 .single-comment {
@@ -122,9 +129,10 @@ textarea {
     overflow-x: auto;
     word-wrap: break-word;
     border-style: solid;
+    border-radius: 10px;
     border-width: 1px;
-    border-color: black;
-    background: rgb(232, 232, 232);
+    border-color: grey;
+    background-color: white;
     padding: 5px;
 }
 
@@ -1145,7 +1153,7 @@ td, th {
 
 .upcomingMatchTeamName {
     font-weight: bold;
-    width: 100px;
+    width: 30%;
     max-width: 100px;
 }
 
@@ -1172,7 +1180,7 @@ td, th {
 }
 
 th.upcomingMatchCoef, td.upcomingMatchCoef {
-    width: 20px;
+    width: 5%;
     text-align: center;
 }
 
@@ -1280,3 +1288,101 @@ input[type="color"]:focus,
     width: 290px;
     border-radius: 5px;
 }
+<<<<<<< HEAD
+
+.button {
+  display: inline-block;
+  border-radius: 4px;
+    background-color: rgb(25, 98, 3);
+  border: none;
+  color: black;
+  text-align: center;
+  font-size: 15px;
+  /*padding: 15px;*/
+  height: 25px;
+  width: 110px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '»';
+    color: white;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button span a {
+    color: white;
+}
+=======
+.read-more-state {
+  display: none;
+}
+
+.read-more-target {
+  opacity: 0;
+  max-height: 0;
+  font-size: 0;
+  transition: .25s ease;
+}
+
+.read-more-state:checked ~ .read-more-wrap .read-more-target {
+  opacity: 1;
+  font-size: inherit;
+  max-height: 999em;
+}
+
+.read-more-state ~ .read-more-trigger:before {
+  content: 'Show more';
+}
+
+.read-more-state:checked ~ .read-more-trigger:before {
+  content: 'Show less';
+}
+
+.read-more-trigger {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 .5em;
+  color: #666;
+  font-size: .9em;
+  line-height: 2;
+  border: 1px solid #ddd;
+  border-radius: .25em;
+}
+
+p.about-us {
+  padding: 2%;
+  background-color: #e6ffff;
+  color:dimgrey;
+  border: 1px solid lightblue;
+  border-radius: .25em;
+}
+#NewCommentContent {
+    width: 500px;
+    height: 90px;
+    border-radius: 10px;
+    padding: 4px;
+}
+>>>>>>> origin/master
