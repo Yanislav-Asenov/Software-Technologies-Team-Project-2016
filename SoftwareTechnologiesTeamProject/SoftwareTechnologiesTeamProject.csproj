@@ -211,6 +211,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608302208167_UserProfilesTable.cs" />
+    <Compile Include="Migrations\201608302208167_UserProfilesTable.Designer.cs">
+      <DependentUpon>201608302208167_UserProfilesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -438,10 +442,6 @@
     <Content Include="Views\Matches\Edit.cshtml" />
     <Content Include="Views\Matches\Matches.cshtml" />
     <Content Include="Views\Matches\UpdateResult.cshtml" />
-    <Content Include="Views\Profiles\Delete.cshtml" />
-    <Content Include="Views\Profiles\Details.cshtml" />
-    <Content Include="Views\Profiles\Edit.cshtml" />
-    <Content Include="Views\Profiles\Index.cshtml" />
     <Content Include="Views\Teams\Create.cshtml" />
     <Content Include="Views\Teams\Delete.cshtml" />
     <Content Include="Views\Teams\Details.cshtml" />
@@ -457,6 +457,11 @@
     <Content Include="Views\Matches\ChooseLeague.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Profiles\Create.cshtml" />
+    <Content Include="Views\Profiles\Delete.cshtml" />
+    <Content Include="Views\Profiles\Details.cshtml" />
+    <Content Include="Views\Profiles\Edit.cshtml" />
+    <Content Include="Views\Profiles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\HomePage\" />
@@ -464,6 +469,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201608302208167_UserProfilesTable.resx">
+      <DependentUpon>201608302208167_UserProfilesTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

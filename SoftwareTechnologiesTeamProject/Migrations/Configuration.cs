@@ -121,9 +121,9 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 Info = "Програмира от 9 години, много е добър." + "Програмира от 9 години, много е добър."
                 + "Програмира от 9 години, много е добър." + "Програмира от 9 години, много е добър."
                 + "Програмира от 9 години, много е добър." + "Програмира от 9 години, много е добър.",
-                Image = new Image { ImagePath = "/Content/Images/1148850_648131101864921_2053131244_n.jpg" } 
+                Image = new Image { ImagePath = "/Content/Images/1148850_648131101864921_2053131244_n.jpg" }
             };
-             
+
             var teamMember2 = new TeamMember
             {
                 Name = "Яни Животното",
@@ -180,29 +180,12 @@ namespace SoftwareTechnologiesTeamProject.Migrations
                 FullName = fullName
             };
 
-        
+
             var userCreateResult = userManager.Create(user, password);
             if (!userCreateResult.Succeeded)
             {
                 throw new Exception(string.Join("; ", userCreateResult.Errors));
             }
-            else
-            {
-                CreateProfile(context, user.Id,user.FullName);
-            }
-        }
-        //Profile for seed users
-        private void CreateProfile(ApplicationDbContext context,
-            string userid, string fullname)
-        {
-            var userProfile = new Profile
-            {
-                UserId = userid,
-                FullName = fullname,
-                Age = 14
-               
-            };
-            context.Profile.Add(userProfile);
         }
 
         private void CreateRole(ApplicationDbContext context, string roleName)

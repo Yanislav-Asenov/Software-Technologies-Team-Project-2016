@@ -1,13 +1,10 @@
-﻿using SoftwareTechnologiesTeamProject.Models;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web.Mvc;
-
-namespace SoftwareTechnologiesTeamProject.Controllers
+﻿namespace SoftwareTechnologiesTeamProject.Controllers
 {
-    using Microsoft.AspNet.Identity;
-
+    using SoftwareTechnologiesTeamProject.Models;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
     public class ProfilesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -15,11 +12,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         // GET: Profiles
         public ActionResult Index()
         {
-            var userId = User.Identity.GetUserId();
-
-            var profile = db.Profile.FirstOrDefault(p => p.UserId == userId);
-
-            return View(profile);
+            return View(db.Profiles.ToList());
         }
 
         // GET: Profiles/Details/5
@@ -29,32 +22,49 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Profile profile = db.Profile.Find(id);
-
+            Profile profile = db.Profiles.Find(id);
             if (profile == null)
             {
                 return HttpNotFound();
             }
+            return View(profile);
+        }
 
+        // GET: Profiles/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Profiles/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,CreationDate,Age,City,FullName,Interests,MoreInfo")] Profile profile)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Profiles.Add(profile);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
             return View(profile);
         }
 
         // GET: Profiles/Edit/5
-        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Profile profile = db.Profile.Find(id);
+            Profile profile = db.Profiles.Find(id);
             if (profile == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.Profile, "Id", "FullName", profile.UserId);
             return View(profile);
         }
 
@@ -62,31 +72,26 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserId,Age,City,Interests,MoreInfo,FullName,ProfilePic")] Profile profile)
+        public ActionResult Edit([Bind(Include = "Id,CreationDate,Age,City,FullName,Interests,MoreInfo")] Profile profile)
         {
             if (ModelState.IsValid)
             {
-
                 db.Entry(profile).State = EntityState.Modified;
-                db.Entry(profile).Property(ui => ui.UserId).IsModified = false;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.Profile, "Id", "FullName", profile.UserId);
             return View(profile);
         }
 
         // GET: Profiles/Delete/5
-        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Profile profile = db.Profile.Find(id);
+            Profile profile = db.Profiles.Find(id);
             if (profile == null)
             {
                 return HttpNotFound();
@@ -97,11 +102,10 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         // POST: Profiles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Profile profile = db.Profile.Find(id);
-            db.Profile.Remove(profile);
+            Profile profile = db.Profiles.Find(id);
+            db.Profiles.Remove(profile);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

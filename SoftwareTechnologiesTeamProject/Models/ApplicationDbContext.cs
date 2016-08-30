@@ -1,7 +1,6 @@
 ﻿namespace SoftwareTechnologiesTeamProject.Models
 {
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Migrations;
     using System.Data.Entity;
 
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
@@ -16,7 +15,9 @@
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
+            modelBuilder.Entity<Profile>()
+              .HasRequired<ApplicationUser>(profile => profile.User);
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -39,7 +40,7 @@
 
         public DbSet<Vote> Votes { get; set; }
 
-        public DbSet<Profile> Profile { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
 
         public DbSet<Image> Images { get; set; }
 
