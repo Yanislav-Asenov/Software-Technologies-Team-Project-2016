@@ -49,16 +49,18 @@
             return View(posts);
         }
 
-        public ActionResult Tag(int? id)
-        {
-            var tag = db.Tags.Include(t => t.Posts.Select(p => p.Author)).FirstOrDefault(t => t.Id == id);
+         public ActionResult Tag(int? id)
+        { 
+            var tags = db.Tags.Include(t => t.Posts.Select(p => p.Author)).ToList();
+
+            var tag = tags.FirstOrDefault(t => t.Id == id);
 
             if (tag == null)
             {
                 return HttpNotFound();
             }
 
-            var posts = tag.Posts;
+            var posts = tag.Posts.ToList();
             var images = db.Images.ToList();
             foreach (var post in posts)
             {
@@ -66,7 +68,15 @@
             }
             ViewBag.Header = tag.Name;
 
-            return View(posts);
+            TagsIndexViewModel viewModel= new TagsIndexViewModel
+
+            {
+                Posts = posts,
+                PopularTags = tags.OrderByDescending(t => t.Posts.Count).Take(5).ToList()
+        };
+
+
+            return View(viewModel);
         }
 
         // GET: Posts/Details/5

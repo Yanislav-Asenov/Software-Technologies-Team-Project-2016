@@ -50,21 +50,31 @@ namespace SoftwareTechnologiesTeamProject.Models
 
         [NotMapped]
         public Image Image { get; set; }
-        
+
         public virtual List<Comment> Comments { get; set; }
 
         public virtual List<Tag> Tags { get; set; } = new List<Tag>();
 
         public string ShortText()
         {
-            if (this.Body.Length > 400)
+            if (this.Body.Length > 300)
             {
-                return this.Body.Substring(0, 400) + "...";
+                return this.Body.Substring(0, 300);
             }
             else
             {
                 return this.Body;
             }
+        }
+
+        public string Fulltext()
+        {
+            if (this.Body.Length > 300)
+            {
+                return this.Body.Substring(300);
+            }
+
+            return string.Empty;
         }
 
         public void AddTags(string[] tagNames, List<Tag> existingTags)

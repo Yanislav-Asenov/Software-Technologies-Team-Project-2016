@@ -48,12 +48,27 @@
                         <h3> <a href="/Posts/Details/@post.Id">@post.Title</a></h3>
                     </div>
                     <div>
+                        @if (post.Author == null)
+                        {
+                            <p class="lead">
+                                by <a>Anonymous</a>
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="lead">
+                                by <a href=#>@Html.DisplayFor(modelItem => post.Author.FullName)</a>
+                            </p>
+                        }
+                        <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => post.Date)</p>
                         <div class="postImage">
                             @if (post.Image != null)
                             {
-                                <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar" />
-                             }
+                                <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar"/>
+                            }
                         </div>
+                        <hr/>
+
                         <div class="post-details-content">
                             @post.Body
                         </div>

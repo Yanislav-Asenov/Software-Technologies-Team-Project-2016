@@ -26,11 +26,13 @@
             
             @if (Model.PostImage != null)
             {
-                <img class="img-responsive" src="~/Content/Images/PostImages/@Model.PostImage.ImagePath" alt="Bar"/>
-                   if (User.IsInRole("Administrator") || (Model.Post.Author != null && User.Identity.Name == Model.Post.Author.UserName))
+                
+                    <img class="img-responsive" src="~/Content/Images/PostImages/@Model.PostImage.ImagePath" alt="Bar" />
+                
+                if (User.IsInRole("Administrator") || (Model.Post.Author != null && User.Identity.Name == Model.Post.Author.UserName))
+                {
+                    using (Html.BeginForm("AddPostImage/" + Html.DisplayFor(model => model.Post.Id), "Images", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
-                        using (Html.BeginForm("AddPostImage/" + Html.DisplayFor(model => model.Post.Id), "Images", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-                        {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
                         <fieldset>

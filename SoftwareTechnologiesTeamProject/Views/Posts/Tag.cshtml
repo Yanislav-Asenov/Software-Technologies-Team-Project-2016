@@ -1,17 +1,27 @@
-﻿@model IEnumerable<SoftwareTechnologiesTeamProject.Models.Post>
+﻿@model SoftwareTechnologiesTeamProject.ViewModels.TagsIndexViewModel
 
 @{
     ViewBag.Title = "Posts";
 }
-<h2>Tag: @ViewBag.Header</h2>
+<div class="col-md-12">
+    <div class="main-content">
+        <section id="photos">
+
+            <img src="~/Content/Images/tagsrow1.png" alt='hashag'>
+            <p>#@ViewBag.Header</p>
+
+        </section>
+    </div>
+</div>
 <br />
 
 <div class="col-md-8">
-    @Html.ActionLink("Create new", "Create")
+    <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Create new", "Create") </span></button>
+    
 
-    @foreach (var post in Model.OrderByDescending(p => p.Date))
+    @foreach (var post in Model.Posts)
     {
-        <h2> @Html.ActionLink(post.Title, "Details", new { id = post.Id })</h2>
+        <h2> @Html.ActionLink(post.Title, "Details", new {id = post.Id})</h2>
 
         if (post.Author == null)
         {
@@ -31,7 +41,7 @@
 
             @if (post.Image != null)
             {
-                <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar" />
+                <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar"/>
             }
         </div>
         <p>@post.ShortText()</p>
@@ -39,13 +49,13 @@
 
         if (User.IsInRole("Administrator") || (post.Author != null && User.Identity.Name == post.Author.UserName))
         {
-            <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new { id = post.Id }) </span></button>
-            <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Delete", "Delete", new { id = post.Id }) </span></button>
+            <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new {id = post.Id}) </span></button>
+            <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Delete", "Delete", new {id = post.Id}) </span></button>
         }
-        <hr />
+        <hr/>
     }
 
-    </div>
+</div>
 
     <div class="col-md-4">
 
@@ -61,22 +71,14 @@
         </div>
 
         <div class="well">
-            <h4>Tags</h4>
+            <h4>See also</h4>
             <div class="row">
                 <div class="col-lg-6">
                     <ul class="list-unstyled">
-                        <li>
-                            <a href="#">Tags</a>
-                        </li>
-                        <li>
-                            <a href="#">Tags</a>
-                        </li>
-                        <li>
-                            <a href="#">Tags</a>
-                        </li>
-                        <li>
-                            <a href="#">Tags</a>
-                        </li>
+                        @foreach (var tag in Model.PopularTags)
+                        {
+                            <li><a href="/Posts/Tag/@tag.Id" class="tag">#@tag.Name</a></li>
+                        }
                     </ul>
                 </div>
             </div>

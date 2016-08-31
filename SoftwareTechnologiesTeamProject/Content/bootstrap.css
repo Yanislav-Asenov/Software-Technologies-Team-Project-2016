@@ -3002,7 +3002,7 @@ select[multiple].input-lg {
 }
 .btn {
   display: inline-block;
-  padding: 6px 12px;
+ 
   margin-bottom: 0;
   font-size: 14px;
   font-weight: normal;
@@ -3057,19 +3057,30 @@ fieldset[disabled] a.btn {
   pointer-events: none;
 }
 .btn-default {
-  color: #333;
-  background-color: #fff;
-  border-color: #ccc;
+   display: inline-block;
+  border-radius: 4px;
+    background-color: darkgreen;
+  border: none;
+  color: whitesmoke;
+  text-align: center;
+  font-size: 15px;
+  /*padding: 15px;*/
+  height: 25px;
+  width: auto;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
 }
 .btn-default:focus,
 .btn-default.focus {
-  color: #333;
+  color: whitesmoke;
   background-color: #e6e6e6;
   border-color: #8c8c8c;
 }
 .btn-default:hover {
-  color: #333;
-  background-color: #e6e6e6;
+  color: whitesmoke;
+    background-color: darkgreen;
+    padding-right: 25px;
   border-color: #adadad;
 }
 .btn-default:active,

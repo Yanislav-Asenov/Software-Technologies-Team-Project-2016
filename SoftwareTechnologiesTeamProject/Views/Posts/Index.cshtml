@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SoftwareTechnologiesTeamProject.Models.Post>
+﻿@model List<SoftwareTechnologiesTeamProject.Models.Post>
 
 @{
     ViewBag.Title = "Posts";
@@ -9,10 +9,12 @@
 <div class="col-md-8">
     <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Create new", "Create") </span></button>
 
-    @foreach (var post in Model.OrderByDescending(p => p.Date))
+    @for (int i = 0; i < Model.Count(); i++)
     {
-        <h2> @Html.ActionLink(post.Title, "Details", new { id = post.Id })</h2>
+        var post = Model[i];
 
+        <h2> @Html.ActionLink(post.Title, "Details", new { id = post.Id })</h2>
+        
         if (post.Author == null)
         {
             <p class="lead">
@@ -34,9 +36,14 @@
                 <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar" />
             }
         </div>
-        <p>@post.ShortText()</p>
+      
+        <div>
+            <input type="checkbox" class="read-more-state" id="post-@i" />
 
+            <p class="read-more-wrap">@post.ShortText()<span class="read-more-target">@post.Fulltext()</span></p>
 
+            <label for="post-@i" class="read-more-trigger"></label>
+        </div>
         if (User.IsInRole("Administrator") || (post.Author != null && User.Identity.Name == post.Author.UserName))
         {
             <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new { id = post.Id }) </span></button>
