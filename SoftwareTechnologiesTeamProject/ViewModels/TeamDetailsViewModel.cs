@@ -96,6 +96,11 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
                 var teamName = this.Team.Name;
                 var currentTeam = this.Standings[i];
 
+                if (i + 1 >= Standings.Count || i + 2 >= Standings.Count)
+                {
+                    break;
+                }
+
                 if (currentTeam.Name == teamName && i == 0)
                 {
                     resultTeams.Add(i + 1, this.Standings[i]);

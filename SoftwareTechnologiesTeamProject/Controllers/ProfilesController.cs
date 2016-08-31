@@ -45,7 +45,7 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Profile profile = db.Profiles.Find(id);
+            Profile profile = db.Profiles.Include(p => p.User).FirstOrDefault(P => P.Id == id);
             if (profile == null)
             {
                 return HttpNotFound();
@@ -59,7 +59,7 @@
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit([Bind(Include = "Id,CreationDate,Age,City,FullName,Interests,MoreInfo")] Profile profile)
+        public ActionResult Edit([Bind(Include = "Id,CreationDate,Age,City,User.FullName,Interests,MoreInfo")] Profile profile)
         {
             if (ModelState.IsValid)
             {

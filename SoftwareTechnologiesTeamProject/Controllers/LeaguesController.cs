@@ -101,18 +101,17 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 return HttpNotFound();
             }
 
-            db.Leagues.Remove(league);
-            db.SaveChanges();
-
-            return RedirectToAction("Index");
+            return View(league);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "LeagueName,StartDate,EndDate")]League league)
+        public ActionResult Edit(League league)
         {
             if (ModelState.IsValid)
             {
+                league.Matches = db.Matches.Where(m => m.LeagueId == league.Id).ToList();
+                league.Teams = db.Teams.Where(t => t.LeagueId == league.Id).ToList();
                 db.Entry(league).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Standings", new { id = league.Id });
@@ -134,8 +133,6 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 return HttpNotFound();
             }
-
-
 
             return View(league);
         }

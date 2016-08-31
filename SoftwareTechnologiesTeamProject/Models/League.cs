@@ -5,7 +5,6 @@ namespace SoftwareTechnologiesTeamProject.Models
 {
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     public class League
     {
@@ -21,14 +20,10 @@ namespace SoftwareTechnologiesTeamProject.Models
         public virtual List<Match> Matches { get; set; } = new List<Match>();
 
         [Required]
-        [DataType(DataType.Date)]
-        [Column(TypeName = "datetime2")]
         [DisplayName("Season start date")]
         public DateTime StartDate { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
-        [Column(TypeName = "datetime2")]
         [DisplayName("Season end date")]
         public DateTime EndDate { get; set; }
 

@@ -1,10 +1,10 @@
 ﻿@model SoftwareTechnologiesTeamProject.Models.League
 
 @{
-    ViewBag.Title = "Edit League";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Edit @Model.Name - @Model.GetSeason()</h2>
+<h2>Edit</h2>
 
 
 @using (Html.BeginForm())
@@ -58,7 +58,7 @@
 }
 
 <div>
-    <button class="button" style="vertical-align: middle"><span>>@Html.ActionLink("Back to List", "Index")</span></button>
+    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {
