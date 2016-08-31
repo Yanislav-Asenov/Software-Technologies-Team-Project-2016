@@ -41,8 +41,11 @@
             <input type="checkbox" class="read-more-state" id="post-@i" />
 
             <p class="read-more-wrap">@post.ShortText()<span class="read-more-target">@post.Fulltext()</span></p>
-
-            <label for="post-@i" class="read-more-trigger"></label>
+            @if (post.Body.Length > 300)
+            {
+                <label for="post-@i" class="read-more-trigger"></label>
+            }
+            
         </div>
         if (User.IsInRole("Administrator") || (post.Author != null && User.Identity.Name == post.Author.UserName))
         {
