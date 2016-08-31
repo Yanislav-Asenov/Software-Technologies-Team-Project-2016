@@ -11,17 +11,17 @@
     <h4>Post</h4>
     <hr/>
 
-    <div class="featured_articles_heading">
+    <div class="col-md-8">
         <h2>@Html.DisplayFor(model => model.Post.Title)</h2>
         <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(model => model.Post.Date)</p>
 
         <h3>By <a href="/Profiles/Details/@Model.Post.Author.Profile.Id">@Html.DisplayFor(model => model.Post.Author.FullName)</a>
         </h3>
     </div>
-   
-    <div class="featured_articles_detail">
+
+    <div>
         
-        <div class="featured_articles_img">
+        <div class="col-md-8">
             
             
             @if (Model.PostImage != null)

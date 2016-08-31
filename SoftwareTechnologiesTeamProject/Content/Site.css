@@ -1301,8 +1301,7 @@ input[type="color"]:focus,
   border: none;
   color: black;
   text-align: center;
-  font-size: 15px;
-  /*padding: 15px;*/
+  font-size: 13px;
   height: 25px;
   width: auto;
   transition: all 0.5s;
@@ -1310,34 +1309,13 @@ input[type="color"]:focus,
   margin: 5px;
 }
 
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-.button span:after {
-  content: '»';
-    color: whitesmoke;
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.button:hover span {
-  padding-right: 25px;
-}
-
-.button:hover span:after {
-  opacity: 1;
-  right: 0;
+.button:hover {
+    background-color: #333;
 }
 
 .button span a {
     color: white;
+    
 }
 
 .read-more-state {
@@ -1398,7 +1376,7 @@ p.about-us {
     
     height: 110%;
     padding-bottom: 1%;
-    width: auto%;
+    width: auto;
  
 }
 
@@ -1476,4 +1454,11 @@ html, body {
     color: black;
 	font-size: 35px;
 	text-align: center;
+}
+
+.homepageImgResize {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    
 }

@@ -3057,6 +3057,7 @@ fieldset[disabled] a.btn {
   pointer-events: none;
 }
 .btn-default {
+  
    display: inline-block;
   border-radius: 4px;
     background-color: darkgreen;
@@ -3079,8 +3080,8 @@ fieldset[disabled] a.btn {
 }
 .btn-default:hover {
   color: whitesmoke;
-    background-color: darkgreen;
-    padding-right: 25px;
+    background-color: #333;
+    font-style: 
   border-color: #adadad;
 }
 .btn-default:active,

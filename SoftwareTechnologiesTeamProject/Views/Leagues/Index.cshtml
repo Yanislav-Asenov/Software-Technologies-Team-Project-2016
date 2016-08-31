@@ -8,8 +8,9 @@
 @if (User.IsInRole("Administrator"))
 {
     <div class="adminActions">
-        @Html.ActionLink("Add new league", "Create")
-    </div>
+        <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Add new league", "Create")</span></button> 
+    </div>    
+   
 }
 
 <table class="table">
@@ -35,8 +36,9 @@
             </td>
             @if (User.IsInRole("Administrator"))
             {
-                <th>@Html.ActionLink("Edit", "Edit", new {league.Id})</th>
-                <th>@Html.ActionLink("Delete", "Delete", new {league.Id})</th>
+                <th><button class="button" style="vertical-align: middle"><span>>@Html.ActionLink("Edit", "Edit", new {league.Id})</span></button></th>
+                <th><button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Delete", "Delete", new { league.Id }) </span></button></th>
+                
             }
         </tr>
     }

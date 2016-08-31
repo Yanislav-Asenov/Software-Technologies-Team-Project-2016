@@ -28,15 +28,7 @@
             {
                 post.SetImage(images);
             }
-
-            //foreach (var post in posts)
-            //{
-            //    post.Image =
-            //        images.Where(i => i.ImagePath.Contains("PostId_" + post.Id))
-            //            .OrderByDescending(i => i.UploadedDate)
-            //            .FirstOrDefault();
-            //}
-
+            
             if (!string.IsNullOrEmpty(searchString))
             {
                 var searchedPosts = posts
@@ -93,18 +85,25 @@
                 .Include(p => p.Tags)
                 .First(p => p.Id == id);
 
+            
+
             if (post == null)
             {
                 this.AddNotification("Error occurred while trying to load post deitals.", NotificationType.ERROR);
                 return RedirectToAction("Index", "Posts");
             }
 
+            var postImage = db.Images
+              .OrderByDescending(i => i.UploadedDate)
+              .FirstOrDefault(i => i.ImagePath.Contains("PostId_" + post.Id));
+
+            
             var viewModel = new PostDetailsViewModel
             {
                 Post = post,
                 CommentAuthorId = User.Identity.GetUserId(),
                 PostId = post.Id,
-                PostImage = db.Images.FirstOrDefault(i => i.ImagePath.Contains("PostId_" + post.Id))
+                PostImage = postImage
             };
 
 

@@ -4,163 +4,166 @@
 @{
     ViewBag.Title = "Home Page";
 }
-<div class="row">
+
+
+<div>
+<div class="rowHome">
     <div class="col-md-12">
         @if (Model.HomePageImagePath != null)
         {
-            <div class="container"></div>
-            <div class="row">
-                <div class="col-md-12">
-                        <img class="img-responsive" src="~/Content/Images/HomePage/@Model.HomePageImagePath" alt="Bar"/>
-                 </div>
-            </div>
+            <div class="homepageImgResize">
+                <img class="homepageImgResize" src="~/Content/Images/HomePage/@Model.HomePageImagePath" alt="Bar"/>
 
+            </div>
         }
 
+
+        @if (User.IsInRole("Administrator"))
+        {
+            using (Html.BeginForm("AddHomePageImage", "Images", null, FormMethod.Post, new {enctype = "multipart/form-data"}))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <fieldset>
+                    <div class="editor-label">
+                        @Html.Label("Change image")
+                    </div>
+                    <div class="editor-field">
+                        <input id="ImagePath" title="Upload a product image"
+                               type="file" name="file"/>
+                    </div>
+                    <p><input type="submit" value="Change"/>
+                    </p>
+                </fieldset>
+            }
+        }
     </div>
 </div>
-@if (User.IsInRole("Administrator"))
-{
-    using (Html.BeginForm("AddHomePageImage", "Images", null, FormMethod.Post,                                                          new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-        <fieldset>
-            <div class="editor-label">
-                @Html.Label("Change image")
-            </div>
-            <div class="editor-field">
-                <input id="ImagePath" title="Upload a product image"
-                       type="file" name="file" />
-            </div>
-            <p><input type="submit" value="Change" /></p>
-        </fieldset>
-    }
-}
-<hr />
+    </div>
+            <hr />
 
-<div id="post-9" class="post-9 post type-post status-publish format-standard has-post-thumbnail hentry category-fashion tag-5 tag-6 tag-popular">
-    <div class="row">
-            <div class="col-md-8">
-                @foreach (var post in Model.FeaturedPosts)
-                {
-                    <div class="post-details-conten">
-                        <h3> <a href="/Posts/Details/@post.Id">@post.Title</a></h3>
-                    </div>
-                    <div>
-                        @if (post.Author == null)
-                        {
-                            <p class="lead">
-                                by <a>Anonymous</a>
-                            </p>
-                        }
-                        else
-                        {
-                            <p class="lead">
-                                by <a href=#>@Html.DisplayFor(modelItem => post.Author.FullName)</a>
-                            </p>
-                        }
-                        <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => post.Date)</p>
-                        <div class="postImage">
-                            @if (post.Image != null)
-                            {
-                                <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar"/>
-                            }
-                        </div>
-                        <hr/>
-
-                        <div class="post-details-content">
-                            @post.Body
-                        </div>
-                    </div>
-                }
-            </div>
-            <div class="col-md-4">
-
-
-                <div class="sidebar-add">
-                    <div class="sidebar">
-
-                        <div class="sidebar">
-
-                            <ul class="nav nav-tabs">
-
-                                <li role="presentation" class="active"><a href="#article" aria-controls="home" role="tab" data-toggle="tab">Recent Posts</a></li>
-
-                                <li role="presentation"><a href="#comments-m" aria-controls="home" role="tab" data-toggle="tab">Recent Comments</a></li>
-
-                            </ul>
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="article">
-                                    <hr />
-                                    <div>
-                                        @foreach (var post in Model.RecentPosts)
-                                        {
-                                            <div class="recent-post-wrapper">
-                                                <a href="/Posts/Details/@post.Id">
-                                                    @post.Title
-                                                </a>
-                                                <span>by @post.Author.FullName on @post.Date.ToString("dd MMMM, yyyy", CultureInfo.InvariantCulture)</span>
-                                            </div>
-                                            <hr />
-                                        }
-                                    </div>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="comments-m">
-
-                                    <hr />
-                                    @foreach (var post in Model.LastCommentedPosts)
+            <div>
+                <div class="row">
+                    <div class="col-md-8">
+                        @foreach (var post in Model.FeaturedPosts)
+            {
+                            <div class="post-details-conten">
+                                <h3> <a href="/Posts/Details/@post.Id">@post.Title</a></h3>
+                            </div>
+                            <div>
+                                @if (post.Author == null)
+                                {
+                                    <p class="lead">
+                                        by <a>Anonymous</a>
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p class="lead">
+                                        by <a href=#>@Html.DisplayFor(modelItem => post.Author.FullName)</a>
+                                    </p>
+                                }
+                                <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => post.Date)</p>
+                                <div class="postImage">
+                                    @if (post.Image != null)
                                     {
+                                        <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar" />
+                                    }
+                                </div>
+                                <hr />
 
-                                        <div class="sidebarPosts">
+                                <div class="post-details-content">
+                                    @post.Body
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-4">
 
-                                            <a href="/Posts/Details/@post.Id" class="postTitle">@post.GetShortTitle()</a>
 
+                        <div class="sidebar-add">
+                            <div class="sidebar">
+
+                                <div class="sidebar">
+
+                                    <ul class="nav nav-tabs">
+
+                                        <li role="presentation" class="active"><a href="#article" aria-controls="home" role="tab" data-toggle="tab">Recent Posts</a></li>
+
+                                        <li role="presentation"><a href="#comments-m" aria-controls="home" role="tab" data-toggle="tab">Recent Comments</a></li>
+
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane active" id="article">
+                                            <hr />
                                             <div>
+                                                @foreach (var post in Model.RecentPosts)
+                                                {
+                                                    <div class="recent-post-wrapper">
+                                                        <a href="/Posts/Details/@post.Id">
+                                                            @post.Title
+                                                        </a>
+                                                        <span>by @post.Author.FullName on @post.Date.ToString("dd MMMM, yyyy", CultureInfo.InvariantCulture)</span>
+                                                    </div>
+                                                    <hr />
+                                                }
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="comments-m">
 
-                                                <a href="" class="authorName">@post.Author.FullName</a>
+                                            <hr />
+                                            @foreach (var post in Model.LastCommentedPosts)
+                                            {
 
-                                                <div class="date">
+                                                <div class="sidebarPosts">
 
-                                                    <span>@post.Date.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture)</span>
+                                                    <a href="/Posts/Details/@post.Id" class="postTitle">@post.GetShortTitle()</a>
+
+                                                    <div>
+
+                                                        <a href="" class="authorName">@post.Author.FullName</a>
+
+                                                        <div class="date">
+
+                                                            <span>@post.Date.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture)</span>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <p style="word-wrap: break-word" class="comment-content">
+                                                        @post.GetRecentComment().GetShortContent()
+                                                    </p>
 
                                                 </div>
-
-                                            </div>
-
-                                            <p style="word-wrap: break-word" class="comment-content">
-                                                @post.GetRecentComment().GetShortContent()
-                                            </p>
-
+                                                <hr />
+                                            }
                                         </div>
-                                        <hr />
-                                    }
+
+                                    </div>
+
                                 </div>
 
                             </div>
 
+
+                            <div class="sidedar_tag">
+
+                                <h3> Popular Tags</h3>
+
+                                <div class="sidebar_tags_wrapper">
+
+                                    <ul>
+                                        @foreach (var tag in Model.PopularTags)
+                                        {
+                                            <li><a href="/Posts/Tag/@tag.Id" class="tag">#@tag.Name</a></li>
+                                        }
+                                    </ul>
+
+                                </div>
+                            </div>
+
                         </div>
-
                     </div>
-
-
-                    <div class="sidedar_tag">
-
-                        <h3> Popular Tags</h3>
-
-                        <div class="sidebar_tags_wrapper">
-
-                            <ul>
-                                @foreach (var tag in Model.PopularTags)
-                                {
-                                    <li><a href="/Posts/Tag/@tag.Id" class="tag">#@tag.Name</a></li>
-                                }
-                            </ul>
-
-                        </div>
-                    </div>
-
                 </div>
             </div>
-        </div>
-</div>
