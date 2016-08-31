@@ -12,7 +12,6 @@
     </div>
 }
 
-
 <table class="table">
     <tr>
         <th>
@@ -30,14 +29,14 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(league.Name, "Standings", new { id = league.Id })
+                @Html.ActionLink(league.Name, "Standings", new {id = league.Id})
             </td>
             <td>
             </td>
             @if (User.IsInRole("Administrator"))
             {
                 <th>@Html.ActionLink("Edit", "Edit", new {league.Id})</th>
-                <th>@Html.ActionLink("Delete", "Delete", new { league.Id })</th>
+                <th>@Html.ActionLink("Delete", "Delete", new {league.Id})</th>
             }
         </tr>
     }

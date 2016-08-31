@@ -24,7 +24,7 @@
             viewModel.RecentPosts = recentPosts;
 
             //Adding last commented posts in view model
-            var comments = db.Comments.OrderByDescending(c => c.DateCreated).Take(10).ToList();
+            var comments = db.Comments.OrderByDescending(c => c.DateCreated).ToList();
             var lastCommentedPosts = new List<Post>();
             foreach (var comment in comments)
             {
@@ -44,16 +44,15 @@
             viewModel.LastCommentedPosts = lastCommentedPosts;
 
             var featuredPosts =
-                posts.Where(p => p.Date <= DateTime.Now && p.Date >= DateTime.Now.AddDays(-7))
+                posts.Where(p => p.Date <= DateTime.Now)
                     .OrderByDescending(p => p.Date)
-                    .ThenByDescending(p => p.VotedUsers.Count)
+                    .ThenByDescending(p => p.VotedUsers.Count + p.Comments.Count)
+                    .Take(5)
                     .ToList();
 
             viewModel.FeaturedPosts = featuredPosts;
 
             viewModel.PopularTags = db.Tags.OrderByDescending(t => t.Posts.Count).Take(5).ToList();
-
-
 
             var images = db.Images.ToList();
 
@@ -69,11 +68,9 @@
 
             foreach (var post in viewModel.FeaturedPosts)
             {
-                post.Image = images.FirstOrDefault(i => i.ImagePath.Contains("PostId_" + post.Id));
+                post.Image = images.OrderByDescending(i => i.UploadedDate).FirstOrDefault(i => i.ImagePath.Contains("PostId_" + post.Id));
             }
 
-            //Missing Check
-           
             return View(viewModel);
         }
     }
