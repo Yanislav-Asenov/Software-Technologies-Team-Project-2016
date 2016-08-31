@@ -177,7 +177,8 @@ namespace SoftwareTechnologiesTeamProject.Migrations
             {
                 UserName = email,
                 Email = email,
-                FullName = fullName
+                FullName = fullName,
+                Profile = new Profile()
             };
 
 
