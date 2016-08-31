@@ -19,42 +19,53 @@
     <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Create new", "Create") </span></button>
     
 
-    @foreach (var post in Model.Posts)
-    {
-        <h2> @Html.ActionLink(post.Title, "Details", new {id = post.Id})</h2>
-
-        if (post.Author == null)
+    @for (int i = 0; i < Model.Posts.Count; i++)
         {
-            <p class="lead">
-                by <a>Anonymous</a>
-            </p>
-        }
+            var post = Model.Posts[i];
 
-        else
-        {
-            <p class="lead">
-                by <a href=#>@Html.DisplayFor(modelItem => post.Author.FullName)</a>
-            </p>
-        }
-        <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => post.Date)</p>
-        <div class="titleImage">
+            <h2> @Html.ActionLink(post.Title, "Details", new { id = post.Id })</h2>
 
-            @if (post.Image != null)
+            if (post.Author?.Profile == null)
             {
-                <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar"/>
+                <p class="lead">
+                    by <a>Anonymous</a>
+                </p>
             }
-        </div>
-        <p>@post.ShortText()</p>
 
+            else
+            {
+                <p class="lead">
+                    by <a href="/Profiles/Details/@post.Author.Profile.Id">@Html.DisplayFor(modelItem => post.Author.FullName)</a>
+                </p>
+            }
+            <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => post.Date)</p>
+            <div class="titleImage">
 
-        if (User.IsInRole("Administrator") || (post.Author != null && User.Identity.Name == post.Author.UserName))
-        {
-            <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new {id = post.Id}) </span></button>
-            <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Delete", "Delete", new {id = post.Id}) </span></button>
-        }
-        <hr/>
-    }
+                @if (post.Image != null)
+                {
+                    <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar" />
+                }
+            </div>
+            <hr />
 
+            <div>
+                <input type="checkbox" class="read-more-state" id="post-@i" />
+
+                <p class="read-more-wrap">@post.ShortText()<span class="read-more-target">@post.Fulltext()</span></p>
+                @if (post.Body.Length > 300)
+                {
+                    <label for="post-@i" class="read-more-trigger"></label>
+                }
+
+            </div>
+            if (User.IsInRole("Administrator") || (post.Author != null && User.Identity.Name == post.Author.UserName))
+            {
+                <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new { id = post.Id }) </span></button>
+                <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Delete", "Delete", new { id = post.Id }) </span></button>
+            }
+            <hr />
+            }
+    
 </div>
 
     <div class="col-md-4">

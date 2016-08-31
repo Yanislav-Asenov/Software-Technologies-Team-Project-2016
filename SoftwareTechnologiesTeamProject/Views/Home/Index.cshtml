@@ -45,9 +45,10 @@
             <div>
                 <div class="row">
                     <div class="col-md-8">
-                        @foreach (var post in Model.FeaturedPosts)
-            {
-                            <div class="post-details-conten">
+                        @for (var i = 0; i < Model.FeaturedPosts.Count; i++)
+                        {
+                            var post = Model.FeaturedPosts[i];
+                           <div class="post-details-conten">
                                 <h3> <a href="/Posts/Details/@post.Id">@post.Title</a></h3>
                             </div>
                             <div>
@@ -72,8 +73,15 @@
                                 </div>
                                 <hr />
 
-                                <div class="post-details-content">
-                                    @post.Body
+                                <div>
+                                    <input type="checkbox" class="read-more-state" id="post-@i" />
+
+                                    <p class="read-more-wrap">@post.ShortText()<span class="read-more-target">@post.Fulltext()</span></p>
+                                    @if (post.Body.Length > 300)
+                {
+                                        <label for="post-@i" class="read-more-trigger"></label>
+                                    }
+
                                 </div>
                             </div>
                         }
@@ -115,13 +123,13 @@
                                             @foreach (var post in Model.LastCommentedPosts)
                                             {
 
-                                                <div class="sidebarPosts">
+                                                <div class="recent-post-wrapper">
 
                                                     <a href="/Posts/Details/@post.Id" class="postTitle">@post.GetShortTitle()</a>
 
                                                     <div>
 
-                                                        <a href="" class="authorName">@post.Author.FullName</a>
+                                                        <a>@post.Author.FullName</a>
 
                                                         <div class="date">
 

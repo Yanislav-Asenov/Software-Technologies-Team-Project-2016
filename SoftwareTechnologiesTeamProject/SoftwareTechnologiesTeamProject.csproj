@@ -251,12 +251,13 @@
     <Compile Include="ViewModels\MatchesFixturesViewModel.cs" />
     <Compile Include="ViewModels\MatchesReultsViewModel.cs" />
     <Compile Include="ViewModels\PostDetailsViewModel.cs" />
+    <Compile Include="ViewModels\PostIndexViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\StandingsViewModel.cs" />
-    <Compile Include="ViewModels\TagsIndexViewModel.cs" />
+    <Compile Include="ViewModels\TagIndexViewModel.cs" />
     <Compile Include="ViewModels\TeamDetailsViewModel.cs" />
     <Compile Include="ViewModels\TeamResultStatsViewModel.cs" />
     <Compile Include="ViewModels\VerifyCodeViewModel.cs" />
@@ -268,6 +269,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Images\AddImage.jpg" />
     <Content Include="Content\Images\droptableGreen.png" />
     <Content Include="Content\Images\search.png" />
     <Content Include="favicon.ico" />

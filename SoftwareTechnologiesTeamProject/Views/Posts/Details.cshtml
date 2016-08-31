@@ -5,10 +5,8 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
 <div class="post-info-wrapper">
-    <h4>Post</h4>
+    
     <hr/>
 
     <div class="col-md-8">
@@ -55,7 +53,7 @@
                 if (User.IsInRole("Administrator") || (Model.Post.Author != null && User.Identity.Name == Model.Post.Author.UserName))
                 {
 
-                    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                    <img class="img-responsive" src="~/Content/Images/AddImage.jpg" alt="">
 
                     using (Html.BeginForm("AddPostImage/" + Html.DisplayFor(model => model.Post.Id), "Images", null, FormMethod.Post, new {enctype = "multipart/form-data"}))
                     {

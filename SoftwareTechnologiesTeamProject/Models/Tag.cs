@@ -11,6 +11,9 @@
         [Required]
         public string Name { get; set; }
 
-        public virtual List<Post> Posts { get; set; } = new List<Post>();
+        public  List<Post> Posts { get; set; } = new List<Post>();
+
+        public string Body { get; set; }            
+
     }
 }
