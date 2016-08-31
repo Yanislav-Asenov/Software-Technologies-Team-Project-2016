@@ -1,28 +1,35 @@
 ﻿namespace SoftwareTechnologiesTeamProject.Controllers
 {
+    using Microsoft.AspNet.Identity;
     using SoftwareTechnologiesTeamProject.Models;
     using System.Data.Entity;
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
+
     public class ProfilesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Profiles
+        [Authorize]
         public ActionResult Index()
         {
-            return View(db.Profiles.ToList());
+            var userId = User.Identity.GetUserId();
+            var profile = db.Profiles.Include(p => p.User).FirstOrDefault(p => p.User.Id == userId);
+
+            return View(profile);
         }
 
         // GET: Profiles/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Profile profile = db.Profiles.Find(id);
+            Profile profile = db.Profiles.Include(p => p.User).FirstOrDefault(p => p.Id == id);
             if (profile == null)
             {
                 return HttpNotFound();
@@ -30,30 +37,8 @@
             return View(profile);
         }
 
-        // GET: Profiles/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Profiles/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreationDate,Age,City,FullName,Interests,MoreInfo")] Profile profile)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Profiles.Add(profile);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(profile);
-        }
-
         // GET: Profiles/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,6 +58,7 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,CreationDate,Age,City,FullName,Interests,MoreInfo")] Profile profile)
         {
             if (ModelState.IsValid)

@@ -49,8 +49,8 @@
             return View(posts);
         }
 
-         public ActionResult Tag(int? id)
-        { 
+        public ActionResult Tag(int? id)
+        {
             var tags = db.Tags.Include(t => t.Posts.Select(p => p.Author)).ToList();
 
             var tag = tags.FirstOrDefault(t => t.Id == id);
@@ -68,12 +68,12 @@
             }
             ViewBag.Header = tag.Name;
 
-            TagsIndexViewModel viewModel= new TagsIndexViewModel
+            TagsIndexViewModel viewModel = new TagsIndexViewModel
 
             {
                 Posts = posts,
                 PopularTags = tags.OrderByDescending(t => t.Posts.Count).Take(5).ToList()
-        };
+            };
 
 
             return View(viewModel);

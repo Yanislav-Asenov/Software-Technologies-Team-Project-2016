@@ -458,7 +458,6 @@
     <Content Include="Views\Matches\ChooseLeague.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
-    <Content Include="Views\Profiles\Create.cshtml" />
     <Content Include="Views\Profiles\Delete.cshtml" />
     <Content Include="Views\Profiles\Details.cshtml" />
     <Content Include="Views\Profiles\Edit.cshtml" />

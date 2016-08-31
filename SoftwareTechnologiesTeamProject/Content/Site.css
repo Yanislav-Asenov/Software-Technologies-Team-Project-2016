@@ -149,6 +149,12 @@ table > thead {
     float: right;
 }
 
+/* Log off form */
+.logOffForm > a {
+    padding-left: 20px;
+    color: white;
+}
+
 
 /* Single comment edit / delete actions styles */
 

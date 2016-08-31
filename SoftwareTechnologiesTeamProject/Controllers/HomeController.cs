@@ -52,7 +52,7 @@
 
             viewModel.FeaturedPosts = featuredPosts;
 
-            viewModel.PopularTags = db.Tags.OrderByDescending(t => t.Posts.Count).Take(5).ToList();
+            viewModel.PopularTags = db.Tags.OrderByDescending(t => t.Posts.Count).Take(10).ToList();
 
             var images = db.Images.ToList();
 
