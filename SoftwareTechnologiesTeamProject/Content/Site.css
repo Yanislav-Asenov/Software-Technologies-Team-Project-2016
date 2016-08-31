@@ -1447,11 +1447,11 @@ html, body {
 }
 
 #photos p {
-	padding: 11% 0 0 0%;
+	padding: 9.5% 0 0 1%;
 	position: absolute;
 	
 	font-family: 'Dancing Script', cursive;
-    color: black;
+    color: whitesmoke;
 	font-size: 35px;
 	text-align: center;
 }

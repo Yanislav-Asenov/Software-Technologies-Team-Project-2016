@@ -10,7 +10,7 @@
     @if (User.IsInRole("Administrator"))
     {
         <div class="adminActions">
-            @Html.ActionLink("Create new", "CreateChooseLeague")
+            <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Create new", "CreateChooseLeague")</span></button>
         </div>
     }
     <h1 class="matchesHeader">Matches for @Model.GetLongDate()</h1>

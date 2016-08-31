@@ -13,7 +13,7 @@
 
     <div class="col-md-8">
         <h2>@Html.DisplayFor(model => model.Post.Title)</h2>
-        <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(model => model.Post.Date)</p>
+        <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(model => model.Post.LastDateActive)</p>
 
         <h3>By <a href="/Profiles/Details/@Model.Post.Author.Profile.Id">@Html.DisplayFor(model => model.Post.Author.FullName)</a>
         </h3>

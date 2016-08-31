@@ -101,10 +101,8 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 return HttpNotFound();
             }
 
-            db.Leagues.Remove(league);
-            db.SaveChanges();
-
-            return RedirectToAction("Index");
+            
+            return View();
         }
 
         [HttpPost]

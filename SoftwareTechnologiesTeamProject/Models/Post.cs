@@ -38,7 +38,7 @@ namespace SoftwareTechnologiesTeamProject.Models
                ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
-        public DateTime? LastDateActive { get; set; }
+        public DateTime LastDateActive { get; set; }
 
         public virtual List<ApplicationUser> VotedUsers { get; set; } = new List<ApplicationUser>();
 

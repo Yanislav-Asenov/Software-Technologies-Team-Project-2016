@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TotalGoals)
+            @Html.DisplayNameFor(model => model.GetTotalGoals())
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Victories)
@@ -71,7 +71,7 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TotalGoals)
+            @Html.DisplayFor(modelItem => item.GetTotalGoals())
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Victories)
