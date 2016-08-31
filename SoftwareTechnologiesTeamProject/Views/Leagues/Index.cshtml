@@ -36,7 +36,7 @@
             </td>
             @if (User.IsInRole("Administrator"))
             {
-                <th><button class="button" style="vertical-align: middle"><span>>@Html.ActionLink("Edit", "Edit", new {league.Id})</span></button></th>
+                <th><button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new {league.Id})</span></button></th>
                 <th><button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Delete", "Delete", new { league.Id }) </span></button></th>
                 
             }
