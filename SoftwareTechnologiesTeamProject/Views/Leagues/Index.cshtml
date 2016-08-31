@@ -7,7 +7,9 @@
 <h2>Leagues</h2>
 @if (User.IsInRole("Administrator"))
 {
-    @Html.ActionLink("Add new league", "Create")
+    <div class="adminActions">
+        @Html.ActionLink("Add new league", "Create")
+    </div>
 }
 
 
@@ -16,7 +18,12 @@
         <th>
             Leagues
         </th>
-        <th></th>
+        <th>
+        </th>
+        @if (User.IsInRole("Administrator"))
+        {
+            <th colspan="2">Actions</th>
+        }
     </tr>
 
     @foreach (var league in Model)
@@ -26,8 +33,12 @@
                 @Html.ActionLink(league.Name, "Standings", new { id = league.Id })
             </td>
             <td>
-
             </td>
+            @if (User.IsInRole("Administrator"))
+            {
+                <th>@Html.ActionLink("Edit", "Edit", new {league.Id})</th>
+                <th>@Html.ActionLink("Delete", "Delete", new { league.Id })</th>
+            }
         </tr>
     }
 </table>

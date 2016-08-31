@@ -462,6 +462,7 @@
     <Content Include="Views\Profiles\Details.cshtml" />
     <Content Include="Views\Profiles\Edit.cshtml" />
     <Content Include="Views\Profiles\Index.cshtml" />
+    <Content Include="Views\Leagues\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\HomePage\" />

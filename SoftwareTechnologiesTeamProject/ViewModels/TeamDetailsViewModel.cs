@@ -125,25 +125,25 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
         public string GetWinsInPercents()
         {
             double totalWins = this.Team.Victories;
-            double percents = (totalWins / this.Team.TotalGamesPlayed) * 100;
+            double percents = (totalWins / this.Team.GetTotalGamesPlayed()) * 100;
 
-            return percents + "%";
+            return $"{percents:F2}%";
         }
 
         public string GetDrawsInPercents()
         {
             double totalDraws = this.Team.Draws;
-            double percents = (totalDraws / this.Team.TotalGamesPlayed) * 100;
+            double percents = (totalDraws / this.Team.GetTotalGamesPlayed()) * 100;
 
-            return percents + "%";
+            return $"{percents:F2}%";
         }
 
         public string GetLossesInPercents()
         {
             double totalLosses = this.Team.Losses;
-            double percents = (totalLosses / this.Team.TotalGamesPlayed) * 100;
+            double percents = (totalLosses / this.Team.GetTotalGamesPlayed()) * 100;
 
-            return percents + "%";
+            return $"{percents:F2}%";
         }
 
         public string GetMatchesGoalsInfo(string overOrUnder, string numberOfGoals)
@@ -170,7 +170,7 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
                     }
 
                     double percents = (matchesCounter / (double)matches.Count) * 100;
-                    return percents + "%";
+                    return $"{percents:F2}%";
                 }
                 else if (numberOfGoals == "2.5")
                 {
@@ -191,7 +191,7 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
                     }
 
                     double percents = (matchesCounter / (double)matches.Count) * 100;
-                    return percents + "%";
+                    return $"{percents:F2}%";
                 }
                 else if (numberOfGoals == "3.5")
                 {
@@ -213,7 +213,7 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
 
 
                     double percents = (matchesCounter / (double)matches.Count) * 100;
-                    return percents + "%";
+                    return $"{percents:F2}%";
                 }
             }
             else if (overOrUnder == "under")
@@ -237,7 +237,7 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
                     }
 
                     double percents = (matchesCounter / (double)matches.Count) * 100;
-                    return percents + "%";
+                    return $"{percents:F2}%";
                 }
                 else if (numberOfGoals == "2.5")
                 {
@@ -258,7 +258,7 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
                     }
 
                     double percents = (matchesCounter / (double)matches.Count) * 100;
-                    return percents + "%";
+                    return $"{percents:F2}%";
                 }
                 else if (numberOfGoals == "3.5")
                 {
@@ -279,7 +279,7 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
 
 
                     double percents = (matchesCounter / (double)matches.Count) * 100;
-                    return percents + "%";
+                    return $"{percents:F2}%"; ;
                 }
             }
 

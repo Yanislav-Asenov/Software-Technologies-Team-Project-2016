@@ -13,30 +13,17 @@
         [Required]
         public string Name { get; set; }
 
-        [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
-        [NotMapped]
-        public int TotalGamesPlayed => this.Victories + this.Draws + this.Losses;
-
-        [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
         public int Victories { get; set; }
 
-        [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
         public int Draws { get; set; }
 
-        [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
         public int Losses { get; set; }
 
-        [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
         public int GoalsFor { get; set; }
 
-        [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
         public int GoalsAgainst { get; set; }
 
-        [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Input must be a number.")]
         public int Points { get; set; }
-
-        [NotMapped]
-        public int GamesPlayed => this.GoalsFor + this.GoalsAgainst;
 
         [Required]
         [StringLength(100)]
@@ -87,6 +74,16 @@
             Points = 0;
         }
 
+        public int GetTotalGamesPlayed()
+        {
+            return this.Victories + this.Draws + this.Losses;
+        }
+
+        public int GetTotalGoals()
+        {
+            return this.GoalsFor + this.GoalsAgainst;
+        }
+
         public void Update(Team team)
         {
             this.Name = team.Name;
@@ -119,21 +116,21 @@
 
         public string GetAverageGoalsPerGame()
         {
-            double averageGoals = this.GamesPlayed / (double)this.TotalGamesPlayed;
+            double averageGoals = this.GetTotalGoals() / (double)this.GetTotalGamesPlayed();
 
             return $"{averageGoals:F2}";
         }
 
         public string GetAverageGoalsFor()
         {
-            double averageGoalsFor = this.GoalsFor / (double)this.TotalGamesPlayed;
+            double averageGoalsFor = this.GoalsFor / (double)this.GetTotalGamesPlayed();
 
             return $"{averageGoalsFor:F2}";
         }
 
         public string GetAverageGoalsAgainst()
         {
-            double averageGoalsAgainst = this.GoalsAgainst / (double)this.TotalGamesPlayed;
+            double averageGoalsAgainst = this.GoalsAgainst / (double)this.GetTotalGamesPlayed();
 
             return $"{averageGoalsAgainst:F2}";
         }

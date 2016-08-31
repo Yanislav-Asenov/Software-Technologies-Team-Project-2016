@@ -37,6 +37,7 @@ p, h1, h2, h3, h4, h5, a {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 50px;
 }
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -148,7 +149,59 @@ table > thead {
     float: right;
 }
 
+.matchesHeader {
+    padding: 15px 15px;
+    margin-bottom: 50px;
+    border-bottom: darkgreen dashed 2px;
+}
 
+.dayLink {
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.dayLink:hover {
+    text-decoration: none;
+    color: white;
+    background: green;
+}
+
+/* Admin actions */
+
+.adminActions {
+    margin: 20px 0;
+    padding: 0;
+}
+
+.adminActions > a {
+    padding: 5px;
+    margin-right: 5px;
+    border: solid black 1px;
+    border-radius: 8px;
+    background: darkgreen;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+.adminActions > a:hover {
+    border: solid black 1px;
+    text-decoration: none;
+    background: white;
+    color: darkgreen;
+}
+
+.adminActions > a:focus {
+    border: solid red 1px;
+    text-decoration: none;
+    background: white;
+    color: red;
+}
+
+.updateResultButton {
+    margin-left: 45%;
+}
 /* Single comment edit / delete actions styles */
 
 .single-comment > .actions {
@@ -516,7 +569,7 @@ table > thead {
 
 .standingsInfo {
     text-align: center;
-    width: 2%;
+    width: 3.5%;
     max-height: 20px;
 }
 
@@ -540,7 +593,7 @@ th{
 
 .standingsMatchHistory {
     color: white;
-    width: 17%;
+    width: 13%;
 }
 
 .standingsMatchHistory > ul {
@@ -578,7 +631,8 @@ th{
     text-decoration: none;
     padding: 5px 0 5px 0;
     text-decoration: none;
-    background: rgb(17, 80, 17)
+    background: darkgreen;
+    color: white;
 }
 
 .standingsMatchHistoryLetter > a:focus {
@@ -901,28 +955,9 @@ thead {
 
 /*  Team details view styles */
 
-.leagueNameWrapper {
-    position: relative;
-}
-
-.leagueNameWrapper > img {
-    float: left;
-}
-
-.leagueNameWrapper > h2 {
-    margin-left: 38%;
-}
-
-.leagueNameWrapper > h1 {
-     margin-left: 34%;
-}
 
 
-.teamInfoTable {
-    position: absolute;
-    top: 0;
-    right: -5%;
-}
+.teamInfoTable > 
 
 .playedGamesWrapper {
     margin-top: 30px;
@@ -1084,7 +1119,6 @@ td, th {
     display: block;
     color: black;
     text-decoration: none;
-    max-width: 217px;
 }
 
 .singleUpcomingMatch > td > a:hover {
@@ -1141,7 +1175,7 @@ td, th {
 
 .time {
     background:darkgreen;
-    width: 20px;
+    width: 5%;
     text-align: center;
     font-weight: bold;
 }
@@ -1154,7 +1188,6 @@ td, th {
 .upcomingMatchTeamName {
     font-weight: bold;
     width: 30%;
-    max-width: 100px;
 }
 
 .adminActionsSmall {

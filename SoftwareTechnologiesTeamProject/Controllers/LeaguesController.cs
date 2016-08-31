@@ -87,6 +87,40 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             return View(league);
         }
 
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            League league = db.Leagues.Find(id);
+
+            if (league == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.Leagues.Remove(league);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "LeagueName,StartDate,EndDate")]League league)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(league).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Standings", new { id = league.Id });
+            }
+
+            return RedirectToAction("Edit", new { id = league.Id });
+        }
+
 
         // GET: Leagues/Delete/5
         public ActionResult Delete(int? id)
@@ -100,6 +134,9 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 return HttpNotFound();
             }
+
+
+
             return View(league);
         }
 

@@ -32,6 +32,7 @@
                 .Include(m => m.HomeTeam)
                 .Include(m => m.AwayTeam)
                 .Where(m => m.HomeTeamId == id || m.AwayTeamId == id)
+                .OrderByDescending(m => m.DateTime)
                 .ToList();
 
 

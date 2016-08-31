@@ -7,15 +7,13 @@
 
 
 <div class="row">
-
-    <h1 class="matchesHeader">Matches for @Model.GetLongDate()</h1>
-
     @if (User.IsInRole("Administrator"))
     {
-        @Html.ActionLink("Create new", "CreateChooseLeague")
+        <div class="adminActions">
+            @Html.ActionLink("Create new", "CreateChooseLeague")
+        </div>
     }
-
-
+    <h1 class="matchesHeader">Matches for @Model.GetLongDate()</h1>
     <div class="col-md-2 calendar">
         <table class="table table-condensed calendar">
             <thead>
@@ -116,12 +114,6 @@
                         <th class="upcomingMatchCoef">1</th>
                         <th class="upcomingMatchCoef">X</th>
                         <th class="upcomingMatchCoef">2</th>
-                        @if (User.IsInRole("Administrator"))
-                        {
-                            <th class="adminActionsSmall"></th>
-                            <th class="adminActionsSmall"></th>
-                            <th class="adminActionsLarge"></th>
-                        }
                     </tr>
                     </thead>
                     @foreach (var match in leagueMatches)
@@ -160,18 +152,6 @@
                             <td class="upcomingMatchCoef match-info-@match.Id">
                                 <a href="/Matches/Details/@match.Id" class="matchLink upcomingMatchCoef match-info-@match.Id">@match.AwayCoefficient</a>
                             </td>
-                            @if (User.IsInRole("Administrator"))
-                            {
-                                <td class="adminActionsSmall">
-                                    <a href="/Matches/Delete/@match.Id" class="matchLink">Delete</a>
-                                </td>
-                                <td class="adminActionsSmall">
-                                    <a href="/Matches/Edit/@match.Id" class="matchLink">Edit</a>
-                                </td>
-                                <td class="adminActionsLarge">
-                                    @Html.ActionLink("Update result", "UpdateResult", new {id = match.Id})
-                                </td>
-                            }
                         </tr>
                         </tbody>
                     }

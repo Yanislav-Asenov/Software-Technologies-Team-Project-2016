@@ -29,7 +29,7 @@
 
         public int GetMissingDays(string dayOfWeek)
         {
-            int missingDays = -1;
+            int missingDays = 1;
             string[] daysOfWeek = new[] { "Monday", "TuesDay", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 
             for (int i = 0; i < daysOfWeek.Length; i++)

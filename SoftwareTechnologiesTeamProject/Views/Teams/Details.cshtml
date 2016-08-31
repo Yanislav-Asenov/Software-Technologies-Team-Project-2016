@@ -6,9 +6,10 @@
 
 @if (User.IsInRole("Administrator"))
 {
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Team.Id }) |
-    </p>
+    <div class="adminActions">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Team.Id })
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Team.Id })
+    </div>
 }
 
 <div class="container">
@@ -123,7 +124,7 @@
                         @:,<strong>@Model.Team.Losses</strong> losses
                 }
 
-                    in last <strong>@Model.Team.TotalGamesPlayed</strong> games played through season @Model.Team.League.GetSeason()
+                    in last <strong>@Model.Team.GetTotalGamesPlayed()</strong> games played through season @Model.Team.League.GetSeason()
                 </p>
             </div>
         </div>
@@ -158,7 +159,7 @@
                     <table class="table table-condensed teamStatsTable">
                         <tr>
                             <td class="text-left boldInfo">Goals</td>
-                            <td class="text-right">@Model.Team.GamesPlayed</td>
+                            <td class="text-right">@Model.Team.GetTotalGoals()</td>
                         </tr>
                         <tr>
                             <td class="text-left boldInfo">Average per game</td>
@@ -264,7 +265,7 @@
                                         <img src="@currentTeam.LogoLink" alt="Club Logo" width="20" height="20" /> @currentTeam.Name
                                     </a>
                                 </td>
-                                <td class="standingsInfo">@currentTeam.GamesPlayed</td>
+                                <td class="standingsInfo">@currentTeam.GetTotalGoals()</td>
                                 <td class="standingsInfo">@currentTeam.GetGoalDifference()</td>
                                 <td class="standingsInfo">@currentTeam.Points</td>
                             </tr>
@@ -278,7 +279,7 @@
                                         <img src="@currentTeam.LogoLink" alt="Club Logo" width="20" height="20" /> @currentTeam.Name
                                     </a>
                                 </td>
-                                <td class="standingsInfo">@currentTeam.GamesPlayed</td>
+                                <td class="standingsInfo">@currentTeam.GetTotalGoals()</td>
                                 <td class="standingsInfo">@currentTeam.GetGoalDifference()</td>
                                 <td class="standingsInfo">@currentTeam.Points</td>
                             </tr>

@@ -28,14 +28,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GamesPlayed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GamesPlayed)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Victories)
         </dt>
 
@@ -130,22 +122,13 @@
         <dd>
             @Html.DisplayFor(model => model.StadiumHeight)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LogoLink)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LogoLink)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }
