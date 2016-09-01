@@ -3,7 +3,6 @@
 namespace SoftwareTechnologiesTeamProject.ViewModels
 {
     using Models;
-    using System.Globalization;
     using System.Linq;
 
     public class TeamDetailsViewModel
@@ -35,17 +34,16 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
             return this.Matches.Where(m => m.AwayTeam.Name == this.Team.Name && m.IsResultUpdated).ToList();
         }
 
-        public Dictionary<string, Match> GetUpcomingMatches()
+        public List<Match> GetUpcomingMatches()
         {
-            var upcomingMatches = new Dictionary<string, Match>();
+            var upcomingMatches = new List<Match>();
 
-            foreach (var match in this.Matches.Where(M => M.IsResultUpdated == false))
+            foreach (var match in this.Matches.Where(m => m.IsResultUpdated == false))
             {
-                string date = match.DateTime.ToString("dddd dd MMMM", CultureInfo.InvariantCulture);
-                upcomingMatches.Add(date, match);
+                upcomingMatches.Add(match);
             }
 
-            return upcomingMatches;
+            return upcomingMatches.Take(3).ToList();
         }
 
         public int GetTotalWinsCount()
@@ -84,7 +82,7 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
                 }
             }
 
-            return teamResultStats.OrderByDescending(s => s.MatchesPlayed).ThenByDescending(s => s.Result).ToList();
+            return teamResultStats.OrderByDescending(s => s.MatchesPlayed).ThenByDescending(s => s.Result).Take(2).ToList();
         }
 
         public Dictionary<int, Team> GetMiniStandings()

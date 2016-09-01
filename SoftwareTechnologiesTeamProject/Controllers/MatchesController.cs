@@ -161,13 +161,6 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             db.Entry(currentMatch.HomeTeam).State = EntityState.Modified;
             db.Entry(currentMatch.AwayTeam).State = EntityState.Modified;
 
-            foreach (var vote in currentMatch.Votes.Where(v => v.VoteType == winner))
-            {
-                var user = vote.Voter;
-                user.Balance += 50;
-                db.Entry(user).State = EntityState.Modified;
-            }
-
             db.Entry(currentMatch).State = EntityState.Modified;
             db.SaveChanges();
 

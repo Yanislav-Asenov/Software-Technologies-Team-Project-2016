@@ -24,21 +24,38 @@
 
             var images = db.Images.ToList();
 
+            //Setting each post iamge
             foreach (var post in posts)
             {
                 post.SetImage(images);
             }
-            
+
+            //Getting popular tags
+            var popularTags = db.Tags
+                .OrderByDescending(t => t.Posts.Count)
+                .Take(10)
+                .ToList();
+
+            var viewModel = new PostIndexViewModel
+            {
+                PopularTags = popularTags
+            };
+
+
             if (!string.IsNullOrEmpty(searchString))
             {
                 var searchedPosts = posts
                     .Where(p => p.Title.Contains(searchString) || p.Author.FullName.Contains(searchString) || p.Body.Contains(searchString))
                     .ToList();
 
-                return View(searchedPosts);
+                viewModel.Posts = searchedPosts;
+
+                return View(viewModel);
             }
 
-            return View(posts);
+            viewModel.Posts = posts;
+
+            return View(viewModel);
         }
 
         public ActionResult Tag(int? id)
@@ -85,7 +102,7 @@
                 .Include(p => p.Tags)
                 .First(p => p.Id == id);
 
-            
+
 
             if (post == null)
             {
@@ -97,7 +114,7 @@
               .OrderByDescending(i => i.UploadedDate)
               .FirstOrDefault(i => i.ImagePath.Contains("PostId_" + post.Id));
 
-            
+
             var viewModel = new PostDetailsViewModel
             {
                 Post = post,
@@ -347,3 +364,4 @@
 
     }
 }
+

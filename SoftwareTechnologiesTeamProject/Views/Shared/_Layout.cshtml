@@ -16,7 +16,7 @@
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span> 
                     </button>
                     <a class="navbar-brand" href="@Url.Action("Index", "Home")" title="Drop Table">
                        
@@ -26,10 +26,9 @@
                 <div id="navbar3" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="navButtons">@Html.ActionLink("Posts", "Index", "Posts")</li>
-                        <li class="navButtons">@Html.ActionLink("Leagues", "Index", "Leagues")</li>
-                        <li class="navButtons">@Html.ActionLink("Matches", "Matches", "Matches")</li>
-                        <li class="navButtons">@Html.ActionLink("Contacts", "Index", "Contacts")</li>
-                        <li class="navButtons">@Html.ActionLink("About Us", "Index", "About")</li>
+                        <li class="navButtons">@Html.ActionLink("Standings", "Index", "Leagues")</li>
+                        <li class="navButtons">@Html.ActionLink("Fixtures", "Matches", "Matches")</li>
+                        <li class="navButtons">@Html.ActionLink("About Us", "About", "Home")</li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@User.Identity.Name<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -77,7 +76,7 @@
 <div class="container body-content">
     @RenderBody()
 </div>
-<div class="footer">Drop Table Team Project - Software Technologies - <a href="http://softuni.bg">SoftUni</a>&copy;.
+<div class="footer">Drop Table Team Project - Software Technologies - <a href="http://softuni.bg">SoftUni</a>
 </div>
 </body>
 </html>

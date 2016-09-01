@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "About Us";
+}
+<div class="about-header">
+    <h2>@ViewBag.Title</h2>
+    <h3>@ViewBag.Message</h3>
+</div>
+<br />
+
+<div class="aboutUs">
+    <h2>Our team:</h2>
+    <br />
+
+    <div class="row">
+        @{ int i = 0; }
+
+
+        <div class="col-md-3">
+            <img class="dev-img" src="https://scontent-vie1-1.xx.fbcdn.net/v/t1.0-9/1148850_648131101864921_2053131244_n.jpg?oh=c1931f0c8e9f02278011f4651aa11567&oe=5882AAD5" width="170" height="170" />
+            <hr />
+            <div>
+                <input type="checkbox" class="read-more-state" id="post-1" />
+                <p class="about-us read-more-wrap">
+                    Боби <br />
+                    <span class="read-more-target">
+                        Програмира от 9 години, много е добър.
+                    </span>
+                </p>
+                <label for="post-1" class="read-more-trigger"></label>
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <img class="dev-img" src="https://scontent-vie1-1.xx.fbcdn.net/v/t1.0-9/13912850_10201848335007443_3915370334382606205_n.jpg?oh=0d7d9312d1a43574b2539a7dba812516&oe=58386C2B" width="170" height="170" />
+            <hr />
+            <div>
+                <input type="checkbox" class="read-more-state" id="post-2" />
+                <p class="about-us read-more-wrap">
+                    Петьо <br />
+                    <span class="read-more-target">
+                        Работил е за гуугъл още преди да съществуват." + "Работил е за гуугъл още преди да съществуват.
+                    </span>
+                </p>
+                <label for="post-2" class="read-more-trigger"></label>
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <img class="dev-img" src="https://scontent-vie1-1.xx.fbcdn.net/v/t1.0-9/10419971_920034744705734_1313142506640151966_n.jpg?oh=503d49576223c51b8ac2f720cb692b69&oe=5839BADB" width="170" height="170" />
+            <hr />
+            <div>
+                <input type="checkbox" class="read-more-state" id="post-3" />
+                <p class="about-us read-more-wrap">
+                    Яни <br />
+                    <span class="read-more-target">
+                        Програмира от както ходи. Като малък е искал да стане зидар, но след серия неуспешни опити се е насочил към програмирането.
+                    </span>
+                </p>
+                <label for="post-3" class="read-more-trigger"></label>
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <img class="dev-img" src="https://scontent-vie1-1.xx.fbcdn.net/v/l/t1.0-9/10460106_10206261668488327_6887670438985273957_n.jpg?oh=69f30f56db4d10a074692167d4f0197b&oe=5853CD88" width="170" height="170" />
+            <hr />
+            <div>
+                <input type="checkbox" class="read-more-state" id="post-@i" />
+                <p class="about-us read-more-wrap">
+                    Адриан <br />
+                    <span class="read-more-target">
+                        Правил е дизайна на змията за Nokia 3310.
+                    </span>
+                </p>
+                <label for="post-@i" class="read-more-trigger"></label>
+            </div>
+        </div>
+
+    </div>
+
+</div>

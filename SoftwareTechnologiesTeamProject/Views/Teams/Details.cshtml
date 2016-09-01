@@ -14,7 +14,6 @@
 
 <div class="container">
     <div class="leagueNameWrapper">
-        <div class="row teamDetailsInfoRow">
             <div class="col-md-3">
                 <img src="@Model.Team.LogoLink" alt="clubLogo" width="130" class="teamDetailsLogo" />
             </div>
@@ -24,7 +23,7 @@
             </div>
             <div class="col-md-3">
                 <table class="table-condensed teamInfoTable">
-                    <tr>
+                    <tr class="tableHead">
                         <th class="text-center" colspan="2">Team info</th>
                     </tr>
                     <tr>
@@ -49,7 +48,7 @@
                     </tr>
                 </table>
             </div>
-        </div>
+
     </div>
 
     <div class="playedGamesWrapper">
@@ -57,7 +56,7 @@
             <div class="col-md-12">
                 <h3>Games played in the league so far</h3>
                 <table class="table matchHistoryTable">
-                    <tr>
+                    <tr class="tableHead">
                         <th class="matchHistoryDate">Date</th>
                         <th class="matchHistoryHomeTeam">Home team</th>
                         <th class="historyMatchResult">Result</th>
@@ -135,7 +134,7 @@
                 @* Wins/Draws/Losses stats *@
                 <div class="col-md-3">
                     <table class="table table-condensed teamStatsTable">
-                        <tr>
+                        <tr class="tableHead">
                             <td class="text-left boldInfo">Games played</td>
                             <td class="text-right">@Model.GetPlayedMatches().Count</td>
                         </tr>
@@ -157,7 +156,7 @@
                 @* Goals stats *@
                 <div class="col-md-3">
                     <table class="table table-condensed teamStatsTable">
-                        <tr>
+                        <tr class="tableHead">
                             <td class="text-left boldInfo">Goals</td>
                             <td class="text-right">@Model.Team.GetTotalGoals()</td>
                         </tr>
@@ -179,7 +178,7 @@
                 @* Goals stats *@
                 <div class="col-md-3">
                     <table class="table table-condensed teamStatsTable leftSide">
-                        <tr>
+                        <tr class="tableHead">
                             <th class="text-center">Goals</th>
                             <th class="text-center">Under</th>
                             <th class="text-center">Over</th>
@@ -205,13 +204,13 @@
                 @* The most common results *@
                 <div class="col-md-3">
                     <table class="table table-condensed teamStatsTable resultsInfo leftSide">
-                        <tr>
+                        <tr class="tableHead">
                             <th class="tableHeading" colspan="3">The most common results</th>
                         </tr>
                         <tr>
-                            <td>Result</td>
-                            <td title="Number of matches with this result">Matches</td>
-                            <td>Percents</td>
+                            <td class="boldInfo">Result</td>
+                            <td title="Number of matches with this result" class="boldInfo">Matches</td>
+                            <td class="boldInfo">Percents</td>
                         </tr>
                         @foreach (var stat in Model.GetTeamStats())
                         {
@@ -240,7 +239,7 @@
         <div class="row teamDetailsInfoRow">
             <div class="col-md-6 rightCol">
                 <table class="table table-condensed">
-                    <tr>
+                    <tr class="tableHead">
                         <th colspan="5">@Model.League.Name</th>
                     </tr>
                     <tr>
@@ -296,13 +295,11 @@
             *@
             <div class="col-md-6 leftCol">
                 <table class="table table-condensed">
-                    <tr>
+                    <tr class="tableHead">
                         <th colspan="4">Matches</th>
                     </tr>
-                    @foreach (var kvp in Model.GetUpcomingMatches())
+                    @foreach (var match in Model.GetUpcomingMatches())
                     {
-                        var date = kvp.Key;
-                        var match = kvp.Value;
                         <tr class="singleUpcomingMatch" onmouseover="changeLinkColor(@match.Id)" id="linkRow-@match.Id" onmouseout="resetLinkColor(@match.Id)">
                             <td>
                                 <a href="/Matches/Details/@match.Id" class="matchLink fixtureLink-@match.Id">

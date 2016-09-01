@@ -75,18 +75,20 @@ textarea {
 
 .bottom-right {
     float: right;
-    background-color:lightskyblue;
+    background-color:white;
     border-radius: 24px;
     font-weight: bold;
-    color: black;
+    color: darkgreen;
+    border: solid 1.5px darkgreen;
 }
 
 .bottom-right:hover {
-    background-color:dodgerblue;
+ background-color: darkgreen;
     -webkit-transform: scale(1.2);
     -ms-transform: scale(1.2);
     transform: scale(1.2);
     transition: all 0.3s ease 0s;
+    color: white;
 }
 
 .add-comment-wrapper > form {
@@ -301,7 +303,6 @@ table > thead {
     margin-bottom: 20px;
 }
 
-
 .confirmDeleteLink {
     background: white;
     color: red;
@@ -370,29 +371,48 @@ table > thead {
      cursor:pointer;
 }
 
+.likesCount {
+    margin-bottom: 15px;
+    position: absolute;
+    top: 2px;
+    left: 30px;
+}
+
+.likesContainer {
+    position: relative;
+}
+
+
+.postBodyContainer {
+    margin: 20px 0 20px 0;
+}
 
 .tag-container {
-    margin: 5px;
+    margin: 20px 0 20px 0;
 }
 
 .tag-container > a {
     margin-right: 5px;
-    padding: 5px 5px 5px 5px;
+    padding: 5px 10px;
     color: black;
     text-decoration: none;
-    background: orange;
+    background: rgb(217, 209, 209);
     border-radius: 45px 45px 45px 45px;
+    border: 2px grey solid;
       cursor:pointer;
+    font-weight: bold;
 }
 
 .tag-container > a:hover {
-    margin-right: 5px;
-    padding: 5px 5px 5px 5px;
-    color: white;
+     margin-right: 5px;
+    padding: 5px 10px;
+    color: black;
     text-decoration: none;
-    background: rgb(54, 51, 51);
+    border: solid darkgreen 2px;
     border-radius: 45px 45px 45px 45px;
-     cursor:pointer;
+      cursor:pointer;
+    font-weight: bold;
+    background: white;
 }
 
 .alert {
@@ -401,6 +421,9 @@ table > thead {
     margin-right: 20%;
     text-align: center;
     font-weight: bold;
+}
+.paddingLeft {
+    
 }
 
 /* Home page styles */
@@ -444,8 +467,27 @@ table > thead {
 }
 
 .singlePost {
-    background: #e7e7e7;
+    background: #f5f5f5;
+    border-radius: 5px;
+    border: solid 1px black;
+    padding: 0px 10px 20px 10px;
 }
+
+.sideBar {
+    margin-top: 35px;
+}
+
+.postBody {
+    padding: 10px 5px;
+}
+
+.well {
+    border: solid black 1px;
+}
+li.dropdown {
+    margin-left: 250px;
+}
+
  /*End of home page styles
 
  Like button styles*/ 
@@ -887,9 +929,78 @@ thead {
 	box-shadow: none;
 }
 .searchPost:focus{
-    width:inherit;
+    width: 117%;
 }
 
+
+.drop-down-menu > li > a {
+    color: white;
+}
+
+/* Tag list styles */
+
+.sidebar-tags-list {
+    list-style: none;
+    width: 300px;
+    padding: 0;
+}
+
+.sidebar-tags-list > li{
+    display: inline-block;
+    margin: 10px 5px;
+    font-size: 15px;
+}
+
+.sidebar-tags-list > li > a{
+    background: darkgreen;
+    border-radius: 25px 25px 25px 25px;
+    border: solid darkgreen 2px;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    text-decoration: none;
+    text-align: center;
+}
+
+
+
+.sidebar-tags-list > li > a:hover{
+    background: white;
+    border-radius: 25px 25px 25px 25px;
+    border: solid darkgreen 2px;
+    color: black;
+    padding: 5px 10px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+}
+
+.tagLink {
+    background: darkgreen;
+    border-radius: 25px 25px 25px 25px;
+    border: solid darkgreen 2px;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.tagLink:hover {
+   background: white;
+    border-radius: 25px 25px 25px 25px;
+    border: solid darkgreen 2px;
+    color: black;
+    padding: 5px 10px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+}
+
+.post-details-body {
+    margin: 20px 0;
+    padding-left: 15px;
+}
 
 /* Not important */
 
@@ -1128,10 +1239,24 @@ td, th {
     border-bottom: solid 0.5px #e7e7e7;
 }
 
+.tableHead {
+    color: white;
+    background: darkgreen;
+    border-bottom: solid 0.5px #e7e7e7;
+}
+
+.leaguesTableAdminActions {
+    width: 50px;
+}
+
+.table > * {
+    font-size: 14px;
+}
+
 .upcomingMatchesTable {
     margin-bottom: 50px;
     border: none;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .upcomingMatchesTable > tbody> tr > td {
@@ -1199,6 +1324,46 @@ th.upcomingMatchCoef, td.upcomingMatchCoef {
     display: inline-block
 }
 
+/* Admin actions */
+
+.adminActions {
+    margin: 20px 0;
+    padding: 0 15px;
+}
+
+.adminActions > a {
+    padding: 5px;
+    margin-right: 5px;
+    border: solid black 1px;
+    border-radius: 8px;
+    background: darkgreen;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+.adminActions > a:hover {
+    border: solid black 1px;
+    text-decoration: none;
+    background: white;
+    color: darkgreen;
+}
+
+.adminActions > a:focus {
+    border: solid red 1px;
+    text-decoration: none;
+    background: white;
+    color: red;
+}
+
+.updateResultButton {
+    margin-left: 45%;
+}
+
+
+
+/* End of admin actions*/
 
 .post-details-content {
     overflow-wrap: break-word;

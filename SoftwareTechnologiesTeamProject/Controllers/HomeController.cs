@@ -8,8 +8,6 @@
     using System.Web.Mvc;
     using ViewModels;
 
-
-
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -72,6 +70,11 @@
             }
 
             return View(viewModel);
+        }
+
+        public ActionResult About()
+        {
+            return View();
         }
     }
 }

@@ -1,12 +1,10 @@
-﻿using System.IO;
-using System.Web.UI.WebControls;
-
-namespace SoftwareTechnologiesTeamProject.Models
+﻿namespace SoftwareTechnologiesTeamProject.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
     using ViewModels;
@@ -55,7 +53,7 @@ namespace SoftwareTechnologiesTeamProject.Models
 
         public virtual List<Tag> Tags { get; set; } = new List<Tag>();
 
-        public string ShortText()
+        public string ShortBody()
         {
             if (this.Body.Length > 300)
             {
@@ -67,7 +65,7 @@ namespace SoftwareTechnologiesTeamProject.Models
             }
         }
 
-        public string Fulltext()
+        public string FullBody()
         {
             if (this.Body.Length > 300)
             {
@@ -119,15 +117,15 @@ namespace SoftwareTechnologiesTeamProject.Models
             this.Body = viewModel.Body;
         }
 
-        public bool HasVoted(string userId)
+        public bool HasUserVoted(string userId)
         {
             return this.VotedUsers.Select(u => u.Id).ToList().Contains(userId);
         }
 
         public string GetDate()
         {
-
-            return $"{Date:dd/MMMM/yyyy}";
+            string date = this.Date.ToString("dd.MMMM.yyyy", CultureInfo.InvariantCulture);
+            return date;
         }
 
         public string GetTime()
@@ -153,8 +151,7 @@ namespace SoftwareTechnologiesTeamProject.Models
         public void SetImage(List<Image> images)
         {
 
-            this.Image =
-                images.Where(i => i.ImagePath.Contains("PostId_" + this.Id))
+            this.Image = images.Where(i => i.ImagePath.Contains("PostId_" + this.Id))
                     .OrderByDescending(i => i.UploadedDate)
                     .FirstOrDefault();
         }

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using SoftwareTechnologiesTeamProject.Models;
-
-namespace SoftwareTechnologiesTeamProject.ViewModels
+﻿namespace SoftwareTechnologiesTeamProject.ViewModels
 {
+    using SoftwareTechnologiesTeamProject.Models;
+    using System.Collections.Generic;
+
     public class PostIndexViewModel
     {
+        public List<Post> Posts { get; set; }
+
         public List<Tag> PopularTags { get; set; }
     }
 }

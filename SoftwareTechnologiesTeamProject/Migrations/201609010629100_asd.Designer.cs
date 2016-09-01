@@ -7,18 +7,18 @@ namespace SoftwareTechnologiesTeamProject.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class UserProfilesTable : IMigrationMetadata
+    public sealed partial class asd : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UserProfilesTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(asd));
         
         string IMigrationMetadata.Id
         {
-            get { return "201608302208167_UserProfilesTable"; }
+            get { return "201609010629100_asd"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return Resources.GetString("Source"); }
+            get { return null; }
         }
         
         string IMigrationMetadata.Target

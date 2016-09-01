@@ -25,19 +25,10 @@
 
             <h2> @Html.ActionLink(post.Title, "Details", new { id = post.Id })</h2>
 
-            if (post.Author?.Profile == null)
-            {
-                <p class="lead">
-                    by <a>Anonymous</a>
-                </p>
-            }
-
-            else
-            {
-                <p class="lead">
-                    by <a href="/Profiles/Details/@post.Author.Profile.Id">@Html.DisplayFor(modelItem => post.Author.FullName)</a>
-                </p>
-            }
+            <p class="lead">
+                by <span>@Html.DisplayFor(modelItem => post.Author.FullName)</span>
+            </p>
+            
             <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => post.Date)</p>
             <div class="titleImage">
 
@@ -46,12 +37,11 @@
                     <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar" />
                 }
             </div>
-            <hr />
 
-            <div>
+            <div class="postBodyContainer">
                 <input type="checkbox" class="read-more-state" id="post-@i" />
 
-                <p class="read-more-wrap">@post.ShortText()<span class="read-more-target">@post.Fulltext()</span></p>
+                <p class="read-more-wrap">@post.ShortBody()<span class="read-more-target">@post.FullBody()</span></p>
                 @if (post.Body.Length > 300)
                 {
                     <label for="post-@i" class="read-more-trigger"></label>

@@ -13,14 +13,6 @@
         {
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Profile>()
-              .HasRequired<ApplicationUser>(profile => profile.User);
-
-            base.OnModelCreating(modelBuilder);
-        }
-
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
@@ -40,14 +32,6 @@
 
         public DbSet<Vote> Votes { get; set; }
 
-        public DbSet<Profile> Profiles { get; set; }
-
         public DbSet<Image> Images { get; set; }
-
-        public DbSet<TeamMember> TeamMembers { get; set; }
-
-        public DbSet<TeamMemberRole> TeamMemberRoles { get; set; }
-
-        //public DbSet<Bet> Bets { get; set; }
     }
 }

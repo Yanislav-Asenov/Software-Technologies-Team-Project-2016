@@ -14,7 +14,7 @@
 }
 
 <table class="table">
-    <tr>
+    <tr class="tableHead">
         <th>
             Leagues
         </th>
@@ -30,14 +30,14 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(league.Name, "Standings", new {id = league.Id})
+                @Html.ActionLink(league.Country + " - " + league.Name, "Standings", new {id = league.Id})
             </td>
             <td>
             </td>
             @if (User.IsInRole("Administrator"))
             {
-                <th><button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new {league.Id})</span></button></th>
-                <th><button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Delete", "Delete", new { league.Id }) </span></button></th>
+                <th class="leaguesTableAdminActions"><button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new {league.Id})</span></button></th>
+                <th class="leaguesTableAdminActions"><button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Delete", "Delete", new { league.Id }) </span></button></th>
                 
             }
         </tr>

@@ -13,14 +13,13 @@
         <h2>@Html.DisplayFor(model => model.Post.Title)</h2>
 
         <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(model => model.Post.LastDateActive)</p>
-        <h3>By <a href="/Profiles/Details/@Model.Post.Author.Profile.Id">@Html.DisplayFor(model => model.Post.Author.FullName)</a>
+        <h3>By <span>@Html.DisplayFor(model => model.Post.Author.FullName)</span>
         </h3>
     </div>
 
     <div>
         
         <div class="col-md-8">
-            
             
             @if (Model.PostImage != null)
             {
@@ -78,45 +77,42 @@
             <hr/>
         </div>
         <div class="post-details-content">
-            <div class="container">
                 <div class="row">
-                    <div class="col-md-8"> @Html.DisplayFor(model => model.Post.Body)</div>
+                    <div class="col-md-8 paddingLeft"> @Html.DisplayFor(model => model.Post.Body)</div>
                 </div>
-            </div>
-            
         </div>
     </div>
-        <div class="tag-container">
+    <div class="tag-container">
+        Tags:
+        @foreach (var tag in Model.Post.Tags)
+        {
+            @Html.ActionLink(tag.Name, "Tag", new {id = tag.Id, @class = "tagLink"})
+        }
+    </div>
+    <div class="likesContainer">
+        @if (Model.Post.HasUserVoted(User.Identity.GetUserId()))
+        {
+            <span class="glyphicon glyphicon-heart liked paddingLeft"></span>
+        }
+        else
+        {
 
-            @foreach (var tag in Model.Post.Tags)
-            {
-                @Html.ActionLink(tag.Name, "Tag", new { id = tag.Id })
-            }
-        </div>
-            @if (Model.Post.HasVoted(User.Identity.GetUserId()))
-            {
-                <span class="glyphicon glyphicon-heart liked"></span>
-            }
-            else
-            {
-
-                @Html.ActionLink(" ", "AddLike", new { id = Model.Post.Id }, new { @class = "glyphicon glyphicon-heart" })
-            }
-        
-            @Model.Post.VotedUsers.Count
-       
-
+            @Html.ActionLink(" ", "AddLike", new { id = Model.Post.Id }, new { @class = "glyphicon glyphicon-heart paddingLeft" })
+        }
+        <span class="likesCount">@Model.Post.VotedUsers.Count</span>
+    </div>
     <p>
         @if (User.IsInRole("Administrator") || (Model.Post.Author != null && User.Identity.Name == Model.Post.Author.UserName))
         {
-            <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new { id = Model.PostId })</span></button>
+            <button class="button paddingLeft" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new {id = Model.PostId})</span></button>
+            <button class="button paddingLeft" style="vertical-align: middle"><span>@Html.ActionLink("Delete", "Delete", new { id = Model.PostId })</span></button>
             <br/>
         }
-        <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Back to List", "Index")</span></button>
+        <button class="button paddingLeft" style="vertical-align: middle"><span>@Html.ActionLink("Back to List", "Index")</span></button>
         
     </p>
 </div>
-<div class="add-comment-wrapper">
+<div class="add-comment-wrapper paddingLeft">
     @using (Html.BeginForm("AddComment", "Posts", FormMethod.Post))
     {
         @Html.ValidationMessageFor(model => model.NewCommentContent, "", new { @class = "text-danger" })
@@ -125,7 +121,6 @@
 
         @Html.HiddenFor(m => m.PostId)
         @Html.HiddenFor(m => m.CommentAuthorId)
-        @Html.HiddenFor(m => m.Post.Author)
 
         @Html.TextAreaFor(m => m.NewCommentContent, new { @class = "add-comment-text-area" })
         <input type="submit" value="Add comment" class="bottom-right" />
@@ -135,7 +130,7 @@
 
 
 
-<div class="comments-wrapper">
+<div class="comments-wrapper paddingLeft">
     <br />
     <h1>Comments(@Model.Post.Comments.Count)</h1>
     <hr />

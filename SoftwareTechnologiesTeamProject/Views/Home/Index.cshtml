@@ -7,171 +7,179 @@
 
 
 <div>
-<div class="rowHome">
-    <div class="col-md-12">
-        @if (Model.HomePageImagePath != null)
-        {
-            <div class="homepageImgResize">
-                <img class="homepageImgResize" src="~/Content/Images/HomePage/@Model.HomePageImagePath" alt="Bar"/>
-
-            </div>
-        }
-
-
-        @if (User.IsInRole("Administrator"))
-        {
-            using (Html.BeginForm("AddHomePageImage", "Images", null, FormMethod.Post, new {enctype = "multipart/form-data"}))
+    <div class="rowHome">
+        <div class="col-md-12">
+            @if (Model.HomePageImagePath != null)
             {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true)
-                <fieldset>
-                    <div class="editor-label">
-                        @Html.Label("Change image")
-                    </div>
-                    <div class="editor-field">
-                        <input id="ImagePath" title="Upload a product image"
-                               type="file" name="file"/>
-                    </div>
-                    <p><input type="submit" value="Change"/>
-                    </p>
-                </fieldset>
+                <div class="homepageImgResize">
+                    <img class="homepageImgResize" src="~/Content/Images/HomePage/@Model.HomePageImagePath" alt="Bar" />
+
+                </div>
             }
-        }
+
+
+            @if (User.IsInRole("Administrator"))
+            {
+                using (Html.BeginForm("AddHomePageImage", "Images", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <div class="editor-label">
+                            @Html.Label("Change image")
+                        </div>
+                        <div class="editor-field">
+                            <input id="ImagePath" title="Upload a product image"
+                                   type="file" name="file" />
+                        </div>
+                        <p>
+                            <input type="submit" value="Change" />
+                        </p>
+                    </fieldset>
+                }
+            }
+        </div>
     </div>
 </div>
-    </div>
-            <hr />
+<hr />
 
-            <div>
-                <div class="row">
-                    <div class="col-md-8">
-                        @for (var i = 0; i < Model.FeaturedPosts.Count; i++)
-                        {
-                            var post = Model.FeaturedPosts[i];
-                           <div class="post-details-conten">
-                                <h3> <a href="/Posts/Details/@post.Id">@post.Title</a></h3>
-                            </div>
-                            <div>
-                                @if (post.Author == null)
-                                {
-                                    <p class="lead">
-                                        by <a>Anonymous</a>
-                                    </p>
-                                }
-                                else
-                                {
-                                    <p class="lead">
-                                        by <a href=#>@Html.DisplayFor(modelItem => post.Author.FullName)</a>
-                                    </p>
-                                }
-                                <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => post.Date)</p>
-                                <div class="postImage">
-                                    @if (post.Image != null)
-                                    {
-                                        <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar" />
-                                    }
-                                </div>
-                                <hr />
-
-                                <div>
-                                    <input type="checkbox" class="read-more-state" id="post-@i" />
-
-                                    <p class="read-more-wrap">@post.ShortText()<span class="read-more-target">@post.Fulltext()</span></p>
-                                    @if (post.Body.Length > 300)
+<div>
+    <div class="row">
+        <div class="col-md-8">
+            @for (var i = 0; i < Model.FeaturedPosts.Count; i++)
                 {
-                                        <label for="post-@i" class="read-more-trigger"></label>
-                                    }
+                    var post = Model.FeaturedPosts[i];
+                    <div class="singlePost">
+                        <div class="post-details-conten">
+                            <h3> <a href="/Posts/Details/@post.Id">@post.Title</a>
+                            </h3>
+                        </div>
+                        <div>
+                            @if (post.Author == null)
+                            {
+                                <p class="lead">
+                                    by <a>Anonymous</a>
+                                </p>
+                            }
+                            else
+                            {
+                                <p class="lead">
+                                    by <span>@Html.DisplayFor(modelItem => post.Author.FullName)</span>
+                                </p>
+                            }
+                            <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => post.Date)</p>
+                            <div class="postImage">
+                                @if (post.Image != null)
+                                {
+                                    <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar"/>
+                                }
+                            </div>
+                            <hr/>
 
+                            <div>
+                                <input type="checkbox" class="read-more-state" id="post-@i"/>
+
+                                <p class="read-more-wrap">@post.ShortBody()<span class="read-more-target">@post.FullBody()</span></p>
+                                @if (post.Body.Length > 300)
+                                {
+                                    <label for="post-@i" class="read-more-trigger"></label>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+            }
+        </div>
+        <div class="col-md-4">
+
+
+            <div class="sidebar-add">
+                <div class="sidebar">
+
+                    <div class="sidebar">
+
+                        <ul class="nav nav-tabs">
+
+                            <li role="presentation" class="active"><a href="#article" aria-controls="home" role="tab" data-toggle="tab">Recent Posts</a></li>
+
+                            <li role="presentation"><a href="#comments-m" aria-controls="home" role="tab" data-toggle="tab">Recent Comments</a></li>
+
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="article">
+                                <hr />
+                                <div>
+                                    @foreach (var post in Model.RecentPosts)
+                                    {
+                                        <div class="recent-post-wrapper">
+                                            <a href="/Posts/Details/@post.Id" class="postTitle">
+                                                @post.Title
+                                            </a>
+                                            <span class="recentPostAuthor">
+                                                by @post.Author.FullName on <span class="date">@post.GetDate()</span>
+                                            </span>
+                                        </div>
+                                        <hr />
+                                    }
                                 </div>
                             </div>
-                        }
-                    </div>
-                    <div class="col-md-4">
+                            <div role="tabpanel" class="tab-pane" id="comments-m">
 
+                                <hr />
+                                @foreach (var post in Model.LastCommentedPosts)
+                                {
 
-                        <div class="sidebar-add">
-                            <div class="sidebar">
+                                    <div class="recent-post-wrapper">
 
-                                <div class="sidebar">
+                                        <a href="/Posts/Details/@post.Id" class="postTitle">@post.GetShortTitle()</a>
 
-                                    <ul class="nav nav-tabs">
+                                        <div>
 
-                                        <li role="presentation" class="active"><a href="#article" aria-controls="home" role="tab" data-toggle="tab">Recent Posts</a></li>
+                                            <a>@post.Author.FullName</a>
 
-                                        <li role="presentation"><a href="#comments-m" aria-controls="home" role="tab" data-toggle="tab">Recent Comments</a></li>
+                                            <div class="date">
 
-                                    </ul>
-                                    <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane active" id="article">
-                                            <hr />
-                                            <div>
-                                                @foreach (var post in Model.RecentPosts)
-                                                {
-                                                    <div class="recent-post-wrapper">
-                                                        <a href="/Posts/Details/@post.Id">
-                                                            @post.Title
-                                                        </a>
-                                                        <span>by @post.Author.FullName on @post.Date.ToString("dd MMMM, yyyy", CultureInfo.InvariantCulture)</span>
-                                                    </div>
-                                                    <hr />
-                                                }
+                                                <span>@post.Date.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture)</span>
+
                                             </div>
+
                                         </div>
-                                        <div role="tabpanel" class="tab-pane" id="comments-m">
 
-                                            <hr />
-                                            @foreach (var post in Model.LastCommentedPosts)
-                                            {
-
-                                                <div class="recent-post-wrapper">
-
-                                                    <a href="/Posts/Details/@post.Id" class="postTitle">@post.GetShortTitle()</a>
-
-                                                    <div>
-
-                                                        <a>@post.Author.FullName</a>
-
-                                                        <div class="date">
-
-                                                            <span>@post.Date.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture)</span>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    <p style="word-wrap: break-word" class="comment-content">
-                                                        @post.GetRecentComment().GetShortContent()
-                                                    </p>
-
-                                                </div>
-                                                <hr />
-                                            }
-                                        </div>
+                                        <p style="word-wrap: break-word" class="comment-content">
+                                            @post.GetRecentComment().GetShortContent()
+                                        </p>
 
                                     </div>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="sidedar_tag">
-
-                                <h3> Popular Tags</h3>
-
-                                <div class="sidebar_tags_wrapper">
-
-                                    <ul>
-                                        @foreach (var tag in Model.PopularTags)
-                                        {
-                                            <li><a href="/Posts/Tag/@tag.Id" class="tag">#@tag.Name</a></li>
-                                        }
-                                    </ul>
-
-                                </div>
+                                    <hr />
+                                }
                             </div>
 
                         </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="sidedar_tag">
+
+                    <h3> Popular Tags</h3>
+
+                    <div class="sidebar_tags_wrapper">
+
+                        <ul class="sidebar-tags-list">
+                            @foreach (var tag in Model.PopularTags)
+                            {
+                                <li><a href="/Posts/Tag/@tag.Id" class="tag">#@tag.Name</a></li>
+                            }
+                        </ul>
+
                     </div>
                 </div>
+
             </div>
+        </div>
+    </div>
+</div>

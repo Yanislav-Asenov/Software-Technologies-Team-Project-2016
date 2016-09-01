@@ -9,8 +9,8 @@
     @Html.ActionLink("Back to list", "Matches", new { date = Model.Match.DateTime })
     @if (User.IsInRole("Administrator"))
     {
-        <a href="/Matches/Delete/@Model.Match.Id" class="matchLink">Delete</a>
-        <a href="/Matches/Edit/@Model.Match.Id" class="matchLink">Edit</a>
+        <a href="/Matches/Delete/@Model.Match.Id" class="matchLink button">Delete</a>
+        <a href="/Matches/Edit/@Model.Match.Id" class="matchLink button">Edit</a>
     }
 </div>
 
@@ -35,7 +35,7 @@
         else
         {
             <div class="updateResultButton adminActions">
-                    <a href="/Matches/UpdateResult/@Model.Match.Id">Update result</a>
+                    <a href="/Matches/UpdateResult/@Model.Match.Id" class="button">Update result</a>
             </div>
         }
 
@@ -117,7 +117,7 @@
     @* Home team match history *@
     <span class="matchHistoryHeading">@Model.Match.HomeTeam.Name - last matches</span>
     <table class="table matchHistoryTable">
-        <tr>
+        <tr class="tableHead">
             <th class="matchHistoryDate">Date</th>
             <th class="matchHistoryHomeTeam">Home team</th>
             <th class="historyMatchResult">Result</th>
@@ -129,7 +129,7 @@
 
         @foreach (var match in Model.HomeTeamHistory)
         {
-            <tr>
+            <tr class="tableBody">
                 <td class="matchHistoryDate">@match.GetDate()</td>
                 @if (match.HomeTeam.Name == Model.Match.HomeTeam.Name)
                 {
@@ -172,7 +172,7 @@
     @* Away team match history *@
     <span class="matchHistoryHeading">@Model.Match.AwayTeam.Name - last matches</span>
     <table class="table matchHistoryTable">
-        <tr>
+        <tr class="tableHead">
             <th class="matchHistoryDate">Date</th>
             <th class="matchHistoryHomeTeam">Home team</th>
             <th class="historyMatchResult">Result</th>
