@@ -4,42 +4,52 @@
     ViewBag.Title = "Leagues";
 }
 
-<h2>Leagues</h2>
-@if (User.IsInRole("Administrator"))
-{
-    <div class="adminActions">
-        <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Add new league", "Create")</span></button> 
-    </div>    
-   
-}
+<div>
+    <div class="col-md-12">
+        <img class="img-responsive" src="~/Content/Images/leagues.png" alt='leagues'>
+    </div>
 
-<table class="table">
-    <tr class="tableHead">
-        <th>
-            Leagues
-        </th>
-        <th>
-        </th>
-        @if (User.IsInRole("Administrator"))
-        {
-            <th colspan="2">Actions</th>
-        }
-    </tr>
-
-    @foreach (var league in Model)
+    <hr />
+    @if (User.IsInRole("Administrator"))
     {
-        <tr>
-            <td>
-                @Html.ActionLink(league.Country + " - " + league.Name, "Standings", new {id = league.Id})
-            </td>
-            <td>
-            </td>
-            @if (User.IsInRole("Administrator"))
-            {
-                <th class="leaguesTableAdminActions"><button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new {league.Id})</span></button></th>
-                <th class="leaguesTableAdminActions"><button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Delete", "Delete", new { league.Id }) </span></button></th>
-                
-            }
-        </tr>
+        <div class="adminActions">
+            <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Add new league", "Create")</span></button>
+        </div>
+
     }
-</table>
+
+    <div class="col-md-12">
+
+
+        <table class="table">
+            <tr class="tableHead">
+                <th style="text-align: left">
+                    League name
+                </th>
+                <th>
+                   
+                </th>
+                @if (User.IsInRole("Administrator"))
+            {
+                    <th colspan="2">Actions</th>
+                }
+            </tr>
+
+            @foreach (var league in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(league.Country + " - " + league.Name, "Standings", new { id = league.Id })
+                    </td>
+                    <td></td>
+                    @if (User.IsInRole("Administrator"))
+                {
+                        <th class="leaguesTableAdminActions"><button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new { league.Id })</span></button></th>
+                        <th class="leaguesTableAdminActions"><button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Delete", "Delete", new { league.Id }) </span></button></th>
+
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+</div>

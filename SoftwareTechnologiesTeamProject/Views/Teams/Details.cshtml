@@ -6,9 +6,9 @@
 
 @if (User.IsInRole("Administrator"))
 {
-    <div class="adminActions">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Team.Id })
-        @Html.ActionLink("Delete", "Delete", new { id = Model.Team.Id })
+    <div class="adminActions" >
+        <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new { id = Model.Team.Id })</span></button>
+        <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Delete", "Delete", new { id = Model.Team.Id })</span></button>
     </div>
 }
 
