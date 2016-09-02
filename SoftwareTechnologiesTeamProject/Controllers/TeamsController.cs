@@ -12,13 +12,6 @@
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Teams
-        public ActionResult Index()
-        {
-            var teams = db.Teams.Include(t => t.League);
-            return View(teams.ToList());
-        }
-
         // GET: Teams/Details/5
         public ActionResult Details(int? id)
         {
@@ -151,10 +144,15 @@
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Team team = db.Teams.Find(id);
+            Team team = db.Teams.Include(t => t.Matches).FirstOrDefault(T => T.Id == id);
+
+            db.Matches.RemoveRange(team.Matches);
+
+            var leagueId = team.LeagueId;
             db.Teams.Remove(team);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Standings", "Leagues", new { id = leagueId });
         }
 
         protected override void Dispose(bool disposing)
