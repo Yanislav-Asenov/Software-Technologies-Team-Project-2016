@@ -140,6 +140,20 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult UpdateResult([Bind(Include = "Id,HomeTeamGoals,AwayTeamGoals,HomeTeamId,AwayTeamId")]Match match)
         {
+            if (match.HomeTeamGoals < 0 || match.AwayTeamGoals < 0)
+            {
+                this.AddNotification("Match result must be positive number.", NotificationType.ERROR);
+
+                var model = db.Matches.Include(m => m.HomeTeam).Include(m => m.AwayTeam).FirstOrDefault(m => m.Id == match.Id);
+
+                if (model == null)
+                {
+                    return RedirectToAction("Matches");
+                }
+
+                return View(model);
+            }
+
             var currentMatch = db.Matches
                 .Include(m => m.HomeTeam)
                 .Include(m => m.AwayTeam)
@@ -213,18 +227,21 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Create([Bind(Include = "Id,LeagueId,LeagueName,HomeTeamId,AwayTeamId,DateTime")] Match match)
         {
+            if (match.HomeTeamId == match.AwayTeamId)
+            {
+                ViewBag.AwayTeamId = new SelectList(db.Teams.Where(t => t.LeagueId == match.LeagueId), "Id", "Name", match.AwayTeamId);
+                ViewBag.HomeTeamId = new SelectList(db.Teams.Where(t => t.LeagueId == match.LeagueId), "Id", "Name", match.HomeTeamId);
+
+                this.AddNotification("Home team selection must differ from away team selection.", NotificationType.ERROR);
+                return View(match);
+            }
+
             if (ModelState.IsValid)
             {
                 var matchLeague = db.Leagues.Find(match.LeagueId);
 
                 match.HomeTeam = db.Teams.Find(match.HomeTeamId);
                 match.AwayTeam = db.Teams.Find(match.AwayTeamId);
-
-                if (match.HomeTeam.Name == match.AwayTeam.Name)
-                {
-                    this.AddNotification("Home and away team can not be the same.", NotificationType.ERROR);
-                    return View(match);
-                }
 
                 match.League = matchLeague;
                 match.LeagueName = matchLeague.Name;
@@ -245,6 +262,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         {
             if (id == null)
             {
+                this.AddNotification("Match not found.", NotificationType.ERROR);
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Match match = db.Matches.Find(id);
@@ -252,8 +270,8 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AwayTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
-            ViewBag.HomeTeamId = new SelectList(db.Teams, "Id", "Name", match.HomeTeamId);
+            ViewBag.AwayTeamId = new SelectList(db.Teams.Where(t => t.LeagueId == match.LeagueId), "Id", "Name", match.AwayTeamId);
+            ViewBag.HomeTeamId = new SelectList(db.Teams.Where(t => t.LeagueId == match.LeagueId), "Id", "Name", match.HomeTeamId);
             ViewBag.LeagueId = new SelectList(db.Leagues, "Id", "Name", match.LeagueId);
             return View(match);
         }
@@ -266,6 +284,16 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Edit([Bind(Include = "Id,LeagueId,LeagueName,HomeTeamId,AwayTeamId,DateTime,Result,HomeTeamGoals,AwayTeamGoals,TotalVotesCount,HomeVotesCount,DrawVotesCount,AwayVotesCount,IsResultUpdated")] Match match)
         {
+            if (match.HomeTeamId == match.AwayTeamId)
+            {
+                ViewBag.AwayTeamId = new SelectList(db.Teams.Where(t => t.LeagueId == match.LeagueId), "Id", "Name", match.AwayTeamId);
+                ViewBag.HomeTeamId = new SelectList(db.Teams.Where(t => t.LeagueId == match.LeagueId), "Id", "Name", match.HomeTeamId);
+                ViewBag.LeagueId = new SelectList(db.Leagues, "Id", "Name", match.LeagueId);
+
+                this.AddNotification("Home team selection must differ from away team selection.", NotificationType.ERROR);
+                return View(match);
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(match).State = EntityState.Modified;

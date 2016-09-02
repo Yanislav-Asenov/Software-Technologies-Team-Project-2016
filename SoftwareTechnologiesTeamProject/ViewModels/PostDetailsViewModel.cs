@@ -1,6 +1,7 @@
 ﻿namespace SoftwareTechnologiesTeamProject.ViewModels
 {
     using Models;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public class PostDetailsViewModel
@@ -9,6 +10,7 @@
 
         [Required]
         [StringLength(300, MinimumLength = 1)]
+        [DisplayName("Comment content")]
         public string NewCommentContent { get; set; }
 
         [Required]

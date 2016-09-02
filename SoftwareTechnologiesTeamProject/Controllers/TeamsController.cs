@@ -1,5 +1,6 @@
 ﻿namespace SoftwareTechnologiesTeamProject.Controllers
 {
+    using Extensions;
     using Models;
     using System.Data.Entity;
     using System.Linq;
@@ -105,6 +106,21 @@
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Victories,Draws,Losses,GoalsFor,GoalsAgainst,Points,City,Coach,Stadium,StadiumCapacity,StadiumWidth,StadiumHeight,LogoLink,LeagueId")] Team team)
         {
+            if (team.Draws < 0 || team.StadiumWidth < 0 || team.GoalsFor < 0 ||
+                team.GoalsAgainst < 0 || team.Losses < 0 || team.Points < 0 ||
+                team.StadiumCapacity < 0 || team.StadiumHeight < 0 || team.Victories < 0)
+            {
+                this.AddNotification("Team stats must be positive numbers.", NotificationType.ERROR);
+                return RedirectToAction("Details", new { id = team.Id });
+            }
+
+            var league = db.Leagues.FirstOrDefault(l => l.Id == team.LeagueId);
+            if (league == null)
+            {
+                this.AddNotification("League not found.", NotificationType.ERROR);
+                return RedirectToAction("Details", new { id = team.Id });
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(team).State = EntityState.Modified;
@@ -122,7 +138,7 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Team team = db.Teams.Find(id);
+            Team team = db.Teams.Include(t => t.League).FirstOrDefault(t => t.Id == id);
             if (team == null)
             {
                 return HttpNotFound();

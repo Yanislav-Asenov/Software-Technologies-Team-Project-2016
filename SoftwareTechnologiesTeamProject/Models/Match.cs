@@ -23,6 +23,7 @@
 
         public string LeagueName { get; set; }
 
+        [Required]
         public int? LeagueId { get; set; }
 
         [ForeignKey("LeagueId")]

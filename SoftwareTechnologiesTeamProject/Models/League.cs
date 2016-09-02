@@ -23,11 +23,15 @@ namespace SoftwareTechnologiesTeamProject.Models
         [Required]
         [Column(TypeName = "datetime2")]
         [DisplayName("Season start date")]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}",
+               ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
         [Required]
         [Column(TypeName = "datetime2")]
         [DisplayName("Season end date")]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}",
+               ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
 
         [Required]
