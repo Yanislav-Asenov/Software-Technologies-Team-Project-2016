@@ -1,0 +1,92 @@
+﻿.post-info-wrapper {
+    margin: 10px 0 10px 0;
+}
+
+.post-info-wrapper > dd {
+    height: 30px;
+}
+
+.postBody {
+    padding: 10px 5px;
+}
+
+.likesContainer {
+    position: relative;
+}
+
+.liked {
+    color: red;
+    text-decoration: none;
+}
+
+.likesCount {
+    margin-bottom: 15px;
+    position: absolute;
+    top: 2px;
+    left: 30px;
+}
+
+
+.add-comment-wrapper > form {
+    height: 90%;
+    bottom: 0;
+}
+
+.add-comment-text-area {
+    max-width: 85%;
+}
+
+
+.add-comment-wrapper > form > input {
+    height: inherit;
+    width: 18%;
+}
+
+.single-comment {
+    width: inherit;
+    margin: 20px 3px;
+    min-height: 100px;
+    position: relative;
+}
+
+.single-comment > .info {
+    font-size: 12px;
+    margin: 1px;
+    padding: 0;
+    width: 15%;
+    text-align: center;
+    position: absolute;
+    bottom: 50%;
+}
+
+.single-comment-content {
+    float: right;
+    height: 100%;
+    width: 65%;
+    margin: 2px 2px;
+    min-height: 90px;
+    overflow-x: auto;
+    word-wrap: break-word;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: grey;
+    background-color: white;
+    padding: 5px;
+}
+
+.add-comment-wrapper {
+    width: 60%;
+    height: 60px;
+    margin: 10px;
+}
+
+.add-comment-wrapper > form > textarea {
+    width: 90%;
+    height: inherit;
+    bottom: 0;
+}
+
+.postBodyContainer {
+    margin: 20px 0 20px 0;
+}

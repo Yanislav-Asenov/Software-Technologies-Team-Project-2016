@@ -28,7 +28,9 @@ namespace SoftwareTechnologiesTeamProject
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                       "~/Content/HomePage.css",
+                       "~/Content/PostsPages.css"));
 
             bundles.Add(new StyleBundle("~/Content/bootstrap-datetimepicker").Include(
                     "~/Content/bootstrap-datetimepicker.less"));

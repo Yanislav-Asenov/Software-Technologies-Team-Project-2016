@@ -3081,8 +3081,7 @@ fieldset[disabled] a.btn {
 .btn-default:hover {
   color: whitesmoke;
     background-color: #333;
-    font-style: 
-  border-color: #adadad;
+    border-color: #adadad;
 }
 .btn-default:active,
 .btn-default.active,

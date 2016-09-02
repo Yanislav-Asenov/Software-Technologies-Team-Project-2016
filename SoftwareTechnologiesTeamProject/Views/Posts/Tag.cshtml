@@ -58,37 +58,30 @@
     
 </div>
 
-    <div class="col-md-4">
+<div class="col-md-4" >
 
-        <div class="well">
-            <h4>Търсене</h4>
-            <div class="input-group">
-                @using (Html.BeginForm("Index", "Posts", FormMethod.Post))
-                {
-                    <input class="searchPost" type="text" name="searchString" placeholder="Search..">
-                }
-            </div>
-
-        </div>
-
-        <div class="well">
-            <h4>See also</h4>
-            <div class="row">
-                <div class="col-lg-6">
-                    <ul class="list-unstyled">
-                        @foreach (var tag in Model.PopularTags)
-                        {
-                            <li><a href="/Posts/Tag/@tag.Id" class="tag">#@tag.Name</a></li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Side Widget Well -->
-        <div class="well">
-            <h4>Side Widget Well</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+    <div class="well" >
+        <h4>Търсене</h4>
+        <div class="input-group" >
+            @using (Html.BeginForm("Index", "Posts", FormMethod.Post))
+            {
+                <input class="searchPost" type="text" name="searchString" placeholder="Search.." >
+            }
         </div>
 
     </div>
+
+    <div class="well" >
+        <h4>See also</h4>
+        <div class="row" >
+            <div class="col-lg-6" >
+                <ul class="list-unstyled" >
+                    @foreach (var tag in Model.PopularTags)
+                    {
+                        <li><a href="/Posts/Tag/@tag.Id" class="tag" >#@tag.Name</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
