@@ -2,8 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Globalization;
     using System.Linq;
 
     public class Match
@@ -26,17 +28,21 @@
         [ForeignKey("LeagueId")]
         public League League { get; set; }
 
+        [DisplayName("Home team")]
         public int? HomeTeamId { get; set; }
 
         [ForeignKey("HomeTeamId")]
         public Team HomeTeam { get; set; }
 
+        [DisplayName("Home team")]
         public int? AwayTeamId { get; set; }
 
         [ForeignKey("AwayTeamId")]
         public Team AwayTeam { get; set; }
 
         [Required]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}",
+               ApplyFormatInEditMode = true)]
         public DateTime DateTime { get; set; }
 
         public string Result => HomeTeamGoals + " - " + AwayTeamGoals;
@@ -49,8 +55,6 @@
 
         public virtual List<Vote> Votes { get; set; } = new List<Vote>();
 
-        //public virtual List<Bet> Bets { get; set; } = new List<Bet>();
-
         public int TotalVotesCount => HomeVotesCount + AwayVotesCount + DrawVotesCount;
 
         public int HomeVotesCount { get; set; }
@@ -58,12 +62,6 @@
         public int DrawVotesCount { get; set; }
 
         public int AwayVotesCount { get; set; }
-
-        public string HomeCoefficient { get; set; }
-
-        public string DrawCoefficient { get; set; }
-
-        public string AwayCoefficient { get; set; }
 
         public string GetWinnerSide()
         {
@@ -146,9 +144,15 @@
             }
         }
 
-        public string GetDate()
+        public string GetShortDate()
         {
             return $"{DateTime:dd-MM-yyyy}";
+        }
+
+        public string GetLongDate()
+        {
+            string date = this.DateTime.ToString("dddd, dd MMMM, yyyy", CultureInfo.InvariantCulture);
+            return date;
         }
 
         public string GetTime()

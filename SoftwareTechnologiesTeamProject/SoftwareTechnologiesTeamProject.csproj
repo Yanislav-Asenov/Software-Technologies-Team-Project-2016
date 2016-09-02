@@ -208,6 +208,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609020104581_DeletedCoeffiecints.cs" />
+    <Compile Include="Migrations\201609020104581_DeletedCoeffiecints.Designer.cs">
+      <DependentUpon>201609020104581_DeletedCoeffiecints.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -252,6 +256,10 @@
     <Compile Include="ViewModels\VerifyPhoneNumberViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-SoftwareTechnologiesTeamProject-20160806091957.mdf" />
+    <Content Include="App_Data\aspnet-SoftwareTechnologiesTeamProject-20160806091957_log.ldf">
+      <DependentUpon>aspnet-SoftwareTechnologiesTeamProject-20160806091957.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -446,12 +454,16 @@
     <Content Include="Views\Leagues\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\Images\HomePage\" />
     <Folder Include="Content\Images\PostImages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201609020104581_DeletedCoeffiecints.resx">
+      <DependentUpon>201609020104581_DeletedCoeffiecints.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

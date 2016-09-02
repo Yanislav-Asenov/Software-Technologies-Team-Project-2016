@@ -94,9 +94,21 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
                 var teamName = this.Team.Name;
                 var currentTeam = this.Standings[i];
 
-                if (i + 1 >= Standings.Count || i + 2 >= Standings.Count)
+                if (this.Standings.Count == 1)
                 {
-                    break;
+                    resultTeams.Add(1, this.Standings[0]);
+                    return resultTeams;
+                }
+
+                if (this.Standings.Count < 3)
+                {
+                    var miniStandings = this.Standings.OrderByDescending(m => m.Points)
+                        .ThenByDescending(m => m.GoalsFor)
+                        .ToList();
+
+                    resultTeams.Add(1, miniStandings[0]);
+                    resultTeams.Add(2, miniStandings[1]);
+                    return resultTeams;
                 }
 
                 if (currentTeam.Name == teamName && i == 0)
@@ -106,14 +118,19 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
                     resultTeams.Add(i + 3, this.Standings[i + 2]);
                     break;
                 }
-                else if (currentTeam.Name == teamName && i == this.Standings.Count - 1)
+
+                if (currentTeam.Name == teamName && i == this.Standings.Count - 1)
                 {
                     resultTeams.Add(i, this.Standings[i - 2]);
                     resultTeams.Add(i + 1, this.Standings[i - 1]);
                     resultTeams.Add(i + 2, this.Standings[i]);
+                    resultTeams.Add(i - 1, this.Standings[i - 2]);
+                    resultTeams.Add(i, this.Standings[i - 1]);
+                    resultTeams.Add(i + 1, this.Standings[i]);
                     break;
                 }
-                else if (currentTeam.Name == teamName)
+
+                if (currentTeam.Name == teamName)
                 {
                     resultTeams.Add(i, this.Standings[i - 1]);
                     resultTeams.Add(i + 1, this.Standings[i]);
@@ -127,6 +144,11 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
 
         public string GetWinsInPercents()
         {
+            if (this.Team.GetTotalGamesPlayed() == 0)
+            {
+                return "0%";
+            }
+
             double totalWins = this.Team.Victories;
             double percents = (totalWins / this.Team.GetTotalGamesPlayed()) * 100;
 
@@ -135,6 +157,11 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
 
         public string GetDrawsInPercents()
         {
+            if (this.Team.GetTotalGamesPlayed() == 0)
+            {
+                return "0%";
+            }
+
             double totalDraws = this.Team.Draws;
             double percents = (totalDraws / this.Team.GetTotalGamesPlayed()) * 100;
 
@@ -143,6 +170,11 @@ namespace SoftwareTechnologiesTeamProject.ViewModels
 
         public string GetLossesInPercents()
         {
+            if (this.Team.GetTotalGamesPlayed() == 0)
+            {
+                return "0%";
+            }
+
             double totalLosses = this.Team.Losses;
             double percents = (totalLosses / this.Team.GetTotalGamesPlayed()) * 100;
 

@@ -61,15 +61,12 @@
                         <th class="matchHistoryHomeTeam">Home team</th>
                         <th class="historyMatchResult">Result</th>
                         <th class="matchHistoryAwayTeam">Away team</th>
-                        <th class="matchHistoryCoefficient">1</th>
-                        <th class="matchHistoryCoefficient">X</th>
-                        <th class="matchHistoryCoefficient">2</th>
                     </tr>
 
                     @foreach (var match in Model.GetPlayedMatches())
                     {
                         <tr>
-                            <td class="matchHistoryDate">@match.GetDate()</td>
+                            <td class="matchHistoryDate">@match.GetShortDate()</td>
                             @if (match.HomeTeam.Name == Model.Team.Name)
                             {
                                 <td class="matchHistoryHomeTeam boldTeamName">@match.HomeTeam.Name</td>
@@ -100,9 +97,6 @@
                             {
                                 <td class="matchHistoryAwayTeam">@match.AwayTeam.Name</td>
                             }
-                            <td class="matchHistoryCoefficient">@match.HomeCoefficient</td>
-                            <td class="matchHistoryCoefficient">@match.DrawCoefficient</td>
-                            <td class="matchHistoryCoefficient">@match.AwayCoefficient</td>
                         </tr>
                     }
                 </table>
@@ -303,7 +297,7 @@
                         <tr class="singleUpcomingMatch" onmouseover="changeLinkColor(@match.Id)" id="linkRow-@match.Id" onmouseout="resetLinkColor(@match.Id)">
                             <td>
                                 <a href="/Matches/Details/@match.Id" class="matchLink fixtureLink-@match.Id">
-                                    @match.GetDate()
+                                    @match.GetShortDate()
                                 </a>
                             </td>
                             <td>
@@ -323,7 +317,7 @@
                     }
                 </table>
                 <div class="tablesLinkContainer">
-                    <a href="/Matches/Index" class="tablesLink">View All Matches</a>
+                    <a href="/Matches/Matches" class="tablesLink">View All Matches</a>
                 </div>
             </div>
         </div>

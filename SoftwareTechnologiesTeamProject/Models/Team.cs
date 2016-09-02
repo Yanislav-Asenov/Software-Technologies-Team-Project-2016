@@ -116,6 +116,11 @@
 
         public string GetAverageGoalsPerGame()
         {
+            if (this.GetTotalGamesPlayed() == 0)
+            {
+                return "0%";
+            }
+
             double averageGoals = this.GetTotalGoals() / (double)this.GetTotalGamesPlayed();
 
             return $"{averageGoals:F2}";
@@ -123,6 +128,11 @@
 
         public string GetAverageGoalsFor()
         {
+            if (this.GetTotalGamesPlayed() == 0)
+            {
+                return "0%";
+            }
+
             double averageGoalsFor = this.GoalsFor / (double)this.GetTotalGamesPlayed();
 
             return $"{averageGoalsFor:F2}";
@@ -130,6 +140,11 @@
 
         public string GetAverageGoalsAgainst()
         {
+            if (this.GetTotalGamesPlayed() == 0)
+            {
+                return "0%";
+            }
+
             double averageGoalsAgainst = this.GoalsAgainst / (double)this.GetTotalGamesPlayed();
 
             return $"{averageGoalsAgainst:F2}";

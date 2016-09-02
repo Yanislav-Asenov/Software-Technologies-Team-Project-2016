@@ -17,7 +17,7 @@
 @* Home team logo/name - Away team logo/name *@
 <div class="container-fluid">
     <p class="gameTitle">@Model.Match.HomeTeam.Name vs @Model.Match.AwayTeam.Name</p>
-    <p class="gameTime">@Model.Match.GetDate()<br /> @Model.Match.GetTime()</p>
+    <p class="gameTime">@Model.Match.GetLongDate()<br /> @Model.Match.GetTime()</p>
     <div class="homeTeamLogo">
         <img src="@Model.Match.HomeTeam.LogoLink" width="130" height="130" alt="Home team logo" />
         <p>@Model.Match.HomeTeam.Name</p>
@@ -122,15 +122,12 @@
             <th class="matchHistoryHomeTeam">Home team</th>
             <th class="historyMatchResult">Result</th>
             <th class="matchHistoryAwayTeam">Away team</th>
-            <th class="matchHistoryCoefficient">1</th>
-            <th class="matchHistoryCoefficient">X</th>
-            <th class="matchHistoryCoefficient">2</th>
         </tr>
 
         @foreach (var match in Model.HomeTeamHistory)
         {
             <tr class="tableBody">
-                <td class="matchHistoryDate">@match.GetDate()</td>
+                <td class="matchHistoryDate">@match.GetShortDate()</td>
                 @if (match.HomeTeam.Name == Model.Match.HomeTeam.Name)
                 {
                     <td class="matchHistoryHomeTeam boldTeamName">@match.HomeTeam.Name</td>
@@ -161,9 +158,6 @@
                 {
                     <td class="matchHistoryAwayTeam">@match.AwayTeam.Name</td>
                 }
-                <td class="matchHistoryCoefficient">@match.HomeCoefficient</td>
-                <td class="matchHistoryCoefficient">@match.DrawCoefficient</td>
-                <td class="matchHistoryCoefficient">@match.AwayCoefficient</td>
             </tr>
         }
     </table>
@@ -177,15 +171,12 @@
             <th class="matchHistoryHomeTeam">Home team</th>
             <th class="historyMatchResult">Result</th>
             <th class="matchHistoryAwayTeam">Away team</th>
-            <th class="matchHistoryCoefficient">1</th>
-            <th class="matchHistoryCoefficient">X</th>
-            <th class="matchHistoryCoefficient">2</th>
         </tr>
 
         @foreach (var match in Model.AwayTeamHistory)
             {
             <tr>
-                <td class="matchHistoryDate">@match.GetDate()</td>
+                <td class="matchHistoryDate">@match.GetShortDate()</td>
                 @if (@match.HomeTeam.Name == Model.Match.AwayTeam.Name)
                 {
                     <td class="matchHistoryHomeTeam boldTeamName">@match.HomeTeam.Name</td>
@@ -215,9 +206,6 @@
                 {
                     <td class="matchHistoryAwayTeam">@match.AwayTeam.Name</td>
                 }
-                <td class="matchHistoryCoefficient">@match.HomeCoefficient</td>
-                <td class="matchHistoryCoefficient">@match.DrawCoefficient</td>
-                <td class="matchHistoryCoefficient">@match.AwayCoefficient</td>
             </tr>
         }
     </table>

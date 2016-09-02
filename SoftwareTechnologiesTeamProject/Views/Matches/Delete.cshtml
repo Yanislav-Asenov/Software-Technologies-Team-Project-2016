@@ -12,19 +12,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.AwayTeam.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AwayTeam.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HomeTeam.Name)
+            Home team
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.HomeTeam.Name)
+        </dd>
+
+        <dt>
+            Away team
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AwayTeam.Name)
         </dd>
 
         <dt>
@@ -91,30 +91,6 @@
             @Html.DisplayFor(model => model.AwayVotesCount)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HomeCoefficient)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HomeCoefficient)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DrawCoefficient)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DrawCoefficient)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AwayCoefficient)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AwayCoefficient)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
@@ -122,7 +98,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Matches")
+            @Html.ActionLink("Back to List", "Matches", new { date = Model.DateTime })
         </div>
     }
 </div>

@@ -180,17 +180,29 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateChooseLeague([Bind(Include = "LeagueId")]Match match)
         {
-            return RedirectToAction("Create", "Matches", new { id = match.LeagueId });
+            return RedirectToAction("Create", new { id = match.LeagueId });
         }
 
         // GET: Matches/Create
         [Authorize(Roles = "Administrator")]
         public ActionResult Create(int? id)
         {
+            if (id == null)
+            {
+                this.AddNotification("League not found. Please choose league.", NotificationType.ERROR);
+                return RedirectToAction("CreateChooseLeague");
+            }
+
             ViewBag.AwayTeamId = new SelectList(db.Teams.Where(t => t.LeagueId == id), "Id", "Name");
             ViewBag.HomeTeamId = new SelectList(db.Teams.Where(t => t.LeagueId == id), "Id", "Name");
-            ViewBag.LeagueId = new SelectList(db.Leagues.Where(l => l.Id == id), "Id", "Name");
-            return View();
+
+            var match = new Match
+            {
+                LeagueId = id,
+                LeagueName = db.Leagues.Find(id).Name
+            };
+
+            return View(match);
         }
 
         // POST: Matches/Create
@@ -199,14 +211,23 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public ActionResult Create([Bind(Include = "Id,LeagueId,HomeTeamId,AwayTeamId,DateTime,HomeCoefficient,DrawCoefficient,AwayCoefficient")] Match match)
+        public ActionResult Create([Bind(Include = "Id,LeagueId,LeagueName,HomeTeamId,AwayTeamId,DateTime")] Match match)
         {
             if (ModelState.IsValid)
             {
+                var matchLeague = db.Leagues.Find(match.LeagueId);
+
                 match.HomeTeam = db.Teams.Find(match.HomeTeamId);
                 match.AwayTeam = db.Teams.Find(match.AwayTeamId);
-                match.League = db.Leagues.Find(match.LeagueId);
-                match.LeagueName = db.Leagues.Find(match.LeagueId).Name;
+
+                if (match.HomeTeam.Name == match.AwayTeam.Name)
+                {
+                    this.AddNotification("Home and away team can not be the same.", NotificationType.ERROR);
+                    return View(match);
+                }
+
+                match.League = matchLeague;
+                match.LeagueName = matchLeague.Name;
 
                 db.Matches.Add(match);
                 db.SaveChanges();
@@ -215,7 +236,6 @@ namespace SoftwareTechnologiesTeamProject.Controllers
 
             ViewBag.AwayTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
             ViewBag.HomeTeamId = new SelectList(db.Teams, "Id", "Name", match.HomeTeamId);
-            ViewBag.LeagueId = new SelectList(db.Leagues, "Id", "Name", match.LeagueId);
             return View(match);
         }
 
@@ -232,7 +252,6 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 return HttpNotFound();
             }
-
             ViewBag.AwayTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
             ViewBag.HomeTeamId = new SelectList(db.Teams, "Id", "Name", match.HomeTeamId);
             ViewBag.LeagueId = new SelectList(db.Leagues, "Id", "Name", match.LeagueId);
@@ -245,7 +264,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public ActionResult Edit([Bind(Include = "Id,LeagueId,HomeTeamId,AwayTeamId,DateTime,Result,HomeTeamGoals,AwayTeamGoals,TotalVotesCount,HomeVotesCount,DrawVotesCount,AwayVotesCount,HomeCoefficient,DrawCoefficient,AwayCoefficient,IsResultUpdated")] Match match)
+        public ActionResult Edit([Bind(Include = "Id,LeagueId,LeagueName,HomeTeamId,AwayTeamId,DateTime,Result,HomeTeamGoals,AwayTeamGoals,TotalVotesCount,HomeVotesCount,DrawVotesCount,AwayVotesCount,IsResultUpdated")] Match match)
         {
             if (ModelState.IsValid)
             {
@@ -267,7 +286,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Match match = db.Matches.Find(id);
+            Match match = db.Matches.Include(m => m.HomeTeam).Include(m => m.AwayTeam).FirstOrDefault(m => m.Id == id);
             if (match == null)
             {
                 return HttpNotFound();
@@ -297,3 +316,4 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         }
     }
 }
+
