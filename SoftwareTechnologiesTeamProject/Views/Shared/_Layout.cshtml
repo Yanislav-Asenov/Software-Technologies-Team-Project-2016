@@ -24,14 +24,15 @@
                     </a>
                 </div>
                 <div id="navbar3" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="navButtons">@Html.ActionLink("Posts", "Index", "Posts")</li>
-                        <li class="navButtons">@Html.ActionLink("Standings", "Index", "Leagues")</li>
-                        <li class="navButtons">@Html.ActionLink("Fixtures", "Matches", "Matches")</li>
-                        <li class="navButtons">@Html.ActionLink("About Us", "About", "Home")</li>
-
-                        @Html.Partial("_LoginPartial")
+                    <ul class="nav navbar-nav navbar-left" >
+                        <li class="navButtons" >@Html.ActionLink("Posts", "Index", "Posts")</li>
+                        <li class="navButtons" >@Html.ActionLink("Standings", "Index", "Leagues")</li>
+                        <li class="navButtons" >@Html.ActionLink("Fixtures", "Matches", "Matches")</li>
+                        <li class="navButtons" >@Html.ActionLink("About Us", "About", "Home")</li>
                     </ul>
+                    <ul class="nav navbar-nav navbar-right">@Html.Partial("_LoginPartial")</ul>
+                        
+                    
                 </div>
              
             </div>
