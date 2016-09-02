@@ -63,6 +63,7 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create([Bind(Include = "Id,Name,Matches,Victories,Draws,Losses,GoalsFor,GoalsAgainst,Points,City,Coach,Stadium,StadiumCapacity,StadiumWidth,StadiumHeight,LogoLink,LeagueId")] Team team)
         {
             if (ModelState.IsValid)
@@ -77,6 +78,7 @@
         }
 
         // GET: Teams/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -97,6 +99,7 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit([Bind(Include = "Id,Name,Victories,Draws,Losses,GoalsFor,GoalsAgainst,Points,City,Coach,Stadium,StadiumCapacity,StadiumWidth,StadiumHeight,LogoLink,LeagueId")] Team team)
         {
             if (team.Draws < 0 || team.StadiumWidth < 0 || team.GoalsFor < 0 ||
@@ -125,6 +128,7 @@
         }
 
         // GET: Teams/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -142,11 +146,19 @@
         // POST: Teams/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
             Team team = db.Teams.Include(t => t.Matches).FirstOrDefault(T => T.Id == id);
 
-            db.Matches.RemoveRange(team.Matches);
+            if (team == null)
+            {
+                return HttpNotFound();
+            }
+
+            var matchesToDelete = db.Matches.Where(m => m.HomeTeamId == team.Id || m.AwayTeamId == team.Id).ToList();
+
+            db.Matches.RemoveRange(matchesToDelete);
 
             var leagueId = team.LeagueId;
             db.Teams.Remove(team);

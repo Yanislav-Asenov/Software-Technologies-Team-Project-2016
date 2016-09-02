@@ -32,7 +32,7 @@
                 <span>@Model.Match.Result</span>
             </div>
         }
-        else
+        else if(User.IsInRole("Administrator"))
         {
             <div class="updateResultButton adminActions">
                     <a href="/Matches/UpdateResult/@Model.Match.Id" class="button">Update result</a>
