@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using SoftwareTechnologiesTeamProject.Extensions;
 using SoftwareTechnologiesTeamProject.Models;
+using System;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SoftwareTechnologiesTeamProject.Extensions;
-using SoftwareTechnologiesTeamProject.ViewModels;
 
 namespace SoftwareTechnologiesTeamProject.Controllers
 {
@@ -12,7 +11,7 @@ namespace SoftwareTechnologiesTeamProject.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        private readonly string[] allowedFileExtensions = new[] {"png", "jpg", "jpeg", "gif"};
+        private readonly string[] allowedFileExtensions = new[] { "png", "jpg", "jpeg", "gif" };
 
         public ActionResult Create()
         {
@@ -42,19 +41,19 @@ namespace SoftwareTechnologiesTeamProject.Controllers
 
                 string homePageImgName = "homepage" + file.FileName;
 
-                    
+
                 file.SaveAs(HttpContext.Server.MapPath("~/Content/Images/HomePage/")
                                                             + homePageImgName);
                 img.ImagePath = homePageImgName;
-                    
+
                 img.UploadedDate = DateTime.Now;
 
                 db.Images.Add(img);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Home");
-              
+
             }
-            return View("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         [Authorize]
@@ -62,23 +61,24 @@ namespace SoftwareTechnologiesTeamProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPostImage(HttpPostedFileBase file)
         {
-            
+
             if (ModelState.IsValid)
             {
-                string check = (HttpContext.Request.FilePath.ToString().Split('/').Last());
-                int postid = int.Parse(check);
+                string check = HttpContext.Request.FilePath.Split('/').Last();
+                int postId = int.Parse(check);
                 Image img = new Image();
 
                 if (file == null)
                 {
-                    return RedirectToAction("Details", "Posts", new { id = postid });
+                    this.AddNotification("Choose image!", NotificationType.ERROR);
+                    return RedirectToAction("Details", "Posts", new { id = postId });
                 }
 
                 var fileExtension = file.FileName.Split('.').Last();
                 if (!allowedFileExtensions.Contains(fileExtension.ToLower()))
                 {
                     this.AddNotification("Not allowed file extension", NotificationType.ERROR);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Details", "Posts", new { id = postId });
                 }
 
                 string postImgName = "PostId_" + check + file.FileName;
@@ -86,15 +86,15 @@ namespace SoftwareTechnologiesTeamProject.Controllers
                 file.SaveAs(HttpContext.Server.MapPath("~/Content/Images/PostImages/")
                                                             + postImgName);
                 img.ImagePath = postImgName;
-                    
+
                 img.UploadedDate = DateTime.Now;
 
                 db.Images.Add(img);
                 db.SaveChanges();
 
-                return RedirectToAction("Details", "Posts", new { id = postid });
-                
-                
+                return RedirectToAction("Details", "Posts", new { id = postId });
+
+
             }
             return View("Index");
         }
