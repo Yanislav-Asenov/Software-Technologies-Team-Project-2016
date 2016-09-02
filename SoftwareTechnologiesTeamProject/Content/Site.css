@@ -1203,12 +1203,11 @@ th.upcomingMatchCoef, td.upcomingMatchCoef {
     background: white;
     
 }
-`
-
 /* Admin actions */
 
 .adminActions {
     margin: 20px 0;
+    margin-top: 10px;
     padding: 0 15px;
 }
 

@@ -4,84 +4,84 @@
 }
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" >
         <span class="standingsHeading">@Model.League.Name (@Model.League.GetSeason()) - Standings</span>
-        <table class="table standingsTable">
-            <thead class="tableHead">
-                <tr>
-                    <th class="standingsInfo">№</th>
-                    <th class="standingsTeamName">Team</th>
-                    <th class="standingsInfo" title="Games played">GP</th>
-                    <th class="standingsInfo" title="Wins">W</th>
-                    <th class="standingsInfo" title="Draws">D</th>
-                    <th class="standingsInfo" title="Losses">L</th>
-                    <th class="standingsInfo" title="Goals for">GF</th>
-                    <th class="standingsInfo" title="Goals against">GA</th>
-                    <th class="standingsInfo" title="Goals difference">GD</th>
-                    <th class="standingsInfo" title="Points">P</th>
-                    <th class="standingsMatchHistory">Form</th>
-                    <th class="standingsInfo">Next</th>
-                </tr>
+
+        <table class="table standingsTable" >
+            <thead class="tableHead" >
+            <tr>
+                <th class="standingsInfo" >№</th>
+                <th class="standingsTeamName" >Team</th>
+                <th class="standingsInfo" title="Games played" >GP</th>
+                <th class="standingsInfo" title="Wins" >W</th>
+                <th class="standingsInfo" title="Draws" >D</th>
+                <th class="standingsInfo" title="Losses" >L</th>
+                <th class="standingsInfo" title="Goals for" >GF</th>
+                <th class="standingsInfo" title="Goals against" >GA</th>
+                <th class="standingsInfo" title="Goals difference" >GD</th>
+                <th class="standingsInfo" title="Points" >P</th>
+                <th class="standingsMatchHistory" >Form</th>
+                <th class="standingsInfo" >Next</th>
+            </tr>
             </thead>
 
-            <tbody class="tableBody">
-                @for (int i = 0; i < Model.Teams.Count; i++)
-                {
-                    int position = i + 1;
-                    var team = Model.Teams[i];
-                    <tr>
-                        <td class="standingsInfo">@position</td>
-                        <td class="standingsTeamName">
-                            <img src="@team.LogoLink" width="30" height="30" />
-                            <a href="/Teams/Details/@team.Id">@team.Name</a>
-                        </td>
-                        <td class="standingsInfo">@team.GetTotalGamesPlayed()</td>
-                        <td class="standingsInfo">@team.Victories</td>
-                        <td class="standingsInfo">@team.Draws</td>
-                        <td class="standingsInfo">@team.Losses</td>
-                        <td class="standingsInfo">@team.GoalsFor</td>
-                        <td class="standingsInfo">@team.GoalsAgainst</td>
-                        <td class="standingsInfo">@team.GetGoalDifference()</td>
-                        <td class="standingsInfo">@team.Points</td>
-                        <td class="standingsMatchHistory">
-                            <ul>
-                                @foreach (var match in team.Matches)
-                                {
-                                    if (match.GetWinnerName() == team.Name)
-                                    {
-                                        <li class="standingsMatchHistoryLetter" style="background: #13cf00">
-                                            <a href="/Matches/Details/@match.Id"> W </a>
-                                        </li>
-                                    }
-                                    else if (match.GetWinnerName() == "draw")
-                                    {
-                                        <li class="standingsMatchHistoryLetter" style="background: rgb(249, 214, 7)">
-                                            <a href="/Matches/Details/@match.Id"> D </a>
-                                        </li>
-                                    }
-                                    else
-                                    {
-                                        <li class="standingsMatchHistoryLetter" style="background: #d81920">
-                                            <a href="/Matches/Details/@match.Id"> L </a>
-                                        </li>
-                                    }
-                                }
-                            </ul>
-                        </td>
-                        <td class="standingsInfo">
-                            @if (team.NextMatch != null)
+            <tbody class="tableBody" >
+            @for (int i = 0; i < Model.Teams.Count; i++)
+            {
+                int position = i + 1;
+                var team = Model.Teams[i];
+                <tr>
+                    <td class="standingsInfo" >@position</td>
+                    <td class="standingsTeamName" >
+                        <img src="@team.LogoLink" width="30" height="30"/>
+                        <a href="/Teams/Details/@team.Id" >@team.Name</a>
+                    </td>
+                    <td class="standingsInfo" >@team.GetTotalGamesPlayed()</td>
+                    <td class="standingsInfo" >@team.Victories</td>
+                    <td class="standingsInfo" >@team.Draws</td>
+                    <td class="standingsInfo" >@team.Losses</td>
+                    <td class="standingsInfo" >@team.GoalsFor</td>
+                    <td class="standingsInfo" >@team.GoalsAgainst</td>
+                    <td class="standingsInfo" >@team.GetGoalDifference()</td>
+                    <td class="standingsInfo" >@team.Points</td>
+                    <td class="standingsMatchHistory" >
+                        <ul>
+                            @foreach (var match in team.Matches)
                             {
-                                <a href="/Matches/Details/@team.NextMatch.Id">
-                                    <img src="@team.NextMatch.GetOpponent(team.Name).LogoLink" width="30" height="30" />
-                                </a>
-
+                                if (match.GetWinnerName() == team.Name)
+                                {
+                                    <li class="standingsMatchHistoryLetter" style="background: #13cf00" >
+                                        <a href="/Matches/Details/@match.Id" > W </a>
+                                    </li>
+                                }
+                                else if (match.GetWinnerName() == "draw")
+                                {
+                                    <li class="standingsMatchHistoryLetter" style="background: rgb(249, 214, 7)" >
+                                        <a href="/Matches/Details/@match.Id" > D </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="standingsMatchHistoryLetter" style="background: #d81920" >
+                                        <a href="/Matches/Details/@match.Id" > L </a>
+                                    </li>
+                                }
                             }
-                        </td>
-                    </tr>
-                }
+                        </ul>
+                    </td>
+                    <td class="standingsInfo" >
+                        @if (team.NextMatch != null)
+                        {
+                            <a href="/Matches/Details/@team.NextMatch.Id" >
+                                <img src="@team.NextMatch.GetOpponent(team.Name).LogoLink" width="30" height="30"/>
+                            </a>
+
+                        }
+                    </td>
+                </tr>
+            }
             </tbody>
         </table>
-
         @if (User.IsInRole("Administrator"))
         {
             <div class="adminActions">
