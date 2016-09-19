@@ -16,46 +16,49 @@
 <br />
 
 <div class="col-md-8">
-    <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Create new", "Create") </span></button>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Create new", "Create") </span></button>
+    }
     
 
     @for (int i = 0; i < Model.Posts.Count; i++)
-        {
-            var post = Model.Posts[i];
+    {
+        var post = Model.Posts[i];
 
-            <h2> @Html.ActionLink(post.Title, "Details", new { id = post.Id })</h2>
+        <h2> @Html.ActionLink(post.Title, "Details", new {id = post.Id})</h2>
 
-            <p class="lead">
-                by <span>@Html.DisplayFor(modelItem => post.Author.FullName)</span>
-            </p>
-            
-            <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => post.Date)</p>
-            <div class="titleImage">
+        <p class="lead">
+            by <span>@Html.DisplayFor(modelItem => post.Author.FullName)</span>
+        </p>
 
-                @if (post.Image != null)
-                {
-                    <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar" />
-                }
-            </div>
+        <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => post.Date)</p>
+        <div class="titleImage">
 
-            <div class="postBodyContainer">
-                <input type="checkbox" class="read-more-state" id="post-@i" />
-
-                <p class="read-more-wrap">@post.ShortBody()<span class="read-more-target">@post.FullBody()</span></p>
-                @if (post.Body.Length > 300)
-                {
-                    <label for="post-@i" class="read-more-trigger"></label>
-                }
-
-            </div>
-            if (User.IsInRole("Administrator") || (post.Author != null && User.Identity.Name == post.Author.UserName))
+            @if (post.Image != null)
             {
-                <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new { id = post.Id }) </span></button>
-                <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Delete", "Delete", new { id = post.Id }) </span></button>
+                <img class="img-responsive" src="~/Content/Images/PostImages/@post.Image.ImagePath" alt="Bar"/>
             }
-            <hr />
+        </div>
+
+        <div class="postBodyContainer">
+            <input type="checkbox" class="read-more-state" id="post-@i"/>
+
+            <p class="read-more-wrap">@post.ShortBody()<span class="read-more-target">@post.FullBody()</span></p>
+            @if (post.Body.Length > 300)
+            {
+                <label for="post-@i" class="read-more-trigger"></label>
             }
-    
+
+        </div>
+        if (User.IsInRole("Administrator") || (post.Author != null && User.Identity.Name == post.Author.UserName))
+        {
+            <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Edit", "Edit", new {id = post.Id}) </span></button>
+            <button class="button" style="vertical-align: middle"><span>@Html.ActionLink("Delete", "Delete", new {id = post.Id}) </span></button>
+        }
+        <hr/>
+    }
+
 </div>
 
 <div class="col-md-4" >
